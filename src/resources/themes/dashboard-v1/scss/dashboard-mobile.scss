@@ -1,0 +1,324 @@
+$primaryColor: #fd7d64;
+
+.mobile-only {
+    display: none !important;
+}
+
+.desktop-only {}
+
+.submenu-item .caret {
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+/* ================== Mobile -md Width ================== */
+@media screen and (max-width: 992px) {
+    .page-content-container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .list-search {
+        width: 100%;
+    }
+
+    .submenu-item .caret {
+        position: absolute;
+        top: 13px;
+        right: 0;
+    }
+
+    .pagination-buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .pagination-buttons button {
+        padding: 10px 15px;
+    }
+
+    .actions-td {
+        padding: 20px 150px;
+    }
+
+    .pagination-controls {
+        flex-direction: column;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .data-filters .nav-item {
+        flex: 1;
+    }
+
+    .control-container,
+    .page-control-container {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
+    .page-control-container .mb-3 {
+        margin: 2px !important;
+    }
+
+    .btn-light-primary-mobile {
+        background: #ffe9e5 !important;
+        color: $primaryColor !important;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .page-content {
+        width: 100%;
+    }
+
+    .mark-complete {
+        margin: 10px;
+    }
+    .products {
+
+        .variations {
+
+            span {
+                font-size: 14px;
+                padding: 10px 10px !important;
+            }
+        }
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-sidebar {
+        position: fixed !important;
+        padding-top: 50px;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+    .mobile-only.d-flex {
+        display: flex !important;
+    }
+
+    .login-section {
+
+        h1,
+        .h1 {
+            font-size: 35px;
+        }
+
+        .bg-doodles {
+            align-items: start;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .account-left-col {
+            align-items: start;
+        }
+
+        .bg-footer {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .logo {
+            max-width: 250px;
+        }
+
+        .logo-container { 
+            margin: 0 auto;
+            margin-bottom: 16px;
+        }
+
+        // form.bg-white {
+        //     border-radius: 20px;
+        //     margin: 10px;
+        // }
+
+        form .form-help {
+            text-align: center;
+        }
+    }
+
+    /* ===================== Home ===================== */
+    .home {
+        height: auto !important;
+    }
+
+    /* ===================== Dashboard ===================== */
+    .most-viewed,
+    .products {
+        width: 100%;
+    }
+
+    .category {
+        padding: 0 16px 8px 16px;
+    }
+
+    /* ===================== Dashboard Sidebar ===================== */
+    .dashboard-sidebar {
+        position: fixed !important;
+        top: 0;
+        left: -290px;
+        transition: .3s;
+        height: 100%;
+        z-index: 3;
+    }
+
+    .open {
+        left: 0;
+        width: 100%;
+        box-shadow: 10px 10px 10px #dcdcdc;
+    }
+
+    .menu button {
+        background: white;
+        border: 1px solid #fffcfc;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* ===================== Prducts ===================== */
+    .products {
+
+        .inputs-container {
+            padding: 30px 16px;
+        }
+
+        .barcode-upload-container {
+            position: relative;
+            width: 98%;
+
+            input {
+                position: relative !important;
+            }
+
+            .custom-uploadCode {
+                width: 100% !important;
+                right: 0 !important;
+            }
+        }
+
+        .variations {
+
+            span {
+                font-size: 10px;
+                padding: 10px 14px !important;
+            }
+        }
+
+        .btn-containers {
+            margin-top: 25px;
+
+            button {
+                width: 100% !important;
+            }
+        }
+    }
+
+    /* ===================== Sign Up ===================== */
+    .signup-section{
+
+        .bg-doodles{
+            justify-content: start;
+        }
+        .logo-container {
+            position: relative;
+            margin: 0 auto;
+            width: 150px;
+            margin-top: 22px;
+            margin-bottom: 16px;
+
+            .logo {
+                width: 100%;
+            }
+        }
+    }
+    .signup-form {
+        // border-radius: 10px;
+        margin: auto;
+    }
+
+    /* ===================== SignUp Data ===================== */
+
+    .signup-data-section {
+
+        .logo-container {
+            position: relative;
+            margin: 0 auto;
+            width: 240px;
+            margin-top: 22px;
+
+            .logo {
+                width: 100%;
+            }
+        }
+
+        .full-width {
+            margin-bottom: 80px;
+        }
+    }
+
+    /* ===================== Time Line ===================== */
+    .time-line {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px !important;
+
+        .time-line-item-container {
+            display: flex;
+            align-items: center;
+
+            .time-line-item {
+                margin-left: 0;
+            }
+
+            .dot-container {
+                margin: 0 10px !important;
+            }
+
+            .line {
+                margin: 0;
+            }
+
+            .line-h {
+                height: 4px;
+                width: 26px;
+                background-color: white;
+                border-radius: 10px;
+            }
+
+            .line-h-disabled {
+                background-color: #FEA898;
+            }
+        }
+    }
+
+    .progress-bar-container {
+        position: relative;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        margin: 0 !important;
+
+        p {
+            margin-top: 16px !important;
+        }
+    }
+}
