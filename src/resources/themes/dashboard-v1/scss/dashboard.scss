@@ -15,7 +15,7 @@
   margin-left: 260px;
 }
 
-$primaryColor: #fd7d64;
+$primaryColor: #007132;
 $primaryLightColor: #fed4cb;
 $primaryColorActive: #f8907e;
 
@@ -433,7 +433,7 @@ form .error,
   }
 
   .account-left-col {
-    background-color: #f95b50;
+    background-color: $primaryColor;
     background-size: cover;
     background-position: center center;
     padding: 0;
