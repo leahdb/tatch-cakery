@@ -41,6 +41,7 @@ const fetch_authed_user = () => {
         localStorage.setItem("user_id", res.data.user.id);
         localStorage.setItem("user_first_name", res.data.user.first_name);
         localStorage.setItem("user_last_name", res.data.user.last_name);
+        localStorage.setItem("user_menus", JSON.stringify(res.data.menus));
         localStorage.setItem("user_role", res.data.role);
       }
 

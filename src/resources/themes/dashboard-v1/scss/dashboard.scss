@@ -1,15 +1,5 @@
 @import "bootstrap";
-
-@font-face {
-  font-family: "SFRoundedRegular";
-  src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Regular.ttf")
-    format("truetype");
-}
-
-@font-face {
-  font-family: "SFRoundedBold";
-  src: url("../fonts/FontsFree-Net-SF-Pro-Rounded-Bold.ttf") format("truetype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 .page-content-container {
   margin-left: 260px;
@@ -33,7 +23,7 @@ $purpleColor: #b36ebe;
 $orangeColor: #ff9500;
 
 * {
-  font-family: "SFRoundedRegular";
+  font-family: "Poppins", sans-serif;
 }
 
 .btn-check:checked + .btn,
@@ -396,7 +386,7 @@ form .error,
 
 /* ===================== Account Auth ===================== */
 .error-page {
-  background-color: #f95b50;
+  background-color: $primaryColor;
   background-size: cover;
   background-position: center center;
   padding: 0;
@@ -417,18 +407,20 @@ form .error,
 
 .login-section {
   h1 {
-    font-family: "SFRoundedBold";
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
     font-size: 48px;
   }
 
   .form-help {
-    font-family: "SFRoundedRegular";
+    font-family: "Poppins", sans-serif;
     font-size: 20px;
     color: $textGray;
   }
 
   label {
-    font-family: "SFRoundedBold";
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
     font-size: 16px;
   }
 
@@ -475,7 +467,8 @@ form .error,
 /* ===================== Dashboard ===================== */
 .dashboard-title {
   font-size: 39px;
-  font-family: "SFRoundedBold";
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
 
   @media (max-width: 575px) {
     font-size: 40px;
@@ -1335,12 +1328,14 @@ form .error,
 
 .stat-num {
   font-size: 28px;
-  font-family: "SFRoundedBold";
+  font-family: "Poppins", sans-serif;
+    font-weight: bold;
 }
 
 .card-text {
   font-size: 12px;
-  font-family: "SFRoundedBold";
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
   color: $textGrayLight;
 }
 
