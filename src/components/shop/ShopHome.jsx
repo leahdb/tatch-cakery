@@ -1,14 +1,16 @@
 //import useLocalStorage from "../../services/utils/local-storage";
 import LogoutButton from "../login/LogoutButton";
+import ShopHeader from "./ShopHeader";
+import ShopIntro from "./ShopIntro";
 
-const DashHome = (props) => {
+const ShopHome = (props) => {
 
   return (
     <section>
-      <h3>yow</h3>
-      <LogoutButton />
+      <ShopHeader />
+      <ShopIntro />
     </section>
   );
 };
 
-export default DashHome;
+export default ShopHome;
