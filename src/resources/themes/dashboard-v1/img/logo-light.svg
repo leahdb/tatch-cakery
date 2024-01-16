@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.08 37.19">
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path d="M15.59,21.55l-3,2.95,3.43,3.37,10.12-9.95,3.37,3.43-12.48,12.28L0,16.65,12.66,4.2l3.37,3.43L5.77,17.71l3.42,3.37,2.99-2.94,3.4,3.4Z" fill="#bfe1c3"/>
+      <path d="M20.26,10.21L13.53,3.37l3.43-3.37,16.82,17.1-3.43,3.37-6.72-6.84-7.36,7.24-3.4-3.4,7.39-7.27Z" fill="#f1f2f2"/>
+      <text transform="translate(36.21 25.44)" fill="#f1f2f2" font-family="Consolas-Bold, Consolas" font-size="22" font-weight="700"><tspan x="0" y="0" letter-spacing="-.05em">E</tspan><tspan x="11" y="0" letter-spacing="-.05em">lectr</tspan><tspan x="66.52" y="0" letter-spacing="-.04em">o</tspan><tspan x="77.74" y="0" letter-spacing="-.06em">Te</tspan><tspan x="99.29" y="0" letter-spacing="-.05em">c</tspan><tspan x="110.29" y="0" letter-spacing="-.05em">h</tspan></text>
+      <text transform="translate(115.65 34.64) scale(1.05 1)" fill="#bfe1c3" font-family="Consolas, Consolas" font-size="8.43" letter-spacing=".15em"><tspan x="0" y="0">TRADING</tspan></text>
+      <path d="M14.75,19.35c.06-.06,.8-.84,.87-.86,.37-.12,.66-.24,1.03-.35,.07-.02,.08-.05,.07-.11-.06-.31,.09-.61,.37-.75,.28-.13,.59-.07,.82,.17,.2,.21,.23,.54,.08,.8-.17,.3-.56,.42-.88,.26-.06-.03-.11-.04-.18-.01-.38,.13-.56,.19-.95,.31-.05,.02-.86,.8-.89,.84" fill="#bfe1c3" stroke="#bfe1c4" stroke-miterlimit="10" stroke-width=".1"/>
+      <path d="M13.79,18.29c.63-.63,1.51-1.51,2.14-2.14,.06-.06,.08-.1,.05-.18-.1-.31,.03-.64,.3-.8,.28-.16,.62-.12,.85,.1,.24,.23,.28,.58,.11,.87-.16,.26-.49,.39-.79,.29-.09-.03-.13,0-.18,.05-.63,.63-1.51,1.51-2.14,2.14l-.33-.33Z" fill="#bfe1c3" stroke="#bfe1c4" stroke-miterlimit="10" stroke-width=".1"/>
+      <path d="M17.51,17.74c.1,.1,.11,.25,.01,.35-.1,.11-.26,.11-.36,0-.1-.1-.1-.27,0-.37,.1-.1,.26-.1,.36,0Z" fill="#f1f2f2"/>
+      <path d="M16.82,15.62c.1,.1,.11,.25,.01,.35-.1,.11-.26,.11-.36,0-.1-.1-.1-.27,0-.37,.1-.1,.26-.1,.36,0Z" fill="#f1f2f2"/>
+    </g>
+  </g>
+</svg>

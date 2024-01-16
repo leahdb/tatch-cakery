@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import iconLogout from "../../resources/themes/dashboard-v1/icons/logout.svg";
 import { Link } from "react-router-dom";
 import LogoutButton from "../login/LogoutButton";
-import logoBlack from "../../resources/themes/dashboard-v1/img/logo-black.png";
+import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 import {circleXIcon} from "../../resources/themes/dashboard-v1/icons/icons";
 
 const icons = {
