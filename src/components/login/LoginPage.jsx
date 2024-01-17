@@ -15,24 +15,19 @@ function LoginPage() {
               <LoginForm class={"mobile-only p-3 bg-white"} />
             </div>
             <div className="bg-footer flex-container-center">
-              <p className="text-white">© Pawpaws 2023</p>
+              <p className="text-white">© ElectroTech Trading 2024</p>
               <a
                 className="link-plain text-white email-link"
-                href="mailto:help@pawpaws.com"
+                href="mailto:contact@electrotechtrading.com"
                 target="_blank"
               >
-                <img src={iconEnvelope} alt="envelope" />
-                <span>help@pawpaws.com</span>
+                <img src={iconEnvelope} alt="envelope" className="me-1"/>
+                <span>contact@electrotechtrading.com</span>
               </a>
             </div>
           </div>
         </div>
         <div className="col-md-6 desktop-only">
-          <div className="text-right full-width p-3 absolute-top">
-            <a className="btn btn-primary btn-padded" href="/admin/register">
-              Join Us
-            </a>
-          </div>
           <div className="full-height flex-container-center flex-column">
             <div className="flex-container-column flex-container-center">
               <LoginForm class={"login-form p-3"} />

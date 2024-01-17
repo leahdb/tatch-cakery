@@ -21,9 +21,8 @@ const ShopHeader = () => {
             <div class="order-lg-last col-lg-4 col-sm-8 col-8">
               <div class="d-flex float-end">
                 <a
-                  href="/test"
+                  href="/login"
                   class="border rounded me-2 py-1 px-2 nav-link d-flex align-items-center"
-                  target="_blank"
                 >
                   <img src={User} alt="profile" height={20} className="pe-1" />
                   <p class="d-none d-md-block mb-0">Login</p>
