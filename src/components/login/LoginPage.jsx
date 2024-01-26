@@ -12,7 +12,7 @@ function LoginPage() {
               <img src={logoWhite} alt="Logo" className="logo" />
             </div>
             <div className="full-width">
-              <LoginForm class={"mobile-only p-3 bg-white"} />
+              <LoginForm className={"mobile-only p-3 bg-white"} />
             </div>
             <div className="bg-footer flex-container-center">
               <p className="text-white">© ElectroTech Trading 2024</p>
@@ -21,7 +21,7 @@ function LoginPage() {
                 href="mailto:contact@electrotechtrading.com"
                 target="_blank"
               >
-                <img src={iconEnvelope} alt="envelope" className="me-1"/>
+                <img src={iconEnvelope} alt="envelope" className="me-1" />
                 <span>contact@electrotechtrading.com</span>
               </a>
             </div>
@@ -30,7 +30,7 @@ function LoginPage() {
         <div className="col-md-6 desktop-only">
           <div className="full-height flex-container-center flex-column">
             <div className="flex-container-column flex-container-center">
-              <LoginForm class={"login-form p-3"} />
+              <LoginForm className={"login-form p-3"} />
               <div>
                 <p>
                   Don’t have an account?{" "}

@@ -1,6 +1,10 @@
 import React from "react";
+import ShopIntro from "./ShopIntro";
+import NewestProducts from "./NewestProducts";
+import ChooseUs from "./ChooseUs";
+import BlogsPreview from "./BlogsPreview";
 
-const ShopIntro = () => {
+const PCB = () => {
   return (
     <div className="container">
       <div className="row gx-3">
@@ -40,4 +44,4 @@ const ShopIntro = () => {
   );
 };
 
-export default ShopIntro;
+export default PCB;

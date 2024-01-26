@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import useLocalStorage from "../../services/utils/local-storage";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import LogoutButton from "../login/LogoutButton";
 import DashboardSideBar from "./DashboardSideBar";
 import DashboardHeader from "./DashboardHeader";

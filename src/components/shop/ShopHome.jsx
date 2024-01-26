@@ -1,16 +1,29 @@
-//import useLocalStorage from "../../services/utils/local-storage";
-import LogoutButton from "../login/LogoutButton";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import ShopHeader from "./ShopHeader";
-import ShopIntro from "./ShopIntro";
+import ShopMain from "./ShopMain";
+import PCB from "./PCB";
+import ShopFooter from "./ShopFooter";
+import ErrorPage404 from "../errors/ErrorPage404";
 
 const ShopHome = (props) => {
-
   return (
     <section>
       <ShopHeader />
-      <ShopIntro />
+      <ShopRoutes />
+      <ShopFooter />
     </section>
   );
 };
 
 export default ShopHome;
+
+const ShopRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<ShopMain />} />
+      <Route path="/pcb-builder" element={<PCB />} />
+      <Route path="*" element={<ErrorPage404 />} />
+    </Routes>
+  );
+};
