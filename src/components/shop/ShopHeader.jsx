@@ -12,7 +12,7 @@ const ShopHeader = () => {
         <div className="container">
           <div className="row gy-3 d-flex justify-content-between align-items-center">
             <div className="col-lg-2 col-sm-4 col-5">
-              <img src={logoBlack} alt="logoBlack" />
+              <a href="/"><img src={logoBlack} alt="logoBlack" /></a>
             </div>
             <div className="col-lg-1 desktop-only"></div>
 
