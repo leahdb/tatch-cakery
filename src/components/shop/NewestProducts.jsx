@@ -61,13 +61,15 @@ const NewestProducts = () => {
       id: 9,
       name: "LM317 Adjustable Voltage Regulator",
       price: 1.99,
-      imageSrc: "https://example.com/images/lm317_regulator.jpg",
+      imageSrc:
+        "https://i5.walmartimages.com/asr/becb1f3d-da68-4fe4-ae95-1a031d7e068a_1.590bdaf485016abeff4daf43c9ff3a85.jpeg",
     },
     {
       id: 10,
       name: "Soldering Iron Kit",
       price: 29.99,
-      imageSrc: "https://example.com/images/soldering_kit.jpg",
+      imageSrc:
+        "https://tse3.mm.bing.net/th?id=OIP.w9Q9-ejAmxUgg0v6tezclgHaHa&pid=Api&P=0&h=220",
     },
   ];
 

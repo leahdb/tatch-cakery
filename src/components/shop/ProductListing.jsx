@@ -1,10 +1,78 @@
 import React from "react";
-import ShopIntro from "./ShopIntro";
-import NewestProducts from "./NewestProducts";
-import ChooseUs from "./ChooseUs";
-import BlogsPreview from "./BlogsPreview";
 
 const ProductListing = () => {
+  const products = [
+    {
+      id: 1,
+      name: "Raspberry Pi 4 Model B",
+      price: 35.99,
+      imageSrc:
+        "https://www.seeedstudio.com/blog/wp-content/uploads/2019/06/WechatIMG1371.png",
+    },
+    {
+      id: 2,
+      name: "Arduino Uno R3",
+      price: 24.99,
+      imageSrc:
+        "https://rukminim1.flixcart.com/image/1664/1664/j76i3rk0/learning-toy/j/z/8/arduino-uno-r3-board-with-dip-atmega328p-adraxx-original-imaexh74faqkvygt.jpeg?q=90",
+    },
+    {
+      id: 3,
+      name: "ESP8266 WiFi Module",
+      price: 3.49,
+      imageSrc:
+        "https://tse1.mm.bing.net/th?id=OIP.5LofEV_I-Y9PG-53g9Iu5AHaHa&pid=Api&P=0&h=220",
+    },
+    {
+      id: 4,
+      name: "MPU6050 Gyroscope and Accelerometer Module",
+      price: 15.99,
+      imageSrc:
+        "https://tse3.mm.bing.net/th?id=OIP.9F2kvsmNfU-ekR6VZwVu4QHaFx&pid=Api&P=0&h=220",
+    },
+    {
+      id: 5,
+      name: "DHT22 Temperature and Humidity Sensor",
+      price: 9.99,
+      imageSrc:
+        "https://tse3.mm.bing.net/th?id=OIP.QZI5OE82YcwbFmafi3MSmAHaHa&pid=Api&P=0&h=220",
+    },
+    {
+      id: 6,
+      name: "BME280 Environmental Sensor",
+      price: 8.99,
+      imageSrc:
+        "https://images-na.ssl-images-amazon.com/images/I/41j5cHWfpDL.jpg",
+    },
+    {
+      id: 7,
+      name: "Breadboard Jumper Wires Kit",
+      price: 6.99,
+      imageSrc:
+        "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F7916454-01",
+    },
+    {
+      id: 8,
+      name: "STMicroelectronics Nucleo-F401RE Development Board",
+      price: 19.99,
+      imageSrc: "https://media.rs-online.com/f_auto/F8029425-01.jpg",
+    },
+    {
+      id: 9,
+      name: "LM317 Adjustable Voltage Regulator",
+      price: 1.99,
+      imageSrc:
+        "https://i5.walmartimages.com/asr/becb1f3d-da68-4fe4-ae95-1a031d7e068a_1.590bdaf485016abeff4daf43c9ff3a85.jpeg",
+    },
+    {
+      id: 10,
+      name: "Soldering Iron Kit",
+      price: 29.99,
+      imageSrc:
+        "https://tse3.mm.bing.net/th?id=OIP.w9Q9-ejAmxUgg0v6tezclgHaHa&pid=Api&P=0&h=220",
+    },
+  ];
+
   return (
     <div className="container my-5">
       <div class="row">
@@ -327,246 +395,51 @@ const ProductListing = () => {
                 <option value="2">High rated</option>
                 <option value="3">Randomly</option>
               </select>
-              <div class="btn-group shadow-0 border">
-                <a href="#" class="btn btn-light" title="List view">
-                  <i class="fa fa-bars fa-lg"></i>
-                </a>
-                <a href="#" class="btn btn-light active" title="Grid view">
-                  <i class="fa fa-th fa-lg"></i>
-                </a>
-              </div>
             </div>
           </header>
 
-          <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <div class="d-flex flex-row">
-                    <h5 class="mb-1 me-1">$34,50</h5>
-                    <span class="text-danger">
-                      <s>$49.99</s>
-                    </span>
+          <div class="row g-3">
+            {products.slice(0, 9).map((product) => (
+              <div
+                key={product.id}
+                className="col-lg-4 col-md-6 col-sm-6 d-flex"
+              >
+                <div className="card w-100 my-2 shadow">
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={product.imageSrc}
+                      className="card-img-top"
+                      alt={product.name}
+                      height={200}
+                    />
                   </div>
-                  <p class="card-text">
-                    T-shirts with multiple colors, for men and lady
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$120.00</h5>
-                  <p class="card-text">
-                    Winter Jacket for Men and Women, All sizes
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
+                  
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <div>
+                      <h5 className="card-title fs-6">{product.name}</h5>
+                      <p className="card-text fs-6 text-primary">
+                        ${product.price}
+                      </p>
+                    </div>
+
+                    <div className="d-flex align-items-end justify-content-center px-0 pb-0 mt-4">
+                      <a
+                        href="#!"
+                        className="btn btn-primary px-3 shadow-0 me-2"
+                      >
+                        <i class="bi bi-cart-plus fs-5 py-1"></i>
+                      </a>
+                      <a
+                        href="#!"
+                        className="btn btn-light border px-3 pt-2 icon-hover"
+                      >
+                        <i class="bi bi-heart-fill fs-5 py-1 text-primary"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$120.00</h5>
-                  <p class="card-text">
-                    T-shirts with multiple colors, for men and lady
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/13.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$120.00</h5>
-                  <p class="card-text">
-                    Blazer Suit Dress Jacket for Men, Blue color
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/14.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$510.00</h5>
-                  <p class="card-text">
-                    Slim sleeve wallet Italian leather - multiple colors
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$79.99</h5>
-                  <p class="card-text">
-                    T-shirts with multiple colors, for men and lady
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$120.00</h5>
-                  <p class="card-text">
-                    Winter Jacket for Men and Women, All sizes
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$120.00</h5>
-                  <p class="card-text">
-                    T-shirts with multiple colors, for men and lady
-                  </p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-              <div class="card w-100 my-2 shadow-2-strong">
-                <img
-                  src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp"
-                  class="card-img-top"
-                />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">$43.50</h5>
-                  <p class="card-text">Summer New Men's Denim Jeans Shorts</p>
-                  <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn btn-primary shadow-0 me-1">
-                      Add to cart
-                    </a>
-                    <a
-                      href="#!"
-                      class="btn btn-light border icon-hover px-2 pt-2"
-                    >
-                      <i class="fas fa-heart fa-lg text-secondary px-1"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <hr />
