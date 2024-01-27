@@ -8,6 +8,7 @@ const Cart = () => {
       price: 35.99,
       imageSrc:
         "https://www.seeedstudio.com/blog/wp-content/uploads/2019/06/WechatIMG1371.png",
+      info: "2 GB",
     },
     {
       id: 2,
@@ -15,6 +16,7 @@ const Cart = () => {
       price: 24.99,
       imageSrc:
         "https://rukminim1.flixcart.com/image/1664/1664/j76i3rk0/learning-toy/j/z/8/arduino-uno-r3-board-with-dip-atmega328p-adraxx-original-imaexh74faqkvygt.jpeg?q=90",
+      info: "Input voltage - 7-12V",
     },
     {
       id: 3,
@@ -22,6 +24,7 @@ const Cart = () => {
       price: 3.49,
       imageSrc:
         "https://tse1.mm.bing.net/th?id=OIP.5LofEV_I-Y9PG-53g9Iu5AHaHa&pid=Api&P=0&h=220",
+      info: "ESP-12E",
     },
   ];
 
@@ -52,13 +55,13 @@ const Cart = () => {
                           <a href="#" className="nav-link">
                             {product.name}
                           </a>
-                          <p className="text-muted">XL size, Jeans, Blue</p>
+                          <p className="text-muted">{product.info}</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-                    <div class="">
+                  <div class="col-lg-4 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
+                    <div class="me-2">
                       <select class="form-select me-4">
                         <option>1</option>
                         <option>2</option>
@@ -96,8 +99,8 @@ const Cart = () => {
 
             <div class="border-top pt-4 mx-4 mb-4">
               <p>
-                <i class="fas fa-truck text-muted fa-lg"></i> Free Delivery
-                within 1-2 weeks
+                <i class="fas fa-truck text-muted fa-lg"></i> Delivery
+                within 2 weeks
               </p>
               <p class="text-muted">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -149,12 +152,10 @@ const Cart = () => {
 
               <div class="mt-3">
                 <a href="#" class="btn btn-success w-100 shadow-0 mb-2">
-                  {" "}
-                  Make Purchase{" "}
+                  Proceed To Checkout
                 </a>
                 <a href="#" class="btn btn-light w-100 border mt-2">
-                  {" "}
-                  Back to shop{" "}
+                  Continue Shopping
                 </a>
               </div>
             </div>

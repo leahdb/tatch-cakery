@@ -4,6 +4,7 @@ import ShopHeader from "./ShopHeader";
 import ShopMain from "./ShopMain";
 import PCB from "./PCB";
 import Cart from "./Cart";
+import WishList from "./WishList";
 import ShopFooter from "./ShopFooter";
 import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
@@ -29,6 +30,7 @@ const ShopRoutes = () => {
       <Route path="/products" element={<ProductListing />} />
       <Route path="/products/*" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/wishlist" element={<WishList />} />
       <Route path="*" element={<ErrorPage404 />} />
     </Routes>
   );
