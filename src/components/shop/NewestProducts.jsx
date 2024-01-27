@@ -82,19 +82,23 @@ const NewestProducts = () => {
         </div>
         {products.slice(0, 8).map((product) => (
           <div key={product.id} className="col-lg-3 col-md-6 col-sm-6 d-flex">
-            <div className="card w-100 my-2 shadow">
-              <img
-                src={product.imageSrc}
-                className="card-img-top"
-                alt={product.name}
-                height={200}
-              />
+            <a href="/products/1" className="card newest w-100 shadow my-2 ">
+              <div className="d-flex justify-content-center">
+                <img
+                  src={product.imageSrc}
+                  className="card-img-top"
+                  alt={product.name}
+                  height={200}
+                />
+              </div>
               <div className="card-body d-flex flex-column justify-content-between">
                 <div>
                   <h5 className="card-title fs-6">{product.name}</h5>
-                  <p className="card-text fs-6 text-primary">${product.price}</p>
+                  <p className="card-text fs-6 text-primary">
+                    ${product.price}
+                  </p>
                 </div>
-                
+
                 <div className="d-flex align-items-end justify-content-center px-0 pb-0 mt-4">
                   <a href="#!" className="btn btn-primary px-3 shadow-0 me-2">
                     <i class="bi bi-cart-plus fs-5 py-1"></i>
@@ -107,12 +111,11 @@ const NewestProducts = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         ))}
       </div>
     </div>
-    
   );
 };
 

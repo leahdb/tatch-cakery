@@ -1327,6 +1327,10 @@ form .error,
   border: none;
 }
 
+.newest:hover {
+  box-shadow: 0px 0px 20px 1px #1f77353e !important;
+}
+
 .card-title {
   color: $textDark;
   font-size: 20px;

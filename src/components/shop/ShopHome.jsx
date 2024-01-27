@@ -8,6 +8,7 @@ import WishList from "./WishList";
 import ShopFooter from "./ShopFooter";
 import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
+import Checkout from "./Checkout";
 import ErrorPage404 from "../errors/ErrorPage404";
 
 const ShopHome = (props) => {
@@ -31,6 +32,7 @@ const ShopRoutes = () => {
       <Route path="/products/*" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<WishList />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<ErrorPage404 />} />
     </Routes>
   );
