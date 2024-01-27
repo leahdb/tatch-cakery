@@ -11,8 +11,8 @@ function LoginPage() {
             <div className="text-center full-width logo-container">
               <img src={logoWhite} alt="Logo" className="logo" />
             </div>
-            <div className="full-width">
-              <LoginForm className={"mobile-only p-3 bg-white"} />
+            <div className="full-width mobile-only-auth">
+              <LoginForm className="mobile-only-auth p-3 bg-white" />
             </div>
             <div className="bg-footer flex-container-center">
               <p className="text-white">© ElectroTech Trading 2024</p>

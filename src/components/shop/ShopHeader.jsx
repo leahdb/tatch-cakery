@@ -26,17 +26,15 @@ const ShopHeader = () => {
                   <p className="d-none d-md-block mb-0">Login</p>
                 </a>
                 <a
-                  href="/test"
+                  href="/wishlist"
                   className="me-2 border rounded py-1 px-2 nav-link d-flex align-items-center"
-                  target="_blank"
                 >
                   <img src={Heart} alt="profile" height={18} className="pe-1" />
                   <p className="d-none d-md-block mb-0">Wishlist</p>
                 </a>
                 <a
-                  href="/test"
+                  href="/cart"
                   className="border rounded py-1 px-2 nav-link d-flex align-items-center"
-                  target="_blank"
                 >
                   <img src={Cart} alt="profile" height={18} className="pe-1" />
                   <p className="d-none d-md-block mb-0">Cart</p>

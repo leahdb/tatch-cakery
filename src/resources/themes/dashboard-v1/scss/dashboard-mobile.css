@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+.mobile-only-auth {
+  display: none !important;
+}
+
 .submenu-item .caret {
   position: absolute;
   top: 20px;

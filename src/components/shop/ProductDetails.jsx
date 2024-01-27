@@ -1,4 +1,7 @@
 import React from "react";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
 
 const ProductDetails = () => {
 
@@ -12,12 +15,6 @@ const ProductDetails = () => {
     description: "Product description goes here.",
     description2: "Additional description goes here.",
     description3: "Even more description goes here.",
-    from_age: "1 month", // Fill in the from_age property
-    to_age: "24 months", // Fill in the to_age property
-    petTypes: [
-      { id: 1, title: "Dog" },
-      { id: 2, title: "Cat" },
-    ], // Fill in the petTypes property with an array of objects
     images: [
       {
         id: 1,
@@ -81,16 +78,7 @@ const ProductDetails = () => {
 
           <div className="row border-top pt-3 mt-5 mx-0">
             <h5 className="fw-semibold text-dark mb-4">Additional Info</h5>
-            <p className="mb-1">
-              <span className="fw-semibold text-dark">Pets: </span>
-              {product.petTypes.length > 0
-                ? product.petTypes.join(", ")
-                : "N/A"}
-            </p>
-            <p className="mb-1">
-              <span className="fw-semibold text-dark">Age: </span>
-              {`${product.fromAge} - ${product.toAge}`}
-            </p>
+            
           </div>
         </div>  
       </div>
