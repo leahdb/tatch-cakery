@@ -40,9 +40,6 @@ const ShopFooter = () => {
                     <a href="service.html">Services</a>
                   </li>
                   <li>
-                    <a href="pricing.html">Pricing</a>
-                  </li>
-                  <li>
                     <a href="contact.html">Contact</a>
                   </li>
                 </ul>
@@ -60,13 +57,10 @@ const ShopFooter = () => {
                     <a href="about.html">About Us</a>
                   </li>
                   <li>
-                    <a href="testimonial.html">Appointment</a>
+                    <a href="/blog">Blog</a>
                   </li>
                   <li>
                     <a href="service.html">Service</a>
-                  </li>
-                  <li>
-                    <a href="pricing.html">News & Media</a>
                   </li>
                 </ul>
               </div>

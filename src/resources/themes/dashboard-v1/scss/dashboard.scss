@@ -3379,3 +3379,35 @@ table.dashboard-table td {
     outline: 0;
     box-shadow: 0 0 0 0.25rem $primaryLightColor;
 }
+
+#categories-dropdown{
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  box-shadow: 0px 400px 1000000px 20rem #0000002e;
+}
+
+.category-menu{
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.category-menu:hover{
+  background-color: transparent !important;
+  text-decoration: underline;
+}
+
+.category-sub{
+  font-size: 15px;
+}
+
+.category-sub:hover{
+  background-color: transparent !important;
+  text-decoration: underline;
+}
+
+#carouselIntro{
+  min-height: 260px;
+  height: 260px;
+}

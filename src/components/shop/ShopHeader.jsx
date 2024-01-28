@@ -6,13 +6,23 @@ import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
 import Heart from "../../resources/themes/dashboard-v1/icons/heart.svg";
 
 const ShopHeader = () => {
+  function toggleDropdown(show) {
+    var dropdown = document.getElementById("categories-dropdown");
+    if (show) {
+      dropdown.classList.add("show");
+    } else {
+      dropdown.classList.remove("show");
+    }
+  }
   return (
     <header>
       <div className="p-3 text-center bg-white border-bottom">
         <div className="container">
           <div className="row gy-3 d-flex justify-content-between align-items-center">
             <div className="col-lg-2 col-sm-4 col-5">
-              <a href="/"><img src={logoBlack} alt="logoBlack" /></a>
+              <a href="/">
+                <img src={logoBlack} alt="logoBlack" />
+              </a>
             </div>
             <div className="col-lg-1 desktop-only"></div>
 
@@ -76,11 +86,189 @@ const ShopHeader = () => {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarLeftAlignExample">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between w-100">
-              <li className="nav-item">
-                <a className="nav-link text-dark" href="#">
-                  Categories
-                </a>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between w-100 align-items-center">
+              <li
+                className="nav-link text-dark list-group-item "
+                type="button"
+                aria-expanded="false"
+                onMouseOver={() => toggleDropdown(true)}
+                onMouseOut={() => toggleDropdown(false)}
+              >
+                Categories
+                <ul
+                  id="categories-dropdown"
+                  className="dropdown-menu rounded-0 px-0"
+                >
+                  <div className="container pt-2 pb-5 px-0">
+                    <div className="row gx-2">
+                      <div className="col-3">
+                        <li>
+                          <a className="dropdown-item category-menu" href="/products">
+                            All Products
+                          </a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item category-menu" href="#">
+                            Arduino
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Arduino Microcontrollers
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Arduino Kits
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Arduino Accessories
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Arduino Shields
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item category-menu fw-bold mt-4"
+                            href="#"
+                          >
+                            Raspberry Pi
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Raspberry Pi Microcontrollers
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Raspberry Pi Kits
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Raspberry Pi Accessories
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Raspberry Pi Shields
+                          </a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item category-menu" href="#">
+                            Teensy
+                          </a>
+                        </li>
+                      </div>
+                      <div className="col-3">
+                        <li>
+                          <a
+                            className="dropdown-item category-menu fw-bold mt-4"
+                            href="#"
+                          >
+                            Motors & Drives
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Servo Motors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            DC Motors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Gear Motors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Stepper Motors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Driver Boards
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Brushless Motors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Motor Accessories
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Wheels
+                          </a>
+                        </li>
+                      </div>
+                      <div className="col-3">
+                        <li>
+                          <a
+                            className="dropdown-item category-menu fw-bold mt-4"
+                            href="#"
+                          >
+                            Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Air Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Current & Voltage Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Flex Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            IR, Light & Imaging Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Liquid Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Motion Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Potentiometer
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Pressure Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Range & Distance Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Sensor Kits
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Sound Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Temperature & Humidity Sensors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Weight Sensors
+                          </a>
+                        </li>
+                      </div>
+                      <div className="col-3">
+                        <li>
+                          <a className="dropdown-item category-menu" href="#">
+                            Passive & Active Components
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Capacitors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Resistors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Inductors
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item category-menu fw-bold mt-4"
+                            href="#"
+                          >
+                            Semiconductors
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Diodes
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            BJT & IGBT
+                          </a>
+                          <a className="dropdown-item category-sub" href="#">
+                            Transistors
+                          </a>
+                        </li>
+                      </div>
+                    </div>
+                  </div>
+                </ul>
               </li>
               <li className="nav-item">
                 <a className="nav-link text-dark" href="/pcb-builder">

@@ -78,7 +78,7 @@ const NewestProducts = () => {
       <div className="row g-3 my-5">
         <div className="col-12 d-flex justify-content-between">
           <h3 className="fw-bold text-muted mb-4">Newest Products</h3>
-          <a href="#">See All New Products</a>
+          <a href="/products">See All New Products</a>
         </div>
         {products.slice(0, 8).map((product) => (
           <div key={product.id} className="col-lg-3 col-md-6 col-sm-6 d-flex">
