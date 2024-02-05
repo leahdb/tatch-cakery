@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import iconLogout from "../../resources/themes/dashboard-v1/icons/logout.svg";
 import { Link } from "react-router-dom";
-import LogoutButton from "../login/LogoutButton";
+import LogoutButton from "../auth/LogoutButton";
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
-import {circleXIcon} from "../../resources/themes/dashboard-v1/icons/icons";
+import { circleXIcon } from "../../resources/themes/dashboard-v1/icons/icons";
 
 const icons = {
   Dashboard: (
@@ -296,146 +296,147 @@ const DashboardSideBar = () => {
     }
   }, []);
 
-
   let renderedRoleMenus = {};
   const closeSideBar = () => {
     const sidebar = document.getElementById("dashboard-sidebar");
     sidebar.classList.toggle("open");
-  }
+  };
   return (
-      <div id="dashboard-sidebar" className={"bg-white dashboard-sidebar"}>
-        <div className={"d-flex justify-content-end mobile-only menu-close-container"}>
-          <span onClick={closeSideBar}>{circleXIcon}</span>
-        </div>
-        <div className="dashboard-logo p-4 d-flex justify-content-center">
-          <img src={logoBlack} alt="logoBlack" />
-        </div>
-        <ul
-            className="no-print bg-white px-4 flex-1 pt-3"
-        >
-          {menus.map((menu, index) => {
-            if (menu.role && renderedRoleMenus[menu.role] === undefined) {
-              renderedRoleMenus[menu.role] = true;
-            } else if (menu.role) {
-              return <div key={index}></div>;
-            }
-            if (menu.submenu) {
-               return (
-                 <div key={index}>
-                   <li
-                     className="list-item d-flex align-items-center py-sm-3 py-2 px-4 pe-5 collapsed position-relative submenu-item"
-                     data-bs-toggle="collapse"
-                     data-bs-target={`#details-collapse`}
-                   >
-                     {getIconForTitle(menu.title)}
-                     <p className="m-0 fw-bold pe-none submenu-role">{menu.title}</p>
-                     <div className="d-flex justify-content-end">
-                       <svg
-                         className="icon ms-4 pe-none caret"
-                         width="16"
-                         height="17"
-                         viewBox="0 0 16 17"
-                         fill="none"
-                         xmlns="http://www.w3.org/2000/svg"
-                       >
-                         <path
-                           d="M7.99975 5.29993C8.46642 5.29993 8.93308 5.47993 9.28641 5.83326L13.6331 10.1799C13.8264 10.3733 13.8264 10.6933 13.6331 10.8866C13.4397 11.08 13.1197 11.08 12.9264 10.8866L8.57975 6.54001C8.25975 6.22001 7.73975 6.22001 7.41975 6.54001L3.0731 10.8866C2.87977 11.08 2.55977 11.08 2.36644 10.8866C2.1731 10.6933 2.1731 10.3733 2.36644 10.1799L6.71308 5.83326C7.06642 5.47993 7.53308 5.29993 7.99975 5.29993Z"
-                           fill="#A0A0A0"
-                         />
-                       </svg>
-                     </div>
-                   </li>
-                   <div
-                     className="collapse submenu submenu-items"
-                     id={`details-collapse`}
-                   >
-                     <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-3">
-                       {menu.submenu.map((submenu, subIndex) => (
-                         <Link to={submenu.link} key={subIndex}>
-                           <li className="list-item d-flex px-4" key={subIndex}>
-                             {getIconForTitle(submenu.title)}
-                             <p className="m-0">{submenu.title}</p>
-                           </li>
-                         </Link>
-                       ))}
-                     </ul>
-                   </div>
-                 </div>
-               );
-             } else if (!menu.role) {
-               return (
-                 <Link to={menu.link} key={index}>
-                   <li
-                     key={index}
-                     onClick={() => {
-                       setSelectedIndex(index);
-                     }}
-                     className={
-                       (index === selectedIndex ? "selected-listitem " : "") +
-                       "list-item d-flex align-items-center py-sm-3 py-2 px-4  mb-3"
-                     }
-                   >
-                     {getIconForTitle(menu.title)}
-                     <p className="m-0 fw-bold pe-none">{menu.title}</p>
-                   </li>
-                 </Link>
-               );
-             } else {
-               const roleMenus = menus.filter(
-                 (item) => item.role === menu.role
-               );
-               return (
-                 <div key={index}>
-                   <li
-                     key={index}
-                     className="list-item d-flex align-items-center py-sm-3 py-2 px-4 pe-5 collapsed position-relative submenu-item"
-                     data-bs-toggle="collapse"
-                     data-bs-target={`#${menu.role}-collapse`}
-                   >
-                     {getIconForTitle(menu.role)}
-                     <p className="m-0 fw-bold pe-none submenu-role">
-                       {menu.role}
-                     </p>
-                     <div className="d-flex justify-content-end">
-                       <svg
-                         className="icon ms-4 pe-none caret"
-                         width="16"
-                         height="17"
-                         viewBox="0 0 16 17"
-                         fill="none"
-                         xmlns="http://www.w3.org/2000/svg"
-                       >
-                         <path
-                           d="M7.99975 5.29993C8.46642 5.29993 8.93308 5.47993 9.28641 5.83326L13.6331 10.1799C13.8264 10.3733 13.8264 10.6933 13.6331 10.8866C13.4397 11.08 13.1197 11.08 12.9264 10.8866L8.57975 6.54001C8.25975 6.22001 7.73975 6.22001 7.41975 6.54001L3.0731 10.8866C2.87977 11.08 2.55977 11.08 2.36644 10.8866C2.1731 10.6933 2.1731 10.3733 2.36644 10.1799L6.71308 5.83326C7.06642 5.47993 7.53308 5.29993 7.99975 5.29993Z"
-                           fill="#A0A0A0"
-                         />
-                       </svg>
-                     </div>
-                   </li>
-                   <div
-                     key={`submenu-${index}`}
-                     className="collapse submenu submenu-items"
-                     id={`${menu.role}-collapse`}
-                   >
-                     <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-3">
-                       {roleMenus.map((submenu, subIndex) => (
-                         <Link to={submenu.link} key={subIndex}>
-                           <li className="list-item d-flex px-4" key={subIndex}>
-                             {getIconForTitle(submenu.title)}
-                             <p className="m-0">{submenu.title}</p>
-                           </li>
-                         </Link>
-                       ))}
-                     </ul>
-                   </div>
-                 </div>
-               );
-             }
-          })}
-
-          <LogoutButton preset={"sidebar"} />
-        </ul>
+    <div id="dashboard-sidebar" className={"bg-white dashboard-sidebar"}>
+      <div
+        className={
+          "d-flex justify-content-end mobile-only menu-close-container"
+        }
+      >
+        <span onClick={closeSideBar}>{circleXIcon}</span>
       </div>
+      <div className="dashboard-logo p-4 d-flex justify-content-center">
+        <img src={logoBlack} alt="logoBlack" />
+      </div>
+      <ul className="no-print bg-white px-4 flex-1 pt-3">
+        {menus.map((menu, index) => {
+          if (menu.role && renderedRoleMenus[menu.role] === undefined) {
+            renderedRoleMenus[menu.role] = true;
+          } else if (menu.role) {
+            return <div key={index}></div>;
+          }
+          if (menu.submenu) {
+            return (
+              <div key={index}>
+                <li
+                  className="list-item d-flex align-items-center py-sm-3 py-2 px-4 pe-5 collapsed position-relative submenu-item"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#details-collapse`}
+                >
+                  {getIconForTitle(menu.title)}
+                  <p className="m-0 fw-bold pe-none submenu-role">
+                    {menu.title}
+                  </p>
+                  <div className="d-flex justify-content-end">
+                    <svg
+                      className="icon ms-4 pe-none caret"
+                      width="16"
+                      height="17"
+                      viewBox="0 0 16 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.99975 5.29993C8.46642 5.29993 8.93308 5.47993 9.28641 5.83326L13.6331 10.1799C13.8264 10.3733 13.8264 10.6933 13.6331 10.8866C13.4397 11.08 13.1197 11.08 12.9264 10.8866L8.57975 6.54001C8.25975 6.22001 7.73975 6.22001 7.41975 6.54001L3.0731 10.8866C2.87977 11.08 2.55977 11.08 2.36644 10.8866C2.1731 10.6933 2.1731 10.3733 2.36644 10.1799L6.71308 5.83326C7.06642 5.47993 7.53308 5.29993 7.99975 5.29993Z"
+                        fill="#A0A0A0"
+                      />
+                    </svg>
+                  </div>
+                </li>
+                <div
+                  className="collapse submenu submenu-items"
+                  id={`details-collapse`}
+                >
+                  <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-3">
+                    {menu.submenu.map((submenu, subIndex) => (
+                      <Link to={submenu.link} key={subIndex}>
+                        <li className="list-item d-flex px-4" key={subIndex}>
+                          {getIconForTitle(submenu.title)}
+                          <p className="m-0">{submenu.title}</p>
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          } else if (!menu.role) {
+            return (
+              <Link to={menu.link} key={index}>
+                <li
+                  key={index}
+                  onClick={() => {
+                    setSelectedIndex(index);
+                  }}
+                  className={
+                    (index === selectedIndex ? "selected-listitem " : "") +
+                    "list-item d-flex align-items-center py-sm-3 py-2 px-4  mb-3"
+                  }
+                >
+                  {getIconForTitle(menu.title)}
+                  <p className="m-0 fw-bold pe-none">{menu.title}</p>
+                </li>
+              </Link>
+            );
+          } else {
+            const roleMenus = menus.filter((item) => item.role === menu.role);
+            return (
+              <div key={index}>
+                <li
+                  key={index}
+                  className="list-item d-flex align-items-center py-sm-3 py-2 px-4 pe-5 collapsed position-relative submenu-item"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#${menu.role}-collapse`}
+                >
+                  {getIconForTitle(menu.role)}
+                  <p className="m-0 fw-bold pe-none submenu-role">
+                    {menu.role}
+                  </p>
+                  <div className="d-flex justify-content-end">
+                    <svg
+                      className="icon ms-4 pe-none caret"
+                      width="16"
+                      height="17"
+                      viewBox="0 0 16 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.99975 5.29993C8.46642 5.29993 8.93308 5.47993 9.28641 5.83326L13.6331 10.1799C13.8264 10.3733 13.8264 10.6933 13.6331 10.8866C13.4397 11.08 13.1197 11.08 12.9264 10.8866L8.57975 6.54001C8.25975 6.22001 7.73975 6.22001 7.41975 6.54001L3.0731 10.8866C2.87977 11.08 2.55977 11.08 2.36644 10.8866C2.1731 10.6933 2.1731 10.3733 2.36644 10.1799L6.71308 5.83326C7.06642 5.47993 7.53308 5.29993 7.99975 5.29993Z"
+                        fill="#A0A0A0"
+                      />
+                    </svg>
+                  </div>
+                </li>
+                <div
+                  key={`submenu-${index}`}
+                  className="collapse submenu submenu-items"
+                  id={`${menu.role}-collapse`}
+                >
+                  <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-3">
+                    {roleMenus.map((submenu, subIndex) => (
+                      <Link to={submenu.link} key={subIndex}>
+                        <li className="list-item d-flex px-4" key={subIndex}>
+                          {getIconForTitle(submenu.title)}
+                          <p className="m-0">{submenu.title}</p>
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          }
+        })}
+
+        <LogoutButton preset={"sidebar"} />
+      </ul>
+    </div>
   );
 };
 

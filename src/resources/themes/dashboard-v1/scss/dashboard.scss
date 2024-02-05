@@ -41,6 +41,12 @@ $orangeColor: #ff9500;
   border-bottom: 1px solid $grayLight;
 }
 
+.form-control:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+  border-color: #e0e0e0;
+}
+
 @media print {
   .no-print,
   .no-print * {
@@ -242,6 +248,10 @@ a:hover {
   height: 100vh;
 }
 
+.full-screen-height-desktop {
+  height: 100vh;
+}
+
 .min-full-screen-height {
   min-height: 100vh;
 }
@@ -271,7 +281,7 @@ a:hover {
 
 .btn-outline-primary,
 .btn-outline-primary:hover {
-  background: #ffe9e5;
+  background: #d3ffdd7d;
   outline-color: $primaryColor;
   border-color: $primaryColor;
   color: $primaryColor;
@@ -1656,7 +1666,6 @@ input[type="checkbox"].checkbox-primary:checked {
         margin-right: 8px;
 
         &::before {
-          content: "|";
           position: absolute;
           right: -16px;
           color: #e0e0e0;
@@ -1931,9 +1940,9 @@ input[type="checkbox"].checkbox-primary:checked {
 .PhoneInput {
   display: flex;
   align-items: center;
-  padding: 18px 16px;
+  padding: 4px 10px;
   border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  border-radius: 7px;
 
   .PhoneInputCountry {
     position: relative;
@@ -1943,7 +1952,6 @@ input[type="checkbox"].checkbox-primary:checked {
     margin-right: 8px;
 
     &::before {
-      content: "|";
       position: absolute;
       right: -16px;
       color: #e0e0e0;
@@ -1968,12 +1976,13 @@ input[type="checkbox"].checkbox-primary:checked {
         display: block;
         width: 100%;
         height: 100%;
+        padding: 5px 0 5px 5px;
       }
     }
 
     .PhoneInputCountrySelectArrow {
-      width: 16px;
-      height: 16px;
+      width: 10px;
+      height: 10px;
       border: 2px solid;
       border-top: none;
       border-left: none;

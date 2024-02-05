@@ -1,4 +1,5 @@
 const API_HOST = "http://127.0.0.1:8000/api/auth/";
+
 export function authenticate(email, password) {
   return fetch(API_HOST + "login", {
     method: "POST",
@@ -67,4 +68,28 @@ export const unauthenticate = () => {
       return res;
     });
 };
+
+export function saveRegistrationData(data) {
+
+  return fetch(API_HOST + "register", {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((response) => {
+      if (response.status === "error") {
+        return response;
+      }
+
+      return fetch_authed_user();
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error(error);
+    });
+}
 

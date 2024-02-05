@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LogoutButton from "../login/LogoutButton";
+import LogoutButton from "../auth/LogoutButton";
 import DashboardSideBar from "./DashboardSideBar";
 import DashboardHeader from "./DashboardHeader";
 import DashboardMain from "./DashboardMain";

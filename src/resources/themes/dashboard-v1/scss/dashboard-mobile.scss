@@ -99,6 +99,11 @@ $primaryColor: #007132;
 }
 
 @media screen and (max-width: 768px) {
+
+  .full-screen-height-desktop{
+    height: fit-content !important;
+  }
+
   .dashboard-sidebar {
     position: fixed !important;
     padding-top: 50px;
@@ -112,6 +117,13 @@ $primaryColor: #007132;
     display: block !important;
   }
   .mobile-only.d-flex {
+    display: flex !important;
+  }
+
+  .mobile-only-auth {
+    display: block !important;
+  }
+  .mobile-only-auth.d-flex {
     display: flex !important;
   }
 
@@ -132,8 +144,11 @@ $primaryColor: #007132;
     }
 
     .bg-footer {
-      flex-direction: row;
-      justify-content: space-between;
+      display: flex;
+      justify-content: center !important;
+      p{
+        padding: 0;
+      }
     }
 
     .logo {
@@ -141,8 +156,7 @@ $primaryColor: #007132;
     }
 
     .logo-container {
-      margin: 0 auto;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     // form.bg-white {
