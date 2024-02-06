@@ -10,6 +10,7 @@ import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
 import Checkout from "./Checkout";
 import ErrorPage404 from "../errors/ErrorPage404";
+import "react-toastify/dist/ReactToastify.css";
 
 const ShopHome = (props) => {
   return (

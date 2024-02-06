@@ -27,9 +27,15 @@ function RegisterPage() {
             </div>
           </div>
         </div>
-        <div className="col-md-6 desktop-only">
+        <div className="col-md-6 desktop-only full-screen-height overflow-scroll">
+          <div className="text-left py-3 px-2">
+            <a href="/" className="text-primary fw-bold">
+              <i className="bi bi-arrow-left-circle-fill text-primary pe-1"></i>{" "}
+              Go Back
+            </a>
+          </div>
           <div className="full-height flex-container-center flex-column">
-            <div className="flex-container-column flex-container-center">
+            <div className="flex-container-column flex-container-center h-100 full-width">
               <RegisterForm className={"login-form p-3"} />
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { authenticate } from "../../services/auth";
 import { Navigate } from "react-router-dom";
+import { notify_error } from "../../services/utils/toasts";
 
 function LoginForm(props) {
   const [email, setEmail] = useState("");
@@ -22,27 +23,35 @@ function LoginForm(props) {
     authenticate(email, password).then((response) => {
       setIsLoggingIn(false);
 
-      if (response.status === "error") {
-        if (response.type === "validation") {
-          setEmailErrorMessage(
-            response.data.user.email !== undefined
-              ? response.data.user.email
-              : ""
-          );
-          setPasswordErrorMessage(
-            response.data.user.password !== undefined
-              ? response.data.user.password
-              : ""
-          );
-        }
+      if (response) {
+        if (response.status === "ok") {
+          setloginSuccessful(true);
+          setUserRole(response.data.role[0]);
+        } else if (response.status === "error") {
+          if (response.type === "validation") {
+            setEmailErrorMessage(
+              response.data.user.email !== undefined
+                ? response.data.user.email
+                : ""
+            );
+            setPasswordErrorMessage(
+              response.data.user.password !== undefined
+                ? response.data.user.password
+                : ""
+            );
+          }
 
-        if (response.type === "general") {
-          setGeneralErrorMessage(response.message);
+          if (response.type === "general") {
+            setGeneralErrorMessage(response.message);
+          }
+        } else {
+          notify_error("Could not authenticate");
         }
       } else {
-        setloginSuccessful(true);
-        setUserRole(response.data.role[0]);
+        notify_error("Could not authenticate");
       }
+
+      
     });
   };
 
@@ -52,7 +61,7 @@ function LoginForm(props) {
   }
 
   return (
-    <div className={props.class}>
+    <div className={props.class}>      
       <form method="POST">
         <h1 className="mb-1 text-center">Welcome Back</h1>
         <p className="form-help">Enter your account details to login</p>

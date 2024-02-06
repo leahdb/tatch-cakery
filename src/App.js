@@ -4,10 +4,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import DashHome from "./components/dashboard/DashHome";
 import ShopHome from "./components/shop/ShopHome";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
+      
       <Routes>
         <Route path={"/*"} element={<ShopHome />} />
         <Route element={<PrivateRoutes />}>

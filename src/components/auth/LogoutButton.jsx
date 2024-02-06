@@ -11,7 +11,7 @@ const LogoutButton = () => {
   };
 
   if (isLoggedOut) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/"} />;
   }
 
   return (

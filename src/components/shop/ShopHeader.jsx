@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import iconSearch from "../../resources/themes/dashboard-v1/icons/search.svg";
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 import User from "../../resources/themes/dashboard-v1/icons/user.svg";
 import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
 import Heart from "../../resources/themes/dashboard-v1/icons/heart.svg";
+import { Navigate } from "react-router-dom";
+import { unauthenticate } from "../../services/auth";
 
 const ShopHeader = () => {
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const logout = () => {
+    unauthenticate().then((response) => {
+      setIsLoggedOut(response.status === "ok");
+    });
+  };
+
+  if (isLoggedOut) {
+    return <Navigate to={"/login"} />;
+  }
+
   function toggleDropdown(show) {
     var dropdown = document.getElementById("categories-dropdown");
     if (show) {
@@ -14,6 +27,13 @@ const ShopHeader = () => {
       dropdown.classList.remove("show");
     }
   }
+  let userName = localStorage["user_full_name"];
+  let isLoggedIn = localStorage["user_logged_in"];
+
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   return (
     <header>
       <div className="p-3 text-center bg-white border-bottom">
@@ -28,13 +48,46 @@ const ShopHeader = () => {
 
             <div className="order-lg-last col-lg-4 col-sm-8 col-6">
               <div className="d-flex float-end">
-                <a
-                  href="/login"
-                  className="border rounded me-2 py-1 px-2 nav-link d-flex align-items-center"
-                >
-                  <img src={User} alt="profile" height={18} className="pe-1" />
-                  <p className="d-none d-md-block mb-0">Login</p>
-                </a>
+                {isLoggedIn === "true" ? (
+                  <div class="dropdown">
+                    <button
+                      class="border rounded me-2 dropdown-toggle py-1 px-2 nav-link d-flex align-items-center h-100"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src={User}
+                        alt="profile"
+                        height={18}
+                        className="pe-1"
+                      />
+                      {capitalizeFirstLetter(userName.split(" ")[0])}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li role="button">
+                        {
+                          <a class="dropdown-item" onClick={logout}>
+                            Logout
+                          </a>
+                        }
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <a
+                    href="/login"
+                    className="border rounded me-2 py-1 px-2 nav-link d-flex align-items-center"
+                  >
+                    <img
+                      src={User}
+                      alt="profile"
+                      height={18}
+                      className="pe-1"
+                    />
+                    <p className="d-none d-md-block mb-0">Login</p>
+                  </a>
+                )}
                 <a
                   href="/wishlist"
                   className="me-2 border rounded py-1 px-2 nav-link d-flex align-items-center"
@@ -103,7 +156,10 @@ const ShopHeader = () => {
                     <div className="row gx-2">
                       <div className="col-3">
                         <li>
-                          <a className="dropdown-item category-menu" href="/products">
+                          <a
+                            className="dropdown-item category-menu"
+                            href="/products"
+                          >
                             All Products
                           </a>
                         </li>
