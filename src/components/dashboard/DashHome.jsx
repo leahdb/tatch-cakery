@@ -6,7 +6,7 @@ import DashboardHeader from "./DashboardHeader";
 import DashboardMain from "./DashboardMain";
 // import ProductFormPage from "./shop/products/ProductFormPage";
 // import ProductViewPage from "./shop/products/ProductViewPage";
-// import ProductListingPage from "./shop/products/ProductListingPage";
+import ProductListingPage from "./ProductListingPage";
 // import OrderListingPage from "./shop/orders/OrderListingPage";
 // import AdminSupportPage from "./admin/AdminSupportPage";
 // import AdminSettingsPage from "./admin/AdminSettingsPage";
@@ -37,16 +37,16 @@ const PageRoutes = ({ userRole }) => {
       {userRole === "super-admin" && (
         <>
           <Route path={"/"} element={<DashboardMain />}></Route>
-          {/* <Route path={"/support"} element={<AdminSupportPage />}></Route>
-          <Route
+          {/* <Route path={"/support"} element={<AdminSupportPage />}></Route> */}
+          {/* <Route
             path={"/settings/:tabName?"}
             element={<AdminSettingsPage />}
-          ></Route>
+          ></Route> */}
           <Route
             path={"/products/list"}
             element={<ProductListingPage />}
           ></Route>
-          <Route path={"/products/add"} element={<ProductFormPage />}></Route>
+          {/* <Route path={"/products/add"} element={<ProductFormPage />}></Route>
           <Route
             path={"/products/edit/:id"}
             element={<ProductFormPage />}
@@ -54,9 +54,9 @@ const PageRoutes = ({ userRole }) => {
           <Route
             path={"/products/view/:id"}
             element={<ProductViewPage />}
-          ></Route>
+          ></Route> */}
 
-          <Route path={"/orders"} element={<OrderListingPage />}></Route>
+          {/* <Route path={"/orders"} element={<OrderListingPage />}></Route>
           <Route
             path={"/accounts/add"}
             element={<AccountManagerForm />}
