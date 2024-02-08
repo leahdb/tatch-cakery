@@ -4,9 +4,9 @@ import LogoutButton from "../auth/LogoutButton";
 import DashboardSideBar from "./DashboardSideBar";
 import DashboardHeader from "./DashboardHeader";
 import DashboardMain from "./DashboardMain";
-// import ProductFormPage from "./shop/products/ProductFormPage";
+import ProductFormPage from "./products/ProductFormPage";
 // import ProductViewPage from "./shop/products/ProductViewPage";
-import ProductListingPage from "./ProductListingPage";
+import ProductListingPage from "./products/ProductListingPage";
 // import OrderListingPage from "./shop/orders/OrderListingPage";
 // import AdminSupportPage from "./admin/AdminSupportPage";
 // import AdminSettingsPage from "./admin/AdminSettingsPage";
@@ -46,12 +46,10 @@ const PageRoutes = ({ userRole }) => {
             path={"/products/list"}
             element={<ProductListingPage />}
           ></Route>
-          {/* <Route path={"/products/add"} element={<ProductFormPage />}></Route>
+          <Route path={"/products/add"} element={<ProductFormPage />}></Route>
           <Route
-            path={"/products/edit/:id"}
-            element={<ProductFormPage />}
-          ></Route>
-          <Route
+            path={"/products/edit/:id"} element={<ProductFormPage />}></Route>
+          {/*<Route
             path={"/products/view/:id"}
             element={<ProductViewPage />}
           ></Route> */}

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import iconClose from "../../resources/themes/dashboard-v1/icons/close.svg";
+import iconClose from "../../../resources/themes/dashboard-v1/icons/close.svg";
 
-import starSVG from "../../resources/themes/dashboard-v1/icons/star.svg";
+import starSVG from "../../../resources/themes/dashboard-v1/icons/star.svg";
 const ProductPopup = ({ product }) => {
   let reviews = [
     // {user_name: "My Floyd Miles", user_image: '', review_text: 'pretty colors too ! '},
@@ -55,7 +55,7 @@ const ProductPopup = ({ product }) => {
               <div className="d-flex justify-content-center">
                 <img
                   className={"img-thumbnail"}
-                  src={product.img_picture}
+                  src={product.image}
                   alt="Product Image"
                   height={150}
                   width={100}
@@ -67,21 +67,6 @@ const ProductPopup = ({ product }) => {
                     <span className="text-muted fw-semibold small">
                       {product.brand_name}
                     </span>
-                    <div
-                      className={
-                        "d-flex align-items-center justify-content-center"
-                      }
-                    >
-                      <img src={starSVG} height={16} width={16} alt={"Star"} />
-                      <img src={starSVG} height={16} width={16} alt={"Star"} />
-                      <img src={starSVG} height={16} width={16} alt={"Star"} />
-                      <img src={starSVG} height={16} width={16} alt={"Star"} />
-                      <img src={starSVG} height={16} width={16} alt={"Star"} />
-                      <div className={"pleft-10 text-muted small"}>
-                        {product.average_rating} ({product.total_reviews}{" "}
-                        Reviews)
-                      </div>
-                    </div>
                   </div>
                   <span className="fs-5 fw-bold mb-4">{product.name}</span>
                 </div>
@@ -99,47 +84,6 @@ const ProductPopup = ({ product }) => {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="popup-data-items-container overflow-auto max-height-500 py-4 d-flex flex-column gap-4">
-            <span className="fw-bold fs-5">Reviews</span>
-            {product.reviews.map((review, index) => {
-              return (
-                <div
-                  className={"product-review d-flex gap-4 border-bottom py-4"}
-                  key={index}
-                >
-                  <div className="">
-                    <img
-                      width={80}
-                      height={120}
-                      className={"reviewer-img img-thumbnail"}
-                      src={review.pet_owner.picture}
-                      alt="user image"
-                    />
-                    {/*<img src={review.user_image} alt="User Image"/>*/}
-                  </div>
-                  <div>
-                    <span>
-                      {review.pet_owner.first_name +
-                        " " +
-                        review.pet_owner.last_name}
-                    </span>
-                    <div className={"d-flex flex-row"}>
-                      <img src={starSVG} width={20} alt={"Star"} />
-                      <div className={"m-2"}>{review.rating}</div>
-                    </div>
-                    <p className={"bold"}>{review.description}</p>
-                  </div>
-                </div>
-              );
-            })}
-
-            {product.reviews.length === 0 ? (
-              <p className={"text-center"}>This product has no reviews</p>
-            ) : (
-              ""
-            )}
           </div>
         </div>
       </div>

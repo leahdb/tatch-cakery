@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import iconSearch from "../../resources/themes/dashboard-v1/icons/search.svg";
+import iconSearch from "../../resources/themes/dashboard-v1/icons/search-white.svg";
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 import User from "../../resources/themes/dashboard-v1/icons/user.svg";
 import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";

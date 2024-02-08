@@ -2,15 +2,13 @@ import React from "react";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-
 const ProductDetails = () => {
-
   const product = {
     id: 1,
     name: "Raspberry Pi 4 Model B",
     brand_name: "Brand Name", // Fill in the brand name property
     price: 35.99,
-    img_picture:
+    image:
       "https://www.seeedstudio.com/blog/wp-content/uploads/2019/06/WechatIMG1371.png",
     description: "Product description goes here.",
     description2: "Additional description goes here.",
@@ -43,9 +41,9 @@ const ProductDetails = () => {
           </p>
         </div>
         <div className="col-md-6 col-12 ps-0 pe-5">
-          <a href={product.img_picture} data-fancybox="gallery">
+          <a href={product.image} data-fancybox="gallery">
             <img
-              src={product.img_picture}
+              src={product.image}
               className="d-block w-100 carousel-image"
               alt="Product"
             />
@@ -78,11 +76,10 @@ const ProductDetails = () => {
 
           <div className="row border-top pt-3 mt-5 mx-0">
             <h5 className="fw-semibold text-dark mb-4">Additional Info</h5>
-            
           </div>
-        </div>  
+        </div>
       </div>
-    </div>  
+    </div>
   );
 };
 

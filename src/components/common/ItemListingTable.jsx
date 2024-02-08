@@ -147,7 +147,7 @@ const ItemListingPaginationControls = ({ pagination, updateTableInfo }) => {
   };
 
   return (
-    <div className="d-flex flex-lg-row flex-md-column flex-sm-row flex-column justify-content-between align-items-center mt-4">
+    <div className="d-flex flex-lg-row flex-md-column flex-sm-row flex-column justify-content-between align-items-center mt-4 no-print">
       <div className="d-flex align-items-center mb-lg-0 mb-3">
         <p className="light-black m-0 me-4">Rows Display per page</p>
         <select

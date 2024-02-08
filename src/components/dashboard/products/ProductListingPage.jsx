@@ -5,15 +5,15 @@ import {
   export_shop_products,
   search_shop_products,
   IMPORT_API,
-} from "../../services/dashboard/products";
+} from "../../../services/dashboard/products";
 import ItemListingTable, {
   getTableUpdateCallback,
-} from "../common/ItemListingTable";
+} from "../../common/ItemListingTable";
 import { useSearchParams } from "react-router-dom";
-import { notify_promise } from "../../services/utils/toasts";
+import { notify_promise } from "../../../services/utils/toasts";
 import ProductPopup from "./ProductPopup";
-import ImportFilePopup from "../common/ImportFilePopup";
-import ListingPageControls from "../common/ListingPageControls";
+import ImportFilePopup from "../../common/ImportFilePopup";
+import ListingPageControls from "../../common/ListingPageControls";
 
 const ProductListingPage = ({ pageState, setPageState }) => {
   const [products, setProducts] = useState([]);
@@ -81,7 +81,7 @@ const ProductListingPage = ({ pageState, setPageState }) => {
 
   useEffect(() => {
     updateTableInfo();
-  }, []);
+  }, [latestSearchQuery]);
 
   useEffect(() => {
     setSearch(searchParams.get("search"));
@@ -90,10 +90,6 @@ const ProductListingPage = ({ pageState, setPageState }) => {
   useEffect(() => {
     setLatestSearchQuery(search);
   }, [search]);
-
-  useEffect(() => {
-    updateTableInfo(0);
-  }, [latestSearchQuery]);
 
   return (
     <div className="page-content py-3 px-4 bg-lightgray">

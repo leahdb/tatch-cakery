@@ -1,6 +1,6 @@
 const API_HOST = "http://127.0.0.1:8000/api/dash/products/";
 const EXPORT_API = "http://127.0.0.1:8000/api/dash/export/products";
-const SEARCH_API =  "http://127.0.0.1:8000/api/dash/search/top";
+const SEARCH_API = "http://127.0.0.1:8000/api/dash/search/top";
 
 export const IMPORT_API = API_HOST + "import";
 
@@ -46,7 +46,7 @@ export const add_shop_products = (data) => {
     formData.append(key, data[key]);
   });
 
-  formData.append("img_picture", data.img_picture);
+  formData.append("image", data.image);
   return fetch(API_HOST, {
     method: "POST",
     credentials: "include",
@@ -62,8 +62,8 @@ export const edit_shop_products = (id, data) => {
     formData.append(key, data[key]);
   });
 
-  if (data.img_picture instanceof File) {
-    formData.append("img_picture", data.img_picture);
+  if (data.image instanceof File) {
+    formData.append("image", data.image);
   }
   return fetch(`${API_HOST}${id}?_method=PUT`, {
     method: "POST",

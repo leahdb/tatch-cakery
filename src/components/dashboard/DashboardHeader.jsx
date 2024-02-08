@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import iconMenu from "../../resources/themes/dashboard-v1/icons/menu.svg";
 import avatar from "../../resources/themes/dashboard-v1/icons/avatar.svg";
 import iconArrowDown from "../../resources/themes/dashboard-v1/icons/arrow-down.svg";
-import iconSearch from "../../resources/themes/dashboard-v1/icons/search.svg";
+import iconSearch from "../../resources/themes/dashboard-v1/icons/search-white.svg";
 import { Link } from "react-router-dom";
 //import SearchBar from "../common/SearchBar";
 
