@@ -3459,8 +3459,6 @@ table.dashboard-table td {
 
 #categories-dropdown {
   width: 100vw;
-  position: fixed;
-  left: 0;
   box-shadow: 0px 400px 1000000px 20rem #0000002e;
 }
 
@@ -3487,4 +3485,21 @@ table.dashboard-table td {
 #carouselIntro {
   min-height: 260px;
   height: 260px;
+}
+
+.scrollable-checkboxes{
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.show-children{
+  display: block;
+}
+
+.hide-children{
+  display: none;
+}
+
+.accordion-button::after {
+    display: none !important;
 }

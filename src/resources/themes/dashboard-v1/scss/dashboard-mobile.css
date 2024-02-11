@@ -75,6 +75,10 @@
   }
 }
 @media screen and (max-width: 768px) {
+  .full-screen-height-desktop {
+    height: -moz-fit-content !important;
+    height: fit-content !important;
+  }
   .dashboard-sidebar {
     position: fixed !important;
     padding-top: 50px;
@@ -86,6 +90,12 @@
     display: block !important;
   }
   .mobile-only.d-flex {
+    display: flex !important;
+  }
+  .mobile-only-auth {
+    display: block !important;
+  }
+  .mobile-only-auth.d-flex {
     display: flex !important;
   }
   .login-section h1,
@@ -101,15 +111,17 @@
     align-items: start;
   }
   .login-section .bg-footer {
-    flex-direction: row;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center !important;
+  }
+  .login-section .bg-footer p {
+    padding: 0;
   }
   .login-section .logo {
     max-width: 300px;
   }
   .login-section .logo-container {
-    margin: 0 auto;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
   .login-section form .form-help {
     text-align: center;

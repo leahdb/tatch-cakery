@@ -3,7 +3,6 @@ import Select from "react-select";
 import { useState } from "react";
 import {
   add_shop_products,
-  delete_shop_products,
   edit_shop_products,
   fetch_shop_product,
   fetch_product_create_form,
