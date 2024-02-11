@@ -2,8 +2,15 @@ const API_HOST = "http://127.0.0.1:8000/api/products/";
 const SEARCH_API = "http://127.0.0.1:8000/api/dash/search/top";
 
 export const fetch_shop_products = (options) => {
-  const { categories, brands, minPrice, maxPrice, sort, perPage, currentPage } =
-    options;
+  const {
+    categories,
+    brands,
+    minPrice,
+    maxPrice,
+    sort,
+    perPage,
+    currentPage,
+  } = options;
 
   // Flatten the hierarchical categories into a single array
   const flattenedCategories = Object.values(categories).flat();

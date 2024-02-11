@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { fetch_shop_products } from "../../services/shop/products";
 import CategoryFilter from "./CategoryFilter";
 
 const ProductListing = () => {
+  const { categoryId } = useParams();
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -40,6 +42,12 @@ const ProductListing = () => {
   };
 
   useEffect(() => {
+    setSelectedCategories((prevSelected) => [
+      ...new Set([...prevSelected, +categoryId]),
+    ]);
+  }, []);
+
+  useEffect(() => {
     fetch_shop_products({
       categories: selectedCategories.map((category) => category),
       brands: selectedBrands,
@@ -56,6 +64,10 @@ const ProductListing = () => {
           setProductCount(res.total);
           setBrands(res.brands);
           setCategories(res.categories);
+          if(localStorage["category_refresh"]===false) {
+            window.location.href = "/products";
+            localStorage.setItem("category_refresh", true);
+          }
         }
       }
     });
@@ -121,6 +133,8 @@ const ProductListing = () => {
                     <CategoryFilter
                       categories={categories}
                       onChange={handleCategoryChange}
+                      selectedCategories={selectedCategories}
+                      setSelectedCategories={setSelectedCategories}
                     />
                   </div>
                 </div>

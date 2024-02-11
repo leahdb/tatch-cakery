@@ -13,6 +13,7 @@ import ErrorPage404 from "../errors/ErrorPage404";
 import "react-toastify/dist/ReactToastify.css";
 
 const ShopHome = (props) => {
+  localStorage.setItem("category_refresh", false);
   return (
     <section>
       <ShopHeader />
@@ -30,7 +31,14 @@ const ShopRoutes = () => {
       <Route path="/" element={<ShopMain />} />
       <Route path="/pcb-builder" element={<PCB />} />
       <Route path="/products" element={<ProductListing />} />
-      <Route path="/products/*" element={<ProductDetails />} />
+      <Route
+        path="/products/category/:categoryId/:categorySlug"
+        element={<ProductListing />}
+      />
+      <Route
+        path="/products/:productId/:productName"
+        element={<ProductDetails />}
+      />
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<WishList />} />
       <Route path="/checkout" element={<Checkout />} />
