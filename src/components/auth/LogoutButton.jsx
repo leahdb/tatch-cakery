@@ -8,6 +8,7 @@ const LogoutButton = ({ preset }) => {
   const logout = () => {
     unauthenticate().then((response) => {
       setIsLoggedOut(response.status === "ok");
+      <Navigate to={"/login"} />;
     });
   };
 

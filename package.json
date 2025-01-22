@@ -25,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "react-toastify": "^10.0.4",
+    "sass": "^1.83.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -52,7 +53,6 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^9.0",
     "sass-loader": "^13.3.3"
   }
 }

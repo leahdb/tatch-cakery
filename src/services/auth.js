@@ -17,8 +17,8 @@ export function authenticate(email, password) {
       if (response.status === "error") {
         return response;
       }
-
-      return fetch_authed_user();
+      localStorage.setItem("user_logged_in", "true");
+      return response;
     })
     .catch((error) => {
       // Handle errors
@@ -26,28 +26,6 @@ export function authenticate(email, password) {
     });
 }
 
-const fetch_authed_user = () => {
-  return fetch(API_HOST + "user", {
-    method: "GET",
-    credentials: "include",
-    secure: true,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.status === "ok") {
-        localStorage.setItem("user_logged_in", "true");
-        localStorage.setItem("user_id", res.data.user.id);
-        localStorage.setItem("user_full_name", res.data.user.full_name);
-        localStorage.setItem("user_menus", JSON.stringify(res.data.menus));
-        localStorage.setItem("user_role", res.data.role);
-      }
-
-      return res;
-    });
-};
 
 export const unauthenticate = () => {
   return fetch(API_HOST + "logout", {
@@ -84,7 +62,7 @@ export function saveRegistrationData(data) {
         return response;
       }
 
-      return fetch_authed_user();
+      return response;
     })
     .catch((error) => {
       // Handle errors

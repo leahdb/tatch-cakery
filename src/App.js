@@ -18,7 +18,6 @@ function App() {
           <Route path={"/admin/*"} element={<DashHome />} />
         </Route>
         <Route path={"/login"} element={<LoginPage />} />
-        //
         <Route path={"/register"} element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>

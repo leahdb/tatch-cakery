@@ -47,7 +47,6 @@ class ShopHeader extends React.Component {
       return <Navigate to={"/login"} />;
     }
 
-    let userName = localStorage["user_full_name"];
     let isLoggedIn = localStorage["user_logged_in"];
 
     const capitalizeFirstLetter = (str) => {
@@ -75,46 +74,6 @@ class ShopHeader extends React.Component {
 
               <div className="order-lg-last col-lg-4 col-sm-8 col-6">
                 <div className="d-flex float-end">
-                  {isLoggedIn === "true" ? (
-                    <div class="dropdown">
-                      <button
-                        class="border rounded me-2 dropdown-toggle py-1 px-2 nav-link d-flex align-items-center h-100"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src={User}
-                          alt="profile"
-                          height={18}
-                          className="pe-1"
-                        />
-                        {capitalizeFirstLetter(userName.split(" ")[0])}
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li role="button">
-                          {
-                            <a class="dropdown-item" onClick={this.logout}>
-                              Logout
-                            </a>
-                          }
-                        </li>
-                      </ul>
-                    </div>
-                  ) : (
-                    <a
-                      href="/login"
-                      className="border rounded me-2 py-1 px-2 nav-link d-flex align-items-center"
-                    >
-                      <img
-                        src={User}
-                        alt="profile"
-                        height={18}
-                        className="pe-1"
-                      />
-                      <p className="d-none d-md-block mb-0">Login</p>
-                    </a>
-                  )}
                   <a
                     href="/wishlist"
                     className="me-2 border rounded py-1 px-2 nav-link d-flex align-items-center"

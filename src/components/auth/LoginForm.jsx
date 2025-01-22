@@ -11,7 +11,6 @@ function LoginForm(props) {
   const [generalErrorMessage, setGeneralErrorMessage] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [loginSuccessful, setloginSuccessful] = useState(false);
-  const [userRole, setUserRole] = useState("");
 
   let login = (e) => {
     e.preventDefault();
@@ -26,7 +25,6 @@ function LoginForm(props) {
       if (response) {
         if (response.status === "ok") {
           setloginSuccessful(true);
-          setUserRole(response.data.role[0]);
         } else if (response.status === "error") {
           if (response.type === "validation") {
             setEmailErrorMessage(
@@ -56,14 +54,13 @@ function LoginForm(props) {
   };
 
   if (loginSuccessful) {
-    //return <Navigate to={"/"} />;
-    return <Navigate to={userRole === "super-admin" ? "/admin" : "/"} />;
+    return <Navigate to={"/admin"} />;
   }
 
   return (
     <div className={props.class}>      
       <form method="POST">
-        <h1 className="mb-1 text-center">Welcome Back</h1>
+        <h1 className="mb-1 text-center">Welcome </h1>
         <p className="form-help">Enter your account details to login</p>
         <div className="general_error error">{generalErrorMessage}</div>
         <div className="mb-3">

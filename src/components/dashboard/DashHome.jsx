@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import DashboardSideBar from "./DashboardSideBar";
-import DashboardHeader from "./DashboardHeader";
 import DashboardMain from "./DashboardMain";
 import ProductFormPage from "./products/ProductFormPage";
 // import ProductViewPage from "./shop/products/ProductViewPage";
@@ -21,7 +20,6 @@ const DashHome = (props) => {
         <div
           className={"d-flex flex-column flex-grow-1 page-content-container"}
         >
-          <DashboardHeader />
           <PageRoutes userRole={userRole} />
         </div>
       </div>

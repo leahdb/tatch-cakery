@@ -5,7 +5,7 @@
   margin-left: 260px;
 }
 
-$primaryColor: #1f7735;
+$primaryColor: #604f3f;
 $primaryLightColor: #bbedc7;
 $primaryColorActive: #54d274;
 
@@ -1131,7 +1131,7 @@ form .error,
   background-color: transparent;
   padding: 8px 16px;
   color: $primaryColor;
-  border: 1px solid #1f7735;
+  border: 1px solid #604f3f;
   border-radius: 6px;
 }
 
@@ -1338,7 +1338,7 @@ form .error,
 }
 
 .newest:hover {
-  box-shadow: 0px 0px 20px 1px #1f77353e !important;
+  box-shadow: 0px 0px 20px 1px #604f3f3e !important;
 }
 
 .card-title {
@@ -1726,11 +1726,11 @@ input[type="checkbox"].checkbox-primary:checked {
 
         & > :nth-child(1) {
           padding: 10px 20px;
-          background: #1f7735;
+          background: #604f3f;
           color: $primaryColor;
           font-weight: 700;
           border-radius: 8px 0px 0px 0px;
-          border: 1px solid #1f7735;
+          border: 1px solid #604f3f;
           border-bottom: none;
           cursor: pointer;
         }
@@ -1780,16 +1780,16 @@ input[type="checkbox"].checkbox-primary:checked {
 
         & > :nth-child(2) {
           font-weight: 700;
-          background: #1f7735;
+          background: #604f3f;
           border-radius: 16px;
-          border: 1px solid #1f7735;
+          border: 1px solid #604f3f;
           padding: 14px 28px;
-          color: #1f7735;
+          color: #604f3f;
         }
 
         & > :nth-child(3) {
           font-weight: 700;
-          background: #1f7735;
+          background: #604f3f;
           border-radius: 16px;
           border: none;
           padding: 14px 28px;
