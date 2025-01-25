@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import {
-  delete_shop_products,
-  fetch_shop_products,
-  export_shop_products,
-  search_shop_products,
+  delete_shop_orderss,
+  fetch_shop_orders,
+  export_shop_orders,
+  search_shop_orders,
   IMPORT_API,
-} from "../../../services/dashboard/products";
+} from "../../../services/dashboard/orders";
 import ItemListingTable, {
   getTableUpdateCallback,
 } from "../../common/ItemListingTable";
 import { useSearchParams } from "react-router-dom";
 import { notify_promise } from "../../../services/utils/toasts";
-import ProductPopup from "./ProductPopup";
+import OrderPopup from "./OrderPopup";
 import ImportFilePopup from "../../common/ImportFilePopup";
 import ListingPageControls from "../../common/ListingPageControls";
 
-const ProductListingPage = ({ pageState, setPageState }) => {
-  const [products, setProducts] = useState([]);
+const OrderListingPage = ({ pageState, setPageState }) => {
+  const [orders, setOrders] = useState([]);
 
-  const [selectedProduct, setSelectedProduct] = useState(undefined);
+  const [selectedOrder, setSelectedOrder] = useState(undefined);
 
   const [fields, setFields] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -30,17 +30,17 @@ const ProductListingPage = ({ pageState, setPageState }) => {
   );
 
   const apiCall = [
-    fetch_shop_products,
+    fetch_shop_orders,
     { page: 0, search: search ? search : "" },
   ];
 
   const deleteItem = (id) => {
     notify_promise(
       new Promise((resolve, reject) => {
-        delete_shop_products([id])
+        delete_shop_orders([id])
           .then((res) => {
-            setProducts((prevProducts) => {
-              return prevProducts.filter((p) => {
+            setOrders((prevOrders) => {
+              return prevOrders.filter((p) => {
                 return p.id !== id;
               });
             });
@@ -51,15 +51,15 @@ const ProductListingPage = ({ pageState, setPageState }) => {
     );
   };
 
-  const openPopup = (productIndex) => {
-    setSelectedProduct(products[productIndex]);
-    const popup = document.getElementById("productPopup");
+  const openPopup = (orderIndex) => {
+    setSelectedOrder(orders[orderIndex]);
+    const popup = document.getElementById("orderPopup");
     popup.style.display = "flex";
   };
 
   const updateTableInfo = getTableUpdateCallback({
     apiCall: apiCall,
-    dataSetter: setProducts,
+    dataSetter: setOrders,
     paginationSetter: setPagination,
     fieldSetter: setFields,
     buttons: [
@@ -67,7 +67,7 @@ const ProductListingPage = ({ pageState, setPageState }) => {
       {
         template: "edit",
         getRedirectURL: (id) => {
-          return "/admin/products/edit/:id";
+          return "/admin/orders/edit/:id";
         },
       },
       {
@@ -93,19 +93,19 @@ const ProductListingPage = ({ pageState, setPageState }) => {
 
   return (
     <div className="page-content py-5 px-4 bg-lightgray">
-      <ProductPopup product={selectedProduct} />
+      <OrderPopup order={selectedOrder} />
       <ImportFilePopup upload_endpoint={IMPORT_API} />
       <ListingPageControls
-        exportApi={export_shop_products}
-        type="product"
-        addNewLink="/admin/products/add"
+        exportApi={export_shop_orders}
+        type="order"
+        addNewLink="/admin/orders/add"
         hasTitle={false}
-        resultType="product"
+        resultType="order"
         setSearch={setSearchParams}
       />
       <ItemListingTable
         fields={fields}
-        data={products}
+        data={orders}
         pagination={pagination}
         updateTableInfo={updateTableInfo}
         modalTrigger={openPopup}
@@ -114,4 +114,4 @@ const ProductListingPage = ({ pageState, setPageState }) => {
   );
 };
 
-export default ProductListingPage;
+export default OrderListingPage;

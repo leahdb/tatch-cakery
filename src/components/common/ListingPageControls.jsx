@@ -85,31 +85,6 @@ const ListingPageControls = ({
               <Link to={addNewLink} className={"btn btn-primary"}>
                 + Add New {type}
               </Link>
-              <div className="d-flex flex-column align-items-center">
-                <button
-                  type={"button"}
-                  className={"btn btn-primary btn-light-primary"}
-                  onClick={openImportModal}
-                >
-                  <img
-                    className={"btn-icon btn-icon-left"}
-                    src={importIcon}
-                    alt="import icon"
-                  />
-                  Import From File
-                </button>
-                <div className="sample">
-                  <a
-                    href={
-                      process.env.REACT_APP_DASHBOARD_API_URL +
-                      `/downloads/import-sample-${type}s.csv`
-                    }
-                    download={`import-sample-${type}s.csv`}
-                  >
-                    Download Sample File
-                  </a>
-                </div>
-              </div>
             </>
           )}
         </div>

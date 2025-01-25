@@ -2,23 +2,18 @@ import React, { useEffect } from "react";
 import iconClose from "../../../resources/themes/dashboard-v1/icons/close.svg";
 
 import starSVG from "../../../resources/themes/dashboard-v1/icons/star.svg";
-const ProductPopup = ({ product }) => {
-  let reviews = [
-    // {user_name: "My Floyd Miles", user_image: '', review_text: 'pretty colors too ! '},
-    // {user_name: "My Floyd Miles", user_image: '', review_text: 'pretty colors too ! '},
-  ];
-
-  if (product === undefined) {
+const OrderPopup = ({ order }) => {
+  if (order === undefined) {
     return (
       <div
-        id="productPopup"
+        id="orderPopup"
         className="popup-container vw-100 vh-100  jusitfy-content-center align-items-center p-md-0 p-2"
       ></div>
     );
   }
 
   const closePopup = () => {
-    const popup = document.getElementById("productPopup");
+    const popup = document.getElementById("orderPopup");
     popup.style.display = "none";
   };
 
@@ -30,7 +25,7 @@ const ProductPopup = ({ product }) => {
 
   return (
     <div
-      id="productPopup"
+      id="orderPopup"
       className="popup-container vw-100 vh-100 jusitfy-content-center align-items-center p-md-0 p-2"
     >
       <div
@@ -47,33 +42,33 @@ const ProductPopup = ({ product }) => {
 
         <div className="py-3 px-4">
           <h6 className="modal-title" id="chatModalLabel">
-            Product &nbsp;
-            <span className="small text-muted">#{product.id}</span>
+            Order &nbsp;
+            <span className="small text-muted">#{order.id}</span>
           </h6>
           <div className="border-bottom pb-4">
             <div className="d-md-flex">
               <div className="d-flex justify-content-center">
                 <img
                   className={"img-thumbnail"}
-                  src={product.image}
-                  alt="Product Image"
+                  src={order.image}
+                  alt="Order Image"
                   height={150}
                   width={100}
                 />
               </div>
-              <div className="product-modal-header-info">
+              <div className="order-modal-header-info">
                 <div className="d-flex flex-column gap-1">
                   <div className="d-flex space-between">
                     <span className="text-muted fw-semibold small">
-                      {product.brand_name}
+                      {order.brand_name}
                     </span>
                   </div>
-                  <span className="fs-5 fw-bold mb-4">{product.name}</span>
+                  <span className="fs-5 fw-bold mb-4">{order.name}</span>
                 </div>
 
                 <div className={"text-left mt-4"}>
                   <span className={"fw-bold color-primary fs-5"}>
-                    $ {product.price}
+                    $ {order.price}
                   </span>
                 </div>
               </div>
@@ -85,4 +80,4 @@ const ProductPopup = ({ product }) => {
   );
 };
 
-export default ProductPopup;
+export default OrderPopup;

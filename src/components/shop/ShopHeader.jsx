@@ -6,7 +6,6 @@ import User from "../../resources/themes/dashboard-v1/icons/user.svg";
 import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
 import Heart from "../../resources/themes/dashboard-v1/icons/heart.svg";
 import { Navigate } from "react-router-dom";
-import { unauthenticate } from "../../services/auth";
 import { fetch_shop_home } from "../../services/shop/home";
 
 class ShopHeader extends React.Component {
@@ -23,12 +22,6 @@ class ShopHeader extends React.Component {
   //     }
   //   });
   // }
-
-  logout = () => {
-    unauthenticate().then((response) => {
-      this.setState({ isLoggedOut: response.status === "ok" });
-    });
-  };
 
   handleClickOutside = () => {
     this.setState({ dropdownVisible: false });

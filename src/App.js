@@ -1,5 +1,4 @@
 import LoginPage from "./components/auth/LoginPage";
-import RegisterPage from "./components/auth/RegisterPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import DashHome from "./components/dashboard/DashHome";
@@ -18,7 +17,6 @@ function App() {
           <Route path={"/admin/*"} element={<DashHome />} />
         </Route>
         <Route path={"/login"} element={<LoginPage />} />
-        <Route path={"/register"} element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );

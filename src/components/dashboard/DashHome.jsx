@@ -32,9 +32,8 @@ export default DashHome;
 const PageRoutes = ({ userRole }) => {
   return (
     <Routes>
-      {userRole === "super-admin" && (
         <>
-          <Route path={"/"} element={<DashboardMain />}></Route>
+          <Route path={"/dash"} element={<DashboardMain />}></Route>
           {/* <Route path={"/support"} element={<AdminSupportPage />}></Route> */}
           {/* <Route
             path={"/settings/:tabName?"}
@@ -62,7 +61,6 @@ const PageRoutes = ({ userRole }) => {
             element={<AccountManagerForm />}
           ></Route> */}
         </>
-      )}
     </Routes>
   );
 };
