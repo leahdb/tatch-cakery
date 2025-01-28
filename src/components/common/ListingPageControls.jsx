@@ -1,14 +1,11 @@
 import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import importIcon from "../../resources/themes/dashboard-v1/icons/import.svg";
-import exportIcon from "../../resources/themes/dashboard-v1/icons/export.svg";
 import printIcon from "../../resources/themes/dashboard-v1/icons/print.svg";
 import SearchBar from "./SearchBar";
 import { notify_promise } from "../../services/utils/toasts";
 import DataFilterButtons, { STYLE_LINKS } from "./DataFilterButtons";
 
 const ListingPageControls = ({
-  exportApi,
   type,
   addNewLink,
   hasTitle,
@@ -21,27 +18,8 @@ const ListingPageControls = ({
   isCalendar,
   buttonAndTabs,
   setSearch,
-  noExport,
   addOnly
 }) => {
-  const exportFunction = () => {
-    notify_promise(
-      new Promise((resolve, reject) => {
-        exportApi()
-          .then((res) => {
-            resolve(res);
-          })
-          .catch(reject);
-      }),
-      "Export in progress! Watch your inbox for the download link soon",
-      "📧"
-    );
-  };
-
-  const openImportModal = (e) => {
-    e.preventDefault();
-    document.getElementById("importFilePopup").style.display = "flex";
-  };
 
   return (
     <>
@@ -113,20 +91,6 @@ const ListingPageControls = ({
                 alt="print icon"
               />
             </button>
-          </div>
-          <div className="mb-xl-0 mb-3">
-            {noExport ? (
-              <></>
-            ) : (
-              <button className={"btn btn-primary"} onClick={exportFunction}>
-                Export
-                <img
-                  className={"btn-icon btn-icon-right"}
-                  src={exportIcon}
-                  alt="export icon"
-                />
-              </button>
-            )}
           </div>
         </div>
       </div>

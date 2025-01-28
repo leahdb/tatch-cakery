@@ -1,4 +1,4 @@
-const API_HOST = process.env.REACT_APP_DASHBOARD_API_URL + "/api/dash/shop/orders/";
+const API_HOST = "http://127.0.0.1:8000/api/dash/orders/";
 
 export const fetch_shop_orders = (options) => {
 

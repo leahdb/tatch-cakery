@@ -759,11 +759,6 @@ export const getTableUpdateCallback = ({
                                     key: "actions",
                                     label: "Actions",
                                     type: "buttons",
-                                    buttons: [
-                                      {
-                                        template: "orderDropdown",
-                                      },
-                                    ],
                                   });
                                   dataSetter(res.data);
                                   fieldSetter(tableFields);

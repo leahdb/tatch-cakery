@@ -3,14 +3,14 @@ import ItemListingTable, {
   getTableUpdateCallback,
 } from "../../common/ItemListingTable";
 import { useSearchParams } from "react-router-dom";
-import { notify_promise } from "../../../../services/utils/toasts";
+import { notify_promise } from "../../../services/utils/toasts";
 import OrderPopup from "./OrderPopup";
 import {
   fetch_shop_orders,
   accept_order,
   refuse_order,
   set_delivery_option,
-} from "../../../../services/shops/orders";
+} from "../../../services/dashboard/orders";
 import DataFilterButtons from "../../common/DataFilterButtons";
 import SearchBar from "../../common/SearchBar";
 

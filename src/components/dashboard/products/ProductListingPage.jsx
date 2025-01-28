@@ -96,7 +96,6 @@ const ProductListingPage = ({ pageState, setPageState }) => {
       <ProductPopup product={selectedProduct} />
       <ImportFilePopup upload_endpoint={IMPORT_API} />
       <ListingPageControls
-        exportApi={export_shop_products}
         type="product"
         addNewLink="/admin/products/add"
         hasTitle={false}

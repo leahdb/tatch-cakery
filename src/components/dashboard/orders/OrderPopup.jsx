@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import iconClose from "../../../../resources/themes/dashboard-v1/icons/close.svg";
+import iconClose from "../../../resources/themes/dashboard-v1/icons/close.svg";
 
-import inStock from "../../../../resources/themes/dashboard-v1/icons/inStock.svg";
-import outStock from "../../../../resources/themes/dashboard-v1/icons/outStock.svg";
+import inStock from "../../../resources/themes/dashboard-v1/icons/inStock.svg";
+import outStock from "../../../resources/themes/dashboard-v1/icons/outStock.svg";
 
 import {
   update_product_quantity,
-} from "../../../../services/shops/orders";
+} from "../../../services/dashboard/orders";
 
-import { notify_promise } from "../../../../services/utils/toasts";
+import { notify_promise } from "../../../services/utils/toasts";
 const OrderPopup = ({ order, setOrders, setSelectedOrder }) => {
   const [productQuantities, setProductQuantities] = useState({});
 
