@@ -1,5 +1,5 @@
 import React from "react";
-
+ 
 const NewestProducts = () => {
   const products = [
     {

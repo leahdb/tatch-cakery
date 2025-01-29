@@ -1,48 +1,25 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import ShopHeader from "./ShopHeader";
-import ShopMain from "./ShopMain";
-import PCB from "./PCB";
-import Cart from "./Cart";
-import WishList from "./WishList";
-import ShopFooter from "./ShopFooter";
-import ProductListing from "./ProductListing";
-import ProductDetails from "./ProductDetails";
-import Checkout from "./Checkout";
-import ErrorPage404 from "../errors/ErrorPage404";
-import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+import CakeSizePage from "./CakeSizePage"; 
+import ShopHeader from "./ShopHeader"; 
+import ShopIntro from "./ShopIntro"; 
+import ShopFooter from "./ShopFooter"; 
+import ChooseUs from "./ChooseUs";
+import BlogsPreview from "./BlogsPreview";
+import SpongePage from "./SpongePage";
 
-const ShopHome = (props) => {
-  localStorage.setItem("category_refresh", false);
+
+const ShopHome = () => {
   return (
     <section>
-      <ShopHeader />
-      <ShopRoutes />
-      <ShopFooter />
+       {/* <ShopHeader /> */}
+      <ShopIntro />
+      <CakeSizePage />
+      {/* <SpongePage /> */}
+      {/* <ChooseUs /> */}
+      {/* <BlogsPreview /> */}
+      {/* <ShopFooter /> */}
     </section>
   );
 };
 
 export default ShopHome;
-
-const ShopRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<ShopMain />} />
-      <Route path="/pcb-builder" element={<PCB />} />
-      <Route path="/products" element={<ProductListing />} />
-      <Route
-        path="/products/category/:categoryId/:categorySlug"
-        element={<ProductListing />}
-      />
-      <Route
-        path="/products/:productId/:productName"
-        element={<ProductDetails />}
-      />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/wishlist" element={<WishList />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route path="*" element={<ErrorPage404 />} />
-    </Routes>
-  );
-};

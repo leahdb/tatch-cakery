@@ -3,148 +3,137 @@ import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 
 const ShopFooter = () => {
   return (
-    <footer id="footer" className="footer-science">
-      <div className="container">
-        <div className="footer-widget-wrapper pt-5 pb-0">
-          <div className="row">
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div
-                id="ultraland_widget_about-3"
-                className="widget ultraland_widget about-widget_wrapper  wow fadeInUp"
-                data-wow-delay="0.3s"
-              >
-                <img src={logoBlack} alt="logoBlack" className="footer-logo" />
-                <ul className="footer-contact-info">
-                  <li className="phone">
-                    <i className="feather-phone"></i>+(426) 762 44 356
-                  </li>
-                  <li className="email">
-                    <i className="feather-mail"></i>{" "}
-                    contact@electrotech-trading.com
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-2 col-md-6 col-sm-6">
-              <div
-                className="widget widget-footer-menu wow fadeInUp mb-0"
-                data-wow-delay="0.5s"
-              >
-                <h4 className="widget-title text-primary">Departments</h4>
-                <ul className="footer-menu">
-                  <li>
-                    <a href="about.html">About Us</a>
-                  </li>
-                  <li>
-                    <a href="service.html">Services</a>
-                  </li>
-                  <li>
-                    <a href="contact.html">Contact</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div
-                className="widget widget-footer-menu wow fadeInUp mb-0"
-                data-wow-delay="0.7s"
-              >
-                <h4 className="widget-title text-primary">Links</h4>
-                <ul className="footer-menu">
-                  <li>
-                    <a href="about.html">About Us</a>
-                  </li>
-                  <li>
-                    <a href="/blog">Blog</a>
-                  </li>
-                  <li>
-                    <a href="service.html">Service</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-3 col-md-6 col-sm-6">
-              <div
-                className="widget ultraland-contact-widget wow fadeInUp mb-0"
-                data-wow-delay="0.7s"
-              >
-                <h3 className="widget-title text-primary">Newsletter</h3>
-                <p>
-                  Subscribe to our newsletter to receive early discount offers.
-                </p>
-
-                <form
-                  action="php/subscribe.php"
-                  method="post"
-                  className="footer-newsletter-form"
-                  data-tt-form="newsletter-subscribe"
-                >
-                  <div className="newsletter-inner d-flex justify-content-center style_one">
-                    <input
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      placeholder="Your email..."
-                      required=""
-                    />
-
-                    <button
-                      type="submit"
-                      name="submit"
-                      className="btn-primary px-3 border-0"
-                    >
-                      <i className="bi bi-arrow-right"></i>
-                      <i className="fas fa-spinner fa-spin"></i>
-                    </button>
-                  </div>
-
-                  <div className="form-result alert">
-                    <div className="content"></div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="site-info">
-          <div className="row align-items-center">
-            <div className="col-md-6">
-              <p className="copy-right">
-                © 2024 ElectroTech Trading Rights Reserved
+    <>
+      <footer className="footer bg-white py-5">
+        <div className="container">
+          {/* Footer Content */}
+          <div className="row text-center align-items-center">
+            {/* Logo and Description */}
+            <div className="col-md-5 mb-4 mb-md-0">
+              <img
+                src={logoBlack}
+                alt="Tatch Cakery Logo"
+                className="footer-logo mb-3"
+                aria-label="Tatch Cakery Logo"
+              />
+              <p className="text-muted">
+                Delicious cakes made with love, bringing sweetness to every
+                moment.
               </p>
             </div>
 
             <div className="col-md-6">
-              <div className="footer-social-wrap">
-                <h3 className="social-title">Follow Us</h3>
+              <div className="row">
+                {/* Quick Links */}
+                <section className="col-sm-6 mb-4 mb-sm-0">
+                  <h5 className="text-primary mb-3">Quick Links</h5>
+                  <ul className="list-unstyled">
+                    <li className="mb-2">
+                      <a
+                        href="/about"
+                        className="text-dark text-decoration-none"
+                        aria-label="About Us"
+                      >
+                        About Us
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a
+                        href="/menu"
+                        className="text-dark text-decoration-none"
+                        aria-label="Menu"
+                      >
+                        Menu
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a
+                        href="/contact"
+                        className="text-dark text-decoration-none"
+                        aria-label="Contact"
+                      >
+                        Contact
+                      </a>
+                    </li>
+                  </ul>
+                </section>
 
-                <ul className="footer-social-link">
-                  <li>
-                    <a href="http://facebook.com">
-                      <i className="bi bi-facebook text-primary"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http://twitter.com">
-                      <i className="bi bi-whatsapp text-primary"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http://dribbble.com">
-                      <i className="bi bi-instagram text-primary"></i>
-                    </a>
-                  </li>
-                </ul>
+                {/* Follow Us */}
+                <section className="col-sm-6">
+                  <h5 className="text-primary mb-4">Follow Us</h5>
+                  <ul className="list-inline">
+                    
+                    {/* Instagram */}
+                    <li className="list-inline-item">
+                      <a
+                        href="http://instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-dark text-decoration-none"
+                        aria-label="Follow us on Instagram"
+                        style={{ position: "relative" }}
+                      >
+                        <i
+                          className="bi bi-instagram fs-4"
+                          style={{
+                            display: "block",
+                            margin: "0 auto",
+                            backgroundImage:
+                              "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
+                            WebkitBackgroundClip: "text",
+                            color: "transparent",
+                            transition: "all 0.3s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.target.style.filter = "brightness(1.2)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.filter = "brightness(1)";
+                          }}
+                        ></i>
+                      </a>
+                    </li>
+
+                    {/* Facebook */}
+                    <li className="list-inline-item ms-4">
+                      <a
+                        href="http://facebook.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-dark text-decoration-none"
+                        aria-label="Follow us on Facebook"
+                      >
+                        <i
+                          className="bi bi-facebook fs-4"
+                          style={{
+                            display: "block",
+                            margin: "0 auto",
+                            transition: "all 0.3s ease",
+                            color: "#4267B2",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.target.style.filter = "brightness(1.2)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.filter = "brightness(1)";
+                          }}
+                        ></i>
+                      </a>
+                    </li>
+                  </ul>
+                </section>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      <section className="bg-light text-center py-2">
+        <p className="text-muted mb-0" style={{ fontSize: "0.8rem" }}>
+          © 2025 Tatch Cakery. All Rights Reserved.
+        </p>
+      </section>
+    </>
   );
 };
 

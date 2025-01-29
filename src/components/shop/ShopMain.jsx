@@ -6,7 +6,7 @@ import BlogsPreview from "./BlogsPreview";
 
 const ShopMain = () => {
   return (
-    <section className="pt-3">
+    <section>
         <ShopIntro />
         <NewestProducts />
         <ChooseUs />
