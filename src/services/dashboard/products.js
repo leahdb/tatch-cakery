@@ -1,6 +1,6 @@
-const API_HOST = "http://127.0.0.1:8000/api/dash/dash-products/";
-const EXPORT_API = "http://127.0.0.1:8000/api/dash/export/products";
-const SEARCH_API = "http://127.0.0.1:8000/api/dash/search/top";
+const API_HOST = "https://api.tatchcakery.com/api/dash/dash-products/";
+const EXPORT_API = "https://api.tatchcakery.com/api/dash/export/products";
+const SEARCH_API = "https://api.tatchcakery.com/api/dash/search/top";
 
 export const IMPORT_API = API_HOST + "import";
 

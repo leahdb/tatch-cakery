@@ -1,4 +1,4 @@
-const API_HOST = "http://127.0.0.1:8000/api/auth/";
+const API_HOST = "https://api.tatchcakery.com/api/auth/";
 
 export function authenticate(email, password) {
   return fetch(API_HOST + "login", {
