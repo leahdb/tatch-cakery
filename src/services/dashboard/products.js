@@ -1,4 +1,4 @@
-const API_HOST = "https://api.tatchcakery.com/api/dash/dash-products/";
+const API_HOST = "https://api.tatchcakery.com/api/dash/dash-products";
 const EXPORT_API = "https://api.tatchcakery.com/api/dash/export/products";
 const SEARCH_API = "https://api.tatchcakery.com/api/dash/search/top";
 
