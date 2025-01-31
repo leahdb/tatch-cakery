@@ -71,12 +71,6 @@ const ProductPopup = ({ product }) => {
                   <span className="fs-5 fw-bold mb-4">{product.name}</span>
                 </div>
 
-                <div className={"d-flex gap-2"}>
-                  <span className="table-category product-popup-category fw-bold text-white">
-                    {product.category.title}
-                  </span>
-                </div>
-
                 <div className={"text-left mt-4"}>
                   <span className={"fw-bold color-primary fs-5"}>
                     $ {product.price}

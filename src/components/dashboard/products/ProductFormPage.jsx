@@ -26,15 +26,12 @@ const ProductFormPage = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    brand_name: "",
     description: "",
     price: "",
-    stock_quantity: "",
-    moq: "",
+    cost: "",
     image: "",
     images: [],
     index: 0,
-    product_category_id: 1,
   });
 
   useEffect(() => {
@@ -70,14 +67,7 @@ const ProductFormPage = () => {
 
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === "pet_type_ids") {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    } else {
-      setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-    }
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleSelectProfile = (index) => {
@@ -206,36 +196,10 @@ const ProductFormPage = () => {
                 placeholder={"Product Name"}
               />
             </div>
-            <div className="d-flex flex-column gap-1 input-container">
-              <label className="fw-semibold">Brand Name</label>
-              <input
-                type="text"
-                name="brand_name"
-                value={formData.brand_name}
-                onChange={handleTextInputChange}
-                placeholder={"Brand Name"}
-              />
-            </div>
           </div>
 
           <div className="d-flex flex-md-row flex-column">
             <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
-              <label className="fw-semibold">Product Category</label>
-              <Select
-                name="category"
-                options={categories}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                placeholder="service..."
-                onChange={(selected) => {
-                  handleSelectInputChange("product_category_id", selected);
-                }}
-                value={categories.find(
-                  (option) => option.value === formData.product_category_id
-                )}
-              />
-            </div>
-            <div className="d-flex flex-column gap-1 input-container">
               <label className="fw-semibold">Product Price</label>
               <input
                 type="number"
@@ -245,27 +209,14 @@ const ProductFormPage = () => {
                 placeholder={"Product Price"}
               />
             </div>
-          </div>
-
-          <div className="d-flex flex-md-row flex-column">
             <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
-              <label className="fw-semibold">Stock Quantity</label>
+              <label className="fw-semibold">Product Cost</label>
               <input
                 type="number"
-                name="stock_quantity"
-                value={formData.stock_quantity}
+                name="cost"
+                value={formData.cost}
                 onChange={handleTextInputChange}
-                placeholder={"Stock Quantity"}
-              />
-            </div>
-            <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
-              <label className="fw-semibold">Minimum Order Quantity</label>
-              <input
-                type="number"
-                name="moq"
-                value={formData.moq}
-                onChange={handleTextInputChange}
-                placeholder={"Minimum Order Quantity"}
+                placeholder={"Product Cost"}
               />
             </div>
           </div>

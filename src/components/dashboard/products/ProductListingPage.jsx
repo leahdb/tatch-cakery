@@ -92,11 +92,10 @@ const ProductListingPage = ({ pageState, setPageState }) => {
   }, [search]);
 
   return (
-    <div className="page-content py-3 px-4 bg-lightgray">
+    <div className="page-content py-5 px-4 bg-lightgray">
       <ProductPopup product={selectedProduct} />
       <ImportFilePopup upload_endpoint={IMPORT_API} />
       <ListingPageControls
-        exportApi={export_shop_products}
         type="product"
         addNewLink="/admin/products/add"
         hasTitle={false}

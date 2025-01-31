@@ -14,17 +14,6 @@ function LoginPage() {
             <div className="full-width mobile-only-auth">
               <LoginForm class={"p-3 bg-white"} />
             </div>
-            <div className="bg-footer flex-container-center">
-              <p className="text-white">© ElectroTech Trading 2024</p>
-              <a
-                className="link-plain text-white email-link desktop-only"
-                href="mailto:contact@electrotechtrading.com"
-                target="_blank"
-              >
-                <img src={iconEnvelope} alt="envelope" className="me-1" />
-                <span>contact@electrotechtrading.com</span>
-              </a>
-            </div>
           </div>
         </div>
         <div className="col-md-6 desktop-only full-screen-height overflow-scroll">

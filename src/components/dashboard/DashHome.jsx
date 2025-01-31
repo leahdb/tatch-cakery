@@ -6,6 +6,8 @@ import DashboardMain from "./DashboardMain";
 import ProductFormPage from "./products/ProductFormPage";
 // import ProductViewPage from "./shop/products/ProductViewPage";
 import ProductListingPage from "./products/ProductListingPage";
+//import OrderFormPage from "./orders/OrderFormPage";
+import OrderListingPage from "./orders/OrderListingPage";
 // import OrderListingPage from "./shop/orders/OrderListingPage";
 // import AdminSupportPage from "./admin/AdminSupportPage";
 // import AdminSettingsPage from "./admin/AdminSettingsPage";
@@ -32,27 +34,29 @@ export default DashHome;
 const PageRoutes = ({ userRole }) => {
   return (
     <Routes>
-      {userRole === "super-admin" && (
-        <>
-          <Route path={"/"} element={<DashboardMain />}></Route>
-          {/* <Route path={"/support"} element={<AdminSupportPage />}></Route> */}
-          {/* <Route
+      <>
+        <Route path={"/dash"} element={<DashboardMain />}></Route>
+        {/* <Route path={"/support"} element={<AdminSupportPage />}></Route> */}
+        {/* <Route
             path={"/settings/:tabName?"}
             element={<AdminSettingsPage />}
           ></Route> */}
-          <Route
-            path={"/products/list"}
-            element={<ProductListingPage />}
-          ></Route>
-          <Route path={"/products/add"} element={<ProductFormPage />}></Route>
-          <Route
-            path={"/products/edit/:id"} element={<ProductFormPage />}></Route>
-          {/*<Route
+        <Route path={"/products/list"} element={<ProductListingPage />}></Route>
+        <Route path={"/products/add"} element={<ProductFormPage />}></Route>
+        <Route
+          path={"/products/edit/:id"}
+          element={<ProductFormPage />}
+        ></Route>
+        {/*<Route
             path={"/products/view/:id"}
             element={<ProductViewPage />}
           ></Route> */}
 
-          {/* <Route path={"/orders"} element={<OrderListingPage />}></Route>
+        <Route path={"/orders/list"} element={<OrderListingPage />}></Route>
+        {/* <Route path={"/orders/add"} element={<OrderFormPage />}></Route>
+        <Route path={"/orders/edit/:id"} element={<OrderFormPage />}></Route> */}
+
+        {/* <Route path={"/orders"} element={<OrderListingPage />}></Route>
           <Route
             path={"/accounts/add"}
             element={<AccountManagerForm />}
@@ -61,8 +65,7 @@ const PageRoutes = ({ userRole }) => {
             path={"/accounts/edit/:id"}
             element={<AccountManagerForm />}
           ></Route> */}
-        </>
-      )}
+      </>
     </Routes>
   );
 };

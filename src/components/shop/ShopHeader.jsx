@@ -1,6 +1,8 @@
 import React from "react";
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
+import { Navigate } from "react-router-dom";
+import { fetch_shop_home } from "../../services/shop/home";
 
 const ShopHeader = () => {
   return (

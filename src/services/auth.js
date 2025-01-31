@@ -1,4 +1,4 @@
-const API_HOST = "http://127.0.0.1:8000/api/auth/";
+const API_HOST = "https://api.tatchcakery.com/api/auth/";
 
 export function authenticate(email, password) {
   return fetch(API_HOST + "login", {
@@ -26,7 +26,6 @@ export function authenticate(email, password) {
     });
 }
 
-
 export const unauthenticate = () => {
   return fetch(API_HOST + "logout", {
     method: "POST",
@@ -37,12 +36,17 @@ export const unauthenticate = () => {
   })
     .then((res) => res.json())
     .then((res) => {
+      console.log(res)
       if (res.status === "ok") {
+        console.log("df")
         localStorage.clear();
         localStorage.setItem("user_logged_in", "false");
       }
-
       return res;
+    })
+    .catch((error) => {
+      console.error("Error during logout:", error);
+      return { status: "error" }; 
     });
 };
 
@@ -65,7 +69,6 @@ export function saveRegistrationData(data) {
       return response;
     })
     .catch((error) => {
-      // Handle errors
       console.error(error);
     });
 }

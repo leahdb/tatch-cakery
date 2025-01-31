@@ -6,14 +6,13 @@ import iconLogout from "../../resources/themes/dashboard-v1/icons/logout.svg";
 const LogoutButton = ({ preset }) => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const logout = () => {
-    unauthenticate().then((response) => {
-      setIsLoggedOut(response.status === "ok");
-      <Navigate to={"/login"} />;
-    });
+    localStorage.clear();
+    localStorage.setItem("user_logged_in", "false");
+    setIsLoggedOut(true);
   };
 
   if (isLoggedOut) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/login"} replace />;
   }
 
   switch (preset) {

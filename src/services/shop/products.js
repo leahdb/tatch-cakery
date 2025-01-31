@@ -1,5 +1,5 @@
-const API_HOST = "http://127.0.0.1:8000/api/products/";
-const SEARCH_API = "http://127.0.0.1:8000/api/dash/search/top";
+const API_HOST = "https://api.tatchcakery.com/api/products/";
+const SEARCH_API = "https://api.tatchcakery.com/api/dash/search/top";
 
 export const fetch_shop_products = (options) => {
   const {
