@@ -20,12 +20,12 @@ const ProductListing = () => {
 
   return (
     <div className="container my-5">
-      <div class="row">
-        <div class="col-lg-12">
-          <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-            <strong class="d-block py-2">2 Items in wishlist</strong>
-            <div class="ms-auto">
-              <select class="form-select d-inline-block w-auto border pt-1">
+      <div className="row">
+        <div className="col-lg-12">
+          <header className="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+            <strong className="d-block py-2">2 Items in wishlist</strong>
+            <div className="ms-auto">
+              <select className="form-select d-inline-block w-auto border pt-1">
                 <option value="0">Best match</option>
                 <option value="1">Recommended</option>
                 <option value="2">High rated</option>
@@ -34,7 +34,7 @@ const ProductListing = () => {
             </div>
           </header>
 
-          <div class="row g-3">
+          <div className="row g-3">
             {products.slice(0, 9).map((product) => (
               <div
                 key={product.id}
@@ -63,13 +63,13 @@ const ProductListing = () => {
                         href="#!"
                         className="btn btn-primary px-3 shadow-0 me-2"
                       >
-                        <i class="bi bi-cart-plus fs-5 py-1"></i>
+                        <i className="bi bi-cart-plus fs-5 py-1"></i>
                       </a>
                       <a
                         href="#!"
                         className="btn btn-light border px-3 pt-2 icon-hover"
                       >
-                        <i class="bi bi-trash-fill fs-5 py-1 text-danger"></i>
+                        <i className="bi bi-trash-fill fs-5 py-1 text-danger"></i>
                       </a>
                     </div>
                   </div>

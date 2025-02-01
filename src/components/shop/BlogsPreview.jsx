@@ -50,8 +50,8 @@ const BlogsPreview = () => {
     ];
 
     return (
-      <div class="container pt-3 pb-5">
-        <header class="mb-4 pb-2">
+      <div className="container pt-3 pb-5">
+        <header className="mb-4 pb-2">
           <h3 className="fw-bold text-muted">Latest Blog posts</h3>
         </header>
 

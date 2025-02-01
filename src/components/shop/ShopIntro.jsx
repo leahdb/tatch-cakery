@@ -7,12 +7,12 @@ const ShopIntro = () => {
             id="carouselIntro"
             data-bs-ride="carousel"
           >
-            <div class="carousel-indicators mb-2">
+            <div className="carousel-indicators mb-2">
               <button
                 type="button"
                 data-bs-target="#carouselIntro"
                 data-bs-slide-to="0"
-                class="active"
+                className="active"
                 aria-current="true"
                 aria-label="Slide 1"
               ></button>
@@ -29,14 +29,14 @@ const ShopIntro = () => {
                 aria-label="Slide 3"
               ></button>
             </div>
-            <div class="carousel-inner h-100">
-              <div class="carousel-item active flex-column justify-content-between">
+            <div className="carousel-inner h-100">
+              <div className="carousel-item active flex-column justify-content-between">
                 <h2 className="text-light">
                   All your electronics needs <br />
                   in one place
                 </h2>
               </div>
-              <div class="carousel-item">
+              <div className="carousel-item">
                 <h2 className="text-light">
                   All your electronics needs <br />
                   in one place
@@ -50,7 +50,7 @@ const ShopIntro = () => {
                   View more{" "}
                 </a>
               </div>
-              <div class="carousel-item">
+              <div className="carousel-item">
                 <h2 className="text-light">
                   All your electronics needs <br />
                   in one place

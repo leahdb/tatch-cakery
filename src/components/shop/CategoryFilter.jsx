@@ -100,7 +100,7 @@ const CategoryFilter = ({
         <li key={parentCategory.id} className="form-check">
           <input
             type="checkbox"
-            class="form-check-input"
+            className="form-check-input"
             checked={selectedCategories.includes(
               categories[parentCategory][0].id
             )}
@@ -109,7 +109,7 @@ const CategoryFilter = ({
               handleParentCheckboxChange(categories[parentCategory])
             }
           />
-          <label class="form-check-label">
+          <label className="form-check-label">
             {categories[parentCategory][0].title}
           </label>
           <ul>{renderCategories(categories[parentCategory])}</ul>

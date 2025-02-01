@@ -8,11 +8,11 @@ const ChooseUs = () => {
           <div className="col-12 d-flex justify-content-between pb-4">
             <h3 className="fw-bold text-primary">Why Choose Us</h3>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <figure class="d-flex align-items-top mb-4">
-              <i class="bi bi-shop fs-3 text-primary me-3"></i>
-              <figcaption class="info">
-                <h6 class="title fw-semibold text-muted">One-Stop Solution</h6>
+          <div className="col-lg-4 col-md-6">
+            <figure className="d-flex align-items-top mb-4">
+              <i className="bi bi-shop fs-3 text-primary me-3"></i>
+              <figcaption className="info">
+                <h6 className="title fw-semibold text-muted">One-Stop Solution</h6>
                 <p className="small">
                   Simplify your sourcing, we offer a wide range of electronic
                   components and provide PCB manufacturing and assembly
@@ -21,11 +21,11 @@ const ChooseUs = () => {
               </figcaption>
             </figure>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <figure class="d-flex align-items-top mb-4">
-              <i class="bi bi-motherboard fs-3 text-primary me-3"></i>
-              <figcaption class="info">
-                <h6 class="title fw-semibold text-muted">
+          <div className="col-lg-4 col-md-6">
+            <figure className="d-flex align-items-top mb-4">
+              <i className="bi bi-motherboard fs-3 text-primary me-3"></i>
+              <figcaption className="info">
+                <h6 className="title fw-semibold text-muted">
                   Precision PCB Fabrication
                 </h6>
                 <p className="small">
@@ -36,11 +36,11 @@ const ChooseUs = () => {
               </figcaption>
             </figure>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <figure class="d-flex align-items-top mb-4">
-              <i class="bi bi-file-earmark-lock fs-3 text-primary me-3"></i>
-              <figcaption class="info">
-                <h6 class="title fw-semibold text-muted">
+          <div className="col-lg-4 col-md-6">
+            <figure className="d-flex align-items-top mb-4">
+              <i className="bi bi-file-earmark-lock fs-3 text-primary me-3"></i>
+              <figcaption className="info">
+                <h6 className="title fw-semibold text-muted">
                   Secure and Confidential Handling
                 </h6>
                 <p className="small">
@@ -50,11 +50,11 @@ const ChooseUs = () => {
               </figcaption>
             </figure>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <figure class="d-flex align-items-top mb-4">
-              <i class="bi bi-wallet2 fs-3 text-primary me-3"></i>
-              <figcaption class="info">
-                <h6 class="title fw-semibold text-muted">
+          <div className="col-lg-4 col-md-6">
+            <figure className="d-flex align-items-top mb-4">
+              <i className="bi bi-wallet2 fs-3 text-primary me-3"></i>
+              <figcaption className="info">
+                <h6 className="title fw-semibold text-muted">
                   Competitive Pricing
                 </h6>
                 <p className="small">
@@ -65,11 +65,11 @@ const ChooseUs = () => {
               </figcaption>
             </figure>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <figure class="d-flex align-items-top mb-4">
-              <i class="bi bi-headset fs-3 text-primary me-3"></i>
-              <figcaption class="info">
-                <h6 class="title fw-semibold text-muted">
+          <div className="col-lg-4 col-md-6">
+            <figure className="d-flex align-items-top mb-4">
+              <i className="bi bi-headset fs-3 text-primary me-3"></i>
+              <figcaption className="info">
+                <h6 className="title fw-semibold text-muted">
                   Responsive Customer Support
                 </h6>
                 <p className="small">
@@ -79,11 +79,11 @@ const ChooseUs = () => {
               </figcaption>
             </figure>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <figure class="d-flex align-items-top mb-4">
-              <i class="bi bi-truck fs-3 text-primary me-3"></i>
-              <figcaption class="info">
-                <h6 class="title fw-semibold text-muted">
+          <div className="col-lg-4 col-md-6">
+            <figure className="d-flex align-items-top mb-4">
+              <i className="bi bi-truck fs-3 text-primary me-3"></i>
+              <figcaption className="info">
+                <h6 className="title fw-semibold text-muted">
                   Fast and Reliable Delivery
                 </h6>
                 <p className="small">

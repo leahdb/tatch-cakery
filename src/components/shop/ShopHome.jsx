@@ -9,6 +9,7 @@ import ShopFooter from "./ShopFooter";
 import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
 import Checkout from "./Checkout";
+import WhatsAppButton from "./WhatsAppButton";
 import ErrorPage404 from "../errors/ErrorPage404";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,6 +19,7 @@ const ShopHome = (props) => {
     <section>
       <ShopHeader />
       <ShopRoutes />
+      <WhatsAppButton />
       <ShopFooter />
     </section>
   );

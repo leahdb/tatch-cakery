@@ -3500,3 +3500,24 @@ table.dashboard-table td {
 .accordion-button::after {
     display: none !important;
 }
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+}

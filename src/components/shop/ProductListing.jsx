@@ -167,9 +167,9 @@ const ProductListing = () => {
   return (
     <div className="container my-5">
       <div>
-        <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-          <strong class="d-block py-2">{productCount} Items found </strong>
-          <div class="ms-auto">
+        <header className="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+          <strong className="d-block py-2">{productCount} Items found </strong>
+          <div className="ms-auto">
             <select
               className="form-select d-inline-block w-auto border pt-1"
               value={sortingOption}
@@ -182,7 +182,7 @@ const ProductListing = () => {
           </div>
         </header>
 
-        <div class="row g-3">
+        <div className="row g-3">
           {products.map((product) => (
             <div key={product.id} className="col-lg-3 col-6 d-flex">
               <div className="card w-100 my-2 shadow">
@@ -205,7 +205,7 @@ const ProductListing = () => {
 
                   <div className="d-flex align-items-end justify-content-center px-0 pb-0 mt-4">
                     <a href="#!" className="btn btn-primary px-3 shadow-0 me-2">
-                      <i class="bi bi-cart-plus fs-5 py-1"></i>
+                      <i className="bi bi-cart-plus fs-5 py-1"></i>
                     </a>
                   </div>
                 </div>

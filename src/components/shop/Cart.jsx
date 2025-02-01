@@ -29,12 +29,12 @@ const Cart = () => {
   ];
 
   return (
-    <div class="container my-5">
-      <div class="row">
-        <div class="col-lg-9">
-          <div class="card border shadow-0">
-            <div class="m-4">
-              <h4 class="card-title mb-4">Your shopping cart</h4>
+    <div className="container my-5">
+      <div className="row">
+        <div className="col-lg-9">
+          <div className="card border shadow-0">
+            <div className="m-4">
+              <h4 className="card-title mb-4">Your shopping cart</h4>
               {products.map((product) => (
                 <div
                   className="row gy-3 mb-4 d-flex align-items-center"
@@ -60,26 +60,26 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
-                    <div class="me-2">
-                      <select class="form-select me-4">
+                  <div className="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
+                    <div className="me-2">
+                      <select className="form-select me-4">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                       </select>
                     </div>
-                    <div class="">
-                      <text class="h6">$1156.00</text>
+                    <div className="">
+                      <text className="h6">$1156.00</text>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-6 d-flex justify-content-end mb-2">
-                    <div class="float-md-end">
+                  <div className="col-lg-3 col-6 d-flex justify-content-end mb-2">
+                    <div className="float-md-end">
                       <a
                         href="#"
-                        class="btn btn-light border px-3 pt-2 icon-hover"
+                        className="btn btn-light border px-3 pt-2 icon-hover"
                       >
-                        <i class="bi bi-trash-fill fs-5 py-1 text-danger"></i>
+                        <i className="bi bi-trash-fill fs-5 py-1 text-danger"></i>
                       </a>
                     </div>
                   </div>
@@ -87,54 +87,54 @@ const Cart = () => {
               ))}
             </div>
 
-            <div class="border-top pt-4 mx-4 mb-4">
+            <div className="border-top pt-4 mx-4 mb-4">
               <p>
-                <i class="fas fa-truck text-muted fa-lg"></i>
+                <i className="fas fa-truck text-muted fa-lg"></i>
                 Delivery withing Beirut
               </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-3">
-          <div class="card mb-3 border shadow-0">
-            <div class="card-body">
+        <div className="col-lg-3">
+          <div className="card mb-3 border shadow-0">
+            <div className="card-body">
               <form>
-                <div class="form-group">
-                  <label class="form-label">Have coupon?</label>
-                  <div class="input-group">
+                <div className="form-group">
+                  <label className="form-label">Have coupon?</label>
+                  <div className="input-group">
                     <input
                       type="text"
-                      class="form-control border"
+                      className="form-control border"
                       name=""
                       placeholder="Coupon code"
                     />
-                    <button class="btn btn-light border">Apply</button>
+                    <button className="btn btn-light border">Apply</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div class="card shadow-0 border">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <p class="mb-2">Total price:</p>
-                <p class="mb-2">$329.00</p>
+          <div className="card shadow-0 border">
+            <div className="card-body">
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Total price:</p>
+                <p className="mb-2">$329.00</p>
               </div>
-              <div class="d-flex justify-content-between">
-                <p class="mb-2">Discount:</p>
-                <p class="mb-2 text-success">-$60.00</p>
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Discount:</p>
+                <p className="mb-2 text-success">-$60.00</p>
               </div>
               <hr />
-              <div class="d-flex justify-content-between">
-                <p class="mb-2">Total price:</p>
-                <p class="mb-2 fw-bold">$283.00</p>
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Total price:</p>
+                <p className="mb-2 fw-bold">$283.00</p>
               </div>
 
-              <div class="mt-3">
-                <a href="#" class="btn btn-success w-100 shadow-0 mb-2">
+              <div className="mt-3">
+                <a href="#" className="btn btn-success w-100 shadow-0 mb-2">
                   Proceed To Checkout
                 </a>
-                <a href="#" class="btn btn-light w-100 border mt-2">
+                <a href="#" className="btn btn-light w-100 border mt-2">
                   Continue Shopping
                 </a>
               </div>
