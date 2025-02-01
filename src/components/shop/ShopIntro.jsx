@@ -2,11 +2,8 @@ import React from "react";
 
 const ShopIntro = () => {
   return (
-    <div className="container">
-      <div className="row gx-3">
-        <main className="col-lg-9">
           <div
-            className="card-banner p-5 bg-primary rounded-3 carousel slide"
+            className="card-banner p-5 bg-primary carousel slide"
             id="carouselIntro"
             data-bs-ride="carousel"
           >
@@ -69,22 +66,6 @@ const ShopIntro = () => {
               </div>
             </div>
           </div>
-        </main>
-        <aside className="col-lg-3">
-          <div className="card-banner pcb-bg h-100 rounded-3">
-            <div className="card-body text-center pb-5">
-              <h3 className="pt-5 text-light fw-bold">PCB Builder</h3>
-              <p className="text-light px-4 pt-2">
-                No matter how far along you are in your sophistication
-              </p>
-              <a href="/pcb-builder" className="btn btn-outline-light">
-                Instant Quote
-              </a>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
   );
 };
 

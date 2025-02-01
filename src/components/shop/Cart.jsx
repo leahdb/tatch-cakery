@@ -60,7 +60,7 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
+                  <div class="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
                     <div class="me-2">
                       <select class="form-select me-4">
                         <option>1</option>
@@ -70,21 +70,11 @@ const Cart = () => {
                       </select>
                     </div>
                     <div class="">
-                      <text class="h6">$1156.00</text> <br />
-                      <small class="text-muted text-nowrap">
-                        {" "}
-                        $460.00 / per item{" "}
-                      </small>
+                      <text class="h6">$1156.00</text>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                  <div class="col-lg-3 col-6 d-flex justify-content-end mb-2">
                     <div class="float-md-end">
-                      <a
-                        href="#!"
-                        className="btn btn-light border px-3 pt-2 icon-hover me-2"
-                      >
-                        <i class="bi bi-heart-fill fs-5 py-1 text-primary"></i>
-                      </a>
                       <a
                         href="#"
                         class="btn btn-light border px-3 pt-2 icon-hover"
@@ -99,14 +89,8 @@ const Cart = () => {
 
             <div class="border-top pt-4 mx-4 mb-4">
               <p>
-                <i class="fas fa-truck text-muted fa-lg"></i> Delivery
-                within 2 weeks
-              </p>
-              <p class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip
+                <i class="fas fa-truck text-muted fa-lg"></i>
+                Delivery withing Beirut
               </p>
             </div>
           </div>
@@ -139,10 +123,6 @@ const Cart = () => {
               <div class="d-flex justify-content-between">
                 <p class="mb-2">Discount:</p>
                 <p class="mb-2 text-success">-$60.00</p>
-              </div>
-              <div class="d-flex justify-content-between">
-                <p class="mb-2">TAX:</p>
-                <p class="mb-2">$14.00</p>
               </div>
               <hr />
               <div class="d-flex justify-content-between">

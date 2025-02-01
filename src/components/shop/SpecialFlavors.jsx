@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewestProducts = () => {
+const specialFlavors = () => {
   const products = [
     {
       id: 1,
@@ -78,7 +78,7 @@ const NewestProducts = () => {
       <div className="row g-3 my-5">
         <div className="col-12 d-flex justify-content-between">
           <h3 className="fw-bold text-muted mb-4">
-            Sweetheart Collection
+            Special Cakes
           </h3>
           <a href="/products">See All</a>
         </div>
@@ -109,4 +109,4 @@ const NewestProducts = () => {
   );
 };
 
-export default NewestProducts;
+export default specialFlavors;

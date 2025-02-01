@@ -1,16 +1,16 @@
 import React from "react";
 import ShopIntro from "./ShopIntro";
 import NewestProducts from "./NewestProducts";
-import ChooseUs from "./ChooseUs";
-import BlogsPreview from "./BlogsPreview";
+import SpecialFlavors from "./SpecialFlavors";
+import BuildYourCake from "./BuildYourCake";
 
 const ShopMain = () => {
   return (
-    <section className="pt-3">
+    <section>
         <ShopIntro />
         <NewestProducts />
-        <ChooseUs />
-        <BlogsPreview />
+        <SpecialFlavors />
+        <BuildYourCake />
     </section>
   );
 };
