@@ -3,7 +3,7 @@ import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 
 const ShopFooter = () => {
   return (
-    <footer id="footer" className="footer-science">
+    <footer id="footer" className="footer-science bg-beige">
       <div className="container text-center">
         <img src={logoBlack} alt="logoBlack" className="footer-logo" />
         <div>
@@ -34,13 +34,13 @@ const ShopFooter = () => {
             </ul>
           </div>
         </div>
-        <div className="row align-items-center">
+        {/* <div className="row align-items-center">
           <div className="col-md-6">
             <p className="copy-right">
               © 2025 Tatch Cakery. All Rights Reserved.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </footer>
   );

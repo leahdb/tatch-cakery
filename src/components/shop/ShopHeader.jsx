@@ -55,7 +55,7 @@ class ShopHeader extends React.Component {
 
     return (
       <header className="sticky-top">
-        <div className="text-center bg-white">
+        <div className="text-center bg-beige">
           <div className="container">
             <div className="row gy-3 d-flex justify-content-between align-items-center">
               <div className="col-lg-2 col-sm-4 col-5">

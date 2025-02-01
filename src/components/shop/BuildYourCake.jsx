@@ -19,7 +19,7 @@ const BuildYourCake = () => {
         </div>
         {products.slice(0, 1).map((product) => (
           <div key={product.id} className="col-lg-3 col-md-6 col-6 d-flex">
-            <a href="/products/1" className="card newest w-100 shadow my-2 ">
+            <a href="/build-cake" className="card newest w-100 shadow my-2 ">
               <div className="d-flex justify-content-center">
                 <img
                   src={product.imageSrc}

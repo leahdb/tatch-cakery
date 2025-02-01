@@ -5,11 +5,11 @@ import ShopMain from "./ShopMain";
 import PCB from "./PCB";
 import Cart from "./Cart";
 import WishList from "./WishList";
-import ShopFooter from "./ShopFooter";
 import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
 import Checkout from "./Checkout";
 import WhatsAppButton from "./WhatsAppButton";
+import CakeCustomization from "./CakeCustomization";
 import ErrorPage404 from "../errors/ErrorPage404";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,7 +20,6 @@ const ShopHome = (props) => {
       <ShopHeader />
       <ShopRoutes />
       <WhatsAppButton />
-      <ShopFooter />
     </section>
   );
 };
@@ -31,6 +30,7 @@ const ShopRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<ShopMain />} />
+      <Route path="/build-cake" element={<CakeCustomization /> } />
       <Route path="/pcb-builder" element={<PCB />} />
       <Route path="/products" element={<ProductListing />} />
       <Route
