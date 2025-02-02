@@ -5,16 +5,30 @@ const CakeCustomization = () => {
     name: "Deluxe Custom Cake",
     description:
       "Customize your perfect cake with our selection of flavors and fillings.",
-    basePrice: 20,
+    basePrice: 8,
     imageUrl:
       "https://d34zicoa2zcr2f.cloudfront.net/sites/files/bakersbrewstudio2/images/products/202404/800xAUTO/strb1.jpg", // Replace with actual image
     options: {
-      cakeFlavors: ["Vanilla", "Chocolate", "Red Velvet", "Carrot"],
-      creamFlavors: ["Buttercream", "Whipped Cream", "Chocolate Ganache"],
+      cakeFlavors: ["Vanilla", "Chocolate"],
+      creamFlavors: ["Vanilla", "Chocolate"],
       fillingFlavors: [
-        { name: "Strawberry", price: 3 },
-        { name: "Chocolate", price: 4 },
-        { name: "Caramel", price: 5 },
+        { name: "Nutella", price: 0.5 },
+        { name: "Pistachio", price: 1 },
+        { name: "Strawberry", price: 0.5 },
+        { name: "Lotus", price: 0.5 },
+      ],
+      extra: [
+        { name: "Fresh Strawberries", price: 0.5 },
+        { name: "Hazelnuts", price: 0.5 },
+        { name: "oreo crumbs", price: 0.5 },
+      ],
+      customizations: [
+        { name: "No Customization", price: 0 },
+        { name: "Cream Message", price: 0 },
+        { name: "1 Color Simple Drawing", price: 0 },
+        { name: "Chocolate Letters Message", price: 0.5 },
+        { name: "Motif Topper", price: 1 },
+        { name: "Multi-Color Drawing", price: 2 },
       ],
     },
   };
@@ -25,13 +39,22 @@ const CakeCustomization = () => {
   const [selectedCream, setSelectedCream] = useState(
     cakeData.options.creamFlavors[0]
   );
-  const [selectedFilling, setSelectedFilling] = useState(
-    cakeData.options.fillingFlavors[0]
+  const [selectedFilling, setSelectedFilling] = useState("");
+  const [selectedExtras, setSelectedExtras] = useState("");
+  const [selectedCustomization, setSelectedCustomization] = useState(
+    cakeData.options.customizations[0]
   );
-const [additionalNote, setAdditionalNote] = useState("");
+    
+    const [additionalNote, setAdditionalNote] = useState("");
+    const [customInput, setCustomInput] = useState("");
+    const [customImage, setCustomImage] = useState(null);
 
 
-  const totalPrice = cakeData.basePrice + selectedFilling.price;
+    const totalPrice =
+        cakeData.basePrice +
+        (selectedFilling.price ? selectedFilling.price : 0) +
+        (selectedCustomization.price ? selectedCustomization.price : 0) +
+        (selectedExtras.price ? selectedExtras.price : 0);
 
   return (
     <div className="mt-0 bg-light-gray">
@@ -102,13 +125,85 @@ const [additionalNote, setAdditionalNote] = useState("");
                   onChange={() => setSelectedFilling(filling)}
                 />
                 <label className="form-check-label">
-                  {filling.name} (+${filling.price})
+                  {filling.name}{" "}
+                  <small className="text-muted">&nbsp;+{filling.price}$</small>
                 </label>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <div className="bg-white">
+        <div className="container">
+          <div className="mb-2 py-3 px-2">
+            <label className="form-label fs-5">Add On</label>
+            {cakeData.options.extra.map((extra, index) => (
+              <div className="form-check" key={index}>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value={extra.name}
+                  checked={selectedExtras.name === extra.name}
+                  onChange={() => setSelectedExtras(extra)}
+                />
+                <label className="form-check-label">
+                  {extra.name}{" "}
+                  <small className="text-muted">&nbsp;+{extra.price}$</small>
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="bg-white">
+        <div className="container">
+          <div className="mb-2 py-3 px-2">
+            <label className="form-label fs-5">Customization</label>
+            {cakeData.options.customizations.map((custom, index) => (
+              <div className="form-check" key={index}>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="customization"
+                  value={custom.name}
+                  checked={selectedCustomization.name === custom.name}
+                  onChange={() => setSelectedCustomization(custom)}
+                />
+                <label className="form-check-label">
+                  {custom.name}
+                  <small className="text-muted">
+                    &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
+                  </small>
+                </label>
+              </div>
+            ))}
+            {selectedCustomization.name.includes("Message") && (
+              <div className="my-3">
+                <label className="form-label fs-5">Enter Your Message</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Your custom message"
+                  value={customInput}
+                  onChange={(e) => setCustomInput(e.target.value)}
+                />
+              </div>
+            )}
+            {selectedCustomization.name.includes("Drawing") ||
+            selectedCustomization.name.includes("Topper") ? (
+              <div className="my-3">
+                <label className="form-label fs-5">Upload Image</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  onChange={(e) => setCustomImage(e.target.files[0])}
+                />
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+
       <div className="bg-white">
         <div className="container">
           <div className="mb-2 py-3 px-2">
@@ -121,8 +216,10 @@ const [additionalNote, setAdditionalNote] = useState("");
               onChange={(e) => setAdditionalNote(e.target.value)}
             />
             <div className="w-100">
-                <button className="btn btn-primary w-100 mt-5">Add to Card</button>
-            </div>        
+              <button className="btn btn-primary w-100 mt-5">
+                Add to Card
+              </button>
+            </div>
           </div>
         </div>
       </div>
