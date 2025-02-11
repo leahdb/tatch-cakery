@@ -6,9 +6,9 @@ const ShopFooter = () => {
     <footer id="footer" className="footer-science bg-beige">
       <div className="container text-center">
         <img src={logoBlack} alt="logoBlack" className="footer-logo" />
-        <div>
-          <i className="feather-phone"></i>+(426) 762 44 356
-        </div>
+        <p>
+          Delicious cakes made with love, bringing sweetness to every moment.
+        </p>
       </div>
       <div className="site-info">
         <div className="col-md-6">

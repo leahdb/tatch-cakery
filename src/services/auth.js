@@ -3,6 +3,7 @@ const API_HOST = "https://api.tatchcakery.com/api/auth/";
 export function authenticate(email, password) {
   return fetch(API_HOST + "login", {
     method: "POST",
+    mode: "no-cors",
     credentials: "include",
     body: JSON.stringify({
       email: email,

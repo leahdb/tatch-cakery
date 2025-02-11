@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//import { handleOrderSubmit } from "../../services/shop/sendOrderEmail";
 
 const CakeCustomization = () => {
   const cakeData = {
@@ -10,7 +11,12 @@ const CakeCustomization = () => {
       "https://d34zicoa2zcr2f.cloudfront.net/sites/files/bakersbrewstudio2/images/products/202404/800xAUTO/strb1.jpg", // Replace with actual image
     options: {
       cakeFlavors: ["Vanilla", "Chocolate"],
-      creamFlavors: ["Vanilla", "Chocolate"],
+      creamFlavors: [
+        { name: "Vanilla", price: 0 },
+        { name: "Chocolate", price: 0 },
+        { name: "Strawberry", price: 0.5 },
+        { name: "Lotus", price: 0.5 },
+      ],
       fillingFlavors: [
         { name: "Nutella", price: 0.5 },
         { name: "Pistachio", price: 1 },
@@ -26,8 +32,7 @@ const CakeCustomization = () => {
         { name: "No Customization", price: 0 },
         { name: "Cream Message", price: 0 },
         { name: "1 Color Simple Drawing", price: 0 },
-        { name: "Chocolate Letters Message", price: 0.5 },
-        { name: "Motif Topper", price: 1 },
+        { name: "Chocolate Letters Message", price: 1 },
         { name: "Multi-Color Drawing", price: 2 },
       ],
     },
@@ -51,10 +56,49 @@ const CakeCustomization = () => {
 
 
     const totalPrice =
-        cakeData.basePrice +
-        (selectedFilling.price ? selectedFilling.price : 0) +
-        (selectedCustomization.price ? selectedCustomization.price : 0) +
-        (selectedExtras.price ? selectedExtras.price : 0);
+      cakeData.basePrice +
+      (selectedCream.price ? selectedCream.price : 0) +
+      (selectedFilling.price ? selectedFilling.price : 0) +
+      (selectedCustomization.price ? selectedCustomization.price : 0) +
+      (selectedExtras.price ? selectedExtras.price : 0);
+    
+    const handleOrderSubmit = () => {
+      const googleSheetsWebhook =
+            "https://script.google.com/macros/s/AKfycbzCztct7Z2noAZ9Mo91g5EwcK3o-b0szJhe0BCb93UzEhzfW89Np4atW3Vgt-6SeCbT/exec"; // Replace with your Google Apps Script URL
+        
+        const order = {
+          name: "John Doe",
+          phone: "+96171234567",
+          items: [
+            { name: "Cake", price: 20 },
+            { name: "Cupcake", price: 5 },
+          ],
+          total: 25,
+          notes: "Please add extra frosting",
+        };
+
+      fetch(googleSheetsWebhook, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
+      })
+        .then(() => alert("Order submitted! (No response due to no-cors mode)"))
+        .catch((error) => console.error("Error sending order:", error));
+    };
+
+
+    // export const edit_shop_orders = (id, data) => {
+    //   return fetch(`${API_HOST}edit/${id}`, {
+    //     method: "POST",
+    //     credentials: "include",
+    //     secure: true,
+    //     body: JSON.stringify(data),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }).then((res) => res.json());
+    // };
 
   return (
     <div className="mt-0 bg-light-gray">
@@ -101,10 +145,15 @@ const CakeCustomization = () => {
                   type="radio"
                   name="creamFlavor"
                   value={flavor}
-                  checked={selectedCream === flavor}
+                  checked={selectedCream.name === flavor.name}
                   onChange={() => setSelectedCream(flavor)}
                 />
-                <label className="form-check-label">{flavor}</label>
+                <label className="form-check-label">
+                  {flavor.name}{" "}
+                  <small className="text-muted">
+                    &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
+                  </small>
+                </label>
               </div>
             ))}
           </div>
@@ -216,7 +265,10 @@ const CakeCustomization = () => {
               onChange={(e) => setAdditionalNote(e.target.value)}
             />
             <div className="w-100">
-              <button className="btn btn-primary w-100 mt-5">
+              <button
+                onClick={() => handleOrderSubmit()}
+                className="btn btn-primary w-100 mt-5"
+              >
                 Add to Card
               </button>
             </div>

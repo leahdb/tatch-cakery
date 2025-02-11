@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ShopHeader from "./ShopHeader";
 import ShopMain from "./ShopMain";
+import ComingSoon from "./ComingSoon";
 import PCB from "./PCB";
 import Cart from "./Cart";
 import WishList from "./WishList";
@@ -16,8 +17,8 @@ import "react-toastify/dist/ReactToastify.css";
 const ShopHome = (props) => {
   localStorage.setItem("category_refresh", false);
   return (
-    <section>
-      <ShopHeader />
+    <section className="comingsoonsec d-flex align-items-center justify-content-center">
+      {/* <ShopHeader /> */}
       <ShopRoutes />
       <WhatsAppButton />
     </section>
@@ -29,8 +30,8 @@ export default ShopHome;
 const ShopRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<ShopMain />} />
-      <Route path="/build-cake" element={<CakeCustomization /> } />
+      <Route path="/" element={<ComingSoon />} />
+      <Route path="/build-cake" element={<CakeCustomization />} />
       <Route path="/pcb-builder" element={<PCB />} />
       <Route path="/products" element={<ProductListing />} />
       <Route
