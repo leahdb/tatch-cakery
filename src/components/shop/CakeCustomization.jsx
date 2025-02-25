@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 //import { handleOrderSubmit } from "../../services/shop/sendOrderEmail";
+import { add_to_cart } from "../../services/shop/cart";
 
 const CakeCustomization = () => {
   const cakeData = {
@@ -85,6 +86,19 @@ const CakeCustomization = () => {
       })
         .then(() => alert("Order submitted! (No response due to no-cors mode)"))
         .catch((error) => console.error("Error sending order:", error));
+    };
+
+    const handleAddToCart = () => {
+      console.log(formData);
+      if (id !== undefined) {
+        edit_shop_products(id, formData).then((res) => {
+          setShouldRedirectToIndex(res.status === "ok");
+        });
+      } else {
+        add_shop_products(formData).then((res) => {
+          setShouldRedirectToIndex(res.status === "ok");
+        });
+      }
     };
 
 

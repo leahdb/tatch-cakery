@@ -17,8 +17,10 @@ import "react-toastify/dist/ReactToastify.css";
 const ShopHome = (props) => {
   localStorage.setItem("category_refresh", false);
   return (
-    <section className="comingsoonsec d-flex align-items-center justify-content-center">
-      {/* <ShopHeader /> */}
+    <section className="">
+      {" "}
+      {/* comingsoonsec d-flex align-items-center justify-content-center */}
+      <ShopHeader />
       <ShopRoutes />
       <WhatsAppButton />
     </section>
@@ -31,6 +33,7 @@ const ShopRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<ComingSoon />} />
+      <Route path="/main" element={<ShopMain />} />
       <Route path="/build-cake" element={<CakeCustomization />} />
       <Route path="/pcb-builder" element={<PCB />} />
       <Route path="/products" element={<ProductListing />} />
