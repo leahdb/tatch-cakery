@@ -88,18 +88,18 @@ const CakeCustomization = () => {
         .catch((error) => console.error("Error sending order:", error));
     };
 
-    const handleAddToCart = () => {
-      console.log(formData);
-      if (id !== undefined) {
-        edit_shop_products(id, formData).then((res) => {
-          setShouldRedirectToIndex(res.status === "ok");
-        });
-      } else {
-        add_shop_products(formData).then((res) => {
-          setShouldRedirectToIndex(res.status === "ok");
-        });
-      }
-    };
+    // const handleAddToCart = () => {
+    //   console.log(formData);
+    //   if (id !== undefined) {
+    //     edit_shop_products(id, formData).then((res) => {
+    //       setShouldRedirectToIndex(res.status === "ok");
+    //     });
+    //   } else {
+    //     add_shop_products(formData).then((res) => {
+    //       setShouldRedirectToIndex(res.status === "ok");
+    //     });
+    //   }
+    // };
 
 
     // export const edit_shop_orders = (id, data) => {
