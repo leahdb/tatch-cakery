@@ -1,66 +1,105 @@
-import React, { useEffect, useState } from "react";
-import { fetch_banners } from "../../services/shop/banners";
+import React from "react";
 
-const ShopIntro = () => {
-  const [banners, setBanners] = useState([]);
-  useEffect(() => {
-    fetch_banners().then((res) => {
-      if (res.status === "ok") {
-        setBanners(res.data);
-      }
-    });
-  }, []);
-  return (
+// Carousel Item Component
+const CarouselItem = ({ slide, isActive }) => (
+  <div
+    className={`carousel-item ${isActive ? "active" : ""}`}
+  >
+    <img
+      src={`${process.env.PUBLIC_URL}/images/${slide.image}`}
+      className="d-block w-100 position-absolute top-0 start-0"
+      alt={slide.title}
+      style={{
+        objectFit: "cover",
+        width: "100%",
+        height: "100%",
+        border: "0",
+      }}
+    />
     <div
-      className="container card-banner p-5 bg-primary carousel slide"
-      id="carouselIntro"
-      data-bs-ride="carousel"
+      className="carousel-caption d-flex justify-content-start align-items-start"
+      style={{
+        zIndex: 2,
+        left: "0",
+        bottom: "0",
+        margin: "0",
+        width: "50%", // Occupies 40% of the image width by default
+        textAlign: "left",
+        background: "rgba(0, 0, 0, 0.5)", // Semi-transparent black background
+        color: "#fff", // White text for contrast
+        padding: "15px", // Padding for text inside the background
+      }}
     >
-      <div className="carousel-indicators mb-2">
-        {banners.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            data-bs-target="#carouselIntro"
-            data-bs-slide-to={index}
-            className={index === 0 ? "active" : ""}
-            aria-label={`Slide ${index + 1}`}
-          ></button>
-        ))}
-      </div>
-      <div className="carousel-inner h-100">
-        {banners.map((banner, index) => (
-          <div
-            key={banner.id}
-            className={`carousel-item ${index === 0 ? "active" : ""}`}
+      <div>
+        <h2
+          className="fw-bold"
+          style={{ fontSize: "1.5rem", marginBottom: "10px" }}
+        >
+          {slide.title}
+        </h2>
+        <p style={{ fontSize: "0.9rem", marginBottom: "10px" }}>
+          {slide.description}
+        </p>
+        {slide.buttonText && (
+          <a
+            href={slide.buttonLink}
+            className="btn btn-light mt-2"
             style={{
-              backgroundImage: `url(${banner.background_image})`,
-              backgroundSize: "cover",
-              color: banner.font_color || "white",
-              padding: `${banner.padding}px`,
-              margin: `${banner.margin}px`,
+              fontSize: "0.9rem",
+              fontWeight: "bold",
+              padding: "8px 15px",
+              borderRadius: "5px",
             }}
           >
-            <h2
-              style={{
-                fontSize: `${banner.font_size}px`,
-                fontWeight: banner.font_weight,
-              }}
-            >
-              {banner.name}
-            </h2>
-            <a
-              href="#"
-              className="btn"
-              style={{
-                backgroundColor: banner.button_background_color || "white",
-                color: banner.font_color || "black",
-              }}
-            >
-              View More
-            </a>
+            {slide.buttonText}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+// Main Component
+const ShopIntro = ({ banners }) => {
+  return (
+    <div className="container-fluid p-0">
+      <div className="row gx-0">
+        <main className="col-12 p-0">
+          <div
+            id="carouselIntro"
+            className="carousel slide carousel-fade carousel-main"
+            data-bs-ride="carousel"
+            data-bs-interval="3000"
+            // style={{
+            //   position: "relative",
+            //   height: "50vh",
+            //   borderBottom: "5px dashed #fff",
+            // }}
+          >
+            <div className="carousel-indicators mb-0">
+              {banners.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  data-bs-target="#carouselIntro"
+                  data-bs-slide-to={index}
+                  className={index === 0 ? "active" : ""}
+                  aria-current={index === 0 ? "true" : "false"}
+                  aria-label={`Slide ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+            <div className="carousel-inner">
+              {banners.map((slide, index) => (
+                <CarouselItem
+                  key={index}
+                  slide={slide}
+                  isActive={index === 0}
+                />
+              ))}
+            </div>
           </div>
-        ))}
+        </main>
       </div>
     </div>
   );

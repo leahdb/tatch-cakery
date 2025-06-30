@@ -34,8 +34,7 @@ const ShopRoutes = () => {
     <Routes>
       <Route path="/" element={<ComingSoon />} />
       <Route path="/main" element={<ShopMain />} />
-      <Route path="/build-cake" element={<CakeCustomization />} />
-      <Route path="/pcb-builder" element={<PCB />} />
+      <Route path="/products/build-your-cake" element={<CakeCustomization />} />
       <Route path="/products" element={<ProductListing />} />
       <Route
         path="/products/category/:categoryId/:categorySlug"

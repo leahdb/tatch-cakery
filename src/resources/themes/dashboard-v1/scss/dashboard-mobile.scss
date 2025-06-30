@@ -332,4 +332,14 @@ $primaryColor: #007132;
       margin-top: 16px !important;
     }
   }
+
+  .carousel-item{
+    height: 30vh !important;
+  }
+
+  .carousel-main{
+    position: relative;
+    height: 30vh !important;
+    border-bottom: 5px dashed #fff,
+  }
 }
