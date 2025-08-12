@@ -32,9 +32,9 @@ export default ShopHome;
 const ShopRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<ComingSoon />} />
+      <Route path="/" element={<ShopMain />} />
       <Route path="/main" element={<ShopMain />} />
-      <Route path="/products/build-your-cake" element={<CakeCustomization />} />
+      <Route path="/build-your-cake" element={<CakeCustomization />} />
       <Route path="/products" element={<ProductListing />} />
       <Route
         path="/products/category/:categoryId/:categorySlug"

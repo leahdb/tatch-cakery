@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SVGVisualizer from "./SVGVisualizerV2";
 //import { handleOrderSubmit } from "../../services/shop/sendOrderEmail";
 import { add_to_cart } from "../../services/shop/cart";
 
@@ -11,18 +12,27 @@ const CakeCustomization = () => {
     imageUrl:
       "https://d34zicoa2zcr2f.cloudfront.net/sites/files/bakersbrewstudio2/images/products/202404/800xAUTO/strb1.jpg", // Replace with actual image
     options: {
-      cakeFlavors: ["Vanilla", "Chocolate"],
+      cakeFlavors: ["Vanilla", "Chocolate", "RedVelvet"],
       creamFlavors: [
         { name: "Vanilla", price: 0 },
         { name: "Chocolate", price: 0 },
         { name: "Strawberry", price: 0.5 },
         { name: "Lotus", price: 0.5 },
+        { name: "Pistachio", price: 0.5 },
       ],
       fillingFlavors: [
         { name: "Nutella", price: 0.5 },
         { name: "Pistachio", price: 1 },
         { name: "Strawberry", price: 0.5 },
         { name: "Lotus", price: 0.5 },
+      ],
+      topCreamFlavors: [
+        { name: "Vanilla", price: 0 },
+        { name: "Chocolate", price: 0 },
+        { name: "Strawberry", price: 0.5 },
+        { name: "Lotus", price: 0.5 },
+        { name: "Pistachio", price: 0.5 },
+        { name: "Colored Vanilla", price: 0 },
       ],
       extra: [
         { name: "Fresh Strawberries", price: 0.5 },
@@ -31,10 +41,9 @@ const CakeCustomization = () => {
       ],
       customizations: [
         { name: "No Customization", price: 0 },
-        { name: "Cream Message", price: 0 },
-        { name: "1 Color Simple Drawing", price: 0 },
-        { name: "Chocolate Letters Message", price: 1 },
-        { name: "Multi-Color Drawing", price: 2 },
+        { name: "Chocolate Letters Writing", price: 1 },
+        { name: "Plexi Writing", price: 0 },
+        { name: "Plexi Motif", price: 0 },
       ],
     },
   };
@@ -45,8 +54,11 @@ const CakeCustomization = () => {
   const [selectedCream, setSelectedCream] = useState(
     cakeData.options.creamFlavors[0]
   );
-  const [selectedFilling, setSelectedFilling] = useState("");
-  const [selectedExtras, setSelectedExtras] = useState("");
+  const [selectedTopCream, setSelectedTopCream] = useState(
+    cakeData.options.topCreamFlavors[0]
+  );
+  const [selectedFilling, setSelectedFilling] = useState(cakeData.options.fillingFlavors[0]);
+  const [selectedExtras, setSelectedExtras] = useState(cakeData.options.extra[0]);
   const [selectedCustomization, setSelectedCustomization] = useState(
     cakeData.options.customizations[0]
   );
@@ -115,180 +127,213 @@ const CakeCustomization = () => {
     // };
 
   return (
-    <div className="mt-0 bg-light-gray">
-      <img
-        src={cakeData.imageUrl}
-        alt={cakeData.name}
-        className="img-fluid w-100 mb-0"
-      />
-      <div className="bg-white mb-2">
-        <div className="container pb-3 pt-1">
-          <h2 className="pt-3">{cakeData.name}</h2>
-          <p className="text-muted">{cakeData.description}</p>
-          <h4>{totalPrice.toFixed(2)}$</h4>
-        </div>
+    <div className="row mt-0 bg-light-gray cake-customization">
+      <div className="col-12 col-lg-6 d-flex justify-content-center p-3 h-100">
+        <SVGVisualizer
+          cakeFlavor={selectedCake}                       // "Vanilla" | "Chocolate" | "RedVelvet"
+          fillingFlavor={selectedFilling.name}           // "Nutella" | "Pistachio" | ...
+          creamFlavor={selectedCream.name}               // "Vanilla" | "Chocolate" | ...
+          topCreamFlavor={selectedTopCream.name}
+          message={customInput}
+          writingStyle={selectedCustomization.name.includes("Chocolate") ? "Chocolate" : "Cream"}
+        />
       </div>
-      <div className="bg-white">
-        <div className="container">
-          <div className="mb-2 py-3 px-2">
-            <label className="form-label fs-5">Cake Flavor</label>
-            {cakeData.options.cakeFlavors.map((flavor, index) => (
-              <div className="form-check" key={index}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="cakeFlavor"
-                  value={flavor}
-                  checked={selectedCake === flavor}
-                  onChange={() => setSelectedCake(flavor)}
-                />
-                <label className="form-check-label">{flavor}</label>
-              </div>
-            ))}
+      <div className="col-12 col-lg-6 overflow-auto h-100">
+        <div className="bg-white mb-2">
+          <div className="container pb-3 pt-1">
+            <h2 className="pt-3">{cakeData.name}</h2>
+            <p className="text-muted">{cakeData.description}</p>
+            <h4>{totalPrice.toFixed(2)}$</h4>
           </div>
         </div>
-      </div>
-      <div className="bg-white">
-        <div className="container">
-          <div className="mb-2 py-3 px-2">
-            <label className="form-label fs-5">Cream Flavor</label>
-            {cakeData.options.creamFlavors.map((flavor, index) => (
-              <div className="form-check" key={index}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="creamFlavor"
-                  value={flavor}
-                  checked={selectedCream.name === flavor.name}
-                  onChange={() => setSelectedCream(flavor)}
-                />
-                <label className="form-check-label">
-                  {flavor.name}{" "}
-                  <small className="text-muted">
-                    &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
-                  </small>
-                </label>
-              </div>
-            ))}
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Cake Flavor</label>
+              {cakeData.options.cakeFlavors.map((flavor, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="cakeFlavor"
+                    value={flavor}
+                    checked={selectedCake === flavor}
+                    onChange={() => setSelectedCake(flavor)}
+                  />
+                  <label className="form-check-label">{flavor}</label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-white">
-        <div className="container">
-          <div className="mb-2 py-3 px-2">
-            <label className="form-label fs-5">Filling Flavor</label>
-            {cakeData.options.fillingFlavors.map((filling, index) => (
-              <div className="form-check" key={index}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="fillingFlavor"
-                  value={filling.name}
-                  checked={selectedFilling.name === filling.name}
-                  onChange={() => setSelectedFilling(filling)}
-                />
-                <label className="form-check-label">
-                  {filling.name}{" "}
-                  <small className="text-muted">&nbsp;+{filling.price}$</small>
-                </label>
-              </div>
-            ))}
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Cream Flavor</label>
+              {cakeData.options.creamFlavors.map((flavor, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="creamFlavor"
+                    value={flavor}
+                    checked={selectedCream.name === flavor.name}
+                    onChange={() => setSelectedCream(flavor)}
+                  />
+                  <label className="form-check-label">
+                    {flavor.name}{" "}
+                    <small className="text-muted">
+                      &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
+                    </small>
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-white">
-        <div className="container">
-          <div className="mb-2 py-3 px-2">
-            <label className="form-label fs-5">Add On</label>
-            {cakeData.options.extra.map((extra, index) => (
-              <div className="form-check" key={index}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  value={extra.name}
-                  checked={selectedExtras.name === extra.name}
-                  onChange={() => setSelectedExtras(extra)}
-                />
-                <label className="form-check-label">
-                  {extra.name}{" "}
-                  <small className="text-muted">&nbsp;+{extra.price}$</small>
-                </label>
-              </div>
-            ))}
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Filling Flavor</label>
+              {cakeData.options.fillingFlavors.map((filling, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="fillingFlavor"
+                    value={filling.name}
+                    checked={selectedFilling.name === filling.name}
+                    onChange={() => setSelectedFilling(filling)}
+                  />
+                  <label className="form-check-label">
+                    {filling.name}{" "}
+                    <small className="text-muted">&nbsp;+{filling.price}$</small>
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-white">
-        <div className="container">
-          <div className="mb-2 py-3 px-2">
-            <label className="form-label fs-5">Customization</label>
-            {cakeData.options.customizations.map((custom, index) => (
-              <div className="form-check" key={index}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="customization"
-                  value={custom.name}
-                  checked={selectedCustomization.name === custom.name}
-                  onChange={() => setSelectedCustomization(custom)}
-                />
-                <label className="form-check-label">
-                  {custom.name}
-                  <small className="text-muted">
-                    &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
-                  </small>
-                </label>
-              </div>
-            ))}
-            {selectedCustomization.name.includes("Message") && (
-              <div className="my-3">
-                <label className="form-label fs-5">Enter Your Message</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Your custom message"
-                  value={customInput}
-                  onChange={(e) => setCustomInput(e.target.value)}
-                />
-              </div>
-            )}
-            {selectedCustomization.name.includes("Drawing") ||
-            selectedCustomization.name.includes("Topper") ? (
-              <div className="my-3">
-                <label className="form-label fs-5">Upload Image</label>
-                <input
-                  type="file"
-                  className="form-control"
-                  onChange={(e) => setCustomImage(e.target.files[0])}
-                />
-              </div>
-            ) : null}
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Add On</label>
+              {cakeData.options.extra.map((extra, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    value={extra.name}
+                    checked={selectedExtras.name === extra.name}
+                    onChange={() => setSelectedExtras(extra)}
+                  />
+                  <label className="form-check-label">
+                    {extra.name}{" "}
+                    <small className="text-muted">&nbsp;+{extra.price}$</small>
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Top Cream Flavor</label>
+              {cakeData.options.topCreamFlavors.map((flavor, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="creamFlavor"
+                    value={flavor}
+                    checked={selectedTopCream.name === flavor.name}
+                    onChange={() => setSelectedTopCream(flavor)}
+                  />
+                  <label className="form-check-label">
+                    {flavor.name}{" "}
+                    <small className="text-muted">
+                      &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
+                    </small>
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Customization</label>
+              {cakeData.options.customizations.map((custom, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="customization"
+                    value={custom.name}
+                    checked={selectedCustomization.name === custom.name}
+                    onChange={() => setSelectedCustomization(custom)}
+                  />
+                  <label className="form-check-label">
+                    {custom.name}
+                    <small className="text-muted">
+                      &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
+                    </small>
+                  </label>
+                </div>
+              ))}
+              {selectedCustomization.name.includes("Writing") && (
+                <div className="my-3">
+                  <label className="form-label fs-5">Enter Your Message</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Your custom message"
+                    value={customInput}
+                    onChange={(e) => setCustomInput(e.target.value)}
+                  />
+                </div>
+              )}
+              {selectedCustomization.name.includes("Drawing") ||
+              selectedCustomization.name.includes("Motif") ? (
+                <div className="my-3">
+                  <label className="form-label fs-5">Upload Image</label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    onChange={(e) => setCustomImage(e.target.files[0])}
+                  />
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
 
-      <div className="bg-white">
-        <div className="container">
-          <div className="mb-2 py-3 px-2">
-            <label className="form-label fs-5">Additional Notes</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter any additional requests"
-              value={additionalNote}
-              onChange={(e) => setAdditionalNote(e.target.value)}
-            />
-            <div className="w-100">
-              <button
-                onClick={() => handleOrderSubmit()}
-                className="btn btn-primary w-100 mt-5"
-              >
-                Add to Card
-              </button>
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Additional Notes</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter any additional requests"
+                value={additionalNote}
+                onChange={(e) => setAdditionalNote(e.target.value)}
+              />
+              <div className="w-100">
+                <button
+                  onClick={() => handleOrderSubmit()}
+                  className="btn btn-primary w-100 mt-5"
+                >
+                  Add to Card
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
