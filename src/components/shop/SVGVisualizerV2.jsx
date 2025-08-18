@@ -1,40 +1,20 @@
 import React, { useMemo } from "react";
 import ChocolateMoldMessage from "./ChocolateLetters";
 import PlexiText from "./PlexiText";
-import PlexiMotif from './PlexiMotif';
+import { MOTIFS } from "./Motifs";
 
-// const colors = {
-//   cls1: "#713f12",
-//   cls2: "#691212",
-//   cls3: "#c88329",
-//   cls4: "#675752",
-//   cls5: "#f3d9a3",
-//   cls6: "#b59f8a",
-//   cls7: "#d6a755",
-//   cls8: "#736663",
-//   cls9: "#8a7a6f",
-//   cls10: "#efcd86",
-//   cls11: "#650d0d",
-//   cls12: "#473c3a",
-//   cls13: "#a01f1f",
-//   cls14: "#560a0a",
-//   cls15: "#5d1212",
-//   cls16: "#7c4515",
-//   cls17: "#f2d392",
-//   cls18: "#4a0606",
-//   cls19: "#b42222",
-//   cls20: "#b72525",
-//   cls21: "#a92222",
-//   cls22: "#fefefe",
-//   cls23: "#a66f39",
-//   cls24: "#e8bd6f",
-//   cls25: "#a00b0b",
-//   cls26: "#9c632d",
-//   cls27: "#600808",
-//   cls28: "#cd892e",
-//   cls29: "#f7e4b8",
-//   cls30: "#f4d89a",
-// };
+const paintMap = {
+  gold:   "url(#goldGradient)",
+  silver: "url(#silverGradient)",
+  black:  "#111827",
+  white:  "#ffffff",
+  red:    "#EF4444",
+  blue:   "#3B82F6",
+  green:  "#10B981",
+  pink:   "#EC4899",
+  purple: "#8B5CF6",
+  teal:   "#14B8A6",
+};
 
 const DUMMY_MOTIF_PATH =
   "M150 700 L850 700 L800 400 L650 550 L550 350 L450 550 L300 400 Z";;
@@ -293,12 +273,31 @@ function getComputedColors(cakeFlavor, middleCreamFlavor, topCreamFlavor, vanill
   return { ...BASE_COLORS, ...cakeOverrides, ...middleCreamOverrides, ...topCreamOverrides };
 }
 
-export default function SVGVisualizer({ cakeFlavor = "RedVelvet", creamFlavor = "Vanilla", topCreamFlavor = "Chocolate", message = "", motif="", color="" }) {
+export default function SVGVisualizer({ 
+  cakeFlavor = "RedVelvet", 
+  creamFlavor = "Vanilla", 
+  topCreamFlavor = "Chocolate", 
+  message = "", 
+  motif="", 
+  plexiColor="",
+  letteringMode, }) {
   const colors = useMemo(() => getComputedColors(cakeFlavor, creamFlavor, topCreamFlavor), [cakeFlavor, creamFlavor, topCreamFlavor]);
   const topCreamRef = React.useRef(null);
   return (
     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 738.93 559.09">
       <defs>
+        <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#B28900" />
+          <stop offset="35%" stopColor="#F1CF63" />
+          <stop offset="65%" stopColor="#7A5A00" />
+          <stop offset="100%" stopColor="#F7E7A1" />
+        </linearGradient>
+        <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#9AA0A6" />
+          <stop offset="35%" stopColor="#ECEFF1" />
+          <stop offset="65%" stopColor="#6B7280" />
+          <stop offset="100%" stopColor="#F5F7FA" />
+        </linearGradient>
         <style>
           {`.cls-1 {
             fill: ${colors.cls1};
@@ -418,7 +417,20 @@ export default function SVGVisualizer({ cakeFlavor = "RedVelvet", creamFlavor = 
 
           .cls-30 {
             fill: ${colors.cls30};
-          }`}
+          }
+          
+          .cls-40 {
+              stroke: #231f20;
+              stroke-miterlimit: 10;
+              stroke-width: 3px;
+          }
+
+          .cls-41 {
+              stroke: #231f20;
+              stroke-miterlimit: 10;
+              stroke-width: 1px;
+          }
+        `}
         </style>
       </defs>
       <path className="cls-4" d="M672.83,367.03l3-1.12c3.2-1.01,4.13-3.75,5.25-4.88.16-.16,1.33.16,1.88,0,.44-.13,2.08-2.48,3.38-1.88-1.2.46-.29,2.33-1.12,2.62-1.79.63-1.77,1.42-3,2.25-2,1.34-5.08,3.14-7.12,3.75l-2.25,3c-4.74,3.69-8.03,6.53-13.12,9.75-.87.55-1.16,1.89-2.62,1.5.05.55-.35,1.33.38,1.5,1.92.44.63-1.41,1.5-1.5.6-.06,1.55.15,1.88,0v3.38l2.62-.38c5.43-4.19,10.48-8.07,16.12-11.62.59-.37,2.75-1.91,3-.38-13.37,9.62-27.48,20.17-40.88,29.25-30.17,20.45-58.8,41.8-88.5,63-27.91,19.92-54.6,39.78-83.25,60-10.8,7.63-21.5,15.95-33,23.25-6.34,4.02-10.92,5.49-17.62,7.5l-.38-.75c-.57-.12-1.49.17-1.88,0-.04-.02.1-.78-.38-.75-.26.02-.46.7-.75.75-3.02.52-4.95-2.25-5.25-2.25s-1.09,1.39-1.5,1.5c-.98.27-1.31-.75-1.5-.75-.39,0-1.52,2.31-1.88-.38-.11-.79-2.23.32-1.5-1.88.84-.62.55-1.25,2.25,0,.28.21.63,1.97,1.5,0,.4-.91,2.16-1.14,3-.75.66.31,2.18,1.87,3,0,.63-1.42,11.11-3.25,13.5-3.75-.4-2.38.7-1.11,1.88-1.5,1.45-.48,12.64-7.77,13.12-8.62,1.25-2.19,1.89-.77,2.25-1.12.14-.14-.14-1.36,0-1.5.28-.28,2.3.72,3.75-1.88.32-.57,8.69-6.13,10.12-7.12,15.94-11.06,31.19-22.25,47.25-33.75,6.44-4.61,12.91-9.16,19.5-14.25.21-.16,1.88-.2,1.88-1.5-2.07-.63-2.34.94-3.38,1.5-.34.18-1.28.39-1.88.75-.55-1.43.64-2.21.75-2.62.35-1.29-.84-2.25,1.5-1.88l-.75-.75c-.28-.28.15-.65.75-.75.7-.11,1.52.07,2.25,0,.13-.87-.73-.7-.75-.75-.09-.18.06-.5,0-.75.48-.39,1.76-.67,1.88-.75,1.16-.84,2.32-2.23,3.38-3,.66-.48.71-.72.75-.75.77-.55,1.57-1.03,2.25-1.5.72-.5.71-.72.75-.75,3.9-2.73,8.19-5.53,12-8.25.68-.49.71-.72.75-.75.16-.12.58.12.75,0,2.57-1.83,16.71-11.51,17.25-12.75.37-.84,11.98-8.25,14.25-9.75.97-.65,2.71-1.59,3-2.25.4-.92,7.99-4.98,9.38-6,1.01-.74,2.75-2.32,2.62-3.75.14.06.5,0,.75,0,1.45-.03,2.18-.78,3.38-1.5,3.77-2.26,7.62-5.01,11.25-7.5,12.29-8.45,23.43-16.82,35.25-25.5,2.32-1.7,4.91-3.54,7.12-5.25.16-.13.43.25.75-.75h1.12l1.12-1.5c.9-.15.58-.35.75-.75l3.38-1.5c2.47-2.71,5.05-3.65,8.62-6l.38.75c1.79.5.89-1.26,1.12-1.5.19-.19,2.06.19,2.25,0,.13-.13-.13-1.08,0-1.5.33-1.03.72-.71.75-.75ZM656.33,384.28l-3.38.75-7.12,6c3.36.49,4.64-2.96,7.12-3.75l3.38-3ZM657.45,385.78c-.49,0-.49.75,0,.75s.49-.75,0-.75ZM645.08,391.78c-2.14-.73-1.3,1.35-1.5,1.5-.22.17-1.33-.16-1.88,0-1.13.34-2.99,2.89-4.5,3.75-9.06,5.14-17.21,11.34-25.5,17.25-5.99,4.27-12.38,8.2-18.75,12.75-13.4,9.58-26.06,18.34-39,27.75-3.77,2.74-7.84,5.89-12,8.25-2.97,1.68-6.31,6.88-10.5,8.25l-3.38,3.75c1.58.51,3.46-2.05,4.12-2.25,3.35-1,.57-.2,1.88-1.5.73-.73,5.47-2.45,6-3.38,1.28-2.26,8.06-5.84,10.88-7.88,5.66-4.1,12.52-10.83,17.25-13.5,5.41-3.06,10.54-7.47,15.75-11.25,1.34-.97,7.45-4.12,7.88-4.88,1.16-2.05.32-.49,2.62-1.12.6-.17,2.14-2.52,3-3,1.68-.94.6-.81,2.25-1.5,2.47-1.03,3.87-2.23,5.25-3,1.06-.59,4.31-3.34,6-4.5,3.25-2.23,19.02-14.63,20.25-15,2.49-.74,1.15-.45,3-1.5,1.38-.78,1.03-2.15,1.12-2.25.19-.19,2.06.19,2.25,0,.14-.14-.14-1.36,0-1.5.16-.16,3.4-1.02,4.12-1.5l3.38-3.75Z"/>
@@ -686,7 +698,6 @@ export default function SVGVisualizer({ cakeFlavor = "RedVelvet", creamFlavor = 
       <path className="cls-30" d="M92.33,199.03c.56.13,1.31-.13,1.88,0,.27.06.43.62.75.75.76.32,1.42-.68,1.12,1.5-.3-.14-1.71-.7-1.88-.75-1.26-.36-2.25.85-1.88-1.5Z"/>
       <path className="cls-23" d="M192.08,253.78c1.02.43.7.73.75.75v1.5c-1.14-.51-3.92-.91-4.5-2.25,1.51-.37,2.18.59,3.38.75l.38-.75Z"/>
       <path className="cls-30" d="M388.58,324.28l.38-.75c1.9.02,3.05-.63,2.62,1.5-.83-.03-1.95.16-2.62,0-.51-.13-.34-.73-.38-.75Z"/>
-      <rect className="cls-30" d="M186.83,252.28h-1.12c-1.45-2.36-5.34-1.29-6.38-3.75,2.64.8,4.07,1.12,6.38,3,.17.14,1.23-.31,1.12.75Z" width="200" height="100" x="10" y="10" rx="20" ry="20" fill="blue" />
       <path className="cls-23" d="M186.83,252.28h-1.12c-1.45-2.36-5.34-1.29-6.38-3.75,2.64.8,4.07,1.12,6.38,3,.17.14,1.23-.31,1.12.75Z"/>
       <path className="cls-23" d="M192.08,253.78l-.38.75c-1.19-.16-1.86-1.12-3.38-.75-.14-.31.07-.86-.75-.75.04-.02-.14-.62.38-.75,1.96-.5,2.15,1.15,3,1.5.37.15.87-.11,1.12,0Z"/>
       <path className="cls-23" d="M176.33,247.03l-.38.75c-1.41-.57-5.15-1.93-5.62-3h1.12c1.5,1.23,3.19,1.58,4.88,2.25Z"/>
@@ -1654,50 +1665,38 @@ export default function SVGVisualizer({ cakeFlavor = "RedVelvet", creamFlavor = 
       <path className="cls-21" d="M97.58,277.78c.76.63-1.35,1.39-2.25-.38l.38-.38c.41.98,1.74.64,1.88.75Z"/>
       <path className="cls-21" d="M111.83,256.78s.16.47-.38.75c-.37.19-.99-.14-1.12,0-.97-.04-1.96-1.69-1.5-2.25.14-.16,1.74,1.29,2.62.75l.38.75Z"/>
       <path className="cls-19" d="M366.83,418.03c1.95,0,3.49-.68,3,1.5-1.94-.08-3.48.75-3-1.5Z"/>
-      <rect transform={`rotate(21, 500, 50)`}
-        ref={topCreamRef}
-        x={200} y={50} width={500} height={300}
-        fill="none" stroke="magenta" pointerEvents="none"
+      {console.log(plexiColor)}
+      {motif?.id && (
+        <path
+        xmlns="http://www.w3.org/2000/svg"
+        d={motif.pathOnCake}
+        fill={paintMap[plexiColor.id]}
+        className={motif.class ? motif.class : ""}
       />
+      )}
+      {letteringMode === "chocolate" && message?.trim() && (
       <ChocolateMoldMessage
         text={message.toUpperCase()}
         targetRef={topCreamRef} 
-        rotation={30}    
+        rotation={22}    
         padding={6}                           
         bounds={{ x: 200, y: 50, width: 500, height: 300 }} // set to your top-cream band
         tile={{ w: 60, h: 76, rx: 6, gap: 6 }}
         spacing={{ letter: 1, word: 16, row: 4 }}
-        rows={{ maxRows: 4 }}
+        rows={{ maxRows: 3 }}
       />
-      {/* <PlexiText
+      )}
+
+      {letteringMode === "plexi" && message?.trim() && (
+      <PlexiText
         text={message}
         targetRef={topCreamRef}
-        rotation={21}
-        stylePreset={"gold"}         // "gold" | "silver" | "custom"
-        customColor={""}        // e.g. from a color picker
-        font={{ family: "'Great Vibes','Pacifico','Allura',cursive", size: 55, weight: 600 }}
+        rotation={22}
+        color={paintMap[plexiColor.id]}
+        font={{ family: "'Great Vibes','Pacifico','Allura',cursive", size: 60, weight: 600 }}
         plate={{ show: true, fuseStroke: 3.5 }}
-      /> */}
-      {/* <PlexiMotif
-        targetRef={topCreamRef}
-        rotation={21}
-        color="#D4AF37"
-        threshold={180}
-        simplifyTol={1.0}
-        minArea={300}
-        expand={0.5}
-        addStake={true}
-        stake={{ width: 50, length: 60, radius: 8 }}
-        sourceImage={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREwWCI0LvtlpJ55y7i5KuaErZS1q5eq5p2DU4I6lahdeim2-dnpEeSp_HmsALE8dw4QKc&usqp=CAU"}
-      /> */}
-
-      {/* <PlexiMotif
-          targetRef={topCreamRef}
-          rotation={21}         // matches cake rotation
-          color="#D4AF37"    // gold/silver/custom
-          pathD={DUMMY_MOTIF_PATH}
-          margin={0.12}
-        /> */}
+      />
+      )}
     </svg>
   );
 }

@@ -35,7 +35,7 @@ export default function ChocolateMoldMessageAuto({
     letterFill: "#f4e7d2",
     letterStroke: "#e0cfb6",
   },
-  font = { family: "sans-serif", weight: 800, size: 56 },
+  font = { family: "sans-serif", weight: 800, size: 60 },
 
   showOverflowHint = true,
 }) {
@@ -100,7 +100,7 @@ export default function ChocolateMoldMessageAuto({
 
       if (ch === " ") { x += spacing.word; continue; }
       tiles.push({ ch, x, y });
-      x += 36;
+      x += 40;
       if (next && next !== " ") x += spacing.letter;
     }
     return tiles;
@@ -196,7 +196,7 @@ export default function ChocolateMoldMessageAuto({
   const { w, h, rx } = tile;
 
   return (
-    <g transform={`rotate(${rotation}, ${B.cx}, ${B.cy})`}>
+    <g transform={`translate(80, 30) rotate(${rotation}, ${B.cx}, ${B.cy}) skewX(-27.77)`}>
       <defs>
         <linearGradient id="chocoShine" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"  stopColor={palette.tileFillTop}/>
@@ -209,26 +209,16 @@ export default function ChocolateMoldMessageAuto({
       </defs>
 
       {lineLayouts.map((line, li) => (
-        <g key={li}>
+        <g key={li} transform={
+      li === 2
+        ? "translate(-45, 0)"
+        : li === 0
+        ? "translate(-15, 0)"
+        : undefined
+    }>
           {line.tiles.map((t, i) => (
             <g key={i} transform={`translate(${t.x}, ${t.y})`}>
-              <text
-            x={w/2}
-            y={h/2 + font.size*0.36}
-            textAnchor="middle"
-            transform="translate(1.2,1.4)"           // ← thickness/height
-            style={{
-                fontFamily: font.family,
-                fontWeight: font.weight,
-                fontSize: font.size,
-                letterSpacing: "0px",
-                fill: "#fff6e6",  
-            }}
-            >
-            {t.ch}
-            </text>
-
-            {/* FACE (front layer) */}
+            
             <text
             x={w/2}
             y={h/2 + font.size*0.36}
@@ -238,11 +228,19 @@ export default function ChocolateMoldMessageAuto({
                 fontFamily: font.family,
                 fontWeight: font.weight,
                 fontSize: font.size,
-                letterSpacing: "0px",
-                fill: "fff6e6",               // ← subtle highlight
+                letterSpacing: "1px",
+                fill: "#fff6e6",               // ← subtle highlight
                 paintOrder: "stroke",
-                stroke: "#fff6e6",                      // thin rim = bevel
-                strokeWidth: 0.8,
+                stroke: "#EADCC8",                      // thin rim = bevel
+                strokeWidth: 2.8,
+                textShadow: `
+                  2px 0.5px 1px rgb(242, 234, 219),
+                  2px 1px 1px rgb(231, 224, 210),
+                  2px 1.5px 1px rgb(219, 213, 201),
+                  2px 2px 1px rgb(207, 202, 191),
+                  2px 2.5px 1px rgb(196, 191, 181),
+                  2px 5px 10px rgba(35, 34, 33, 0.2)
+                `
             }}
             >
             {t.ch}

@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 const ShopHome = (props) => {
   localStorage.setItem("category_refresh", false);
   return (
-    <section className="">
+    <section className="page">
       {" "}
       {/* comingsoonsec d-flex align-items-center justify-content-center */}
       <ShopHeader />
@@ -41,7 +41,7 @@ const ShopRoutes = () => {
         element={<ProductListing />}
       />
       <Route
-        path="/products/:productId/:productName"
+        path="/products/:productId"
         element={<ProductDetails />}
       />
       <Route path="/cart" element={<Cart />} />

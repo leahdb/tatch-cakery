@@ -3551,7 +3551,27 @@ table.dashboard-table td {
 }
 
 .cake-customization{
-  height: 100vh;
+  height: calc(100vh - 100px);
+}
+
+.custom-height-1{
+  height: 100% !important;
+}
+
+.custom-height-2{
+  height: 100% !important;
+}
+
+.swatch-btn {
+  width: 40px;
+  height: 40px;
+  outline: none;
+}
+.swatch-btn:focus-visible {
+  box-shadow: 0 0 0 .25rem rgba(0,0,0,.25);
+}
+.swatch-selected {
+  box-shadow: 0 0 0 3px rgba(0,0,0,.25) inset, 0 0 0 .15rem rgba(0, 0, 0, 0); /* inner ring + outer focus-like ring */
 }
 
 
@@ -3628,6 +3648,10 @@ table.dashboard-table td {
             fill: #4a0606;  // dark brown 251106
           }
 
+          .cls-18-text {
+            letter-spacing: 0em;
+          }
+
           .cls-19 {
             fill: #b42222;  // brown 7f3c1a
           }
@@ -3642,6 +3666,12 @@ table.dashboard-table td {
 
           .cls-22 {
             fill: #fefefe;
+          }
+
+          .cls-22-text {
+            font-family: Arial-Black, 'Arial Black';
+            font-size: 76.13px;
+            font-weight: 800;
           }
 
           .cls-23 {
@@ -3675,3 +3705,15 @@ table.dashboard-table td {
           .cls-30 {
             fill: #f4d89a;
           }
+
+          .cls-35-text {
+            letter-spacing: 0em;
+          }
+
+          .cls-32 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-33 {
+        letter-spacing: -.03em;
+      }

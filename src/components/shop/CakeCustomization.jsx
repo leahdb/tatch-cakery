@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import SVGVisualizer from "./SVGVisualizerV2";
+import MotifPicker from "./MotifPicker";
+import ColorPicker from "./ColorPicker";
 //import { handleOrderSubmit } from "../../services/shop/sendOrderEmail";
 import { add_to_cart } from "../../services/shop/cart";
 
 const CakeCustomization = () => {
   const cakeData = {
-    name: "Deluxe Custom Cake",
+    name: "Build Your Cake",
     description:
       "Customize your perfect cake with our selection of flavors and fillings.",
     basePrice: 8,
     imageUrl:
       "https://d34zicoa2zcr2f.cloudfront.net/sites/files/bakersbrewstudio2/images/products/202404/800xAUTO/strb1.jpg", // Replace with actual image
     options: {
-      cakeFlavors: ["Vanilla", "Chocolate", "RedVelvet"],
+      cakeFlavors: ["Chocolate", "Vanilla", "RedVelvet"],
       creamFlavors: [
-        { name: "Vanilla", price: 0 },
         { name: "Chocolate", price: 0 },
+        { name: "Vanilla", price: 0 },
         { name: "Strawberry", price: 0.5 },
         { name: "Lotus", price: 0.5 },
         { name: "Pistachio", price: 0.5 },
@@ -27,8 +29,8 @@ const CakeCustomization = () => {
         { name: "Lotus", price: 0.5 },
       ],
       topCreamFlavors: [
-        { name: "Vanilla", price: 0 },
         { name: "Chocolate", price: 0 },
+        { name: "Vanilla", price: 0 },
         { name: "Strawberry", price: 0.5 },
         { name: "Lotus", price: 0.5 },
         { name: "Pistachio", price: 0.5 },
@@ -65,7 +67,8 @@ const CakeCustomization = () => {
     
     const [additionalNote, setAdditionalNote] = useState("");
     const [customInput, setCustomInput] = useState("");
-    const [customImage, setCustomImage] = useState(null);
+    const [motifChoice, setMotifChoice] = useState(null);
+    const [plexiColor, setPlexiColor] = useState("gold");
 
 
     const totalPrice =
@@ -127,21 +130,29 @@ const CakeCustomization = () => {
     // };
 
   return (
-    <div className="row mt-0 bg-light-gray cake-customization">
-      <div className="col-12 col-lg-6 d-flex justify-content-center p-3 h-100">
+    <div className="row mt-3 bg-light-gray cake-customization">
+      <div className="col-12 col-lg-6 d-flex justify-content-center px-5 custom-height-1">
         <SVGVisualizer
           cakeFlavor={selectedCake}                       // "Vanilla" | "Chocolate" | "RedVelvet"
           fillingFlavor={selectedFilling.name}           // "Nutella" | "Pistachio" | ...
           creamFlavor={selectedCream.name}               // "Vanilla" | "Chocolate" | ...
           topCreamFlavor={selectedTopCream.name}
           message={customInput}
-          writingStyle={selectedCustomization.name.includes("Chocolate") ? "Chocolate" : "Cream"}
+          motif={selectedCustomization.name === "Plexi Motif" ? motifChoice : null}
+          plexiColor={plexiColor}
+          letteringMode={
+            selectedCustomization.name === "Chocolate Letters Writing"
+              ? "chocolate"
+              : selectedCustomization.name === "Plexi Writing"
+              ? "plexi"
+              : "none"
+          }
         />
       </div>
-      <div className="col-12 col-lg-6 overflow-auto h-100">
+      <div className="col-12 col-lg-6 overflow-auto custom-height-2">
         <div className="bg-white mb-2">
           <div className="container pb-3 pt-1">
-            <h2 className="pt-3">{cakeData.name}</h2>
+            <h2 className="pt-4">{cakeData.name}</h2>
             <p className="text-muted">{cakeData.description}</p>
             <h4>{totalPrice.toFixed(2)}$</h4>
           </div>
@@ -273,7 +284,12 @@ const CakeCustomization = () => {
                     name="customization"
                     value={custom.name}
                     checked={selectedCustomization.name === custom.name}
-                    onChange={() => setSelectedCustomization(custom)}
+                    onChange={() => {
+                      setSelectedCustomization(custom);
+                      if (custom.name !== "Plexi Motif") {
+                        setMotifChoice(null); // clear motif when leaving motif mode
+                      }
+                    }}
                   />
                   <label className="form-check-label">
                     {custom.name}
@@ -297,15 +313,19 @@ const CakeCustomization = () => {
               )}
               {selectedCustomization.name.includes("Drawing") ||
               selectedCustomization.name.includes("Motif") ? (
+                <MotifPicker
+                  value={motifChoice}
+                  onChange={setMotifChoice}
+                />
+              ) : null}
+              {selectedCustomization.name.includes("Plexi") && (
                 <div className="my-3">
-                  <label className="form-label fs-5">Upload Image</label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    onChange={(e) => setCustomImage(e.target.files[0])}
+                  <ColorPicker
+                    value={plexiColor}
+                    onChange={setPlexiColor}
                   />
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </div>

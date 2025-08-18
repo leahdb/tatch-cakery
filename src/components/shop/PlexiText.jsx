@@ -3,20 +3,6 @@ import React from "react";
 /**
  * PlexiText
  * Connected "plexi" script text with mirror gold/silver or custom color.
- *
- * Usage:
- *   <PlexiText
- *     text="Happy Birthday Reem"
- *     targetRef={topCreamRef}
- *     rotation={45}
- *     stylePreset="gold"          // "gold" | "silver" | "custom"
- *     customColor="#FF5CA8"       // used when stylePreset="custom"
- *     font={{ family: "'Great Vibes', 'Pacifico', 'Allura', cursive", size: 42, weight: 600 }}
- *     plate={{ fuseStroke: 3.5, show: true }}     // outline stroke that fuses the letters
- *     extrude={{ dx: 1.2, dy: 1.6, opacity: 0.4 }}// fake thickness
- *     shadow={{ dx: 0.8, dy: 1.2, blur: 1.2, opacity: 0.35 }}
- *     padding={10}
- *   />
  */
 export default function PlexiText({
   text = "Happy Birthday Reem",
@@ -24,10 +10,9 @@ export default function PlexiText({
   rotation = 45,
   padding = 6,
   maxRows = 3,
-  maxCharsPerRow = 12, // character limit per row
+  maxCharsPerRow = 12,
 
-  stylePreset = "gold",
-  customColor = "#ff4fb7",
+  color = "#ff4fb7",
   font = { family: "'Great Vibes','Pacifico','Allura',cursive", size: 42, weight: 600 },
   plate = { show: true, fuseStroke: 3.5, color: "currentColor", opacity: 0.9 },
   extrude = { dx: 1.0, dy: 1.4, opacity: 0.35 },
@@ -36,81 +21,99 @@ export default function PlexiText({
 }) {
   const [B, setB] = React.useState(null);
 
-  // split text into max rows & char limits
+  // split text into rows
   const rows = React.useMemo(() => {
-    let words = text.trim().split(/\s+/);
-    let result = [];
+    const words = text.trim().split(/\s+/);
+    const result = [];
     let currentRow = "";
-
-    for (let w of words) {
+    for (const w of words) {
       if ((currentRow + " " + w).trim().length <= maxCharsPerRow) {
         currentRow = (currentRow + " " + w).trim();
       } else {
-        result.push(currentRow);
+        if (currentRow) result.push(currentRow);
         currentRow = w;
       }
     }
     if (currentRow) result.push(currentRow);
-
-    return result.slice(0, maxRows); // enforce max rows
+    return result.slice(0, maxRows);
   }, [text, maxCharsPerRow, maxRows]);
+
+  // ---- stable compare + shape helpers
+  const sameB = (a, b) =>
+    !!a &&
+    !!b &&
+    a.x === b.x &&
+    a.y === b.y &&
+    a.width === b.width &&
+    a.height === b.height &&
+    a.cx === b.cx &&
+    a.cy === b.cy;
+
+  const toBox = (b, pad) => ({
+    x: b.x + pad,
+    y: b.y + pad,
+    width: Math.max(0, b.width - pad * 2),
+    height: Math.max(0, b.height - pad * 2),
+    cx: b.x + b.width / 2,
+    cy: b.y + b.height / 2,
+  });
+
+  // destructure primitives so deps are stable
+  const {
+    x: fbX,
+    y: fbY,
+    width: fbW,
+    height: fbH,
+  } = fallbackBounds;
 
   React.useLayoutEffect(() => {
     const el = targetRef?.current;
+
+    const apply = (raw) => {
+      const next = toBox(raw, padding);
+      setB((prev) => (sameB(prev, next) ? prev : next));
+    };
+
     if (!el) {
-      const fb = fallbackBounds;
-      setB({
-        x: fb.x + padding,
-        y: fb.y + padding,
-        width: Math.max(0, fb.width - padding * 2),
-        height: Math.max(0, fb.height - padding * 2),
-        cx: fb.x + fb.width / 2,
-        cy: fb.y + fb.height / 2,
-      });
+      // only update when fallback-derived box actually changes
+      apply({ x: fbX, y: fbY, width: fbW, height: fbH });
       return;
     }
+
+    let raf = 0;
+
     const measure = () => {
       try {
         const b = el.getBBox();
-        setB({
-          x: b.x + padding,
-          y: b.y + padding,
-          width: Math.max(0, b.width - padding * 2),
-          height: Math.max(0, b.height - padding * 2),
-          cx: b.x + b.width / 2,
-          cy: b.y + b.height / 2,
-        });
-      } catch {}
+        apply(b);
+      } catch {
+        // getBBox can throw if element is not in DOM yet
+      }
     };
+
+    // initial measure
     measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [targetRef, padding, fallbackBounds]);
+
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(measure);
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
+  }, [targetRef?.current, padding, fbX, fbY, fbW, fbH]);
 
   const palette = React.useMemo(() => {
-    if (stylePreset === "gold") {
-      return {
-        faceFillId: "plexiGoldFill",
-        stroke: "#E6C14A",
-        faceStrokeWidth: 0.6,
-        extrudeFill: "#7a6020",
-      };
-    }
-    if (stylePreset === "silver") {
-      return {
-        faceFillId: "plexiSilverFill",
-        stroke: "#bfc6d1",
-        faceStrokeWidth: 0.6,
-        extrudeFill: "#5a6270",
-      };
-    }
     return {
       faceFillId: "plexiCustomFill",
-      stroke: customColor,
+      stroke: color,
       faceStrokeWidth: 0.6,
-      extrudeFill: shade(customColor, -0.45),
+      extrudeFill: shade(color, -0.45),
     };
-  }, [stylePreset, customColor]);
+  }, [color]);
 
   if (!B) return null;
 
@@ -118,7 +121,7 @@ export default function PlexiText({
   const startY = B.cy - ((rows.length - 1) * lineHeight) / 2;
 
   return (
-    <g transform={`rotate(${rotation}, ${B.cx}, ${B.cy})`}>
+    <g transform={`translate(70, 55) rotate(${rotation}, ${B.cx}, ${B.cy}) skewX(-27.77)`}>
       <defs>
         {/* gradients */}
         <linearGradient id="plexiGoldFill" x1="0" y1="0" x2="0" y2="1">
@@ -136,9 +139,9 @@ export default function PlexiText({
           <stop offset="100%" stopColor="#8C96A6" />
         </linearGradient>
         <linearGradient id="plexiCustomFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={tint(customColor, 0.35)} />
-          <stop offset="60%" stopColor={customColor} />
-          <stop offset="100%" stopColor={shade(customColor, 0.25)} />
+          <stop offset="0%" stopColor={tint(color, 0.35)} />
+          <stop offset="60%" stopColor={color} />
+          <stop offset="100%" stopColor={shade(color, 0.25)} />
         </linearGradient>
         <filter id="plexiShadow" x="-50%" y="-50%" width="200%" height="200%">
           <feDropShadow
@@ -168,6 +171,7 @@ export default function PlexiText({
                 fontWeight: font.weight,
                 fontSize: font.size,
                 fontFeatureSettings: "'liga' 1, 'clig' 1",
+                letterSpacing: 2
               }}
               transform={`translate(${extrude.dx}, ${extrude.dy})`}
             >
@@ -192,6 +196,7 @@ export default function PlexiText({
                   fontWeight: font.weight,
                   fontSize: font.size,
                   fontFeatureSettings: "'liga' 1, 'clig' 1",
+                  letterSpacing: 2
                 }}
               >
                 {line}
@@ -214,6 +219,7 @@ export default function PlexiText({
                 fontWeight: font.weight,
                 fontSize: font.size,
                 fontFeatureSettings: "'liga' 1, 'clig' 1",
+                letterSpacing: 2
               }}
             >
               {line}
