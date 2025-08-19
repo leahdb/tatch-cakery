@@ -28,7 +28,7 @@ const ProductsMain = ({ categories, products }) => {
                   >
                     <div className="d-flex justify-content-center">
                       <img
-                        src={`${process.env.PUBLIC_URL}/images/${product.image}`}
+                        src={product.image_url}
                         className="card-img-top w-100"
                         alt={product.name}
                       />
