@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ShopIntro from "./ShopIntro";
 import ProductsMain from "./ProductsMain";
 import BuildYourCake from "./BuildYourCake";
