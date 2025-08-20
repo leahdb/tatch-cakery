@@ -131,7 +131,7 @@ const ShopMain = () => {
     <section>
       <ShopIntro banners={ banners } />
       <ProductsMain categories={ categories } products={ products } />
-      {/* <BuildYourCake /> */}
+      <BuildYourCake />
       <ShopFooter />
     </section>
   );
