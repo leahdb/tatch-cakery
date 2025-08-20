@@ -17,23 +17,19 @@ const CarouselItem = ({ slide, isActive }) => (
       }}
     />
     <div
-      className="carousel-caption d-flex justify-content-start align-items-start"
+      className="carousel-caption d-flex justify-content-center align-items-center"
       style={{
         zIndex: 2,
-        left: "0",
-        bottom: "0",
         margin: "0",
-        width: "50%", // Occupies 40% of the image width by default
+        width: "25%", // Occupies 40% of the image width by default
         textAlign: "left",
-        background: "rgba(0, 0, 0, 0.5)", // Semi-transparent black background
         color: "#fff", // White text for contrast
-        padding: "15px", // Padding for text inside the background
       }}
     >
       <div>
         <h2
           className="fw-bold"
-          style={{ fontSize: "1.5rem", marginBottom: "10px" }}
+          style={{ fontSize: "2rem", marginBottom: "10px" }}
         >
           {slide.title}
         </h2>

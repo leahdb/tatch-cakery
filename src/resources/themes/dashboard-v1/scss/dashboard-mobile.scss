@@ -17,6 +17,18 @@ $primaryColor: #007132;
   right: 0;
 }
 
+@media screen and (max-width: 1200px) {
+  .carousel-item{
+    height: 45vh !important;
+  }
+
+  .carousel-main{
+    position: relative;
+    height: 45vh !important;
+    border-bottom: 5px dashed #fff,
+  }
+}
+
 /* ================== Mobile -md Width ================== */
 @media screen and (max-width: 992px) {
   .desktop-only {
@@ -103,6 +115,16 @@ $primaryColor: #007132;
 
   .custom-height-2{
     height: 60% !important;
+  }
+
+  .carousel-item{
+    height: 35vh !important;
+  }
+
+  .carousel-main{
+    position: relative;
+    height: 35vh !important;
+    border-bottom: 5px dashed #fff,
   }
 }
 
@@ -350,12 +372,12 @@ $primaryColor: #007132;
   }
 
   .carousel-item{
-    height: 30vh !important;
+    height: 25vh !important;
   }
 
   .carousel-main{
     position: relative;
-    height: 30vh !important;
+    height: 25vh !important;
     border-bottom: 5px dashed #fff,
   }
 }
