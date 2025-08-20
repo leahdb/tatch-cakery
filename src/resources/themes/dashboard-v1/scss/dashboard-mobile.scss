@@ -126,6 +126,11 @@ $primaryColor: #007132;
     height: 35vh !important;
     border-bottom: 5px dashed #fff,
   }
+
+  #carouselIntro {
+    min-height: 200px;
+    height: 200px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -379,5 +384,46 @@ $primaryColor: #007132;
     position: relative;
     height: 25vh !important;
     border-bottom: 5px dashed #fff,
+  }
+
+  .carousel-caption {
+    left: 8%;
+    width: 40%;
+  }
+
+  .banner-header {
+    font-size: 1.4rem !important;
+  }
+
+  .banner-text {
+    font-size: 0.75rem !important;
+  }
+
+  .banner-button {
+    font-size: 0.8rem !important;
+    padding: 7px 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .carousel-caption {
+    left: 6%;
+  }
+
+  .carousel-caption {
+    width: 40%;
+  }
+
+  .banner-header {
+    font-size: 1rem !important;
+  }
+
+  .banner-text {
+    font-size: 0.5rem !important;
+  }
+
+  .banner-button {
+    font-size: 0.7rem !important;
+    padding: 6px 12px;
   }
 }

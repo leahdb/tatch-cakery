@@ -28,18 +28,18 @@ const CarouselItem = ({ slide, isActive }) => (
     >
       <div>
         <h2
-          className="fw-bold"
+          className="banner-header fw-bold"
           style={{ fontSize: "2rem", marginBottom: "10px" }}
         >
           {slide.title}
         </h2>
-        <p style={{ fontSize: "0.9rem", marginBottom: "10px" }}>
+        <p className="banner-text" style={{ fontSize: "0.9rem", marginBottom: "10px" }}>
           {slide.description}
         </p>
         {slide.buttonText && (
           <a
             href={slide.buttonLink}
-            className="btn btn-light mt-2"
+            className="banner-button btn btn-light mt-2"
             style={{
               fontSize: "0.9rem",
               fontWeight: "bold",
