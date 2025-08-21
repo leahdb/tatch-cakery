@@ -11,10 +11,10 @@ const ProductsMain = ({ categories, products }) => {
         if (filteredProducts.length === 0) return null;
 
         return (
-          <div key={category.id} className="my-5">
+          <div key={category.id} className="my-4">
             <div className="row g-3 my-md-5">
               <div className="col-12 d-flex justify-content-start">
-                <h3 className="fw-bold text-muted mb-2">{category.name}</h3>
+                <h3 className="fw-bold text-muted mb-0 mb-md-2">{category.name}</h3>
                 {/* <a href={`/category/${category.slug}`}>See All</a> */}
               </div>
               {filteredProducts.slice(0, 4).map((product) => (

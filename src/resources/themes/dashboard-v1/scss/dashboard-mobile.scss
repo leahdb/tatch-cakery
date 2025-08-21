@@ -469,7 +469,7 @@ $primaryColor: #007132;
   }
 
   .banner-text {
-    font-size: 0.5rem !important;
+    font-size: 0.6rem !important;
     margin-bottom: 10px !important;
   }
 
@@ -480,7 +480,14 @@ $primaryColor: #007132;
 }
 
 @media screen and (max-width: 404px) {
-  .banner-header {
-    font-size: 0.9rem !important;
+  .carousel-caption {
+    left: 5% !important;
+    width: 45% !important;
+    bottom: 1rem !important;
+  }
+
+  .banner-button {
+    font-size: 0.6rem !important;
+    padding: 6px 12px !important;
   }
 }
