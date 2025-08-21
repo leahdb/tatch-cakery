@@ -43,8 +43,8 @@ const ProductDetails = () => {
 
   return (
     <div className="container my-5">
-      <div className="row d-flex justify-content-between">
-        <div className="col-md-6 col-12 ps-0 pe-5">
+      <div className="row g-5 d-flex justify-content-between">
+        <div className="col-md-6 col-12 px-0 px-md-4">
           <a href={product.image_path} data-fancybox="gallery">
             <img
               src={product.image_url}
@@ -65,7 +65,7 @@ const ProductDetails = () => {
             ))}
           </div> */}
         </div>
-        <div className="col-md-6 col-12 ps-5 pe-0">
+        <div className="col-md-6 col-12">
           <h4 className="mb-1">{product.name}</h4>
 
           <span className="fs-5 fw-bold text-black">${product.price}</span>
