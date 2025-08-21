@@ -1665,7 +1665,6 @@ export default function SVGVisualizer({
       <path className="cls-21" d="M97.58,277.78c.76.63-1.35,1.39-2.25-.38l.38-.38c.41.98,1.74.64,1.88.75Z"/>
       <path className="cls-21" d="M111.83,256.78s.16.47-.38.75c-.37.19-.99-.14-1.12,0-.97-.04-1.96-1.69-1.5-2.25.14-.16,1.74,1.29,2.62.75l.38.75Z"/>
       <path className="cls-19" d="M366.83,418.03c1.95,0,3.49-.68,3,1.5-1.94-.08-3.48.75-3-1.5Z"/>
-      {console.log(plexiColor)}
       {motif?.id && (
         <path
         xmlns="http://www.w3.org/2000/svg"

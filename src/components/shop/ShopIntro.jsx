@@ -21,19 +21,20 @@ const CarouselItem = ({ slide, isActive }) => (
       style={{
         zIndex: 2,
         margin: "0",
-        width: "25%", // Occupies 40% of the image width by default
+        width: "35%", // Occupies 40% of the image width by default
         textAlign: "left",
         color: "#fff", // White text for contrast
+        bottom: "5rem"
       }}
     >
       <div>
         <h2
           className="banner-header fw-bold"
-          style={{ fontSize: "2rem", marginBottom: "10px" }}
+          style={{ fontSize: "2.2rem", marginBottom: "10px" }}
         >
           {slide.title}
         </h2>
-        <p className="banner-text" style={{ fontSize: "0.9rem", marginBottom: "10px" }}>
+        <p className="banner-text" style={{ fontSize: "1.1rem", marginBottom: "30px" }}>
           {slide.description}
         </p>
         {slide.buttonText && (
@@ -41,7 +42,7 @@ const CarouselItem = ({ slide, isActive }) => (
             href={slide.buttonLink}
             className="banner-button btn btn-light mt-2"
             style={{
-              fontSize: "0.9rem",
+              fontSize: "1rem",
               fontWeight: "bold",
               padding: "8px 15px",
               borderRadius: "5px",
