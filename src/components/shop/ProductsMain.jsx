@@ -23,7 +23,7 @@ const ProductsMain = ({ categories, products }) => {
                   className="col-lg-3 col-md-6 col-6 d-flex"
                 >
                   <a
-                    href={`/products/${product.id}`}
+                    href={`/products/${product.slug}`}
                     className="card newest w-100 shadow my-2"
                   >
                     <div className="d-flex justify-content-center">

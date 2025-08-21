@@ -48,8 +48,8 @@ export const fetch_shop_products = (options) => {
   }).then((res) => res.json());
 };
 
-export const fetch_shop_product = (id) => {
-  return fetch(API_HOST + id, {
+export const fetch_shop_product = (slug) => {
+  return fetch(API_HOST + "slug/" + slug, {
     method: "GET",
     credentials: "include",
     secure: true,
