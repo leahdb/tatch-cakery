@@ -143,6 +143,25 @@ $primaryColor: #007132;
     min-height: 200px;
     height: 200px;
   }
+
+  .carousel-caption {
+    bottom: 1rem !important;
+    left: 10% !important;
+  }
+
+  .banner-header {
+    font-size: 1.8rem !important;
+  }
+
+  .banner-text {
+    font-size: 1rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  .banner-button {
+    font-size: 0.9rem !important;
+    padding: 8px 15px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -440,8 +459,9 @@ $primaryColor: #007132;
 
 @media screen and (max-width: 500px) {
   .carousel-caption {
-    left: 6%;
-    width: 40%;
+    left: 6% !important;
+    width: 40% !important;
+    bottom: 1rem !important;
   }
 
   .banner-header {
@@ -450,10 +470,17 @@ $primaryColor: #007132;
 
   .banner-text {
     font-size: 0.5rem !important;
+    margin-bottom: 10px !important;
   }
 
   .banner-button {
     font-size: 0.7rem !important;
-    padding: 6px 12px;
+    padding: 6px 12px !important;
+  }
+}
+
+@media screen and (max-width: 404px) {
+  .banner-header {
+    font-size: 0.9rem !important;
   }
 }

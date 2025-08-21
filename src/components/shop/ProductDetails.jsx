@@ -45,9 +45,9 @@ const ProductDetails = () => {
     <div className="container my-5">
       <div className="row d-flex justify-content-between">
         <div className="col-md-6 col-12 ps-0 pe-5">
-          <a href={product.image} data-fancybox="gallery">
+          <a href={product.image_path} data-fancybox="gallery">
             <img
-              src={product.image}
+              src={product.image_path}
               className="d-block w-100 carousel-image"
               alt="Product"
             />
