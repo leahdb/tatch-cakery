@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useParams} from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { fetch_shop_product } from "../../services/shop/products";
@@ -29,10 +30,11 @@ const ProductDetails = () => {
   //   ], // Fill in the images property with an array of objects
   // };
 
+  const { slug } = useParams();
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch_shop_product().then((res) => {
+    fetch_shop_product(slug).then((res) => {
         if (res.status === "ok") {
           setProduct(res.data);
         }

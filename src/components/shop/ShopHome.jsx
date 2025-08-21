@@ -41,7 +41,7 @@ const ShopRoutes = () => {
         element={<ProductListing />}
       />
       <Route
-        path="/products/:productId"
+        path="/products/:slug"
         element={<ProductDetails />}
       />
       <Route path="/cart" element={<Cart />} />
