@@ -47,7 +47,7 @@ const ProductDetails = () => {
         <div className="col-md-6 col-12 ps-0 pe-5">
           <a href={product.image_path} data-fancybox="gallery">
             <img
-              src={product.image_path}
+              src={product.image_url}
               className="d-block w-100 carousel-image"
               alt="Product"
             />
