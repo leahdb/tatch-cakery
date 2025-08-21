@@ -24,7 +24,8 @@ const CarouselItem = ({ slide, isActive }) => (
         width: "35%", // Occupies 40% of the image width by default
         textAlign: "left",
         color: "#fff", // White text for contrast
-        bottom: "5rem"
+        bottom: "5rem",
+        left: "10%"
       }}
     >
       <div>
