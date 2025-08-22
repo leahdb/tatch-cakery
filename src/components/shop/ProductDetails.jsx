@@ -35,6 +35,14 @@ const ProductDetails = () => {
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(1);
 
+  const decrease = () => {
+    if (qty > 1) setQty(qty - 1);
+  };
+
+  const increase = () => {
+    setQty(qty + 1);
+  };
+
   useEffect(() => {
     fetch_shop_product(slug).then((res) => {
         if (res.status === "ok") {
@@ -100,6 +108,28 @@ const ProductDetails = () => {
               value={qty}
               onChange={(e) => setQty(Math.max(1, Number(e.target.value)))}
             />
+            <div className="input-group" style={{ width: "120px" }}>
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={decrease}
+              >
+                −
+              </button>
+              <input
+                type="text"
+                className="form-control text-center"
+                value={qty}
+                readOnly
+              />
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={increase}
+              >
+                +
+              </button>
+            </div>
 
             <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
           </div>
