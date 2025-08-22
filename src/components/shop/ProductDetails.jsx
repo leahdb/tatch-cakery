@@ -43,19 +43,16 @@ const ProductDetails = () => {
     });
   }, []);
 
-  const onAdd = async () => {
-    try {
-      const res = await add_to_cart({
-        product_id: product.id,
-        quantity: qty,
-      });
-      // Optionally show a toast/snackbar
-      console.log('Cart after add:', res);
-      alert("Added to cart!");
-    } catch (e) {
-      console.error(e);
-      alert(e.message || 'Failed to add to cart');
-    }
+  const handleAddToCart = () => {
+    add_to_cart({
+      product_id: product.id,
+      quantity: qty,
+    }).then((res) => {
+      if (res.message) {
+        console.log("Cart:", res.cart);
+        alert(res.message); // "Product added to cart successfully"
+      }
+    });
   };
 
   return (
@@ -104,7 +101,7 @@ const ProductDetails = () => {
               onChange={(e) => setQty(Math.max(1, Number(e.target.value)))}
             />
 
-            <button onClick={onAdd}>Add to cart</button>
+            <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
           </div>
         </div>
       </div>

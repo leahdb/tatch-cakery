@@ -5,8 +5,10 @@ export const add_to_cart = (data) => {
     method: "POST",
     credentials: "include",
     secure: true,
-    body: data,
-    headers: {},
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((res) => res.json());
 };
 
