@@ -102,36 +102,33 @@ const ProductDetails = () => {
           </div>
 
           <div className="row border-top pt-3 mt-5 mx-0">
-            <input
-              type="number"
-              min={1}
-              value={qty}
-              onChange={(e) => setQty(Math.max(1, Number(e.target.value)))}
-            />
-            <div className="input-group" style={{ width: "120px" }}>
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={decrease}
-              >
-                −
-              </button>
-              <input
-                type="text"
-                className="form-control text-center"
-                value={qty}
-                readOnly
-              />
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={increase}
-              >
-                +
-              </button>
+            <div className="col-6">
+              <div className="input-group" style={{ width: "120px" }}>
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={decrease}
+                >
+                  −
+                </button>
+                <input
+                  type="text"
+                  className="form-control text-center p-0"
+                  value={qty}
+                  readOnly
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={increase}
+                >
+                  +
+                </button>
+              </div>
             </div>
-
-            <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
+            <div className="col-6">
+              <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
+            </div>
           </div>
         </div>
       </div>
