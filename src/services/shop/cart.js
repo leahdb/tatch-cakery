@@ -1,7 +1,7 @@
 const API_HOST = "https://api.tatchcakery.com/api/cart/";
 
 export const add_to_cart = (data) => {
-  return fetch(API_HOST, {
+  return fetch(API_HOST + "/add", {
     method: "POST",
     credentials: "include",
     secure: true,

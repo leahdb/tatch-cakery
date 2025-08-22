@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { fetch_shop_product } from "../../services/shop/products";
+import { add_to_cart } from "../../services/shop/cart";
 
 
 const ProductDetails = () => {
@@ -32,14 +33,30 @@ const ProductDetails = () => {
 
   const { slug } = useParams();
   const [product, setProduct] = useState([]);
+  const [qty, setQty] = useState(1);
 
   useEffect(() => {
     fetch_shop_product(slug).then((res) => {
         if (res.status === "ok") {
           setProduct(res.data);
         }
+    });
+  }, []);
+
+  const onAdd = async () => {
+    try {
+      const res = await add_to_cart({
+        product_id: product.id,
+        quantity: qty,
       });
-    }, []);
+      // Optionally show a toast/snackbar
+      console.log('Cart after add:', res);
+      alert("Added to cart!");
+    } catch (e) {
+      console.error(e);
+      alert(e.message || 'Failed to add to cart');
+    }
+  };
 
   return (
     <div className="container my-5">
@@ -77,6 +94,17 @@ const ProductDetails = () => {
 
           <div className="row border-top pt-3 mt-5 mx-0">
             <h5 className="fw-semibold text-dark mb-4">Additional Info</h5>
+          </div>
+
+          <div className="row border-top pt-3 mt-5 mx-0">
+            <input
+              type="number"
+              min={1}
+              value={qty}
+              onChange={(e) => setQty(Math.max(1, Number(e.target.value)))}
+            />
+
+            <button onClick={onAdd}>Add to cart</button>
           </div>
         </div>
       </div>
