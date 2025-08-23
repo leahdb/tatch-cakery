@@ -41,7 +41,7 @@ const Cart = () => {
         quantity: v.quantity,
         price: v.price,
         slug: v.slug,
-        imageSrc: v.image || null, // normalize image field name
+        image: v.image || null, // normalize image field name
         subtotal: v.price * v.quantity,
       }));
       setCart(items);
