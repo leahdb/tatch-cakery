@@ -102,10 +102,10 @@ const ProductDetails = () => {
           </div>
 
           <div className="row border-top pt-3 mt-5 mx-0">
-            <div className="col-6">
-              <div className="input-group" style={{ width: "120px" }}>
+            <div className="col-12 col-md-6">
+              <div className="input-group border w-100">
                 <button
-                  className="btn btn-outline-secondary"
+                  className="btn"
                   type="button"
                   onClick={decrease}
                 >
@@ -113,12 +113,12 @@ const ProductDetails = () => {
                 </button>
                 <input
                   type="text"
-                  className="form-control text-center p-0"
+                  className="form-control text-center p-0 border-0"
                   value={qty}
                   readOnly
                 />
                 <button
-                  className="btn btn-outline-secondary"
+                  className="btn"
                   type="button"
                   onClick={increase}
                 >
@@ -126,8 +126,8 @@ const ProductDetails = () => {
                 </button>
               </div>
             </div>
-            <div className="col-6">
-              <button className="btn btn-primary" onClick={handleAddToCart}>Add to cart</button>
+            <div className="col-12 col-md-6">
+              <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
             </div>
           </div>
         </div>
