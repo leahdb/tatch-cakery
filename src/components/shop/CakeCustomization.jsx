@@ -70,6 +70,26 @@ const CakeCustomization = () => {
     const [motifChoice, setMotifChoice] = useState(null);
     const [plexiColor, setPlexiColor] = useState("gold");
 
+    const [qty, setQty] = useState(1);
+    
+    const decrease = () => {
+      if (qty > 1) setQty(qty - 1);
+    };
+  
+    const increase = () => {
+      setQty(qty + 1);
+    };
+
+    const handleAddToCart = () => {
+        add_to_cart({
+          quantity: qty,
+        }).then((res) => {
+          if (res.message) {
+            console.log("Cart:", res.cart);
+            alert(res.message); // "Product added to cart successfully"
+          }
+        });
+      };
 
     const totalPrice =
       cakeData.basePrice +
@@ -352,6 +372,36 @@ const CakeCustomization = () => {
             </div>
           </div>
         </div>
+
+        <div className="row pt-3 mt-5 mx-0">
+            <div className="col-12 col-md-6">
+              <div className="input-group border w-100">
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={decrease}
+                >
+                  −
+                </button>
+                <input
+                  type="text"
+                  className="form-control text-center p-0 border-0"
+                  value={qty}
+                  readOnly
+                />
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={increase}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="col-12 col-md-6">
+              <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
+            </div>
+          </div>
       </div>
       
     </div>
