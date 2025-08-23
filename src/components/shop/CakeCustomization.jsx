@@ -361,47 +361,38 @@ const CakeCustomization = () => {
                 value={additionalNote}
                 onChange={(e) => setAdditionalNote(e.target.value)}
               />
-              <div className="w-100">
-                <button
-                  onClick={() => handleOrderSubmit()}
-                  className="btn btn-primary w-100 mt-5"
-                >
-                  Add to Card
-                </button>
+              <div className="row pt-3 mt-5 mx-0">
+                <div className="col-12 col-md-6">
+                  <div className="input-group border w-100">
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={decrease}
+                    >
+                      −
+                    </button>
+                    <input
+                      type="text"
+                      className="form-control text-center p-0 border-0"
+                      value={qty}
+                      readOnly
+                    />
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={increase}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="row pt-3 mt-5 mx-0">
-            <div className="col-12 col-md-6">
-              <div className="input-group border w-100">
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={decrease}
-                >
-                  −
-                </button>
-                <input
-                  type="text"
-                  className="form-control text-center p-0 border-0"
-                  value={qty}
-                  readOnly
-                />
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={increase}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="col-12 col-md-6">
-              <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
-            </div>
-          </div>
       </div>
       
     </div>
