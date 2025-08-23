@@ -64,8 +64,8 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="container my-5">
-      <div className="row g-5 d-flex justify-content-between">
+    <div className="container my-md-5 my-3">
+      <div className="row g-md-5 d-flex justify-content-between">
         <div className="col-md-6 col-12 px-0 px-md-4">
           <a href={product.image_path} data-fancybox="gallery">
             <img
@@ -92,16 +92,11 @@ const ProductDetails = () => {
 
           <span className="fs-5 fw-bold text-black">${product.price}</span>
 
-          <div className="row border-top pt-3 mt-5 mx-0">
-            <h5 className="fw-semibold text-dark mb-4">About the Product</h5>
+          <div className="row pt-3 mt-5 mx-0">
             <p>{product.description}</p>
           </div>
 
-          <div className="row border-top pt-3 mt-5 mx-0">
-            <h5 className="fw-semibold text-dark mb-4">Additional Info</h5>
-          </div>
-
-          <div className="row border-top pt-3 mt-5 mx-0">
+          <div className="row pt-3 mt-5 mx-0">
             <div className="col-12 col-md-6">
               <div className="input-group border w-100">
                 <button
@@ -129,6 +124,10 @@ const ProductDetails = () => {
             <div className="col-12 col-md-6">
               <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
             </div>
+          </div>
+
+          <div className="row border-top pt-3 mt-5 mx-0">
+            <h5 className="fw-semibold text-dark mb-4">Description</h5>
           </div>
         </div>
       </div>
