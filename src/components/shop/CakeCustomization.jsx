@@ -373,7 +373,7 @@ const CakeCustomization = () => {
                     </button>
                     <input
                       type="text"
-                      className="form-control text-center p-0 border-0 color-primary fs-5 fw-bold"
+                      className="form-control text-center p-0 border-0 bg-light-beige color-primary fs-5 fw-bold"
                       value={qty}
                       readOnly
                     />

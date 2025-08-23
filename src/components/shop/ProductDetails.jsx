@@ -88,19 +88,19 @@ const ProductDetails = () => {
           </div> */}
         </div>
         <div className="col-md-6 col-12">
-          <h4 className="mb-1">{product.name}</h4>
+          <div className="row">
+            <h3 className="mb-1 text-light-brown fw-bold pt-md-3 pt-4">{product.name}</h3>
 
-          <span className="fs-5 fw-bold text-black">${product.price}</span>
+            <span className="fs-5 fw-bold color-primary">${product.price}</span>
 
-          <div className="row pt-3 mt-5 mx-0">
-            <p>{product.description}</p>
+            <p className="pt-3 mt-5 mx-0">{product.description}</p>
           </div>
 
           <div className="row pt-3 mt-5 mx-0">
             <div className="col-12 col-md-6">
               <div className="input-group border border-brown w-100">
                 <button
-                  className="btn"
+                  className="btn color-primary fs-5"
                   type="button"
                   onClick={decrease}
                 >
@@ -108,12 +108,12 @@ const ProductDetails = () => {
                 </button>
                 <input
                   type="text"
-                  className="form-control text-center p-0 border-0"
+                  className="form-control text-center p-0 border-0 bg-light-beige color-primary fs-5 fw-bold"
                   value={qty}
                   readOnly
                 />
                 <button
-                  className="btn"
+                  className="btn color-primary fs-5"
                   type="button"
                   onClick={increase}
                 >
@@ -122,7 +122,7 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="col-12 col-md-6">
-              <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
+              <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>Add to cart</button>
             </div>
           </div>
 

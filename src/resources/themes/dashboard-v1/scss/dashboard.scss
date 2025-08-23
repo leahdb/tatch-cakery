@@ -6,7 +6,7 @@
 }
 
 $primaryColor: #604f3f;
-$primaryLightColor: #c6a688;
+$primaryLightColor: #a68b72; //a0866e a68b72
 $primaryColorActive: #725c47;
 
 $infoColor: #17a2b8;
@@ -30,8 +30,12 @@ $lightBeigeBg: #fffcf6;
   font-family: "Poppins", sans-serif;
 }
 
+.text-light-brown{
+  color: $primaryLightColor !important;
+}
+
 .bg-light-beige{
-  background-color: $lightBeigeBg;
+  background-color: $lightBeigeBg !important;
 }
 
 .btn-check:checked + .btn,
@@ -46,6 +50,10 @@ $lightBeigeBg: #fffcf6;
 
 .border-brown {
   border-color: $primaryColor !important;
+}
+
+.border-light-brown {
+  border-color: $primaryLightColor !important;
 }
 
 .card-list-group li {
