@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetch_cart } from "../../services/shop/cart";
 
 const Cart = () => {
   const products = [
@@ -27,6 +28,19 @@ const Cart = () => {
       info: "ESP-12E",
     },
   ];
+  const [cart, setCart] = useState(null);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    fetch_cart().then((res) => {
+      setCart(res.cart);
+      setTotalItems(res.total_items);
+      setTotalPrice(res.total_price)
+    });
+  }, []);
+
+  if (!cart) return <p>Loading...</p>;
 
   return (
     <div className="container my-5">
@@ -35,27 +49,27 @@ const Cart = () => {
           <div className="card border shadow-0">
             <div className="m-4">
               <h4 className="card-title mb-4 color-primary">Your shopping bag</h4>
-              {products.map((product) => (
+              {cart.map((item) => (
                 <div
                   className="row gy-3 mb-4 d-flex align-items-center"
-                  key={product.id}
+                  key={item.id}
                 >
                   <div className="col-lg-5">
                     <div className="me-lg-5">
                       <div className="d-flex">
                         <div className="img-thumbnail me-3 d-flex justify-content-center align-items-center">
                           <img
-                            src={product.imageSrc}
+                            src={item.imageSrc}
                             className="img-thumbnail-cart"
-                            alt={product.name}
+                            alt={item.name}
                           />
                         </div>
 
                         <div className="">
                           <a href="#" className="nav-link">
-                            {product.name}
+                            {item.name}
                           </a>
-                          <p className="text-muted">{product.info}</p>
+                          <p className="text-muted">{item.info}</p>
                         </div>
                       </div>
                     </div>
