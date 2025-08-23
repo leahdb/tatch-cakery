@@ -88,17 +88,17 @@ const ProductDetails = () => {
           </div> */}
         </div>
         <div className="col-md-6 col-12">
-          <div className="row">
+          <div className="row px-2">
             <h3 className="mb-1 text-light-brown fw-bold pt-md-3 pt-4">{product.name}</h3>
 
-            <span className="fs-5 fw-bold color-primary">${product.price}</span>
+            <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">${product.price}</span>
 
-            <p className="pt-3 mt-5 mx-0">{product.description}</p>
+            <p className="pt-3 mt-4 mx-0">{product.description}</p>
           </div>
 
-          <div className="row pt-3 mt-5 mx-0">
+          <div className="row pt-3 mt-4 mx-0 gy-md-0 gy-3">
             <div className="col-12 col-md-6">
-              <div className="input-group border border-brown w-100">
+              <div className="input-group border border-brown w-100 small-h">
                 <button
                   className="btn color-primary fs-5"
                   type="button"
@@ -122,7 +122,7 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="col-12 col-md-6">
-              <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>Add to cart</button>
+              <button className="btn btn-primary w-100 rounded-0 h-100 small-h" onClick={handleAddToCart}>Add to cart</button>
             </div>
           </div>
 
