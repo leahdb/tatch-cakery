@@ -34,7 +34,17 @@ const Cart = () => {
 
   useEffect(() => {
     fetch_cart().then((res) => {
-      setCart(res.cart);
+      const items = Object.entries(res.cart).map(([key, v]) => ({
+        id: key,                  // "2:20" (unique per product+variant/price)
+        product_id: v.product_id,
+        name: v.name,
+        quantity: v.quantity,
+        price: v.price,
+        slug: v.slug,
+        imageSrc: v.image || null, // normalize image field name
+        subtotal: v.price * v.quantity,
+      }));
+      setCart(items);
       setTotalItems(res.total_items);
       setTotalPrice(res.total_price)
     });
@@ -59,7 +69,7 @@ const Cart = () => {
                       <div className="d-flex">
                         <div className="img-thumbnail me-3 d-flex justify-content-center align-items-center">
                           <img
-                            src={item.imageSrc}
+                            src={item.image}
                             className="img-thumbnail-cart"
                             alt={item.name}
                           />
