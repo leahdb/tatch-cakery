@@ -34,7 +34,7 @@ const Cart = () => {
         <div className="col-lg-9">
           <div className="card border shadow-0">
             <div className="m-4">
-              <h4 className="card-title mb-4">Your shopping cart</h4>
+              <h4 className="card-title mb-4 color-primary">Your shopping bag</h4>
               {products.map((product) => (
                 <div
                   className="row gy-3 mb-4 d-flex align-items-center"

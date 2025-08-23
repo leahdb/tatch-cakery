@@ -4,6 +4,7 @@ import iconSearch from "../../resources/themes/dashboard-v1/icons/search-white.s
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
 import User from "../../resources/themes/dashboard-v1/icons/user.svg";
 import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
+import Bag from "../../resources/themes/dashboard-v1/icons/bag.svg";
 import Heart from "../../resources/themes/dashboard-v1/icons/heart.svg";
 import { Navigate } from "react-router-dom";
 import { fetch_shop_home } from "../../services/shop/home";
@@ -71,7 +72,7 @@ class ShopHeader extends React.Component {
                     className="py-1 px-2 nav-link d-flex align-items-center"
                   >
                     <img
-                      src={Cart}
+                      src={Bag}
                       alt="profile"
                       height={25}
                       className="pe-1"

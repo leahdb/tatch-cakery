@@ -1240,7 +1240,7 @@ form .error,
 }
 
 .color-primary {
-  color: $primaryColor;
+  color: $primaryColor !important;
 }
 
 .selected-listitem {
