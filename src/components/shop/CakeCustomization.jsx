@@ -363,9 +363,9 @@ const CakeCustomization = () => {
               />
               <div className="row pt-3 mt-5 mx-0">
                 <div className="col-12 col-md-6">
-                  <div className="input-group border w-100">
+                  <div className="input-group border border-brown w-100">
                     <button
-                      className="btn"
+                      className="btn color-primary fs-5"
                       type="button"
                       onClick={decrease}
                     >
@@ -373,12 +373,12 @@ const CakeCustomization = () => {
                     </button>
                     <input
                       type="text"
-                      className="form-control text-center p-0 border-0"
+                      className="form-control text-center p-0 border-0 color-primary fs-5 fw-bold"
                       value={qty}
                       readOnly
                     />
                     <button
-                      className="btn"
+                      className="btn color-primary fs-5"
                       type="button"
                       onClick={increase}
                     >
@@ -387,7 +387,7 @@ const CakeCustomization = () => {
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
-                  <button className="btn btn-primary w-100" onClick={handleAddToCart}>Add to cart</button>
+                  <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>Add to cart</button>
                 </div>
               </div>
             </div>

@@ -98,7 +98,7 @@ const ProductDetails = () => {
 
           <div className="row pt-3 mt-5 mx-0">
             <div className="col-12 col-md-6">
-              <div className="input-group border w-100">
+              <div className="input-group border border-brown w-100">
                 <button
                   className="btn"
                   type="button"

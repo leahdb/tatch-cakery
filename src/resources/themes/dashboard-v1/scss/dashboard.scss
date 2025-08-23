@@ -24,9 +24,14 @@ $purpleColor: #b36ebe;
 $orangeColor: #ff9500;
 
 $lightBeige: #fff7e8;
+$lightBeigeBg: #fffcf6;
 
 * {
   font-family: "Poppins", sans-serif;
+}
+
+.bg-light-beige{
+  background-color: $lightBeigeBg;
 }
 
 .btn-check:checked + .btn,
@@ -37,6 +42,10 @@ $lightBeige: #fff7e8;
   color: $primaryColorActive;
   background-color: $primaryColorActive;
   border-color: $primaryColorActive;
+}
+
+.border-brown {
+  border-color: $primaryColor !important;
 }
 
 .card-list-group li {

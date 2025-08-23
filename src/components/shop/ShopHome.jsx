@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 const ShopHome = (props) => {
   localStorage.setItem("category_refresh", false);
   return (
-    <section className="page">
+    <section className="page bg-light-beige">
       {" "}
       {/* comingsoonsec d-flex align-items-center justify-content-center */}
       <ShopHeader />
