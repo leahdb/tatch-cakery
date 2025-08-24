@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Checkout = () => {
+  const deliveryAreas = {
+    "Beirut": ["Beirut", "Hamra", "Achrafieh", "Verdun"],
+    "Mount Lebanon": ["Baabda", "Jounieh", "Aley", "Bikfaya"],
+    "North Lebanon": ["Tripoli", "Batroun", "Zgharta"],
+    "South Lebanon": ["Saida", "Tyre", "Jezzine"],
+  };
+
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
   return (
     <div className="container my-5">
     <div className="row">
@@ -18,35 +27,68 @@ const Checkout = () => {
               <div className="col-6 mb-3">
                 <p className="mb-0">First name</p>
                 <div className="form-outline">
-                  <input type="text" id="typeText" placeholder="Type here" className="form-control" />
+                  <input type="text" id="typeText" placeholder="first name" className="form-control" />
                 </div>
               </div>
 
               <div className="col-6">
                 <p className="mb-0">Last name</p>
                 <div className="form-outline">
-                  <input type="text" id="typeText" placeholder="Type here" className="form-control" />
+                  <input type="text" id="typeText" placeholder="last name" className="form-control" />
                 </div>
               </div>
 
               <div className="col-6 mb-3">
                 <p className="mb-0">Phone</p>
                 <div className="form-outline">
-                  <input type="tel" id="typePhone" value="+48 " className="form-control" />
+                  <input type="tel" id="typePhone" value="+961 " className="form-control" />
                 </div>
               </div>
 
               <div className="col-6 mb-3">
-                <p className="mb-0">Email</p>
+                <p className="mb-0">State</p>
+                <select
+                  className="form-select"
+                  value={selectedState}
+                  onChange={(e) => {
+                    setSelectedState(e.target.value);
+                    setSelectedCity(""); // reset city when state changes
+                  }}
+                >
+                  <option value="">Select State</option>
+                  {Object.keys(deliveryAreas).map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* ✅ City Dropdown */}
+              <div className="col-6 mb-3">
+                <p className="mb-0">City</p>
+                <select
+                  className="form-select"
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  disabled={!selectedState} // disable if no state chosen
+                >
+                  <option value="">Select City</option>
+                  {selectedState &&
+                    deliveryAreas[selectedState].map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div className="col-6 mb-3">
+                <p className="mb-0">Street</p>
                 <div className="form-outline">
                   <input type="email" id="typeEmail" placeholder="example@gmail.com" className="form-control" />
                 </div>
               </div>
-            </div>
-
-            <div className="form-check">
-              <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-              <label className="form-check-label" for="flexCheckDefault">Keep me up to date on news</label>
             </div>
 
             <hr className="my-4" />
@@ -142,7 +184,7 @@ const Checkout = () => {
 
             <div className="float-end">
               <button className="btn btn-light border">Cancel</button>
-              <button className="btn btn-success shadow-0 border">Continue</button>
+              <button className="btn btn-primary shadow-0 border">Continue</button>
             </div>
           </div>
         </div>
