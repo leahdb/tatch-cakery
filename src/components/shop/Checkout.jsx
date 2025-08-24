@@ -131,52 +131,8 @@ const Checkout = () => {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-sm-8 mb-3">
-                <p className="mb-0">Address</p>
-                <div className="form-outline">
-                  <input type="text" id="typeText" placeholder="Type here" className="form-control" />
-                </div>
-              </div>
-
-              <div className="col-sm-4 mb-3">
-                <p className="mb-0">City</p>
-                <select className="form-select">
-                  <option value="1">New York</option>
-                  <option value="2">Moscow</option>
-                  <option value="3">Samarqand</option>
-                </select>
-              </div>
-
-              <div className="col-sm-4 mb-3">
-                <p className="mb-0">House</p>
-                <div className="form-outline">
-                  <input type="text" id="typeText" placeholder="Type here" className="form-control" />
-                </div>
-              </div>
-
-              <div className="col-sm-4 col-6 mb-3">
-                <p className="mb-0">Postal code</p>
-                <div className="form-outline">
-                  <input type="text" id="typeText" className="form-control" />
-                </div>
-              </div>
-
-              <div className="col-sm-4 col-6 mb-3">
-                <p className="mb-0">Zip</p>
-                <div className="form-outline">
-                  <input type="text" id="typeText" className="form-control" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-check mb-3">
-              <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
-              <label className="form-check-label" for="flexCheckDefault1">Save this address</label>
-            </div>
-
             <div className="mb-3">
-              <p className="mb-0">Message to seller</p>
+              <p className="mb-0">Additional Notes</p>
               <div className="form-outline">
                 <textarea className="form-control" id="textAreaExample1" rows="2"></textarea>
               </div>
@@ -208,11 +164,6 @@ const Checkout = () => {
           <div className="d-flex justify-content-between">
             <p className="mb-2">Total price:</p>
             <p className="mb-2 fw-bold">$149.90</p>
-          </div>
-
-          <div className="input-group mt-3 mb-4">
-            <input type="text" className="form-control border" name="" placeholder="Promo code" />
-            <button className="btn btn-light text-primary border">Apply</button>
           </div>
 
           <hr />
