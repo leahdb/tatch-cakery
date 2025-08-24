@@ -61,13 +61,13 @@ const Cart = () => {
               <h4 className="card-title mb-4 color-primary">Your shopping bag</h4>
               {cart.map((item) => (
                 <div
-                  className="row gy-3 mb-4 d-flex align-items-center"
+                  className="row gy-3 mb-4 d-flex align-items-center border-bottom pb-2"
                   key={item.id}
                 >
                   <div className="col-lg-5">
                     <div className="me-lg-5">
                       <div className="d-flex align-items-center">
-                        <div className="img-thumbnail me-3 d-flex justify-content-center align-items-center">
+                        <div className="me-3 d-flex justify-content-center align-items-center">
                           <img
                             src={item.image}
                             className="img-thumbnail-cart"
@@ -85,9 +85,9 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
-                    <div className="input-group border border-brown w-100 small-h">
+                    <div className="input-group border border-brown w-50 small-h-cart me-5">
                       <button
-                        className="btn color-primary fs-5"
+                        className="btn color-primary fs-6"
                         type="button"
                         onClick={item.quantity>1 && item.quantity--}
                       >
@@ -95,12 +95,12 @@ const Cart = () => {
                       </button>
                       <input
                         type="text"
-                        className="form-control text-center p-0 border-0 bg-light-beige color-primary fs-5 fw-bold"
+                        className="form-control text-center p-0 border-0 bg-light-beige color-primary fs-6 fw-bold"
                         value={item.quantity}
                         readOnly
                       />
                       <button
-                        className="btn color-primary fs-5"
+                        className="btn color-primary fs-6"
                         type="button"
                         onClick={item.quantity++}
                       >
@@ -108,7 +108,7 @@ const Cart = () => {
                       </button>
                     </div>
                     <div className="">
-                      <text className="h6">${item.price*item.quantity}</text>
+                      <text className="h6 color-primary">${item.price*item.quantity}</text>
                     </div>
                   </div>
                   <div className="col-lg-3 col-6 d-flex justify-content-end mb-2">
@@ -138,13 +138,13 @@ const Cart = () => {
             <div className="card-body">
               <form>
                 <div className="form-group">
-                  <label className="form-label">Have coupon?</label>
+                  <label className="form-label">Have promo code?</label>
                   <div className="input-group">
                     <input
                       type="text"
                       className="form-control border"
                       name=""
-                      placeholder="Coupon code"
+                      placeholder="Promo code"
                     />
                     <button className="btn btn-light border">Apply</button>
                   </div>
@@ -160,7 +160,7 @@ const Cart = () => {
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount:</p>
-                <p className="mb-2 text-success">-$60.00</p>
+                <p className="mb-2 text-primary">-$60.00</p>
               </div>
               <hr />
               <div className="d-flex justify-content-between">
@@ -169,7 +169,7 @@ const Cart = () => {
               </div>
 
               <div className="mt-3">
-                <a href="#" className="btn btn-success w-100 shadow-0 mb-2">
+                <a href="#" className="btn btn-primary w-100 shadow-0 mb-2">
                   Proceed To Checkout
                 </a>
                 <a href="#" className="btn btn-light w-100 border mt-2">
