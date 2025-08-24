@@ -80,12 +80,11 @@ class ShopHeader extends React.Component {
                     />
                     {cartCount > 0 && (
                       <span
-                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                        style={{ fontSize: "0.65rem", minWidth: 18, height: 18, padding: "0 6px" }}
+                        className="position-absolute color-primary fw-bold"
+                        style={{ fontSize: "13px", minWidth: 18, height: 18, padding: "2px 5px 1px 6.9px" }}
                         aria-label={`${cartCount} items in cart`}
                       >
                         {cartCount > 99 ? "99+" : cartCount}
-                        <span className="visually-hidden">items in cart</span>
                       </span>
                     )}
                   </a>
