@@ -9,6 +9,7 @@ $primaryColor: #604f3f;
 $primaryLightColor: #a68b72; //a0866e a68b72
 $primaryColorActive: #725c47;
 
+
 $infoColor: #17a2b8;
 
 $textGrayLight: #a0a0a0;
@@ -25,6 +26,7 @@ $orangeColor: #ff9500;
 
 $lightBeige: #fff7e8;
 $lightBeigeBg: #fffcf6;
+$lightBeigeBorder: #f0e9e3;
 
 * {
   font-family: "Poppins", sans-serif;
@@ -36,6 +38,10 @@ $lightBeigeBg: #fffcf6;
 
 .bg-light-beige{
   background-color: $lightBeigeBg !important;
+}
+
+.border-light-beige {
+  border-color: $lightBeigeBorder !important;
 }
 
 .btn-check:checked + .btn,
