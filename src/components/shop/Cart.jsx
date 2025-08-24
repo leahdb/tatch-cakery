@@ -55,7 +55,7 @@ const Cart = () => {
   return (
     <div className="container my-5">
       <div className="row">
-        <div className="col-lg-9">
+        <div className="col-lg-8">
           <div className="m-4">
             <h4 className="card-title mb-4 color-primary">Your shopping bag</h4>
             {cart.map((item) => (
@@ -124,48 +124,50 @@ const Cart = () => {
             ))}
           </div>
         </div>
-        <div className="col-lg-3">
-          <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label className="form-label">Have promo code?</label>
-                  <div className="input-group border">
-                    <input
-                      type="text"
-                      className="form-control border-0 bg-light-beige-input"
-                      name=""
-                      placeholder="Promo code"
-                    />
-                    <button className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown">Apply</button>
+        <div className="col-lg-4">
+          <div className="m-4">
+            <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
+              <div className="card-body">
+                <form>
+                  <div className="form-group">
+                    <label className="form-label">Have promo code?</label>
+                    <div className="input-group border">
+                      <input
+                        type="text"
+                        className="form-control border-0 bg-light-beige-input"
+                        name=""
+                        placeholder="Promo code"
+                      />
+                      <button className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown">Apply</button>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-          <div className="card rounded-0 bg-light-beige shadow-0 border-light-beige border">
-            <div className="card-body">
-              <div className="d-flex justify-content-between">
-                <p className="mb-2">Subtotal</p>
-                <p className="mb-2">$329.00</p>
-              </div>
-              <div className="d-flex justify-content-between">
-                <p className="mb-2">Discount</p>
-                <p className="mb-2 text-primary">-$60.00</p>
-              </div>
-              <hr />
-              <div className="d-flex justify-content-between">
-                <p className="mb-2">Total price</p>
-                <p className="mb-2 fw-bold">$283.00</p>
-              </div>
+            <div className="card rounded-0 bg-light-beige shadow-0 border-light-beige border">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  <p className="mb-2">Subtotal</p>
+                  <p className="mb-2">$329.00</p>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <p className="mb-2">Discount</p>
+                  <p className="mb-2 text-primary">-$60.00</p>
+                </div>
+                <hr />
+                <div className="d-flex justify-content-between">
+                  <p className="mb-2">Total price</p>
+                  <p className="mb-2 fw-bold">$283.00</p>
+                </div>
 
-              <div className="mt-3">
-                <a href="#" className="btn btn-primary w-100 shadow-0 mb-2">
-                  Proceed To Checkout
-                </a>
-                <a href="#" className="btn btn-light w-100 border mt-2">
-                  Continue Shopping
-                </a>
+                <div className="mt-3">
+                  <a href="#" className="btn btn-primary w-100 shadow-0 mb-2 rounded-0">
+                    Proceed To Checkout
+                  </a>
+                  <a href="#" className="btn btn-light w-100 border mt-2 rounded-0 bg-light-beige-input">
+                    Continue Shopping
+                  </a>
+                </div>
               </div>
             </div>
           </div>
