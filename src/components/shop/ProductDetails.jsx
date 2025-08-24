@@ -7,30 +7,6 @@ import { add_to_cart } from "../../services/shop/cart";
 
 
 const ProductDetails = ({setCartCount}) => {
-  // const product = {
-  //   id: 1,
-  //   name: "Raspberry Pi 4 Model B",
-  //   brand_name: "Brand Name", // Fill in the brand name property
-  //   price: 35.99,
-  //   image:
-  //     "https://www.seeedstudio.com/blog/wp-content/uploads/2019/06/WechatIMG1371.png",
-  //   description: "Product description goes here.",
-  //   description2: "Additional description goes here.",
-  //   description3: "Even more description goes here.",
-  //   images: [
-  //     {
-  //       id: 1,
-  //       image:
-  //         "https://tse4.mm.bing.net/th?id=OIP.AqbMVg88672GzWP3v63dNgHaFj&pid=Api&P=0&h=220",
-  //     },
-  //     {
-  //       id: 2,
-  //       image:
-  //         "https://tse2.mm.bing.net/th?id=OIP.KmOmoXeGLiSJVFS9lHn8GAHaFS&pid=Api&P=0&h=220",
-  //     },
-  //   ], // Fill in the images property with an array of objects
-  // };
-
   const { slug } = useParams();
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(1);
