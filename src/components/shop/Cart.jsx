@@ -161,10 +161,10 @@ const Cart = () => {
                 </div>
 
                 <div className="mt-3">
-                  <a href="#" className="btn btn-primary w-100 shadow-0 mb-2 rounded-0">
+                  <a href="/checkout" className="btn btn-primary w-100 shadow-0 mb-2 rounded-0">
                     Proceed To Checkout
                   </a>
-                  <a href="#" className="btn btn-light w-100 border mt-2 rounded-0 bg-light-beige-input">
+                  <a href="/" className="btn btn-light w-100 border mt-2 rounded-0 bg-light-beige-input">
                     Continue Shopping
                   </a>
                 </div>

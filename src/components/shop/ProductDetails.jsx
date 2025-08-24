@@ -58,9 +58,9 @@ const ProductDetails = ({setCartCount}) => {
       product_id: product.id,
       quantity: qty,
     }).then((res) => {
-       alert("Product added to cart successfully"); // "Product added to cart successfully"
-       setCartCount(res.total_items);
-       setButtonText("Add to cart")
+      setCartCount(res.total_items);
+      setButtonText("Add to cart")
+      alert("Product added to cart successfully"); // "Product added to cart successfully
     });
   };
 
