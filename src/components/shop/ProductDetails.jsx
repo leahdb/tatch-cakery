@@ -6,7 +6,7 @@ import { fetch_shop_product } from "../../services/shop/products";
 import { add_to_cart } from "../../services/shop/cart";
 
 
-const ProductDetails = () => {
+const ProductDetails = ({setCartCount}) => {
   // const product = {
   //   id: 1,
   //   name: "Raspberry Pi 4 Model B",
@@ -34,6 +34,7 @@ const ProductDetails = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(1);
+  const [buttonText, setButtonText] = useState("Add to cart")
 
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
@@ -52,14 +53,14 @@ const ProductDetails = () => {
   }, []);
 
   const handleAddToCart = () => {
+    setButtonText("Adding...")
     add_to_cart({
       product_id: product.id,
       quantity: qty,
     }).then((res) => {
-      if (res.message) {
-        console.log("Cart:", res.cart);
-        alert(res.message); // "Product added to cart successfully"
-      }
+       alert("Product added to cart successfully"); // "Product added to cart successfully"
+       setCartCount(res.total_items);
+       setButtonText("Add to cart")
     });
   };
 
@@ -122,7 +123,7 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="col-12 col-md-6">
-              <button className="btn btn-primary w-100 rounded-0 h-100 small-h" onClick={handleAddToCart}>Add to cart</button>
+              <button className="btn btn-primary w-100 rounded-0 h-100 small-h" onClick={handleAddToCart}>{buttonText}</button>
             </div>
           </div>
 

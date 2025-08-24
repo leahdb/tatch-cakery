@@ -35,6 +35,7 @@ class ShopHeader extends React.Component {
   };
 
   render() {
+    const { cartCount } = this.props;
     const { isLoggedOut, dropdownVisible, categories } = this.state;
 
     if (isLoggedOut) {
@@ -73,10 +74,20 @@ class ShopHeader extends React.Component {
                   >
                     <img
                       src={Bag}
-                      alt="profile"
+                      alt="bag"
                       height={25}
                       className="pe-1"
                     />
+                    {cartCount > 0 && (
+                      <span
+                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style={{ fontSize: "0.65rem", minWidth: 18, height: 18, padding: "0 6px" }}
+                        aria-label={`${cartCount} items in cart`}
+                      >
+                        {cartCount > 99 ? "99+" : cartCount}
+                        <span className="visually-hidden">items in cart</span>
+                      </span>
+                    )}
                   </a>
                 </div>
               </div>
