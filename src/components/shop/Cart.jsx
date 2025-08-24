@@ -66,7 +66,7 @@ const Cart = () => {
                 >
                   <div className="col-lg-5">
                     <div className="me-lg-5">
-                      <div className="d-flex">
+                      <div className="d-flex align-items-center">
                         <div className="img-thumbnail me-3 d-flex justify-content-center align-items-center">
                           <img
                             src={item.image}
@@ -79,31 +79,45 @@ const Cart = () => {
                           <a href="#" className="nav-link">
                             {item.name}
                           </a>
-                          <p className="text-muted">{item.info}</p>
+                          <p className="text-muted">${item.price}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
-                    <div className="me-2">
-                      <select className="form-select me-4">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                      </select>
+                    <div className="input-group border border-brown w-100 small-h">
+                      <button
+                        className="btn color-primary fs-5"
+                        type="button"
+                        onClick={item.quantity>1 && item.quantity--}
+                      >
+                        −
+                      </button>
+                      <input
+                        type="text"
+                        className="form-control text-center p-0 border-0 bg-light-beige color-primary fs-5 fw-bold"
+                        value={item.quantity}
+                        readOnly
+                      />
+                      <button
+                        className="btn color-primary fs-5"
+                        type="button"
+                        onClick={item.quantity++}
+                      >
+                        +
+                      </button>
                     </div>
                     <div className="">
-                      <text className="h6">$1156.00</text>
+                      <text className="h6">${item.price*item.quantity}</text>
                     </div>
                   </div>
                   <div className="col-lg-3 col-6 d-flex justify-content-end mb-2">
                     <div className="float-md-end">
                       <a
                         href="#"
-                        className="btn btn-light border px-3 pt-2 icon-hover"
+                        className="remove-cart text-light-brown"
                       >
-                        <i className="bi bi-trash-fill fs-5 py-1 text-danger"></i>
+                        Remove
                       </a>
                     </div>
                   </div>
