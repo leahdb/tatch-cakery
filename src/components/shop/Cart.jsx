@@ -60,7 +60,7 @@ const Cart = () => {
             <h4 className="card-title mb-4 color-primary">Your shopping bag</h4>
             {cart.map((item) => (
               <div
-                className="row gy-3 mb-4 d-flex align-items-center border-bottom pb-2"
+                className="row gy-3 mb-5 mb-md-4 d-flex align-items-center border-bottom pb-2 border-light-beige"
                 key={item.id}
               >
                 <div className="col-lg-5">
@@ -84,7 +84,7 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
-                  <div className="input-group border border-brown w-50 small-h-cart me-5">
+                  <div className="input-group border border-brown w-100 w-md-50 small-h-cart me-md-5 me-4">
                     <button
                       className="btn color-primary fs-6"
                       type="button"
@@ -125,37 +125,37 @@ const Cart = () => {
           </div>
         </div>
         <div className="col-lg-3">
-          <div className="card mb-3 border shadow-0">
+          <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
             <div className="card-body">
               <form>
                 <div className="form-group">
                   <label className="form-label">Have promo code?</label>
-                  <div className="input-group">
+                  <div className="input-group border">
                     <input
                       type="text"
-                      className="form-control border"
+                      className="form-control border-0 bg-light-beige-input"
                       name=""
                       placeholder="Promo code"
                     />
-                    <button className="btn btn-light border">Apply</button>
+                    <button className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown">Apply</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div className="card shadow-0 border">
+          <div className="card rounded-0 bg-light-beige shadow-0 border-light-beige border">
             <div className="card-body">
               <div className="d-flex justify-content-between">
-                <p className="mb-2">Total price:</p>
+                <p className="mb-2">Subtotal</p>
                 <p className="mb-2">$329.00</p>
               </div>
               <div className="d-flex justify-content-between">
-                <p className="mb-2">Discount:</p>
+                <p className="mb-2">Discount</p>
                 <p className="mb-2 text-primary">-$60.00</p>
               </div>
               <hr />
               <div className="d-flex justify-content-between">
-                <p className="mb-2">Total price:</p>
+                <p className="mb-2">Total price</p>
                 <p className="mb-2 fw-bold">$283.00</p>
               </div>
 

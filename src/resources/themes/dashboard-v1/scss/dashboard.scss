@@ -27,6 +27,9 @@ $orangeColor: #ff9500;
 $lightBeige: #fff7e8;
 $lightBeigeBg: #fffcf6;
 $lightBeigeBorder: #f0e9e3;
+$lightBeigeInput: #f8f5f0;
+
+ //f6f1ee
 
 * {
   font-family: "Poppins", sans-serif;
@@ -38,6 +41,10 @@ $lightBeigeBorder: #f0e9e3;
 
 .bg-light-beige{
   background-color: $lightBeigeBg !important;
+}
+
+.bg-light-beige-input{
+  background-color: $lightBeigeInput !important;
 }
 
 .border-light-beige {
