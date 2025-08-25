@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 
 const Checkout = () => {
   const deliveryAreas = {
-    "Beirut": ["Beirut", "Hamra", "Achrafieh", "Verdun"],
-    "Mount Lebanon": ["Baabda", "Jounieh", "Aley", "Bikfaya"],
-    "North Lebanon": ["Tripoli", "Batroun", "Zgharta"],
-    "South Lebanon": ["Saida", "Tyre", "Jezzine"],
+    "Beirut": ["Manara", "Hamra", "Achrafieh", "Verdun", "Raouché", "Qoreitem", "Ain el-Tineh", "Clemenceau", "Sanyeh", "Tallet el-Khayat", "Mar Elias", "Zuqaq al-Blat", "Batrakieh", "Mina el-Hosn", "Qantari", "Down Town", "Basta el-Tahta", "Bachoura", "Burj Abi Haidar", "Basta el-Faouqa", "Ras el-Nabaa", "Mazraa", "Tariq el-Jdideh", "Sioufi", "Sodeco", "Saifi", "Gemmayzeh", "Badaro", "Mar Mikhaël"],
+    "Aley": ["Aramoun", "Bchamoun", "Choueifat", "Khalde",],
+    "Baabda": ["Ain el Remmaneh", "Bourj el-Barajneh", "Chiyah", "Furn el Chebbak", "Ghbeireh", "Hadath", "Haret Hreik", "Hazmieh", "Laylakeh"],
+    "Matn": ["Antelias", "Bouchrieh", "Bourj Hammoud", "Dbayeh", "Dekwaneh", "Mansourieh", "Jal el Dib", "Jdeideh", "Sin el Fil", "Zalka"],
+    "Chouf": ["Naameh", "Damour", "Haret El Naameh", "Mechref"],
   };
 
   const [selectedState, setSelectedState] = useState("");
@@ -24,28 +25,28 @@ const Checkout = () => {
           <div className="p-4">
             <h5 className="card-title mb-3">Delivery</h5>
             <div className="row">
-              <div className="col-6 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">First name</p>
                 <div className="form-outline">
                   <input type="text" id="typeText" placeholder="first name" className="form-control" />
                 </div>
               </div>
 
-              <div className="col-6">
+              <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">Last name</p>
                 <div className="form-outline">
                   <input type="text" id="typeText" placeholder="last name" className="form-control" />
                 </div>
               </div>
 
-              <div className="col-6 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">Phone</p>
                 <div className="form-outline">
                   <input type="tel" id="typePhone" value="+961 " className="form-control" />
                 </div>
               </div>
 
-              <div className="col-6 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">State</p>
                 <select
                   className="form-select"
@@ -55,8 +56,8 @@ const Checkout = () => {
                     setSelectedCity(""); // reset city when state changes
                   }}
                 >
-                  <option value="">Select State</option>
-                  {Object.keys(deliveryAreas).map((state) => (
+                  <option value="">Select District</option>
+                  {Object.keys(deliveryAreas).sort().map((state) => (
                     <option key={state} value={state}>
                       {state}
                     </option>
@@ -65,7 +66,7 @@ const Checkout = () => {
               </div>
 
               {/* ✅ City Dropdown */}
-              <div className="col-6 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">City</p>
                 <select
                   className="form-select"
@@ -75,7 +76,7 @@ const Checkout = () => {
                 >
                   <option value="">Select City</option>
                   {selectedState &&
-                    deliveryAreas[selectedState].map((city) => (
+                    deliveryAreas[selectedState].slice().sort().map((city) => (
                       <option key={city} value={city}>
                         {city}
                       </option>
@@ -83,7 +84,7 @@ const Checkout = () => {
                 </select>
               </div>
 
-              <div className="col-6 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">Street</p>
                 <div className="form-outline">
                   <input type="email" id="typeEmail" placeholder="example@gmail.com" className="form-control" />
