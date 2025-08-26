@@ -20,14 +20,14 @@ const Checkout = () => {
   return (
     <div className="container my-5">
     <div className="row">
-      <div className="col-xl-8 col-lg-8 mb-4 px-4">
+      <div className="col-xl-8 col-lg-8 mb-4 px-5">
         <div className="card mb-4 border shadow-0">
           <div className="p-4">
             <h5 className="card-title mb-3">Contact</h5>
             <input type="text" id="typeText" placeholder="mobile phone number" className="form-control" />
           </div>
         </div>
-        <div className="card shadow-0 border">
+        <div className="card mb-4 shadow-0 border">
           <div className="p-4">
             <h5 className="card-title mb-3">Shipping Address</h5>
             <div className="row">
@@ -145,12 +145,12 @@ const Checkout = () => {
             <input type="text" id="typeText" placeholder="mobile phone number" className="form-control" />
           </div>
         </div>
-        <div className="float-end">
-            <button className="btn btn-primary shadow-0 border rounded-0">Place Order</button>
+        <div className="w-100">
+            <button className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
           </div>
       </div>
-      <div className="col-xl-4 col-lg-4 d-flex justify-content-center px-4">
-        <div className="ms-lg-4 mt-4 mt-lg-0">
+      <div className="col-xl-4 col-lg-4 d-flex justify-content-center px-5">
+        <div className="mt-4 mt-lg-0 w-100">
           <h6 className="mb-3">Summary</h6>
           <div className="d-flex justify-content-between">
             <p className="mb-2">Subtotal</p>
