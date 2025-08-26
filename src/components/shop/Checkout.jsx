@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { fetch_cart } from "../../services/shop/cart";
 
 const Checkout = () => {
   const deliveryAreas = {
@@ -9,8 +10,31 @@ const Checkout = () => {
     "Chouf": ["Naameh", "Damour", "Haret El Naameh", "Mechref"],
   };
 
+  const [cart, setCart] = useState(null);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+
+  useEffect(() => {
+    fetch_cart().then((res) => {
+      const items = Object.entries(res.cart).map(([key, v]) => ({
+        id: key,                  // "2:20" (unique per product+variant/price)
+        product_id: v.product_id,
+        name: v.name,
+        quantity: v.quantity,
+        price: v.price,
+        slug: v.slug,
+        image: v.image || null, // normalize image field name
+        subtotal: v.price * v.quantity,
+      }));
+      setCart(items);
+      setTotalItems(res.total_items);
+      setTotalPrice(res.total_price)
+    });
+  }, []);
+
   return (
     <div className="container my-5">
     <div className="row">
@@ -23,7 +47,7 @@ const Checkout = () => {
         </div>
         <div className="card shadow-0 border">
           <div className="p-4">
-            <h5 className="card-title mb-3">Delivery</h5>
+            <h5 className="card-title mb-3">Shipping Address</h5>
             <div className="row">
               <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">First name</p>
@@ -87,133 +111,100 @@ const Checkout = () => {
               <div className="col-12 col-md-6 mb-3">
                 <p className="mb-0">Street</p>
                 <div className="form-outline">
-                  <input type="email" id="typeEmail" placeholder="example@gmail.com" className="form-control" />
+                  <input type="text" id="typeEmail" placeholder="" className="form-control" />
+                </div>
+              </div>
+
+              <div className="col-12 mb-3">
+                <p className="mb-0">Address</p>
+                <div className="form-outline">
+                  <input type="text" id="typeEmail" placeholder="" className="form-control" />
+                </div>
+              </div>
+
+              <div className="col-12 mb-3">
+                <p className="mb-0">Building, apartment, floor, ect.</p>
+                <div className="form-outline">
+                  <input type="text" id="typeEmail" placeholder="" className="form-control" />
                 </div>
               </div>
             </div>
 
             <hr className="my-4" />
 
-            <h5 className="card-title mb-3">Shipping info</h5>
-
-            <div className="row mb-3">
-              <div className="col-lg-4 mb-3"> 
-                <div className="form-check h-100 border rounded-3">
-                  <div className="p-3">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
-                    <label className="form-check-label" for="flexRadioDefault1">
-                      Express delivery <br />
-                      <small className="text-muted">3-4 days via Fedex </small>
-                    </label>
-                  </div>
+            <h5 className="card-title mb-3">Delivery</h5>
+            <div className="row">
+              <div className="col-12 col-md-6 mb-3">
+                <p className="mb-0">Delivery Date</p>
+                <div className="form-outline">
+                  <input type="date" id="typeText" placeholder="date" className="form-control" />
                 </div>
               </div>
-              <div className="col-lg-4 mb-3">
-                <div className="form-check h-100 border rounded-3">
-                  <div className="p-3">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                    <label className="form-check-label" for="flexRadioDefault2">
-                      Post office <br />
-                      <small className="text-muted">20-30 days via post </small>
-                    </label>
-                  </div>
+
+              <div className="col-12 col-md-6 mb-3">
+                <p className="mb-0">Delivery Time</p>
+                <div className="form-outline">
+                  <input type="time" id="typeText" placeholder="time" className="form-control" />
                 </div>
               </div>
-              <div className="col-lg-4 mb-3">
-                <div className="form-check h-100 border rounded-3">
-                  <div className="p-3">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" />
-                    <label className="form-check-label" for="flexRadioDefault3">
-                      Self pick-up <br />
-                      <small className="text-muted">Come to our shop </small>
-                    </label>
-                  </div>
+
+              <div className="col-12 mb-3">
+                <p className="mb-0">Delivery Note</p>
+                <div className="form-outline">
+                  <input type="text" id="typeText" placeholder="last name" className="form-control" />
                 </div>
               </div>
-            </div>
-
-            <div className="mb-3">
-              <p className="mb-0">Additional Notes</p>
-              <div className="form-outline">
-                <textarea className="form-control" id="textAreaExample1" rows="2"></textarea>
-              </div>
-            </div>
-
-            <div className="float-end">
-              <button className="btn btn-light border">Cancel</button>
-              <button className="btn btn-primary shadow-0 border">Continue</button>
             </div>
           </div>
         </div>
+        <div className="card mb-4 border shadow-0">
+          <div className="p-4">
+            <h5 className="card-title mb-3">Payment Method</h5>
+            <input type="text" id="typeText" placeholder="mobile phone number" className="form-control" />
+          </div>
+        </div>
+        <div className="float-end">
+            <button className="btn btn-primary shadow-0 border rounded-0">Place Order</button>
+          </div>
       </div>
       <div className="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
         <div className="ms-lg-4 mt-4 mt-lg-0">
           <h6 className="mb-3">Summary</h6>
           <div className="d-flex justify-content-between">
-            <p className="mb-2">Total price:</p>
+            <p className="mb-2">Subtotal</p>
             <p className="mb-2">$195.90</p>
           </div>
           <div className="d-flex justify-content-between">
-            <p className="mb-2">Discount:</p>
+            <p className="mb-2">Discount</p>
             <p className="mb-2 text-danger">- $60.00</p>
           </div>
           <div className="d-flex justify-content-between">
-            <p className="mb-2">Shipping cost:</p>
+            <p className="mb-2">Shipping</p>
             <p className="mb-2">+ $14.00</p>
           </div>
           <hr />
           <div className="d-flex justify-content-between">
-            <p className="mb-2">Total price:</p>
+            <p className="mb-2">Total</p>
             <p className="mb-2 fw-bold">$149.90</p>
           </div>
 
           <hr />
-          <h6 className="text-dark my-4">Items in cart</h6>
-
-          <div className="d-flex align-items-center mb-4">
-            <div className="me-3 position-relative">
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
-                1
-              </span>
-              <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp" className="img-sm rounded border" />
+          {cart.map((item) => (
+            <div className="d-flex align-items-center mt-5 mb-4">
+              <div className="me-3 position-relative">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
+                  {item.quantity}
+                </span>
+                <img src={item.image} className="img-sm rounded border" />
+              </div>
+              <div className="">
+                <a href="#" className="nav-link">
+                  {item.name}
+                </a>
+                <div className="price text-muted">${item.price}</div>
+              </div>
             </div>
-            <div className="">
-              <a href="#" className="nav-link">
-                Gaming Headset with Mic <br />
-                Darkblue color
-              </a>
-              <div className="price text-muted">Total: $295.99</div>
-            </div>
-          </div>
-
-          <div className="d-flex align-items-center mb-4">
-            <div className="me-3 position-relative">
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
-                1
-              </span>
-              <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.webp" className="img-sm rounded border" />
-            </div>
-            <div className="">
-              <a href="#" className="nav-link">
-                Apple Watch Series 4 Space <br />
-                Large size
-              </a>
-              <div className="price text-muted">Total: $217.99</div>
-            </div>
-          </div>
-
-          <div className="d-flex align-items-center mb-4">
-            <div className="me-3 position-relative">
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
-                3
-              </span>
-              <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" className="img-sm rounded border" />
-            </div>
-            <div className="">
-              <a href="#" className="nav-link">GoPro HERO6 4K Action Camera - Black</a>
-              <div className="price text-muted">Total: $910.00</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

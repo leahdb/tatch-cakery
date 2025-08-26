@@ -2,32 +2,6 @@ import React, { useEffect, useState } from "react";
 import { fetch_cart } from "../../services/shop/cart";
 
 const Cart = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Raspberry Pi 4 Model B",
-      price: 35.99,
-      imageSrc:
-        "https://www.seeedstudio.com/blog/wp-content/uploads/2019/06/WechatIMG1371.png",
-      info: "2 GB",
-    },
-    {
-      id: 2,
-      name: "Arduino Uno R3",
-      price: 24.99,
-      imageSrc:
-        "https://rukminim1.flixcart.com/image/1664/1664/j76i3rk0/learning-toy/j/z/8/arduino-uno-r3-board-with-dip-atmega328p-adraxx-original-imaexh74faqkvygt.jpeg?q=90",
-      info: "Input voltage - 7-12V",
-    },
-    {
-      id: 3,
-      name: "ESP8266 WiFi Module",
-      price: 3.49,
-      imageSrc:
-        "https://tse1.mm.bing.net/th?id=OIP.5LofEV_I-Y9PG-53g9Iu5AHaHa&pid=Api&P=0&h=220",
-      info: "ESP-12E",
-    },
-  ];
   const [cart, setCart] = useState(null);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -154,9 +128,13 @@ const Cart = () => {
                   <p className="mb-2">Discount</p>
                   <p className="mb-2 text-primary">-$60.00</p>
                 </div>
+                <div className="d-flex justify-content-between">
+                  <p className="mb-2">Shipping</p>
+                  <p className="mb-2 text-primary">Calculated on checkout</p>
+                </div>
                 <hr />
                 <div className="d-flex justify-content-between">
-                  <p className="mb-2">Total price</p>
+                  <p className="mb-2">Total</p>
                   <p className="mb-2 fw-bold">$283.00</p>
                 </div>
 
