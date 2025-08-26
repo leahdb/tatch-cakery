@@ -20,7 +20,7 @@ const Checkout = () => {
   return (
     <div className="container my-5">
     <div className="row">
-      <div className="col-xl-8 col-lg-8 mb-4">
+      <div className="col-xl-8 col-lg-8 mb-4 px-4">
         <div className="card mb-4 border shadow-0">
           <div className="p-4">
             <h5 className="card-title mb-3">Contact</h5>
@@ -149,7 +149,7 @@ const Checkout = () => {
             <button className="btn btn-primary shadow-0 border rounded-0">Place Order</button>
           </div>
       </div>
-      <div className="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+      <div className="col-xl-4 col-lg-4 d-flex justify-content-center px-4">
         <div className="ms-lg-4 mt-4 mt-lg-0">
           <h6 className="mb-3">Summary</h6>
           <div className="d-flex justify-content-between">
@@ -174,10 +174,10 @@ const Checkout = () => {
           {cart.map((item) => (
             <div className="d-flex align-items-center mt-5 mb-4">
               <div className="me-3 position-relative">
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary">
                   {item.quantity}
                 </span>
-                <img src={item.image} className="img-sm rounded border" />
+                <img src={item.image} className="img-sm-checkout rounded border" />
               </div>
               <div className="">
                 <a href="#" className="nav-link">
