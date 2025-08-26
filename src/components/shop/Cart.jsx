@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "./UseCart";
 
 const Cart = () => {
-  const { cart, totalItems, totalPrice, loading } = useCart();
+  const { cart, totalItems, totalPrice, loading, setCart } = useCart();
   if (loading) return <p>Loading...</p>;
 
   const updateQty = (id, delta) => {
