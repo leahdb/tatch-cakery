@@ -19,8 +19,17 @@ const Cart = () => {
   const handleRemove = (id) => {
     remove_from_cart(id).then((res) => {
       console.log("Cart after removal:", res.cart);
-      // update your state so UI refreshes
-      setCart(res.cart);
+      const items = Object.entries(res.cart).map(([key, v]) => ({
+        id: key,
+        product_id: v.product_id,
+        name: v.name,
+        quantity: v.quantity,
+        price: v.price,
+        slug: v.slug,
+        image: v.image || "/placeholder.jpg",
+        subtotal: v.price * v.quantity,
+      }));
+      setCart(items);
       setTotalItems(res.total_items);
       setTotalPrice(res.total_price);
     });
