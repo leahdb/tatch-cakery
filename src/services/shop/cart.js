@@ -23,6 +23,17 @@ export const fetch_cart = () => {
   }).then((res) => res.json());
 };
 
+export const remove_from_cart = (product_id) => {
+  return fetch(API_HOST + "remove", {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ product_id }),
+  }).then((res) => res.json());
+};
+
 export const fetch_shop_product = (id) => {
   return fetch(API_HOST + id, {
     method: "GET",

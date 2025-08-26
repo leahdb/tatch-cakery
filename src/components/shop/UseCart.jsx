@@ -27,5 +27,5 @@ export function useCart() {
     });
   }, []);
 
-  return { cart, totalItems, totalPrice, loading, setCart };
+  return { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice };
 }

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "./UseCart";
+import { remove_from_cart } from "../../services/shop/cart";
 
 const Cart = () => {
-  const { cart, totalItems, totalPrice, loading, setCart } = useCart();
+  const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
   if (loading) return <p>Loading...</p>;
 
   const updateQty = (id, delta) => {
@@ -13,6 +14,16 @@ const Cart = () => {
           : it
       )
     );
+  };
+
+  const handleRemove = (id) => {
+    remove_from_cart(id).then((res) => {
+      console.log("Cart after removal:", res.cart);
+      // update your state so UI refreshes
+      setCart(res.cart);
+      setTotalItems(res.total_items);
+      setTotalPrice(res.total_price);
+    });
   };
 
   return (
@@ -79,6 +90,7 @@ const Cart = () => {
                     <a
                       href="#"
                       className="remove-cart text-light-brown"
+                      onClick={() => handleRemove(item.id)}
                     >
                       Remove
                     </a>
