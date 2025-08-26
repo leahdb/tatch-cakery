@@ -5,6 +5,16 @@ const Cart = () => {
   const { cart, totalItems, totalPrice, loading } = useCart();
   if (loading) return <p>Loading...</p>;
 
+  const updateQty = (id, delta) => {
+    setCart(curr =>
+      curr.map(it =>
+        it.id === id
+          ? { ...it, quantity: Math.max(1, it.quantity + delta) }
+          : it
+      )
+    );
+  };
+
   return (
     <div className="container my-5">
       <div className="row">
@@ -41,7 +51,8 @@ const Cart = () => {
                     <button
                       className="btn color-primary fs-6"
                       type="button"
-                      onClick={item.quantity>1 && item.quantity--}
+                      onClick={() => updateQty(item.id, -1)}
+                      disabled={item.quantity <= 1}
                     >
                       −
                     </button>
@@ -54,7 +65,7 @@ const Cart = () => {
                     <button
                       className="btn color-primary fs-6"
                       type="button"
-                      onClick={item.quantity++}
+                      onClick={() => updateQty(item.id, +1)}
                     >
                       +
                     </button>
