@@ -1,30 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { fetch_cart } from "../../services/shop/cart";
+import { useCart } from "./UseCart";
 
 const Cart = () => {
-  const [cart, setCart] = useState(null);
-  const [totalItems, setTotalItems] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    fetch_cart().then((res) => {
-      const items = Object.entries(res.cart).map(([key, v]) => ({
-        id: key,                  // "2:20" (unique per product+variant/price)
-        product_id: v.product_id,
-        name: v.name,
-        quantity: v.quantity,
-        price: v.price,
-        slug: v.slug,
-        image: v.image || null, // normalize image field name
-        subtotal: v.price * v.quantity,
-      }));
-      setCart(items);
-      setTotalItems(res.total_items);
-      setTotalPrice(res.total_price)
-    });
-  }, []);
-
-  if (!cart) return <p>Loading...</p>;
+  const { cart, totalItems, totalPrice, loading } = useCart();
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="container my-5">
