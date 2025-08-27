@@ -46,7 +46,7 @@ const BOX_CLASS_KEYS = [ // 5
 ];
 
 const CAKE_OVERRIDES = {
-  RedVelvet: {
+  red_velvet: {
     // This matches your current base; you can omit it, shown for clarity.
     cls2:"#691212",
     cls11:"#650d0d",
@@ -61,7 +61,7 @@ const CAKE_OVERRIDES = {
     cls25:"#a00b0b",
     cls27:"#600808",
   },
-  Chocolate: {
+  chocolate: {
     // from your inline comments:
     cls2:"#51220d",  // was "choiy dark brown 51220d"
     cls11:"#421e0c", // dark brown
@@ -76,7 +76,7 @@ const CAKE_OVERRIDES = {
     cls25:"#6d3217", // medium brown
     cls27:"#3a1909", // dark brown
   },
-  Vanilla: {
+  vanilla: {
     // TODO: put your art-directed vanilla tones here:
     cls2:"#eadfca",
     cls11:"#d9c8ac",
@@ -94,7 +94,7 @@ const CAKE_OVERRIDES = {
 };
 
 const MIDDLE_CREAM_OVERRIDES = {
-  Vanilla: {
+  vanilla: {
     cls1:"#f8f1dd", // light vanilla beige
     cls3:"#f6e8c4", // pale warm cream
     cls7:"#f3dfb2", // soft golden cream
@@ -102,7 +102,7 @@ const MIDDLE_CREAM_OVERRIDES = {
     cls26:"#e0c997", // warm tan
     cls28:"#f5e2b4", // light golden
   },
-  Chocolate: {
+  chocolate: {
     cls1:"#5b3a1a", // milk chocolate
     cls3:"#6e4b26", // cocoa brown
     cls7:"#8b5e2e", // caramel chocolate
@@ -110,7 +110,7 @@ const MIDDLE_CREAM_OVERRIDES = {
     cls26:"#6a3c16", // dark milk chocolate
     cls28:"#9c6b36", // caramel
   },
-  Strawberry: {
+  strawberry: {
     cls1:"#f9c6c3", // soft strawberry pink
     cls3:"#f6b1ae", // pink cream
     cls7:"#f7d3d0", // pale strawberry
@@ -118,7 +118,7 @@ const MIDDLE_CREAM_OVERRIDES = {
     cls26:"#ec8d87", // deeper strawberry
     cls28:"#f6bbb7", // blush
   },
-  Lotus: {
+  lotus: {
     cls1:"#d8a46f", // biscuit tan
     cls3:"#c79055", // lotus cookie brown
     cls7:"#deb27e", // light lotus cream
@@ -126,7 +126,7 @@ const MIDDLE_CREAM_OVERRIDES = {
     cls26:"#a86f3a", // caramelized lotus
     cls28:"#e1b885", // biscuit beige
   },
-  Pistachio: {
+  pistachio: {
     cls1:"#b8c38a", // soft pistachio green
     cls3:"#aab777", // pastel green
     cls7:"#cdd8a4", // pale pistachio
@@ -137,7 +137,7 @@ const MIDDLE_CREAM_OVERRIDES = {
 };
 
 const TOP_CREAM_OVERRIDES = {
-  Vanilla: {
+  vanilla: {
     cls5:  "#f8f1dd", // soft beige
     cls10: "#f6e8c4", // pale vanilla
     cls17: "#f3dfb2", // light golden cream
@@ -146,7 +146,7 @@ const TOP_CREAM_OVERRIDES = {
     cls29: "#f7e4b8", // light cream
     cls30: "#f4d89a", // warm cream
   },
-  Chocolate: {
+  chocolate: {
     cls5:  "#6b4a2e", // milk chocolate
     cls10: "#8b5e3c", // lighter cocoa
     cls17: "#a17451", // caramel brown
@@ -155,7 +155,7 @@ const TOP_CREAM_OVERRIDES = {
     cls29: "#9a6b48", // warm brown
     cls30: "#b7835c", // soft chocolate
   },
-  Strawberry: {
+  strawberry: {
     cls5:  "#f9c6c3", // pale pink
     cls10: "#f6b1ae", // strawberry pink
     cls17: "#f4a6a1", // medium pink
@@ -164,7 +164,7 @@ const TOP_CREAM_OVERRIDES = {
     cls29: "#f6bbb7", // warm pink
     cls30: "#fdd0cd", // very pale pink
   },
-  Lotus: {
+  lotus: {
     cls5:  "#d8a46f", // biscuit tan
     cls10: "#c79055", // lotus cookie
     cls17: "#deb27e", // light lotus cream
@@ -173,7 +173,7 @@ const TOP_CREAM_OVERRIDES = {
     cls29: "#d1a068", // caramel biscuit
     cls30: "#f2cf9e", // light caramel
   },
-  Pistachio: {
+  pistachio: {
     cls5:  "#b8c38a", // soft pistachio
     cls10: "#aab777", // pastel green
     cls17: "#cdd8a4", // pale pistachio
@@ -182,7 +182,7 @@ const TOP_CREAM_OVERRIDES = {
     cls29: "#d5dfb2", // pale yellow-green
     cls30: "#e0e8c4", // cream green
   },
-  ColoredVanilla: {
+  colored_vanilla: {
     // These will be dynamically replaced depending on user-selected color
     Blue: {
       cls5:  "#9ecafc",
@@ -260,8 +260,8 @@ const TOP_CREAM_OVERRIDES = {
 };
 
 function getTopCreamColors(topCream, vanillaColor) {
-  if (topCream === "ColoredVanilla") {
-    return TOP_CREAM_OVERRIDES.ColoredVanilla[vanillaColor] || {};
+  if (topCream === "colored_vanilla") {
+    return TOP_CREAM_OVERRIDES.colored_vanilla[vanillaColor] || {};
   }
   return TOP_CREAM_OVERRIDES[topCream] || {};
 }
@@ -274,9 +274,9 @@ function getComputedColors(cakeFlavor, middleCreamFlavor, topCreamFlavor, vanill
 }
 
 export default function SVGVisualizer({ 
-  cakeFlavor = "RedVelvet", 
-  creamFlavor = "Vanilla", 
-  topCreamFlavor = "Chocolate", 
+  cakeFlavor = "red_velvet", 
+  creamFlavor = "vanilla", 
+  topCreamFlavor = "chocolate", 
   message = "", 
   motif="", 
   plexiColor="",

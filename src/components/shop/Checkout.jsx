@@ -53,7 +53,7 @@ const Checkout = () => {
               </div>
 
               <div className="col-12 col-md-6 mb-3">
-                <p className="mb-0">State</p>
+                <p className="mb-0">District</p>
                 <select
                   className="form-select"
                   value={selectedState}

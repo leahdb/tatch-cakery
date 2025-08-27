@@ -1,69 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SVGVisualizer from "./SVGVisualizerV2";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
-//import { handleOrderSubmit } from "../../services/shop/sendOrderEmail";
+import { cakeCode, middleCreamCode, topCreamCode, fillingCode, extraOptions, customizationOptions } from "../../services/shop/customizationOptions";
 import { add_to_cart } from "../../services/shop/cart";
+import { fetch_shop_product } from "../../services/shop/products";
 
 const CakeCustomization = () => {
-  const cakeData = {
-    name: "Build Your Cake",
-    description:
-      "Customize your perfect cake with our selection of flavors and fillings.",
-    basePrice: 8,
-    imageUrl:
-      "https://d34zicoa2zcr2f.cloudfront.net/sites/files/bakersbrewstudio2/images/products/202404/800xAUTO/strb1.jpg", // Replace with actual image
-    options: {
-      cakeFlavors: ["Chocolate", "Vanilla", "RedVelvet"],
-      creamFlavors: [
-        { name: "Chocolate", price: 0 },
-        { name: "Vanilla", price: 0 },
-        { name: "Strawberry", price: 0.5 },
-        { name: "Lotus", price: 0.5 },
-        { name: "Pistachio", price: 0.5 },
-      ],
-      fillingFlavors: [
-        { name: "Nutella", price: 0.5 },
-        { name: "Pistachio", price: 1 },
-        { name: "Strawberry", price: 0.5 },
-        { name: "Lotus", price: 0.5 },
-      ],
-      topCreamFlavors: [
-        { name: "Chocolate", price: 0 },
-        { name: "Vanilla", price: 0 },
-        { name: "Strawberry", price: 0.5 },
-        { name: "Lotus", price: 0.5 },
-        { name: "Pistachio", price: 0.5 },
-        { name: "Colored Vanilla", price: 0 },
-      ],
-      extra: [
-        { name: "Fresh Strawberries", price: 0.5 },
-        { name: "Hazelnuts", price: 0.5 },
-        { name: "oreo crumbs", price: 0.5 },
-      ],
-      customizations: [
-        { name: "No Customization", price: 0 },
-        { name: "Chocolate Letters Writing", price: 1 },
-        { name: "Plexi Writing", price: 0 },
-        { name: "Plexi Motif", price: 0 },
-      ],
-    },
-  };
+    const [product, setProduct] = useState([]);
+    const [selectedCake, setSelectedCake] = useState(cakeCode[0]);
+    const [selectedCream, setSelectedCream] = useState(middleCreamCode[0]);
+    const [selectedTopCream, setSelectedTopCream] = useState(topCreamCode[0]);
+    const [selectedFilling, setSelectedFilling] = useState(fillingCode[0]);
+    const [selectedExtras, setSelectedExtras] = useState(extraOptions[0]);
+    const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
 
-  const [selectedCake, setSelectedCake] = useState(
-    cakeData.options.cakeFlavors[0]
-  );
-  const [selectedCream, setSelectedCream] = useState(
-    cakeData.options.creamFlavors[0]
-  );
-  const [selectedTopCream, setSelectedTopCream] = useState(
-    cakeData.options.topCreamFlavors[0]
-  );
-  const [selectedFilling, setSelectedFilling] = useState(cakeData.options.fillingFlavors[0]);
-  const [selectedExtras, setSelectedExtras] = useState(cakeData.options.extra[0]);
-  const [selectedCustomization, setSelectedCustomization] = useState(
-    cakeData.options.customizations[0]
-  );
     
     const [additionalNote, setAdditionalNote] = useState("");
     const [customInput, setCustomInput] = useState("");
@@ -80,48 +31,51 @@ const CakeCustomization = () => {
       setQty(qty + 1);
     };
 
+    useEffect(() => {
+      fetch_shop_product("build-your-cake").then((res) => {
+          if (res.status === "ok") {
+            setProduct(res.data);
+          }
+      });
+    }, []);
+
     const handleAddToCart = () => {
-        add_to_cart({
+        const payload = {
+          product_id: product.id,
           quantity: qty,
-        }).then((res) => {
-          if (res.message) {
+          custom: {
+            fillings: [fillingCode(selectedFilling.name)],// array
+            extras: [extraOptions(selectedExtras.name)], // array (use checkbox array if you want many)
+            designs: [customizationOptions(selectedCustomization.name)], // array
+            // Optional extra metadata for your order item (not used for pricing):
+            note: additionalNote || null,
+            message: selectedCustomization.name === "Chocolate Letters Writing" || selectedCustomization.name === "Plexi Writing"
+              ? (customInput || "")
+              : null,
+            plexi_color: selectedCustomization.name.includes("Plexi") ? plexiColor : null,
+            motif: selectedCustomization.name === "Plexi Motif" ? motifChoice : null,
+            // You can also send the three “cream” layers if you price them:
+            cream: middleCreamCode(selectedCream.name),
+            top_cream: topCreamCode(selectedTopCream.name),
+            cake_flavor: selectedCake.toLowerCase(), // if you want to store/display
+          },
+        };
+        add_to_cart(payload).then((res) => {
+          if (res.total_items != undefined) {
             console.log("Cart:", res.cart);
-            alert(res.message); // "Product added to cart successfully"
+            alert("Product added to cart successfully"); // "Product added to cart successfully"
           }
         });
       };
 
     const totalPrice =
-      cakeData.basePrice +
-      (selectedCream.price ? selectedCream.price : 0) +
-      (selectedFilling.price ? selectedFilling.price : 0) +
-      (selectedCustomization.price ? selectedCustomization.price : 0) +
-      (selectedExtras.price ? selectedExtras.price : 0);
+      product.price +
+      (selectedCream?.price || 0) +
+      (selectedFilling?.price || 0) +
+      (selectedExtras?.price || 0) +
+      (selectedCustomization?.price || 0);
     
-    const handleOrderSubmit = () => {
-      const googleSheetsWebhook =
-            "https://script.google.com/macros/s/AKfycbzCztct7Z2noAZ9Mo91g5EwcK3o-b0szJhe0BCb93UzEhzfW89Np4atW3Vgt-6SeCbT/exec"; // Replace with your Google Apps Script URL
-        
-        const order = {
-          name: "John Doe",
-          phone: "+96171234567",
-          items: [
-            { name: "Cake", price: 20 },
-            { name: "Cupcake", price: 5 },
-          ],
-          total: 25,
-          notes: "Please add extra frosting",
-        };
-
-      fetch(googleSheetsWebhook, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(order),
-      })
-        .then(() => alert("Order submitted! (No response due to no-cors mode)"))
-        .catch((error) => console.error("Error sending order:", error));
-    };
+    
 
     // const handleAddToCart = () => {
     //   console.log(formData);
@@ -153,17 +107,17 @@ const CakeCustomization = () => {
     <div className="row mt-3 bg-light-gray cake-customization">
       <div className="col-12 col-lg-6 d-flex justify-content-center px-5 custom-height-1">
         <SVGVisualizer
-          cakeFlavor={selectedCake}                       // "Vanilla" | "Chocolate" | "RedVelvet"
-          fillingFlavor={selectedFilling.name}           // "Nutella" | "Pistachio" | ...
-          creamFlavor={selectedCream.name}               // "Vanilla" | "Chocolate" | ...
-          topCreamFlavor={selectedTopCream.name}
+          cakeFlavor={selectedCake.code}                       // "Vanilla" | "Chocolate" | "RedVelvet"
+          fillingFlavor={selectedFilling.code}           // "Nutella" | "Pistachio" | ...
+          creamFlavor={selectedCream.code}               // "Vanilla" | "Chocolate" | ...
+          topCreamFlavor={selectedTopCream.code}
           message={customInput}
-          motif={selectedCustomization.name === "Plexi Motif" ? motifChoice : null}
+          motif={selectedCustomization.code === "plexi_motif" ? motifChoice : null}
           plexiColor={plexiColor}
           letteringMode={
-            selectedCustomization.name === "Chocolate Letters Writing"
+            selectedCustomization.code === "choco_letters"
               ? "chocolate"
-              : selectedCustomization.name === "Plexi Writing"
+              : selectedCustomization.code === "plexi_writing"
               ? "plexi"
               : "none"
           }
@@ -172,8 +126,8 @@ const CakeCustomization = () => {
       <div className="col-12 col-lg-6 overflow-auto custom-height-2">
         <div className="bg-white mb-2">
           <div className="container pb-3 pt-1">
-            <h2 className="pt-4">{cakeData.name}</h2>
-            <p className="text-muted">{cakeData.description}</p>
+            <h2 className="pt-4">{product.name}</h2>
+            <p className="text-muted">{product.description}</p>
             <h4>{totalPrice.toFixed(2)}$</h4>
           </div>
         </div>
@@ -181,17 +135,17 @@ const CakeCustomization = () => {
           <div className="container">
             <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Cake Flavor</label>
-              {cakeData.options.cakeFlavors.map((flavor, index) => (
+              {cakeCode.map((flavor, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="radio"
                     name="cakeFlavor"
-                    value={flavor}
-                    checked={selectedCake === flavor}
+                    value={flavor.label}
+                    checked={selectedCake.code === flavor.code}
                     onChange={() => setSelectedCake(flavor)}
                   />
-                  <label className="form-check-label">{flavor}</label>
+                  <label className="form-check-label">{flavor.label}</label>
                 </div>
               ))}
             </div>
@@ -201,18 +155,18 @@ const CakeCustomization = () => {
           <div className="container">
             <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Cream Flavor</label>
-              {cakeData.options.creamFlavors.map((flavor, index) => (
+              {middleCreamCode.map((flavor, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="radio"
                     name="creamFlavor"
-                    value={flavor}
-                    checked={selectedCream.name === flavor.name}
+                    value={flavor.label}
+                    checked={selectedCream.code === flavor.code}
                     onChange={() => setSelectedCream(flavor)}
                   />
                   <label className="form-check-label">
-                    {flavor.name}{" "}
+                    {flavor.label}{" "}
                     <small className="text-muted">
                       &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
                     </small>
@@ -226,18 +180,18 @@ const CakeCustomization = () => {
           <div className="container">
             <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Filling Flavor</label>
-              {cakeData.options.fillingFlavors.map((filling, index) => (
+              {middleCreamCode.map((filling, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="radio"
                     name="fillingFlavor"
-                    value={filling.name}
-                    checked={selectedFilling.name === filling.name}
+                    value={filling.label}
+                    checked={selectedFilling.code === filling.code}
                     onChange={() => setSelectedFilling(filling)}
                   />
                   <label className="form-check-label">
-                    {filling.name}{" "}
+                    {filling.label}{" "}
                     <small className="text-muted">&nbsp;+{filling.price}$</small>
                   </label>
                 </div>
@@ -249,17 +203,17 @@ const CakeCustomization = () => {
           <div className="container">
             <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Add On</label>
-              {cakeData.options.extra.map((extra, index) => (
+              {extraOptions.map((extra, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="radio"
-                    value={extra.name}
-                    checked={selectedExtras.name === extra.name}
+                    value={extra.label}
+                    checked={selectedExtras.code === extra.code}
                     onChange={() => setSelectedExtras(extra)}
                   />
                   <label className="form-check-label">
-                    {extra.name}{" "}
+                    {extra.label}{" "}
                     <small className="text-muted">&nbsp;+{extra.price}$</small>
                   </label>
                 </div>
@@ -271,18 +225,18 @@ const CakeCustomization = () => {
           <div className="container">
             <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Top Cream Flavor</label>
-              {cakeData.options.topCreamFlavors.map((flavor, index) => (
+              {topCreamCode.map((flavor, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="radio"
                     name="creamFlavor"
-                    value={flavor}
-                    checked={selectedTopCream.name === flavor.name}
+                    value={flavor.label}
+                    checked={selectedTopCream.code === flavor.code}
                     onChange={() => setSelectedTopCream(flavor)}
                   />
                   <label className="form-check-label">
-                    {flavor.name}{" "}
+                    {flavor.label}{" "}
                     <small className="text-muted">
                       &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
                     </small>
@@ -296,23 +250,23 @@ const CakeCustomization = () => {
           <div className="container">
             <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Customization</label>
-              {cakeData.options.customizations.map((custom, index) => (
+              {customizationOptions.map((custom, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="radio"
                     name="customization"
-                    value={custom.name}
-                    checked={selectedCustomization.name === custom.name}
+                    value={custom.label}
+                    checked={selectedCustomization.code === custom.code}
                     onChange={() => {
                       setSelectedCustomization(custom);
-                      if (custom.name !== "Plexi Motif") {
+                      if (custom.label !== "Plexi Motif") {
                         setMotifChoice(null); // clear motif when leaving motif mode
                       }
                     }}
                   />
                   <label className="form-check-label">
-                    {custom.name}
+                    {custom.label}
                     <small className="text-muted">
                       &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
                     </small>
