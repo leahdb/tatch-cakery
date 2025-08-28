@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "./UseCart";
 import { remove_from_cart } from "../../services/shop/cart";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Cart = () => {
   const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
-  if (loading) return <p>Loading...</p>;
+  if (loading) return (
+    <DotLottieReact
+      src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
+      loop
+      autoplay
+    />
+  );
 
   const updateQty = (id, delta) => {
     setCart(curr =>

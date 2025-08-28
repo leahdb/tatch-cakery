@@ -6,6 +6,7 @@
     "@fancyapps/ui": "^5.0.33",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@lottiefiles/dotlottie-react": "^0.15.2",
     "@phntms/use-local-state": "^0.1.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

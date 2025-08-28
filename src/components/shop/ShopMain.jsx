@@ -2,23 +2,8 @@ import React, { useEffect, useState } from "react";
 import ShopIntro from "./ShopIntro";
 import ProductsMain from "./ProductsMain";
 import ShopFooter from "./ShopFooter";
-import { fetch_shop_home } from "../../services/shop/home";
 
-const ShopMain = () => {
-  const [products, setProducts] = useState([]);
-  const [banners, setBanners] = useState([]);
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    fetch_shop_home().then((res) => {
-        if (res.status === "ok") {
-          setProducts(res.products);
-          setBanners(res.banners);
-          setCategories(res.categories);
-        }
-      });
-    }, []);
-
+const ShopMain = ({products, banners, categories}) => {
   return (
     <section>
       <ShopIntro banners={ banners } />
