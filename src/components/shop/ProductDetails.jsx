@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { fetch_shop_product } from "../../services/shop/products";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { add_to_cart } from "../../services/shop/cart";
 
 
@@ -11,6 +12,7 @@ const ProductDetails = ({setCartCount}) => {
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(1);
   const [buttonText, setButtonText] = useState("Add to cart")
+  const [loading, setLoading] = useState(true);
 
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
@@ -24,6 +26,7 @@ const ProductDetails = ({setCartCount}) => {
     fetch_shop_product(slug).then((res) => {
         if (res.status === "ok") {
           setProduct(res.data);
+          setLoading(false);
         }
     });
   }, []);
@@ -39,6 +42,17 @@ const ProductDetails = ({setCartCount}) => {
       alert("Product added to cart successfully"); // "Product added to cart successfully
     });
   };
+
+  if (loading) return (
+    <div className="d-flex align-items-center" style={{height: "100vh"}}>
+      <DotLottieReact
+        src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
+        loop
+        autoplay
+        style={{height: "auto"}}
+      />
+    </div>
+  );
 
   return (
     <div className="container my-md-5 my-3">

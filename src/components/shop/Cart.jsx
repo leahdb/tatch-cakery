@@ -6,11 +6,14 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 const Cart = () => {
   const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
   if (loading) return (
-    <DotLottieReact
-      src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
-      loop
-      autoplay
-    />
+    <div className="d-flex align-items-center" style={{height: "100vh"}}>
+      <DotLottieReact
+        src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
+        loop
+        autoplay
+        style={{height: "auto"}}
+      />
+    </div>
   );
 
   const updateQty = (id, delta) => {

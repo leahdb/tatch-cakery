@@ -97,8 +97,7 @@ const ShopRoutes = ({setCartCount, products, banners, categories}) => {
         element={<ProductDetails setCartCount={setCartCount}/>}
       />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/wishlist" element={<WishList />} />
-      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout" element={<Checkout setCartCount={setCartCount} />} />
       <Route path="*" element={<ErrorPage404 />} />
     </Routes>
   );

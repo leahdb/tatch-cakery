@@ -34,16 +34,24 @@ export const remove_from_cart = (product_id) => {
   }).then((res) => res.json());
 };
 
-export const fetch_shop_product = (id) => {
-  return fetch(API_HOST + id, {
-    method: "GET",
+export const checkout = (payload) =>
+  fetch(API_HOST + "checkout", {
+    method: "POST",
     credentials: "include",
-    secure: true,
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   }).then((res) => res.json());
-};
+
+// export const fetch_shop_product = (id) => {
+//   return fetch(API_HOST + id, {
+//     method: "GET",
+//     credentials: "include",
+//     secure: true,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   }).then((res) => res.json());
+// };
 
 // export const search_shop_products = (searchQuery) => {
 //   return fetch(`${SEARCH_API}?query=${searchQuery}&type=product`, {
