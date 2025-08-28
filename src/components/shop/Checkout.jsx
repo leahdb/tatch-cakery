@@ -200,7 +200,7 @@ const Checkout = ({setCartCount}) => {
             </div>
           </div>
           <div className="w-100">
-            <button className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
+            <button type="submit" onSubmit={onSubmit} onClick={onSubmit} className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
           </div>
         </div>
         <div className="col-xl-4 col-lg-4 d-flex justify-content-center px-5">
