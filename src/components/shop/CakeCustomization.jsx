@@ -276,7 +276,7 @@ const CakeCustomization = () => {
                   </label>
                 </div>
               ))}
-              {selectedCustomization.name.includes("Writing") && (
+              {selectedCustomization.label.includes("Writing") && (
                 <div className="my-3">
                   <label className="form-label fs-5">Enter Your Message</label>
                   <input
@@ -288,14 +288,14 @@ const CakeCustomization = () => {
                   />
                 </div>
               )}
-              {selectedCustomization.name.includes("Drawing") ||
-              selectedCustomization.name.includes("Motif") ? (
+              {selectedCustomization.label.includes("Drawing") ||
+              selectedCustomization.label.includes("Motif") ? (
                 <MotifPicker
                   value={motifChoice}
                   onChange={setMotifChoice}
                 />
               ) : null}
-              {selectedCustomization.name.includes("Plexi") && (
+              {selectedCustomization.label.includes("Plexi") && (
                 <div className="my-3">
                   <ColorPicker
                     value={plexiColor}
