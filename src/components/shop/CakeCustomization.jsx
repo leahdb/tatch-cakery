@@ -60,7 +60,7 @@ const CakeCustomization = () => {
             // You can also send the three “cream” layers if you price them:
             mcreams: selectedCream.code,
             tcreams: selectedTopCream.code,
-            cake_flavor: selectedCake.toLowerCase(), // if you want to store/display
+            cake_flavor: selectedCake.code, // if you want to store/display
           },
         };
         add_to_cart(payload).then((res) => {
