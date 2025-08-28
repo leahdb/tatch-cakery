@@ -31,7 +31,10 @@ const CakeCustomization = () => {
       setQty(qty + 1);
     };
 
+    console.log("hello");
+
     useEffect(() => {
+      console.log("[CakeCustomization] mounted");
       fetch_shop_product("build-your-cake").then((res) => {
           if (res.status === "ok") {
             setProduct(res.data);
