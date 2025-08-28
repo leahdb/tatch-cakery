@@ -47,19 +47,19 @@ const CakeCustomization = () => {
           product_id: product.id,
           quantity: qty,
           custom: {
-            fillings: [fillingCode(selectedFilling.name)],// array
-            extras: [extraOptions(selectedExtras.name)], // array (use checkbox array if you want many)
-            designs: [customizationOptions(selectedCustomization.name)], // array
+            fillings: [fillingCode(selectedFilling.code)],// array
+            extras: [extraOptions(selectedExtras.code)], // array (use checkbox array if you want many)
+            designs: [customizationOptions(selectedCustomization.code)], // array
             // Optional extra metadata for your order item (not used for pricing):
             note: additionalNote || null,
-            message: selectedCustomization.name === "Chocolate Letters Writing" || selectedCustomization.name === "Plexi Writing"
+            message: selectedCustomization.code === "choco_letters" || selectedCustomization.code === "plexi_writing"
               ? (customInput || "")
               : null,
-            plexi_color: selectedCustomization.name.includes("Plexi") ? plexiColor : null,
-            motif: selectedCustomization.name === "Plexi Motif" ? motifChoice : null,
+            plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
+            motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
             // You can also send the three “cream” layers if you price them:
-            cream: middleCreamCode(selectedCream.name),
-            top_cream: topCreamCode(selectedTopCream.name),
+            mcreams: middleCreamCode(selectedCream.code),
+            tcreams: topCreamCode(selectedTopCream.code),
             cake_flavor: selectedCake.toLowerCase(), // if you want to store/display
           },
         };
