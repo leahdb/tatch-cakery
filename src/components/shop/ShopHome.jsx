@@ -70,8 +70,22 @@ export default ShopHome;
 const ShopRoutes = ({setCartCount, products, banners, categories}) => {
   return (
     <Routes>
-      <Route path="/" element={<ShopMain />} products={products} banners={banners} categories={categories}/>
-      <Route path="/main" element={<ShopMain />} products={products} banners={banners} categories={categories}/>
+      <Route path="/" element={
+        <ShopMain
+          setCartCount={setCartCount}
+          products={products}
+          banners={banners}
+          categories={categories}
+        />}
+      />
+      <Route path="/main" element={
+        <ShopMain
+          setCartCount={setCartCount}
+          products={products}
+          banners={banners}
+          categories={categories}
+        />}
+      />
       <Route path="/build-your-cake" element={<CakeCustomization />} />
       <Route path="/products" element={<ProductListing />} />
       <Route
@@ -80,8 +94,7 @@ const ShopRoutes = ({setCartCount, products, banners, categories}) => {
       />
       <Route
         path="/products/:slug"
-        element={<ProductDetails />}
-        setCartCount={setCartCount}
+        element={<ProductDetails setCartCount={setCartCount}/>}
       />
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<WishList />} />
