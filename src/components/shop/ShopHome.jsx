@@ -67,7 +67,7 @@ export default ShopHome;
 const ShopRoutes = ({setCartCount, products, banners, categories}) => {
   return (
     <Routes>
-      <Route path="/" element={<ShopMain />} />
+      <Route path="/" element={<ShopMain />} products={products} banners={banners} categories={categories}/>
       <Route path="/main" element={<ShopMain />} products={products} banners={banners} categories={categories}/>
       <Route path="/build-your-cake" element={<CakeCustomization />} />
       <Route path="/products" element={<ProductListing />} />
