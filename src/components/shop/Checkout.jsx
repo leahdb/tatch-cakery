@@ -43,7 +43,8 @@ const Checkout = ({setCartCount}) => {
     setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault(); 
     setError(null);
     console.log("test");
     checkout(form).then((res) => {
@@ -202,7 +203,7 @@ const Checkout = ({setCartCount}) => {
             </div>
           </div>
           <div className="w-100">
-            <button onSubmit={onSubmit} onClick={onSubmit} className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
+            <button type="submit" className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
           </div>
         </div>
         <div className="col-xl-4 col-lg-4 d-flex justify-content-center px-5">
