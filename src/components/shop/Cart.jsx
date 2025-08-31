@@ -135,7 +135,7 @@ const Cart = () => {
                     <a
                       href="#"
                       className="remove-cart text-light-brown"
-                      onClick={() => handleRemove(item.product_id)}
+                      onClick={(e) => handleRemove(e, item.product_id)}
                     >
                       Remove
                     </a>
