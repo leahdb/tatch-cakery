@@ -49,6 +49,8 @@ const Checkout = ({setCartCount}) => {
     });
   };
 
+  const fmt = (n) => `$${n.toFixed(2)}`;
+
   if (loading) return (
     <div className="d-flex align-items-center" style={{height: "100vh"}}>
       <DotLottieReact
@@ -59,6 +61,19 @@ const Checkout = ({setCartCount}) => {
       />
     </div>
   );
+
+  if (totalItems === 0) {
+    return (
+      <div className="d-flex align-items-center" style={{height: "100vh"}}>
+        <div className="text-center">
+          <h4 className="text-primary">Bag is empty</h4>
+          <a className="btn btn-primary rounded-0" href="/">
+            Start Shopping
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container my-5">
@@ -221,7 +236,7 @@ const Checkout = ({setCartCount}) => {
             <div className="card-body">
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Subtotal</p>
-                <p className="mb-2">$329.00</p>
+                <p className="mb-2">{fmt(totalPrice)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount</p>
@@ -234,7 +249,7 @@ const Checkout = ({setCartCount}) => {
               <hr />
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Total</p>
-                <p className="mb-2 fw-bold">$283.00</p>
+                <p className="mb-2 fw-bold">{fmt(totalPrice)}</p>
               </div>
             </div>
           </div>
