@@ -20,7 +20,7 @@ const Checkout = ({setCartCount}) => {
     first_name: "",
     last_name: "",
     phone_number: "",
-    state: "",
+    district: "",
     city: "",
     street: "",
     address: "",
@@ -131,7 +131,7 @@ const Checkout = ({setCartCount}) => {
                     className="form-select"
                     value={selectedCity}
                     onChange={(e) => {
-                      setForm(prev => ({ ...prev, ["city"]: selectedState }))
+                      setForm(prev => ({ ...prev, ["city"]: selectedCity }))
                       setSelectedCity(e.target.value)
                     }}
                     name="district" required

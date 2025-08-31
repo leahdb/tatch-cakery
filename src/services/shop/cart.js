@@ -43,7 +43,7 @@ export const checkout = (payload) => {
       "Content-Type": "application/json",
       'Accept': 'application/json'
     },
-    body: JSON.stringify({ payload }),
+    body: JSON.stringify(payload),
   }).then((res) => res.json());
 };
 
