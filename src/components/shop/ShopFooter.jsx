@@ -6,28 +6,28 @@ const ShopFooter = () => {
     <footer id="footer" className="footer-science bg-beige">
       <div className="container text-center">
         <img src={logoBlack} alt="logoBlack" className="footer-logo" />
-        <p>
+        <p className="text-muted">
           Delicious cakes made with love, bringing sweetness to every moment.
         </p>
       </div>
-      <div className="site-info">
-        <div className="col-md-6">
-          <div className="footer-social-wrap">
-            <h3 className="social-title">Follow Us</h3>
+      <div className="site-info d-flex justify-content-center m-0">
+        <div className="col-md-6 d-flex justify-content-center">
+          <div className="footer-social-wrap m-0">
+            <h3 className="social-title text-primary">Follow Us</h3>
 
             <ul className="footer-social-link">
               <li>
-                <a href="http://facebook.com">
+                <a href="https://www.facebook.com/profile.php?id=61579342395911#">
                   <i className="bi bi-facebook text-primary"></i>
                 </a>
               </li>
               <li>
-                <a href="http://twitter.com">
-                  <i className="bi bi-whatsapp text-primary"></i>
+                <a href="https://www.tiktok.com/@tatch.cakery">
+                  <i className="bi bi-tiktok text-primary"></i>
                 </a>
               </li>
               <li>
-                <a href="http://dribbble.com">
+                <a href="https://www.instagram.com/tatchcakery">
                   <i className="bi bi-instagram text-primary"></i>
                 </a>
               </li>

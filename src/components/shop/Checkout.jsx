@@ -17,7 +17,7 @@ const Checkout = ({setCartCount}) => {
     first_name: "",
     last_name: "",
     phone_number: "",
-    district: "",
+    state: "",
     city: "",
     street: "",
     address: "",
@@ -43,9 +43,7 @@ const Checkout = ({setCartCount}) => {
   const onSubmit = (e) => {
     e.preventDefault(); 
     setError(null);
-    console.log("test");
     checkout(form).then((res) => {
-      console.log(res);
       setSuccess("Order placed successfully");
       setCartCount(0);
     });
