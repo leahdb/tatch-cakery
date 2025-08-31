@@ -1,10 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useCart } from "./UseCart";
 import { remove_from_cart } from "../../services/shop/cart";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Cart = () => {
   const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
+
+  const { subtotal, itemsCount } = useMemo(() => {
+    const sub = cart.reduce((sum, it) => sum + Number(it.price) * Number(it.quantity), 0);
+    const count = cart.reduce((sum, it) => sum + Number(it.quantity), 0);
+    return { subtotal: sub, itemsCount: count };
+  }, [cart]);
+
+  useEffect(() => {
+    setTotalItems(itemsCount);
+    setTotalPrice(subtotal);
+  }, [itemsCount, subtotal, setTotalItems, setTotalPrice]);
+
+  const fmt = (n) => `$${n.toFixed(2)}`;
+
   if (loading) return (
     <div className="d-flex align-items-center" style={{height: "100vh"}}>
       <DotLottieReact
@@ -26,7 +40,8 @@ const Cart = () => {
     );
   };
 
-  const handleRemove = (id) => {
+  const handleRemove = (e, id) => {
+    e.preventDefault();
     remove_from_cart(id).then((res) => {
       console.log("Cart after removal:", res.cart);
       const items = Object.entries(res.cart).map(([key, v]) => ({
@@ -46,12 +61,14 @@ const Cart = () => {
   };
 
   if (totalItems === 0) {
-    <div className="d-flex align-items-center text center" style={{height: "100vh"}}>
-      <h3 className="text-primary">Bag is empty</h3>
-        <a className="btn btn-secondary" href="/">
-          Start Shoppoing
-        </a>
-    </div>
+    return (
+      <div className="d-flex align-items-center text center" style={{height: "100vh"}}>
+        <h3 className="text-primary">Bag is empty</h3>
+          <a className="btn btn-secondary" href="/">
+            Start Shopping
+          </a>
+      </div>
+    );
   }
 
   return (
@@ -134,20 +151,20 @@ const Cart = () => {
               <div className="card-body">
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Subtotal</p>
-                  <p className="mb-2">$329.00</p>
+                  <p className="mb-2">{fmt(subtotal)}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Discount</p>
-                  <p className="mb-2 text-primary">-$60.00</p>
+                  <p className="mb-2 text-primary">{fmt(0)}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Shipping</p>
-                  <p className="mb-2 text-primary">Calculated on checkout</p>
+                  <p className="mb-2 text-primary small d-flex align-items-end">Calculated on checkout</p>
                 </div>
                 <hr />
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Total</p>
-                  <p className="mb-2 fw-bold">$283.00</p>
+                  <p className="mb-2 fw-bold">{fmt(subtotal)}</p>
                 </div>
 
                 <div className="mt-3">
