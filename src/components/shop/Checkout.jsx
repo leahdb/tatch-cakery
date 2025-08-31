@@ -199,6 +199,72 @@ const Checkout = ({setCartCount}) => {
           </div>
         </div>
         <div className="col-xl-4 col-lg-4 d-flex justify-content-center px-5">
+          <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
+            <div className="card-body">
+              <form>
+                <div className="form-group">
+                  <label className="form-label">Have promo code?</label>
+                  <div className="input-group border">
+                    <input
+                      type="text"
+                      className="form-control border-0 bg-light-beige-input"
+                      name=""
+                      placeholder="Promo code"
+                    />
+                    <button className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown">Apply</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="card rounded-0 bg-light-beige shadow-0 border-light-beige border">
+            <div className="card-body">
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Subtotal</p>
+                <p className="mb-2">$329.00</p>
+              </div>
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Discount</p>
+                <p className="mb-2 text-primary">-$60.00</p>
+              </div>
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Shipping</p>
+                <p className="mb-2 text-primary">Calculated on checkout</p>
+              </div>
+              <hr />
+              <div className="d-flex justify-content-between">
+                <p className="mb-2">Total</p>
+                <p className="mb-2 fw-bold">$283.00</p>
+              </div>
+
+              <div className="mt-3">
+                <a href="/checkout" className="btn btn-primary w-100 shadow-0 mb-2 rounded-0">
+                  Proceed To Checkout
+                </a>
+                <a href="/" className="btn btn-light w-100 border mt-2 rounded-0 bg-light-beige-input">
+                  Continue Shopping
+                </a>
+              </div>
+            </div>
+          </div>
+          {cart.map((item) => (
+            <div className="d-flex align-items-center mt-5 mb-4">
+              <div className="me-3 position-relative">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary">
+                  {item.quantity}
+                </span>
+                <img src={item.image} className="img-sm-checkout rounded border" />
+              </div>
+              <div className="">
+                <a href="#" className="nav-link">
+                  {item.name}
+                </a>
+                <div className="price text-muted">${item.price}</div>
+              </div>
+            </div>
+          ))}
+
+          
           <div className="mt-4 mt-lg-0 w-100">
             <h6 className="mb-3">Summary</h6>
             <div className="d-flex justify-content-between">

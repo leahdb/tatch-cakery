@@ -121,24 +121,6 @@ const Cart = () => {
         </div>
         <div className="col-lg-4">
           <div className="m-4">
-            <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
-              <div className="card-body">
-                <form>
-                  <div className="form-group">
-                    <label className="form-label">Have promo code?</label>
-                    <div className="input-group border">
-                      <input
-                        type="text"
-                        className="form-control border-0 bg-light-beige-input"
-                        name=""
-                        placeholder="Promo code"
-                      />
-                      <button className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown">Apply</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
             <div className="card rounded-0 bg-light-beige shadow-0 border-light-beige border">
               <div className="card-body">
                 <div className="d-flex justify-content-between">
