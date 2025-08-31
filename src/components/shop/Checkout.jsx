@@ -12,9 +12,6 @@ const Checkout = ({setCartCount}) => {
     "Chouf": ["Naameh", "Damour", "Haret El Naameh", "Mechref"],
   };
 
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-
   const [form, setForm] = useState({
     contact_number: "",
     first_name: "",
@@ -107,13 +104,11 @@ const Checkout = ({setCartCount}) => {
                   <p className="mb-0">District</p>
                   <select
                     className="form-select"
-                    value={selectedState}
+                    value={form.state}
                     onChange={(e) => {
-                      setForm(prev => ({ ...prev, ["district"]: selectedState }));
-                      setSelectedState(e.target.value);
-                      setSelectedCity(""); // reset city when state changes
+                      setForm(prev => ({ ...prev, state: e.target.value, city: "" }));
                     }}
-                    name="district" required
+                    name="state" required
                   >
                     <option value="">Select District</option>
                     {Object.keys(deliveryAreas).sort().map((state) => (
@@ -129,17 +124,16 @@ const Checkout = ({setCartCount}) => {
                   <p className="mb-0">City</p>
                   <select
                     className="form-select"
-                    value={selectedCity}
+                    value={form.city}
                     onChange={(e) => {
-                      setForm(prev => ({ ...prev, ["city"]: selectedCity }))
-                      setSelectedCity(e.target.value)
+                      setForm(prev => ({ ...prev, city: e.target.value }));
                     }}
-                    name="district" required
-                    disabled={!selectedState} // disable if no state chosen
+                    name="city" required
+                    disabled={!form.state}
                   >
                     <option value="">Select City</option>
-                    {selectedState &&
-                      deliveryAreas[selectedState].slice().sort().map((city) => (
+                    {form.state &&
+                      deliveryAreas[form.state].slice().sort().map((city) => (
                         <option key={city} value={city}>
                           {city}
                         </option>
