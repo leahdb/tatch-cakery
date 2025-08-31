@@ -34,13 +34,16 @@ export const remove_from_cart = (product_id) => {
   }).then((res) => res.json());
 };
 
-export const checkout = (payload) =>
-  fetch(API_HOST + "checkout", {
+export const checkout = (payload) => {
+  return fetch(API_HOST + "checkout", {
     method: "POST",
     credentials: "include",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: { 
+      "Content-Type": "application/json" 
+    },
+    body: JSON.stringify({ payload }),
   }).then((res) => res.json());
+};
 
 // export const fetch_shop_product = (id) => {
 //   return fetch(API_HOST + id, {
