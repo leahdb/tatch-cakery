@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useCart } from "./UseCart";
 import { checkout } from "../../services/shop/cart";
@@ -35,6 +35,25 @@ const Checkout = ({setCartCount}) => {
   
   const { cart, totalItems, totalPrice, loading } = useCart();
 
+  const fmt = (n) => `$${Number(n || 0).toFixed(2)}`;
+
+  const computeDeliveryFee = (city) => {
+    if (!city) return 0;
+    const group1 = ["Aramoun","Bchamoun","Choueifat","Khalde","Naameh","Damour","Haret El Naameh","Mechref","Antelias","Bouchrieh","Bourj Hammoud","Dbayeh","Dekwaneh","Mansourieh","Jal el Dib","Jdeideh","Zalka"];
+    const group2 = ["Sin el Fil","Ain el Remmaneh","Bourj el-Barajneh","Chiyah","Furn el Chebbak","Ghbeireh","Hadath","Haret Hreik","Hazmieh","Laylakeh"];
+    if (group1.includes(city)) return 4;
+    if (group2.includes(city)) return 3;
+    return 2; 
+  };
+
+  const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
+
+  const discount = 0;
+
+  const total = useMemo(() => {
+    return Number(totalPrice) - Number(discount) + Number(shipping || 0);
+  }, [totalPrice, discount, shipping]);
+
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
@@ -48,8 +67,6 @@ const Checkout = ({setCartCount}) => {
       setCartCount(0);
     });
   };
-
-  const fmt = (n) => `$${n.toFixed(2)}`;
 
   if (loading) return (
     <div className="d-flex align-items-center" style={{height: "100vh"}}>
@@ -240,16 +257,16 @@ const Checkout = ({setCartCount}) => {
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount</p>
-                <p className="mb-2 text-primary">-$60.00</p>
+                <p className="mb-2 text-primary">{fmt(discount)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Shipping</p>
-                <p className="mb-2 text-primary">$5.00</p>
+                <p className="mb-2 text-primary">{form.city ? fmt(shipping) : <span className="small">Calculated after address</span>}</p>
               </div>
               <hr />
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Total</p>
-                <p className="mb-2 fw-bold">{fmt(totalPrice)}</p>
+                <p className="mb-2 fw-bold">{fmt(total)}</p>
               </div>
             </div>
           </div>
