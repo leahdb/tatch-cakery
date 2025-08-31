@@ -38,6 +38,7 @@ export const checkout = (payload) => {
   return fetch(API_HOST + "checkout", {
     method: "POST",
     credentials: "include",
+    redirect: 'manual',
     headers: { 
       "Content-Type": "application/json" 
     },
