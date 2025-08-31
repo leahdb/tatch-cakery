@@ -40,7 +40,8 @@ export const checkout = (payload) => {
     credentials: "include",
     redirect: 'manual',
     headers: { 
-      "Content-Type": "application/json" 
+      "Content-Type": "application/json",
+      'Accept': 'application/json'
     },
     body: JSON.stringify({ payload }),
   }).then((res) => res.json());
