@@ -45,6 +45,15 @@ const Cart = () => {
     });
   };
 
+  if (cart.length === 0) {
+    <div className="d-flex align-items-center text center" style={{height: "100vh"}}>
+      <h3 className="text-primary">Bag is empty</h3>
+        <a className="btn btn-secondary" href="/">
+          Start Shoppoing
+        </a>
+    </div>
+  }
+
   return (
     <div className="container my-5">
       <div className="row">
