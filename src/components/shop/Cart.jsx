@@ -62,11 +62,13 @@ const Cart = () => {
 
   if (totalItems === 0) {
     return (
-      <div className="d-flex align-items-center text center" style={{height: "100vh"}}>
-        <h3 className="text-primary">Bag is empty</h3>
-          <a className="btn btn-secondary" href="/">
+      <div className="d-flex align-items-center" style={{height: "100vh"}}>
+        <div className="text-center">
+          <h4 className="text-primary">Bag is empty</h4>
+          <a className="btn btn-primary rounded-0" href="/">
             Start Shopping
           </a>
+        </div>
       </div>
     );
   }

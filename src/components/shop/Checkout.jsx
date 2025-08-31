@@ -229,7 +229,7 @@ const Checkout = ({setCartCount}) => {
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Shipping</p>
-                <p className="mb-2 text-primary">Calculated on checkout</p>
+                <p className="mb-2 text-primary">$5.00</p>
               </div>
               <hr />
               <div className="d-flex justify-content-between">
