@@ -281,7 +281,7 @@ const Checkout = ({setCartCount}) => {
                     </button>
                   )}
                 </div>
-                {promoError && <small className="text-danger">{promoError}</small>}
+                {promoError && <small className="text-danger">Invalid or inactive code</small>}
                 {promo && <small className="text-success">Applied: {promo.label || promo.code}</small>}
               </div>
             </div>
