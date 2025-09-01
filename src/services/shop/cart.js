@@ -47,24 +47,24 @@ export const checkout = (payload) => {
   }).then((res) => res.json());
 };
 
-// export const fetch_shop_product = (id) => {
-//   return fetch(API_HOST + id, {
-//     method: "GET",
-//     credentials: "include",
-//     secure: true,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   }).then((res) => res.json());
-// };
+export const apply_coupon = ({ code, city }) => {
+  return fetch(API_HOST + "apply-coupon", {
+    method: "POST",
+    credentials: "include",
+    redirect: 'manual',
+    headers: { 
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ code, city }),
+  }).then((res) => res.json());
+};
 
-// export const search_shop_products = (searchQuery) => {
-//   return fetch(`${SEARCH_API}?query=${searchQuery}&type=product`, {
-//     method: "GET",
-//     credentials: "include",
-//     secure: true,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   }).then((res) => res.json());
-// };
+export const remove_coupon = async () => {
+  return fetch(API_HOST + "coupon", {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+};

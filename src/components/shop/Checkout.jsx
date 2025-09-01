@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useCart } from "./UseCart";
-import { checkout } from "../../services/shop/cart";
+import { checkout, apply_coupon, remove_coupon } from "../../services/shop/cart";
 
 const Checkout = ({setCartCount}) => {
   const deliveryAreas = {
@@ -20,7 +20,6 @@ const Checkout = ({setCartCount}) => {
     state: "",
     city: "",
     street: "",
-    address: "",
     building: "",
     note: "",
     delivery_date: "",
@@ -46,13 +45,38 @@ const Checkout = ({setCartCount}) => {
     return 2; 
   };
 
-  const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
+  const [promoInput, setPromoInput] = useState("");
+  const [promo, setPromo] = useState(null);
+  const [discount, setDiscount] = useState(0);
+  const [promoError, setPromoError] = useState(null);
+  const [applying, setApplying] = useState(false);
 
-  const discount = 0;
+  const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
 
   const total = useMemo(() => {
     return Number(totalPrice) - Number(discount) + Number(shipping || 0);
   }, [totalPrice, discount, shipping]);
+
+  const handleApply = async (e) => {
+    e?.preventDefault();
+    if (!promoInput) return;
+    setApplying(true); setPromoError(null);
+    try {
+      const data = await apply_coupon({ code: promoInput });
+      setPromo(data.coupon);
+      setDiscount(Number(data.pricing.discount || 0));
+    } catch (err) {
+      setPromo(null); setDiscount(0);
+      setPromoError(err.message);
+    } finally { setApplying(false); }
+  };
+
+  const handleRemovePromo = async (e) => {
+    e?.preventDefault();
+    try { await remove_coupon(); } finally {
+      setPromo(null); setDiscount(0); setPromoError(null);
+    }
+  };
 
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -179,13 +203,6 @@ const Checkout = ({setCartCount}) => {
                 </div>
 
                 <div className="col-12 mb-3">
-                  <p className="mb-0">Address</p>
-                  <div className="form-outline">
-                    <input type="text" id="typeEmail" placeholder="" className="form-control" name="address" onChange={onChange} />
-                  </div>
-                </div>
-
-                <div className="col-12 mb-3">
                   <p className="mb-0">Building, apartment, floor, ect.</p>
                   <div className="form-outline">
                     <input type="text" id="typeEmail" placeholder="" className="form-control" name="building" onChange={onChange} />
@@ -233,20 +250,40 @@ const Checkout = ({setCartCount}) => {
         <div className="col-xl-4 col-lg-4 px-5">
           <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
             <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label className="form-label">Have promo code?</label>
-                  <div className="input-group border">
-                    <input
-                      type="text"
-                      className="form-control border-0 bg-light-beige-input"
-                      name=""
-                      placeholder="Promo code"
-                    />
-                    <button className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown">Apply</button>
-                  </div>
+              <div className="form-group">
+                <label className="form-label">Have promo code?</label>
+                <div className="input-group border">
+                  <input
+                    type="text"
+                    className="form-control border-0 bg-light-beige-input"
+                    placeholder="Promo code"
+                    value={promoInput}
+                    onChange={(e) => setPromoInput(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleApply(e); } }}
+                    disabled={!!promo || applying}
+                  />
+                  {promo ? (
+                    <button
+                      type="button"
+                      className="btn btn-light border-0 bg-light-beige-input text-danger"
+                      onClick={handleRemovePromo}
+                    >
+                      Remove
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-light border-0 bg-light-beige-input remove-cart text-light-brown"
+                      onClick={handleApply}
+                      disabled={applying || !promoInput.trim()}
+                    >
+                      {applying ? 'Applying...' : 'Apply'}
+                    </button>
+                  )}
                 </div>
-              </form>
+                {promoError && <small className="text-danger">{promoError}</small>}
+                {promo && <small className="text-success">Applied: {promo.label || promo.code}</small>}
+              </div>
             </div>
           </div>
           <div className="card rounded-0 bg-light-beige shadow-0 border-light-beige border">
@@ -257,7 +294,7 @@ const Checkout = ({setCartCount}) => {
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount</p>
-                <p className="mb-2 text-primary">{fmt(discount)}</p>
+                <p className="mb-2 text-primary">{fmt(promo ? discount : 0)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Shipping</p>
