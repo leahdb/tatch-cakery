@@ -3,6 +3,73 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useCart } from "./UseCart";
 import { checkout, apply_coupon, remove_coupon } from "../../services/shop/cart";
 
+const TZ = "Asia/Beirut";
+
+// Formats "Mon, Sep 01"
+const formatDateLabel = (d) =>
+  new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ, weekday: "short", month: "short", day: "2-digit"
+  }).format(d);
+
+// Formats "10:00 AM"
+const formatTimeLabel = (d) =>
+  new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: true
+  }).format(d);
+
+// YYYY-MM-DD (safe for inputs/values)
+const toISODate = (d) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+
+// Round up to next :00 or :30
+const ceilToNextHalfHour = (date) => {
+  const d = new Date(date.getTime());
+  d.setSeconds(0, 0);
+  const m = d.getMinutes();
+  if (m === 0 || m === 30) return d;
+  if (m < 30) d.setMinutes(30);
+  else {
+    d.setMinutes(0);
+    d.setHours(d.getHours() + 1);
+  }
+  return d;
+};
+
+// Build next N days (today inclusive)
+const buildDateOptions = (days = 30) => {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  return Array.from({ length: days + 1 }).map((_, i) => {
+    const d = new Date(today.getTime());
+    d.setDate(d.getDate() + i);
+    return { value: toISODate(d), label: formatDateLabel(d) };
+  });
+};
+
+// Build 30-min slots between 10:00 → 22:00 for a given date
+const buildTimeSlots = (isoDate, includePastForNonToday = false) => {
+  if (!isoDate) return [];
+  const start = new Date(`${isoDate}T10:00:00`); // local time
+  const end   = new Date(`${isoDate}T22:00:00`);
+  const now   = new Date();
+  const isToday = isoDate === toISODate(now);
+
+  const earliest = isToday ? ceilToNextHalfHour(now) : start;
+
+  const slots = [];
+  for (let t = new Date(start); t < end; t = new Date(t.getTime() + 30 * 60000)) {
+    const t2 = new Date(t.getTime() + 30 * 60000);
+    // Skip past slots for today
+    if (isToday && t < earliest) continue;
+    // Build label/value
+    const label = `${formatTimeLabel(t)} - ${formatTimeLabel(t2)}`;
+    // Value can be "startISO|endISO" or just label; choose what your backend prefers
+    const value = `${t.toISOString()}|${t2.toISOString()}`;
+    slots.push({ value, label });
+  }
+  return slots;
+};
+
 const Checkout = ({setCartCount}) => {
   const deliveryAreas = {
     "Beirut": ["Manara", "Hamra", "Achrafieh", "Verdun", "Raouché", "Qoreitem", "Ain el-Tineh", "Clemenceau", "Sanyeh", "Tallet el-Khayat", "Mar Elias", "Zuqaq al-Blat", "Batrakieh", "Mina el-Hosn", "Qantari", "Down Town", "Basta el-Tahta", "Bachoura", "Burj Abi Haidar", "Basta el-Faouqa", "Ras el-Nabaa", "Mazraa", "Tariq el-Jdideh", "Sioufi", "Sodeco", "Saifi", "Gemmayzeh", "Badaro", "Mar Mikhaël"],
@@ -50,6 +117,24 @@ const Checkout = ({setCartCount}) => {
   const [discount, setDiscount] = useState(0);
   const [promoError, setPromoError] = useState(null);
   const [applying, setApplying] = useState(false);
+
+  const [fulfillmentType, setFulfillmentType] = useState("now"); // "now" | "schedule"
+  const [dateOptions, setDateOptions] = useState(() => buildDateOptions(30));
+  const [timeOptions, setTimeOptions] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(toISODate(new Date()));
+  const [selectedSlot, setSelectedSlot] = useState("");
+
+  useEffect(() => {
+    if (fulfillmentType === "schedule") {
+      const slots = buildTimeSlots(selectedDate);
+      setTimeOptions(slots);
+      // auto-pick first available slot if none is chosen yet
+      if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
+    } else {
+      setTimeOptions([]);
+      setSelectedSlot("");
+    }
+  }, [fulfillmentType, selectedDate]);
 
   const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
 
@@ -213,6 +298,76 @@ const Checkout = ({setCartCount}) => {
               <hr className="my-4" />
 
               <h5 className="card-title mb-3">Delivery</h5>
+              <div className="row">
+                {/* Now vs Schedule toggle */}
+                <div className="col-12 mb-3">
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="deliveryNow"
+                      name="fulfillmentType"
+                      value="now"
+                      checked={fulfillmentType === "now"}
+                      onChange={() => setFulfillmentType("now")}
+                    />
+                    <label className="form-check-label" htmlFor="deliveryNow">Now (ASAP)</label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="deliverySchedule"
+                      name="fulfillmentType"
+                      value="schedule"
+                      checked={fulfillmentType === "schedule"}
+                      onChange={() => setFulfillmentType("schedule")}
+                    />
+                    <label className="form-check-label" htmlFor="deliverySchedule">Schedule</label>
+                  </div>
+                </div>
+
+                {/* Date */}
+                <div className="col-12 col-md-6 mb-3">
+                  <p className="mb-0">Delivery Date</p>
+                  <select
+                    className="form-select"
+                    disabled={fulfillmentType !== "schedule"}
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    required={fulfillmentType === "schedule"}
+                  >
+                    {dateOptions.map((d) => (
+                      <option key={d.value} value={d.value}>{d.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Time slot */}
+                <div className="col-12 col-md-6 mb-3">
+                  <p className="mb-0">Delivery Time</p>
+                  <select
+                    className="form-select"
+                    disabled={fulfillmentType !== "schedule"}
+                    value={selectedSlot}
+                    onChange={(e) => setSelectedSlot(e.target.value)}
+                    required={fulfillmentType === "schedule"}
+                  >
+                    {timeOptions.length === 0 && (
+                      <option value="">No slots left today — pick another date</option>
+                    )}
+                    {timeOptions.map((t) => (
+                      <option key={t.value} value={t.value}>{t.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Note */}
+                <div className="col-12 mb-3">
+                  <p className="mb-0">Delivery Note</p>
+                  <input type="text" className="form-control" name="note" onChange={onChange} />
+                </div>
+              </div>
               <div className="row">
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">Delivery Date</p>
