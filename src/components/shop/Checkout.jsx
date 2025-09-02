@@ -225,9 +225,12 @@ const Checkout = ({setCartCount}) => {
     const payload = { ...form };
     if (type === "now") {
       payload.delivery_type = "now";
+      payload.delivery_date = "now"
+      payload.delivery_time = "now"
     } else {
       payload.delivery_type = "schedule";
       payload.delivery_date = date;
+      payload.delivery_time = selectedSlot;
       const [fromISO, toISO] = (slot || "").split("|");
       payload.delivery_from = fromISO;
       payload.delivery_to   = toISO;
