@@ -211,7 +211,7 @@ const Checkout = ({setCartCount}) => {
           <div className="card mb-4 border shadow-0">
             <div className="p-4">
               <h5 className="card-title mb-3">Contact</h5>
-              <input type="text" id="typeText" name="contact_number" placeholder="mobile phone number" className="form-control" onChange={onChange} required/>
+              <input type="tel" id="typeText" name="contact_number" placeholder="mobile phone number" className="form-control" onChange={onChange} required/>
             </div>
           </div>
           <div className="card mb-4 shadow-0 border">
@@ -311,7 +311,7 @@ const Checkout = ({setCartCount}) => {
                       checked={fulfillmentType === "now"}
                       onChange={() => setFulfillmentType("now")}
                     />
-                    <label className="form-check-label" htmlFor="deliveryNow">Now (ASAP)</label>
+                    <label className="form-check-label" htmlFor="deliveryNow">Now (in 30 - 60 mins)</label>
                   </div>
                   <div className="form-check form-check-inline">
                     <input
@@ -323,71 +323,48 @@ const Checkout = ({setCartCount}) => {
                       checked={fulfillmentType === "schedule"}
                       onChange={() => setFulfillmentType("schedule")}
                     />
-                    <label className="form-check-label" htmlFor="deliverySchedule">Schedule</label>
+                    <label className="form-check-label" htmlFor="deliverySchedule">Schedule for later</label>
                   </div>
                 </div>
-
-                {/* Date */}
-                <div className="col-12 col-md-6 mb-3">
-                  <p className="mb-0">Delivery Date</p>
-                  <select
-                    className="form-select"
-                    disabled={fulfillmentType !== "schedule"}
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    required={fulfillmentType === "schedule"}
-                  >
-                    {dateOptions.map((d) => (
-                      <option key={d.value} value={d.value}>{d.label}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Time slot */}
-                <div className="col-12 col-md-6 mb-3">
-                  <p className="mb-0">Delivery Time</p>
-                  <select
-                    className="form-select"
-                    disabled={fulfillmentType !== "schedule"}
-                    value={selectedSlot}
-                    onChange={(e) => setSelectedSlot(e.target.value)}
-                    required={fulfillmentType === "schedule"}
-                  >
-                    {timeOptions.length === 0 && (
-                      <option value="">No slots left today — pick another date</option>
-                    )}
-                    {timeOptions.map((t) => (
-                      <option key={t.value} value={t.value}>{t.label}</option>
-                    ))}
-                  </select>
-                </div>
-
+                {fulfillmentType === "schedule"  && (
+                  <div className="col-12 col-md-6 mb-3">
+                    <p className="mb-0">Delivery Date</p>
+                    <select
+                      className="form-select"
+                      disabled={fulfillmentType !== "schedule"}
+                      value={selectedDate}
+                      onChange={(e) => setSelectedDate(e.target.value)}
+                      required={fulfillmentType === "schedule"}
+                    >
+                      {dateOptions.map((d) => (
+                        <option key={d.value} value={d.value}>{d.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                {fulfillmentType === "schedule"  && (
+                  <div className="col-12 col-md-6 mb-3">
+                    <p className="mb-0">Delivery Time</p>
+                    <select
+                      className="form-select"
+                      disabled={fulfillmentType !== "schedule"}
+                      value={selectedSlot}
+                      onChange={(e) => setSelectedSlot(e.target.value)}
+                      required={fulfillmentType === "schedule"}
+                    >
+                      {timeOptions.length === 0 && (
+                        <option value="">No slots left today — pick another date</option>
+                      )}
+                      {timeOptions.map((t) => (
+                        <option key={t.value} value={t.value}>{t.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 {/* Note */}
                 <div className="col-12 mb-3">
                   <p className="mb-0">Delivery Note</p>
                   <input type="text" className="form-control" name="note" onChange={onChange} />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12 col-md-6 mb-3">
-                  <p className="mb-0">Delivery Date</p>
-                  <div className="form-outline">
-                    <input type="date" id="typeText" placeholder="date" className="form-control" name="delivery_date" onChange={onChange} required />
-                  </div>
-                </div>
-
-                <div className="col-12 col-md-6 mb-3">
-                  <p className="mb-0">Delivery Time</p>
-                  <div className="form-outline">
-                    <input type="time" id="typeText" placeholder="time" className="form-control" name="delivery_time" onChange={onChange} required />
-                  </div>
-                </div>
-
-                <div className="col-12 mb-3">
-                  <p className="mb-0">Delivery Note</p>
-                  <div className="form-outline">
-                    <input type="text" id="typeText" placeholder="last name" className="form-control" name="note" onChange={onChange} />
-                  </div>
                 </div>
               </div>
             </div>
