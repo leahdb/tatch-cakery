@@ -442,7 +442,16 @@ const Checkout = ({setCartCount}) => {
           <div className="card mb-4 border shadow-0">
             <div className="p-4">
               <h5 className="card-title mb-3">Payment Method</h5>
-              <input type="text" id="typeText" placeholder="mobile phone number" className="form-control" />
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  id="paymentMethod"
+                  name="paymentMethod"
+                  disabled
+                />
+                <label className="form-check-label" htmlFor="paymentMethod">Cash on delivery</label>
+              </div>
             </div>
           </div>
           <div className="w-100">
