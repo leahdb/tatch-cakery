@@ -21,53 +21,60 @@ const formatTimeLabel = (d) =>
 const toISODate = (d) =>
   new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
 
+
 // Round up to next :00 or :30
 const ceilToNextHalfHour = (date) => {
-  const d = new Date(date.getTime());
+  const d = new Date(date);
   d.setSeconds(0, 0);
   const m = d.getMinutes();
   if (m === 0 || m === 30) return d;
   if (m < 30) d.setMinutes(30);
-  else {
-    d.setMinutes(0);
-    d.setHours(d.getHours() + 1);
+  else { 
+    d.setMinutes(0); 
+    d.setHours(d.getHours() + 1); 
   }
   return d;
 };
 
 // Build next N days (today inclusive)
-const buildDateOptions = (days = 30) => {
+const buildDateOptions = (days = 30, startOffsetDays = 0) => {
   const today = new Date();
   today.setHours(0,0,0,0);
-  return Array.from({ length: days + 1 }).map((_, i) => {
-    const d = new Date(today.getTime());
-    d.setDate(d.getDate() + i);
+  return Array.from({ length: days + 1 - startOffsetDays }).map((_, i) => {
+    const d = new Date(today);
+    d.setDate(d.getDate() + startOffsetDays + i);
     return { value: toISODate(d), label: formatDateLabel(d) };
   });
 };
 
 // Build 30-min slots between 10:00 → 22:00 for a given date
-const buildTimeSlots = (isoDate, includePastForNonToday = false) => {
+const buildTimeSlots = (isoDate) => {
   if (!isoDate) return [];
-  const start = new Date(`${isoDate}T10:00:00`); // local time
+  const start = new Date(`${isoDate}T10:00:00`);
   const end   = new Date(`${isoDate}T22:00:00`);
   const now   = new Date();
   const isToday = isoDate === toISODate(now);
-
   const earliest = isToday ? ceilToNextHalfHour(now) : start;
 
   const slots = [];
   for (let t = new Date(start); t < end; t = new Date(t.getTime() + 30 * 60000)) {
     const t2 = new Date(t.getTime() + 30 * 60000);
-    // Skip past slots for today
-    if (isToday && t < earliest) continue;
-    // Build label/value
-    const label = `${formatTimeLabel(t)} - ${formatTimeLabel(t2)}`;
-    // Value can be "startISO|endISO" or just label; choose what your backend prefers
-    const value = `${t.toISOString()}|${t2.toISOString()}`;
-    slots.push({ value, label });
+    if (isToday && t < earliest) continue; // hide past slots
+    slots.push({
+      value: `${t.toISOString()}|${t2.toISOString()}`,
+      label: `${formatTimeLabel(t)} - ${formatTimeLabel(t2)}`
+    });
   }
   return slots;
+};
+
+const isAfter9pmBeirut = () => {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: TZ, hour: "numeric", minute: "numeric", hour12: false
+  }).formatToParts(new Date());
+  const h = Number(parts.find(p => p.type === "hour").value);
+  const m = Number(parts.find(p => p.type === "minute").value);
+  return h > 21 || (h === 21 && m >= 0);
 };
 
 const Checkout = ({setCartCount}) => {
@@ -118,22 +125,43 @@ const Checkout = ({setCartCount}) => {
   const [promoError, setPromoError] = useState(null);
   const [applying, setApplying] = useState(false);
 
-  const [fulfillmentType, setFulfillmentType] = useState("now"); // "now" | "schedule"
+  const [fulfillmentType, setFulfillmentType] = useState("now");
   const [dateOptions, setDateOptions] = useState(() => buildDateOptions(30));
   const [timeOptions, setTimeOptions] = useState([]);
   const [selectedDate, setSelectedDate] = useState(toISODate(new Date()));
   const [selectedSlot, setSelectedSlot] = useState("");
 
+  const hasCustom = useMemo(() => cart?.some(it => Number(it.product_id) === 6), [cart]);
+  const after9pm  = useMemo(isAfter9pmBeirut, []);
+  const nowDisabled = hasCustom || after9pm;
+
+  // If "Now" is disabled: force Schedule and start dates from tomorrow
   useEffect(() => {
-    if (fulfillmentType === "schedule") {
-      const slots = buildTimeSlots(selectedDate);
-      setTimeOptions(slots);
-      // auto-pick first available slot if none is chosen yet
-      if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
+    const startOffsetDays = nowDisabled ? 1 : 0;
+    const opts = buildDateOptions(30, startOffsetDays);
+    setDateOptions(opts);
+
+    if (nowDisabled) {
+      setFulfillmentType("schedule");
+      setSelectedDate(opts[0]?.value);
     } else {
-      setTimeOptions([]);
-      setSelectedSlot("");
+      // keep current selectedDate if still in the list; else reset to today
+      const stillValid = opts.some(o => o.value === selectedDate);
+      if (!stillValid) setSelectedDate(opts[0]?.value);
     }
+  }, [nowDisabled]);
+
+  useEffect(() => {
+    if (fulfillmentType !== "schedule") { setTimeOptions([]); setSelectedSlot(""); return; }
+    let slots = buildTimeSlots(selectedDate);
+    if (slots.length === 0) {
+      // move to tomorrow first slot
+      const opts = buildDateOptions(30, 1);
+      setSelectedDate(opts[0]?.value);
+      slots = buildTimeSlots(opts[0]?.value);
+    }
+    setTimeOptions(slots);
+    if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
   }, [fulfillmentType, selectedDate]);
 
   const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
@@ -168,13 +196,46 @@ const Checkout = ({setCartCount}) => {
     setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
+  // const onSubmit = (e) => {
+  //   e.preventDefault(); 
+  //   setError(null);
+  //   checkout(form).then((res) => {
+  //     setSuccess("Order placed successfully");
+  //     setCartCount(0);
+  //   });
+  // };
+
   const onSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setError(null);
-    checkout(form).then((res) => {
-      setSuccess("Order placed successfully");
-      setCartCount(0);
-    });
+
+    // If "Now" is disabled but somehow selected, force schedule for tomorrow
+    let type = fulfillmentType;
+    let date = selectedDate;
+    let slot = selectedSlot;
+
+    if (nowDisabled || type !== "schedule" && nowDisabled) {
+      type = "schedule";
+      const opts = buildDateOptions(30, 1);
+      date = opts[0]?.value;
+      const slots = buildTimeSlots(date);
+      slot = slots[0]?.value || "";
+    }
+
+    const payload = { ...form };
+    if (type === "now") {
+      payload.delivery_type = "now";
+    } else {
+      payload.delivery_type = "schedule";
+      payload.delivery_date = date;
+      const [fromISO, toISO] = (slot || "").split("|");
+      payload.delivery_from = fromISO;
+      payload.delivery_to   = toISO;
+    }
+
+    checkout(payload)
+      .then(() => { setSuccess("Order placed successfully"); setCartCount(0); })
+      .catch(() => setError("Something went wrong, please try again."));
   };
 
   if (loading) return (
@@ -310,8 +371,14 @@ const Checkout = ({setCartCount}) => {
                       value="now"
                       checked={fulfillmentType === "now"}
                       onChange={() => setFulfillmentType("now")}
+                      disabled={nowDisabled}
                     />
                     <label className="form-check-label" htmlFor="deliveryNow">Now (in 30 - 60 mins)</label>
+                    {nowDisabled && (
+                      <small className="text-muted ms-2 d-block">
+                        {hasCustom ? "Custom items require scheduling for tomorrow." : "Orders after 9:00 PM are for tomorrow."}
+                      </small>
+                    )}
                   </div>
                   <div className="form-check form-check-inline">
                     <input
