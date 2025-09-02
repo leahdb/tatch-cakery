@@ -130,6 +130,13 @@ const Checkout = ({setCartCount}) => {
   const [timeOptions, setTimeOptions] = useState([]);
   const [selectedDate, setSelectedDate] = useState(toISODate(new Date()));
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [selectedTimeLabel, setSelectedTimeLabel] = useState("now");
+
+  const onSlotChange = (e) => {
+    setSelectedSlot(e.target.value);
+    const label = e.target.selectedOptions?.[0]?.dataset.label || e.target.selectedOptions?.[0]?.text || "";
+    setSelectedTimeLabel(label);
+  };
 
   const hasCustom = useMemo(() => cart?.some(it => Number(it.product_id) === 6), [cart]);
   const after9pm  = useMemo(isAfter9pmBeirut, []);
@@ -196,15 +203,6 @@ const Checkout = ({setCartCount}) => {
     setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault(); 
-  //   setError(null);
-  //   checkout(form).then((res) => {
-  //     setSuccess("Order placed successfully");
-  //     setCartCount(0);
-  //   });
-  // };
-
   const onSubmit = (e) => {
     e.preventDefault();
     setError(null);
@@ -223,6 +221,9 @@ const Checkout = ({setCartCount}) => {
     }
 
     const payload = { ...form };
+
+    payload.coupon_code = promoInput;
+
     if (type === "now") {
       payload.delivery_type = "now";
       payload.delivery_date = "now"
@@ -230,7 +231,7 @@ const Checkout = ({setCartCount}) => {
     } else {
       payload.delivery_type = "schedule";
       payload.delivery_date = date;
-      payload.delivery_time = selectedSlot;
+      payload.delivery_time = selectedTimeLabel;
       const [fromISO, toISO] = (slot || "").split("|");
       payload.delivery_from = fromISO;
       payload.delivery_to   = toISO;
@@ -419,7 +420,7 @@ const Checkout = ({setCartCount}) => {
                       className="form-select"
                       disabled={fulfillmentType !== "schedule"}
                       value={selectedSlot}
-                      onChange={(e) => setSelectedSlot(e.target.value)}
+                      onChange={onSlotChange}
                       required={fulfillmentType === "schedule"}
                     >
                       {timeOptions.length === 0 && (
@@ -448,7 +449,7 @@ const Checkout = ({setCartCount}) => {
                   type="radio"
                   id="paymentMethod"
                   name="paymentMethod"
-                  disabled
+                  checked
                 />
                 <label className="form-check-label" htmlFor="paymentMethod">Cash on delivery</label>
               </div>
