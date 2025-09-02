@@ -268,7 +268,7 @@ const Checkout = ({setCartCount}) => {
       {success && <div className="alert alert-success">{success}</div>}
     <form onSubmit={onSubmit}>
       <div className="row">
-        <div className="col-xl-8 col-lg-8 mb-4 px-5">
+        <div className="col-xl-8 col-lg-8 mb-4 px-4 px-md-5">
           <div className="card mb-4 border shadow-0">
             <div className="p-4">
               <h5 className="card-title mb-3">Contact</h5>
@@ -361,7 +361,7 @@ const Checkout = ({setCartCount}) => {
               <h5 className="card-title mb-3">Delivery</h5>
               <div className="row">
                 {/* Now vs Schedule toggle */}
-                <div className="col-12 mb-3">
+                <div className="col-12 mb-3 d-md-flex align-items-start">
                   <div className="form-check form-check-inline">
                     <input
                       className="form-check-input"
@@ -446,7 +446,7 @@ const Checkout = ({setCartCount}) => {
             <button type="submit" className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
           </div>
         </div>
-        <div className="col-xl-4 col-lg-4 px-5">
+        <div className="col-xl-4 col-lg-4 px-4 px-md-5">
           <div className="card mb-3 border shadow-0 rounded-0 bg-light-beige border-light-beige">
             <div className="card-body">
               <div className="form-group">
