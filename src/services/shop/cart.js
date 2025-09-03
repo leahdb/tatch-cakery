@@ -23,6 +23,17 @@ export const fetch_cart = () => {
   }).then((res) => res.json());
 };
 
+export const update_cart = (product_id, quantity) => {
+  return fetch(API_HOST + "update", {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ product_id, quantity }),
+  }).then((res) => res.json());
+};
+
 export const remove_from_cart = (product_id) => {
   return fetch(API_HOST + "remove", {
     method: "DELETE",

@@ -255,7 +255,7 @@ const Checkout = ({setCartCount}) => {
 
   if (totalItems === 0) {
     return (
-      <div className="d-flex align-items-center" style={{height: "100vh"}}>
+      <div className="d-flex align-items-center justify-content-center" style={{height: "100vh"}}>
         <div className="text-center">
           <h4 className="text-primary">Bag is empty</h4>
           <a className="btn btn-primary rounded-0" href="/">

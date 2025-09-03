@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useCart } from "./UseCart";
-import { remove_from_cart } from "../../services/shop/cart";
+import { remove_from_cart, update_cart } from "../../services/shop/cart";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Cart = () => {
@@ -30,15 +30,40 @@ const Cart = () => {
     </div>
   );
 
-  const updateQty = (id, delta) => {
+  const updateQty = (product_id, delta) => {
+    const current = cart.find(it => it.product_id === product_id);
+    if (!current) return;
+    const nextQty = Math.max(1, current.quantity + delta);
+
     setCart(curr =>
       curr.map(it =>
-        it.id === id
-          ? { ...it, quantity: Math.max(1, it.quantity + delta) }
+        it.product_id === product_id
+          ? { ...it, quantity: nextQty }
           : it
       )
     );
+
+    update_cart(product_id, nextQty)
+        .then(res => {
+          const items = Object.entries(res.cart || {}).map(([key, v]) => ({
+            id: key,
+            product_id: v.product_id,
+            name: v.name,
+            quantity: v.quantity,
+            price: v.price,
+            slug: v.slug,
+            image: v.image || "/placeholder.jpg",
+            subtotal: v.price * v.quantity,
+          }));
+          setCart(items);
+          setTotalItems(res.total_items);
+          setTotalPrice(res.total_price);
+        })
+        .catch(err => {
+          console.error("Update failed", err);
+        });
   };
+
 
   const handleRemove = (e, id) => {
     e.preventDefault();
@@ -109,7 +134,7 @@ const Cart = () => {
                     <button
                       className="btn color-primary fs-6 border-0"
                       type="button"
-                      onClick={() => updateQty(item.id, -1)}
+                      onClick={() => updateQty(item.product_id, -1)}
                       disabled={item.quantity <= 1}
                     >
                       −
@@ -123,7 +148,7 @@ const Cart = () => {
                     <button
                       className="btn color-primary fs-6 border-0"
                       type="button"
-                      onClick={() => updateQty(item.id, +1)}
+                      onClick={() => updateQty(item.product_id, +1)}
                     >
                       +
                     </button>
