@@ -42,10 +42,14 @@ const ProductListing = () => {
   return (
     <div className="container my-5">
       <div>
+        <h1></h1>  // i need to convert slug to title
         <div className="row g-3">
           {products.map((product) => (
             <div key={product.id} className="col-lg-3 col-6 d-flex">
-              <div className="card newest w-100 my-2 shadow">
+              <a 
+                href={`/products/${product.slug}`} 
+                className="card newest w-100 my-2 shadow"
+              >
                 <div className="d-flex justify-content-center">
                   <img
                     src={product.image_url}
@@ -61,7 +65,7 @@ const ProductListing = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>
