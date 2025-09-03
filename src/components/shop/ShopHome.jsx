@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import ShopHeader from "./ShopHeader";
 import ShopMain from "./ShopMain";
 import ComingSoon from "./ComingSoon";
-import PCB from "./PCB";
 import Cart from "./Cart";
 import WishList from "./WishList";
 import ProductListing from "./ProductListing";

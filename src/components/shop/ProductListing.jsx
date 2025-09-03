@@ -98,24 +98,24 @@ const ProductListing = () => {
     const categorySlug = selectedCategory.slug;
 
     // Check if the category is already selected
-    if (selectedCategories.includes(categoryId)) {
+    if (selectedCategories.includes(categorySlug)) {
       // If selected, remove it and its parent (if applicable)
       setSelectedCategories((prevSelected) => {
-        const updatedSelected = prevSelected.filter((id) => id !== categoryId);
+        const updatedSelected = prevSelected.filter((id) => id !== categorySlug);
 
         return updatedSelected;
       });
     } else {
       // If not selected, add it
       setSelectedCategories((prevSelected) => [
-        ...new Set([...prevSelected, categoryId]),
+        ...new Set([...prevSelected, categorySlug]),
       ]);
     }
   };
 
   useEffect(() => {
     setSelectedCategories((prevSelected) => [
-      ...new Set([...prevSelected, +categoryId]),
+      ...new Set([...prevSelected, +categorySlug]),
     ]);
     setProducts(productss);
   }, []);
