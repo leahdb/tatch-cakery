@@ -10,6 +10,14 @@ const ProductListing = () => {
   const [perPage, setPerPage] = useState(15);
   const [pagination, setPagination] = useState({});
 
+  const slugToTitle = (slug) => {
+    if (!slug) return "";
+    return slug
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   useEffect(() => {
     fetch_shop_products({
       categorySlug,
@@ -42,7 +50,7 @@ const ProductListing = () => {
   return (
     <div className="container my-5">
       <div>
-        <h1></h1>  // i need to convert slug to title
+        <h1>{slugToTitle(categorySlug)}</h1>
         <div className="row g-3">
           {products.map((product) => (
             <div key={product.id} className="col-lg-3 col-6 d-flex">
