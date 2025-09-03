@@ -50,7 +50,7 @@ const ProductListing = () => {
   return (
     <div className="container my-5">
       <div>
-        <h1>{slugToTitle(categorySlug)}</h1>
+        <h2 className="fw-bold text-primary mb-3">{slugToTitle(categorySlug)}</h2>
         <div className="row g-3">
           {products.map((product) => (
             <div key={product.id} className="col-lg-3 col-6 d-flex">
