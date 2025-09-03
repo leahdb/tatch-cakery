@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useCart } from "./UseCart";
 import { checkout, apply_coupon, remove_coupon } from "../../services/shop/cart";
@@ -203,6 +204,8 @@ const Checkout = ({setCartCount}) => {
     setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     setError(null);
@@ -220,9 +223,7 @@ const Checkout = ({setCartCount}) => {
       slot = slots[0]?.value || "";
     }
 
-    const payload = { ...form };
-
-    payload.coupon_code = promoInput;
+    const payload = { ...form, coupon_code: promoInput };
 
     if (type === "now") {
       payload.delivery_type = "now";
@@ -238,7 +239,24 @@ const Checkout = ({setCartCount}) => {
     }
 
     checkout(payload)
-      .then(() => { setSuccess("Order placed successfully"); setCartCount(0); })
+      .then((res) => {
+        const orderId = res?.order?.id ?? res?.order_id ?? null;
+        const orderNumber = res?.order?.order_number ?? res?.order_number ?? null;
+
+        setCartCount(0);
+
+        navigate("/thank-you", {
+          state: {
+            orderId,
+            orderNumber,
+            deliveryType: payload.delivery_type,
+            deliveryDate: payload.delivery_date,
+            timeLabel: payload.delivery_type === "now" ? "ASAP" : selectedTimeLabel,
+            name: form.first_name,
+          },
+          replace: true,
+        });
+      })
       .catch(() => setError("Something went wrong, please try again."));
   };
 

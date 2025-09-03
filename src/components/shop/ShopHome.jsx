@@ -9,6 +9,7 @@ import WishList from "./WishList";
 import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
 import Checkout from "./Checkout";
+import ThankYou from "./ThankYou";
 import WhatsAppButton from "./WhatsAppButton";
 import CakeCustomization from "./CakeCustomization";
 import ErrorPage404 from "../errors/ErrorPage404";
@@ -98,6 +99,7 @@ const ShopRoutes = ({setCartCount, products, banners, categories}) => {
       />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout setCartCount={setCartCount} />} />
+      <Route path="/thank-you" element={<ThankYou />} />
       <Route path="*" element={<ErrorPage404 />} />
     </Routes>
   );
