@@ -4,7 +4,7 @@ import { fetch_shop_products } from "../../services/shop/products";
 import CategoryFilter from "./CategoryFilter";
 
 const ProductListing = () => {
-  const { categoryId } = useParams();
+  const { categorySlug } = useParams();
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -95,7 +95,7 @@ const ProductListing = () => {
   };
 
   const handleCategoryChange = (selectedCategory) => {
-    const categoryId = selectedCategory.id;
+    const categorySlug = selectedCategory.slug;
 
     // Check if the category is already selected
     if (selectedCategories.includes(categoryId)) {

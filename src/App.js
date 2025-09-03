@@ -14,8 +14,7 @@ function App() {
         closeOnClick
         draggable={false}
         pauseOnHover={false}
-        autoClose={1500}
-        theme="light"
+        autoClose={3000}
       />
       
       <Routes>

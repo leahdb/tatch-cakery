@@ -90,7 +90,7 @@ const ShopRoutes = ({setCartCount, products, banners, categories}) => {
       <Route path="/build-your-cake" element={<CakeCustomization />} />
       <Route path="/products" element={<ProductListing />} />
       <Route
-        path="/products/category/:categoryId/:categorySlug"
+        path="/products/category/:categorySlug"
         element={<ProductListing />}
       />
       <Route
