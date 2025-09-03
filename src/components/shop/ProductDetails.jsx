@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useParams} from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { notify_promise } from "../../services/utils/toasts";
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { add_to_cart } from "../../services/shop/cart";
@@ -12,6 +13,7 @@ const ProductDetails = ({setCartCount}) => {
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(1);
   const [buttonText, setButtonText] = useState("Add to cart")
+  const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
 
   const decrease = () => {
@@ -32,15 +34,24 @@ const ProductDetails = ({setCartCount}) => {
   }, []);
 
   const handleAddToCart = () => {
+    if (isAdding) return;
+    setIsAdding(true);
     setButtonText("Adding...")
-    add_to_cart({
+    const promise = add_to_cart({
       product_id: product.id,
       quantity: qty,
-    }).then((res) => {
-      setCartCount(res.total_items);
-      setButtonText("Add to cart")
-      alert("Product added to cart successfully"); // "Product added to cart successfully
     });
+
+    notify_promise(promise, "Added to cart!", "🛒");
+
+    promise
+      .then((res) => {
+        setCartCount(res.total_items);
+      })
+      .finally(() => {
+        setIsAdding(false);
+        setButtonText("Add to cart");
+      });
   };
 
   if (loading) return (
@@ -113,7 +124,13 @@ const ProductDetails = ({setCartCount}) => {
               </div>
             </div>
             <div className="col-12 col-md-6">
-              <button className="btn btn-primary w-100 rounded-0 h-100 small-h" onClick={handleAddToCart}>{buttonText}</button>
+              <button 
+                type="button" 
+                disabled={isAdding} 
+                className="btn btn-primary w-100 rounded-0 h-100 small-h" 
+                onClick={handleAddToCart} >
+                  {buttonText}
+              </button>
             </div>
           </div>
 

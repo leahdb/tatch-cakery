@@ -8,7 +8,15 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer />
+      <ToastContainer 
+        newestOnTop
+        hideProgressBar
+        closeOnClick
+        draggable={false}
+        pauseOnHover={false}
+        autoClose={1500}
+        theme="light"
+      />
       
       <Routes>
         <Route path={"/*"} element={<ShopHome />} />

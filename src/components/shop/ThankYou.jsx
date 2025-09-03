@@ -23,12 +23,11 @@ const ThankYou = () => {
         {orderId && !orderNumber && <p className="mb-2">Order ID: <b>{orderId}</b></p>}
 
         <p className="mb-2">
-          Delivery: <b>{deliveryType === "now" ? "ASAP" : `${deliveryDate} • ${timeLabel}`}</b>
+          Delivery: <b>{deliveryType === "now" ? "Now" : `${deliveryDate} • ${timeLabel}`}</b>
         </p>
 
         <div className="mt-4 d-flex gap-3">
           <Link to="/" className="btn btn-primary rounded-0">Continue Shopping</Link>
-          <Link to="/orders" className="btn btn-light rounded-0 border">View Orders</Link>
         </div>
       </div>
     </div>

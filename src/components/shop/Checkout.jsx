@@ -106,6 +106,7 @@ const Checkout = ({setCartCount}) => {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [buttonText, setButtonText] = useState("Place Order")
   
   const { cart, totalItems, totalPrice, loading } = useCart();
 
@@ -209,6 +210,7 @@ const Checkout = ({setCartCount}) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setError(null);
+    setButtonText("Placing...")
 
     // If "Now" is disabled but somehow selected, force schedule for tomorrow
     let type = fulfillmentType;
@@ -244,6 +246,7 @@ const Checkout = ({setCartCount}) => {
         const orderNumber = res?.order?.order_number ?? res?.order_number ?? null;
 
         setCartCount(0);
+        setButtonText("Place Order")
 
         navigate("/thank-you", {
           state: {
@@ -474,7 +477,7 @@ const Checkout = ({setCartCount}) => {
             </div>
           </div>
           <div className="w-100">
-            <button type="submit" className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">Place Order</button>
+            <button type="submit" className="btn btn-primary shadow-0 border rounded-0 w-100 py-2">{buttonText}</button>
           </div>
         </div>
         <div className="col-xl-4 col-lg-4 px-4 px-md-5">
