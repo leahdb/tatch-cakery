@@ -45,16 +45,14 @@ const ProductListing = () => {
         <div className="row g-3">
           {products.map((product) => (
             <div key={product.id} className="col-lg-3 col-6 d-flex">
-              <div className="card w-100 my-2 shadow">
+              <div className="card newest w-100 my-2 shadow">
                 <div className="d-flex justify-content-center">
                   <img
-                    src={product.imageSrc}
-                    className="card-img-top"
+                    src={product.image_url}
+                    className="card-img-top w-100"
                     alt={product.name}
-                    height={200}
                   />
                 </div>
-
                 <div className="card-body d-flex flex-column justify-content-between">
                   <div>
                     <h5 className="card-title fs-6">{product.name}</h5>
@@ -62,119 +60,116 @@ const ProductListing = () => {
                       ${product.price}
                     </p>
                   </div>
-
-                  <div className="d-flex align-items-end justify-content-center px-0 pb-0 mt-4">
-                    <a href="#!" className="btn btn-primary px-3 shadow-0 me-2">
-                      <i className="bi bi-cart-plus fs-5 py-1"></i>
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="d-flex flex-lg-row flex-md-column flex-sm-row flex-column justify-content-between align-items-center mt-4">
-          <div className="d-flex align-items-center mb-lg-0 mb-3">
-            <p className="light-black m-0 me-4">Items per page</p>
-            <select
-              className="drop-down"
-              name="rows"
-              id=""
-              value={perPage}
-              onChange={handlePerPageChange}
-            >
-              <option key={5} value="5">
-                5
-              </option>
-              <option key={15} value="15" selected>
-                15
-              </option>
-              <option key={30} value="30">
-                30
-              </option>
-              <option key={60} value="60">
-                60
-              </option>
-            </select>
-          </div>
-          {pagination.links && (
-            <div className="pagination-controls d-flex gap-3">
-              <button
-                disabled={pagination.links[0].url === null}
-                className={"prev-btn fw-bold"}
-                onClick={() => {
-                  const params = new URLSearchParams(
-                    pagination.links[0].url.split("?")[1]
-                  );
-                  const page = params.has("page")
-                    ? parseInt(params.get("page"))
-                    : 1;
-                  handlePageClick(page);
-                }}
+        {
+          productCount > perPage && 
+          <div className="d-flex flex-lg-row flex-md-column flex-sm-row flex-column justify-content-between align-items-center mt-4">
+            <div className="d-flex align-items-center mb-lg-0 mb-3">
+              <p className="light-black m-0 me-4">Items per page</p>
+              <select
+                className="drop-down"
+                name="rows"
+                id=""
+                value={perPage}
+                onChange={handlePerPageChange}
               >
-                &laquo; Previous
-              </button>
-
-              <div className="pagination-buttons">
-                {pagination.links.map((link, index) => {
-                  let className = "page-number-btn";
-                  let label = link.label;
-                  let isDisabled = link.url == null;
-
-                  if (index === 0 || index === pagination.links.length - 1) {
-                    return <div key={index}></div>;
-                  }
-
-                  if (index === currentPage) {
-                    className += " text-white bg-primary";
-                  }
-
-                  if (isDisabled) {
-                    className += " btn-disabled";
-                  }
-
-                  return (
-                    <button
-                      key={index}
-                      disabled={isDisabled}
-                      className={className + " fw-bold"}
-                      onClick={() => {
-                        const params = new URLSearchParams(
-                          link.url.split("?")[1]
-                        );
-                        const page = params.has("page")
-                          ? parseInt(params.get("page"))
-                          : 1;
-                        handlePageClick(page);
-                      }}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-              <button
-                disabled={
-                  pagination.links[pagination.links.length - 1].url === null
-                }
-                className={"prev-btn fw-bold"}
-                onClick={() => {
-                  const params = new URLSearchParams(
-                    pagination.links[pagination.links.length - 1].url.split(
-                      "?"
-                    )[1]
-                  );
-                  const page = params.has("page")
-                    ? parseInt(params.get("page"))
-                    : 1;
-                  handlePageClick(page);
-                }}
-              >
-                Next &raquo;
-              </button>
+                <option key={5} value="5">
+                  5
+                </option>
+                <option key={15} value="15" selected>
+                  15
+                </option>
+                <option key={30} value="30">
+                  30
+                </option>
+                <option key={60} value="60">
+                  60
+                </option>
+              </select>
             </div>
-          )}
-        </div>
+            {pagination.links && (
+              <div className="pagination-controls d-flex gap-3">
+                <button
+                  disabled={pagination.links[0].url === null}
+                  className={"prev-btn fw-bold"}
+                  onClick={() => {
+                    const params = new URLSearchParams(
+                      pagination.links[0].url.split("?")[1]
+                    );
+                    const page = params.has("page")
+                      ? parseInt(params.get("page"))
+                      : 1;
+                    handlePageClick(page);
+                  }}
+                >
+                  &laquo; Previous
+                </button>
+
+                <div className="pagination-buttons">
+                  {pagination.links.map((link, index) => {
+                    let className = "page-number-btn";
+                    let label = link.label;
+                    let isDisabled = link.url == null;
+
+                    if (index === 0 || index === pagination.links.length - 1) {
+                      return <div key={index}></div>;
+                    }
+
+                    if (index === currentPage) {
+                      className += " text-white bg-primary";
+                    }
+
+                    if (isDisabled) {
+                      className += " btn-disabled";
+                    }
+
+                    return (
+                      <button
+                        key={index}
+                        disabled={isDisabled}
+                        className={className + " fw-bold"}
+                        onClick={() => {
+                          const params = new URLSearchParams(
+                            link.url.split("?")[1]
+                          );
+                          const page = params.has("page")
+                            ? parseInt(params.get("page"))
+                            : 1;
+                          handlePageClick(page);
+                        }}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  disabled={
+                    pagination.links[pagination.links.length - 1].url === null
+                  }
+                  className={"prev-btn fw-bold"}
+                  onClick={() => {
+                    const params = new URLSearchParams(
+                      pagination.links[pagination.links.length - 1].url.split(
+                        "?"
+                      )[1]
+                    );
+                    const page = params.has("page")
+                      ? parseInt(params.get("page"))
+                      : 1;
+                    handlePageClick(page);
+                  }}
+                >
+                  Next &raquo;
+                </button>
+              </div>
+            )}
+          </div>
+        }
       </div>
     </div>
   );
