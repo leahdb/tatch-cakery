@@ -1,158 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetch_shop_products } from "../../services/shop/products";
-import CategoryFilter from "./CategoryFilter";
 
 const ProductListing = () => {
   const { categorySlug } = useParams();
   const [products, setProducts] = useState([]);
-  const [brands, setBrands] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [productCount, setProductCount] = useState();
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedBrands, setSelectedBrands] = useState([]);
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [sortingOption, setSortingOption] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(15);
   const [pagination, setPagination] = useState({});
 
-  const productss = [
-    {
-      id: 1,
-      name: "Raspberry Pi 4 Model B",
-      price: 35.99,
-      imageSrc:
-        "https://www.seeedstudio.com/blog/wp-content/uploads/2019/06/WechatIMG1371.png",
-    },
-    {
-      id: 2,
-      name: "Arduino Uno R3",
-      price: 24.99,
-      imageSrc:
-        "https://rukminim1.flixcart.com/image/1664/1664/j76i3rk0/learning-toy/j/z/8/arduino-uno-r3-board-with-dip-atmega328p-adraxx-original-imaexh74faqkvygt.jpeg?q=90",
-    },
-    {
-      id: 3,
-      name: "ESP8266 WiFi Module",
-      price: 3.49,
-      imageSrc:
-        "https://tse1.mm.bing.net/th?id=OIP.5LofEV_I-Y9PG-53g9Iu5AHaHa&pid=Api&P=0&h=220",
-    },
-    {
-      id: 4,
-      name: "MPU6050 Gyroscope and Accelerometer Module",
-      price: 15.99,
-      imageSrc:
-        "https://tse3.mm.bing.net/th?id=OIP.9F2kvsmNfU-ekR6VZwVu4QHaFx&pid=Api&P=0&h=220",
-    },
-    {
-      id: 5,
-      name: "DHT22 Temperature and Humidity Sensor",
-      price: 9.99,
-      imageSrc:
-        "https://tse3.mm.bing.net/th?id=OIP.QZI5OE82YcwbFmafi3MSmAHaHa&pid=Api&P=0&h=220",
-    },
-    {
-      id: 6,
-      name: "BME280 Environmental Sensor",
-      price: 8.99,
-      imageSrc:
-        "https://images-na.ssl-images-amazon.com/images/I/41j5cHWfpDL.jpg",
-    },
-    {
-      id: 7,
-      name: "Breadboard Jumper Wires Kit",
-      price: 6.99,
-      imageSrc:
-        "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F7916454-01",
-    },
-    {
-      id: 8,
-      name: "STMicroelectronics Nucleo-F401RE Development Board",
-      price: 19.99,
-      imageSrc: "https://media.rs-online.com/f_auto/F8029425-01.jpg",
-    },
-    {
-      id: 9,
-      name: "LM317 Adjustable Voltage Regulator",
-      price: 1.99,
-      imageSrc:
-        "https://i5.walmartimages.com/asr/becb1f3d-da68-4fe4-ae95-1a031d7e068a_1.590bdaf485016abeff4daf43c9ff3a85.jpeg",
-    },
-    {
-      id: 10,
-      name: "Soldering Iron Kit",
-      price: 29.99,
-      imageSrc:
-        "https://tse3.mm.bing.net/th?id=OIP.w9Q9-ejAmxUgg0v6tezclgHaHa&pid=Api&P=0&h=220",
-    },
-  ];
-
-  const handleSortingChange = (event) => {
-    setSortingOption(event.target.value);
-  };
-
-  const handleCategoryChange = (selectedCategory) => {
-    const categorySlug = selectedCategory.slug;
-
-    // Check if the category is already selected
-    if (selectedCategories.includes(categorySlug)) {
-      // If selected, remove it and its parent (if applicable)
-      setSelectedCategories((prevSelected) => {
-        const updatedSelected = prevSelected.filter((id) => id !== categorySlug);
-
-        return updatedSelected;
-      });
-    } else {
-      // If not selected, add it
-      setSelectedCategories((prevSelected) => [
-        ...new Set([...prevSelected, categorySlug]),
-      ]);
-    }
-  };
-
   useEffect(() => {
-    setSelectedCategories((prevSelected) => [
-      ...new Set([...prevSelected, +categorySlug]),
-    ]);
-    setProducts(productss);
-  }, []);
-
-  // useEffect(() => {
-  //   fetch_shop_products({
-  //     categories: selectedCategories.map((category) => category),
-  //     brands: selectedBrands,
-  //     minPrice,
-  //     maxPrice,
-  //     sort: sortingOption,
-  //     perPage,
-  //     currentPage,
-  //   }).then((res) => {
-  //     if (res.status === "ok") {
-  //       setPagination(res);
-  //       if (res.data) {
-  //         setProducts(res.data);
-  //         setProductCount(res.total);
-  //         setBrands(res.brands);
-  //         setCategories(res.categories);
-  //         if(localStorage["category_refresh"]===false) {
-  //           window.location.href = "/products";
-  //           localStorage.setItem("category_refresh", true);
-  //         }
-  //       }
-  //     }
-  //   });
-  // }, [
-  //   selectedCategories,
-  //   selectedBrands,
-  //   minPrice,
-  //   maxPrice,
-  //   sortingOption,
-  //   perPage,
-  //   currentPage,
-  // ]);
+    fetch_shop_products({
+      categorySlug,
+      perPage,
+      currentPage,
+    }).then((res) => {
+      if (res.status === "ok") {
+        setPagination(res);
+        if (res.data) {
+          setProducts(res.data);
+          setProductCount(res.total);
+        }
+      }
+    });
+  }, [
+    perPage,
+    currentPage,
+  ]);
 
   const handlePerPageChange = (e) => {
     const newPerPage = parseInt(e.target.value, 10);
@@ -167,21 +42,6 @@ const ProductListing = () => {
   return (
     <div className="container my-5">
       <div>
-        <header className="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-          <strong className="d-block py-2">{productCount} Items found </strong>
-          <div className="ms-auto">
-            <select
-              className="form-select d-inline-block w-auto border pt-1"
-              value={sortingOption}
-              onChange={handleSortingChange}
-            >
-              <option value="0">Best Match</option>
-              <option value="1">Price: Low to High</option>
-              <option value="2">Price: High to Low</option>
-            </select>
-          </div>
-        </header>
-
         <div className="row g-3">
           {products.map((product) => (
             <div key={product.id} className="col-lg-3 col-6 d-flex">
