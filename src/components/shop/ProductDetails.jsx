@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useParams} from "react-router-dom";
+import {useParams, useOutletContext} from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { notify_promise } from "../../services/utils/toasts";
@@ -8,7 +8,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { add_to_cart } from "../../services/shop/cart";
 
 
-const ProductDetails = ({setCartCount}) => {
+export default function ProductDetails() {
+  const { setCartCount } = useOutletContext();
   const { slug } = useParams();
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(1);
@@ -143,5 +144,3 @@ const ProductDetails = ({setCartCount}) => {
     </div>
   );
 };
-
-export default ProductDetails;

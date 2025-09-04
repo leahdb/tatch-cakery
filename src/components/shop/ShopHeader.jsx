@@ -7,7 +7,6 @@ import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
 import Bag from "../../resources/themes/dashboard-v1/icons/bag.svg";
 import Heart from "../../resources/themes/dashboard-v1/icons/heart.svg";
 import { Navigate } from "react-router-dom";
-import { fetch_shop_home } from "../../services/shop/home";
 
 class ShopHeader extends React.Component {
   state = {
@@ -15,14 +14,6 @@ class ShopHeader extends React.Component {
     dropdownVisible: false,
     categories: [],
   };
-
-  // componentDidMount() {
-  //   fetch_shop_home().then((response) => {
-  //     if (response.status === "ok") {
-  //       this.setState({ categories: response.categories });
-  //     }
-  //   });
-  // }
 
   handleClickOutside = () => {
     this.setState({ dropdownVisible: false });
@@ -47,13 +38,6 @@ class ShopHeader extends React.Component {
     const capitalizeFirstLetter = (str) => {
       return str.charAt(0).toUpperCase() + str.slice(1);
     };
-
-    // useEffect(() => {
-    //   fetch_shop_home().then((response) => {
-    //     if (response.status === "ok")
-    //       this.setState({ categories: response.categories });
-    //   });
-    // }, []);
 
     return (
       <header className="sticky-top">

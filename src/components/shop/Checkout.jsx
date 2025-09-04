@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useCart } from "./UseCart";
 import { checkout, apply_coupon, remove_coupon } from "../../services/shop/cart";
@@ -78,7 +78,8 @@ const isAfter9pmBeirut = () => {
   return h > 21 || (h === 21 && m >= 0);
 };
 
-const Checkout = ({setCartCount}) => {
+const Checkout = () => {
+  const { setCartCount } = useOutletContext();
   const deliveryAreas = {
     "Beirut": ["Manara", "Hamra", "Achrafieh", "Verdun", "Raouché", "Qoreitem", "Ain el-Tineh", "Clemenceau", "Sanyeh", "Tallet el-Khayat", "Mar Elias", "Zuqaq al-Blat", "Batrakieh", "Mina el-Hosn", "Qantari", "Down Town", "Basta el-Tahta", "Bachoura", "Burj Abi Haidar", "Basta el-Faouqa", "Ras el-Nabaa", "Mazraa", "Tariq el-Jdideh", "Sioufi", "Sodeco", "Saifi", "Gemmayzeh", "Badaro", "Mar Mikhaël"],
     "Aley": ["Aramoun", "Bchamoun", "Choueifat", "Khalde",],

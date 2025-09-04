@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import ShopIntro from "./ShopIntro";
 import ProductsMain from "./ProductsMain";
 import ShopFooter from "./ShopFooter";
 
-const ShopMain = ({products, banners, categories}) => {
+export default function ShopMain() {
+  const { setCartCount, products, banners, categories } = useOutletContext();
   return (
     <section>
       <ShopIntro banners={ banners } />
@@ -11,6 +13,4 @@ const ShopMain = ({products, banners, categories}) => {
       <ShopFooter />
     </section>
   );
-};
-
-export default ShopMain;
+}
