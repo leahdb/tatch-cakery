@@ -9,6 +9,7 @@ const ProductListing = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(15);
   const [pagination, setPagination] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const slugToTitle = (slug) => {
     if (!slug) return "";
