@@ -138,6 +138,7 @@ export default function ProductDetails() {
 
           <div className="row border-top pt-3 mt-5 mx-0">
             <h5 className="fw-semibold text-dark mb-4">Description</h5>
+            <p>{product.description_long}</p>
           </div>
         </div>
       </div>
