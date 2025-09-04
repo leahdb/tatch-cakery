@@ -29,6 +29,7 @@ const ProductListing = () => {
         if (res.data) {
           setProducts(res.data);
           setProductCount(res.total);
+          setLoading(false)
         }
       }
     });
