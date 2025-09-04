@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetch_shop_home } from "../../services/shop/home";
 
-const ProductsMain = ({ categories, products }) => {
+const ProductsMain = ({ categories, products, setLoading, setCategories, setBanners, setProducts }) => {
+  useEffect(() => {
+    fetch_shop_home().then((res) => {
+      if (res.status === "ok") {
+        setProducts(res.products || []);
+        setBanners(res.banners || []);
+        setCategories(res.categories || []);
+      }
+      setLoading(false);
+    });
+  }, []);
   return (
     <div className="container">
       {categories.map((category) => {

@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import ShopHeader from "./ShopHeader";
 import WhatsAppButton from "./WhatsAppButton";
 import { fetch_cart } from "../../services/shop/cart";
-import { fetch_shop_home } from "../../services/shop/home";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const ShopHome = () => {
@@ -15,17 +14,6 @@ const ShopHome = () => {
 
   useEffect(() => {
     fetch_cart().then((res) => setCartCount(res.total_items ?? 0));
-  }, []);
-
-  useEffect(() => {
-    fetch_shop_home().then((res) => {
-      if (res.status === "ok") {
-        setProducts(res.products || []);
-        setBanners(res.banners || []);
-        setCategories(res.categories || []);
-      }
-      setLoading(false);
-    });
   }, []);
 
   if (loading) {
@@ -43,7 +31,7 @@ const ShopHome = () => {
   return (
     <section className="page bg-light-beige">
       <ShopHeader cartCount={cartCount} />
-      <Outlet context={{ setCartCount, products, banners, categories }} />
+      <Outlet context={{ setCartCount, setLoading, setCategories, setBanners, setProducts, products, banners, categories }} />
       <WhatsAppButton />
     </section>
   );
