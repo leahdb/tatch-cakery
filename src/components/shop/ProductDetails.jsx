@@ -74,6 +74,7 @@ const ProductDetails = ({setCartCount}) => {
               src={product.image_url}
               className="d-block w-100 carousel-image"
               alt="Product"
+              loading="lazy"
             />
           </a>
           {/* <div className="thumbnail-container mt-5">

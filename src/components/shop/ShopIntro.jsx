@@ -15,6 +15,7 @@ const CarouselItem = ({ slide, isActive }) => (
         height: "100%",
         border: "0",
       }}
+      loading="lazy"
     />
     <div
       className="carousel-caption d-flex justify-content-center align-items-center"

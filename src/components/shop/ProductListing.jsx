@@ -63,6 +63,7 @@ const ProductListing = () => {
                     src={product.image_url}
                     className="card-img-top w-100"
                     alt={product.name}
+                    loading="lazy"
                   />
                 </div>
                 <div className="card-body d-flex flex-column justify-content-between">

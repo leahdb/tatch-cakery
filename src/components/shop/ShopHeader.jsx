@@ -77,6 +77,7 @@ class ShopHeader extends React.Component {
                       alt="bag"
                       height={25}
                       className="bag-image pe-1"
+                      loading="lazy"
                     />
                     {cartCount > 0 && (
                       <span

@@ -546,7 +546,7 @@ const Checkout = ({setCartCount}) => {
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary">
                   {item.quantity}
                 </span>
-                <img src={item.image} className="img-sm-checkout rounded border" />
+                <img src={item.image} className="img-sm-checkout rounded border" loading="lazy" />
               </div>
               <div className="">
                 <a href="#" className="nav-link">

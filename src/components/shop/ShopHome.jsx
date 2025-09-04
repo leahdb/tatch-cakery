@@ -4,7 +4,6 @@ import ShopHeader from "./ShopHeader";
 import ShopMain from "./ShopMain";
 import ComingSoon from "./ComingSoon";
 import Cart from "./Cart";
-import WishList from "./WishList";
 import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
 import Checkout from "./Checkout";

@@ -5,7 +5,7 @@ const ShopFooter = () => {
   return (
     <footer id="footer" className="footer-science bg-beige">
       <div className="container text-center">
-        <img src={logoBlack} alt="logoBlack" className="footer-logo" />
+        <img src={logoBlack} alt="logoBlack" className="footer-logo" loading="lazy"/>
         <p className="text-muted">
           Delicious cakes made with love, bringing sweetness to every moment.
         </p>
