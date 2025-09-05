@@ -1,6 +1,6 @@
 // optionCodes.ts
-export const sizeCode = (label?: string) => {
-  const map: Record<string,string> = {
+export const sizeCode = (label) => {
+  const map= {
     "6 inch": "6inch",
     "8 inch": "8inch",
     "10 inch": "10inch",
@@ -8,8 +8,8 @@ export const sizeCode = (label?: string) => {
   return map[label || ""] || null;
 };
 
-export const creamCode = (label: string) => {
-  const map: Record<string,string> = {
+export const creamCode = (label) => {
+  const map = {
     "Chocolate": "chocolate",
     "Vanilla": "vanilla",
     "Strawberry": "strawberry",
@@ -20,8 +20,8 @@ export const creamCode = (label: string) => {
   return map[label] || "";
 };
 
-export const fillingCode = (label: string) => {
-  const map: Record<string,string> = {
+export const fillingCode = (label) => {
+  const map = {
     "Nutella": "nutella",
     "Pistachio": "pistachio",
     "Strawberry": "strawberry",
@@ -30,8 +30,8 @@ export const fillingCode = (label: string) => {
   return map[label] || "";
 };
 
-export const toppingCode = (label: string) => {
-  const map: Record<string,string> = {
+export const toppingCode = (label) => {
+  const map = {
     "Fresh Strawberries": "fresh_berries",
     "Hazelnuts": "hazelnuts",
     "oreo crumbs": "oreo_crumbs",
@@ -39,8 +39,8 @@ export const toppingCode = (label: string) => {
   return map[label] || "";
 };
 
-export const customizationCode = (label: string) => {
-  const map: Record<string,string> = {
+export const customizationCode = (label) => {
+  const map = {
     "No Customization": "none",
     "Chocolate Letters Writing": "choco_letters",
     "Plexi Writing": "plexi_writing",
