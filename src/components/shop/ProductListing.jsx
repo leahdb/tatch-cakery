@@ -43,7 +43,7 @@ const ProductListing = () => {
   const handlePerPageChange = (e) => {
     const newPerPage = parseInt(e.target.value, 10);
     setPerPage(newPerPage);
-    setCurrentPage(1); // Reset to the first page when changing items per page
+    setCurrentPage(1);
   };
 
   const handlePageClick = (page) => {

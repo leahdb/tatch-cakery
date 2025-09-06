@@ -279,7 +279,7 @@ export default function SVGVisualizer({
   topCreamFlavor = "chocolate", 
   message = "", 
   motif="", 
-  plexiColor="",
+  plexiColor="gold",
   letteringMode, }) {
   const colors = useMemo(() => getComputedColors(cakeFlavor, creamFlavor, topCreamFlavor), [cakeFlavor, creamFlavor, topCreamFlavor]);
   const topCreamRef = React.useRef(null);

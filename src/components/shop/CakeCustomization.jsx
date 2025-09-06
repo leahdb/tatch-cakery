@@ -5,6 +5,7 @@ import ColorPicker from "./ColorPicker";
 import { cakeCode, middleCreamCode, topCreamCode, fillingCode, extraOptions, customizationOptions } from "../../services/shop/customizationOptions";
 import { add_to_cart } from "../../services/shop/cart";
 import { fetch_shop_product } from "../../services/shop/products";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const CakeCustomization = () => {
     const [product, setProduct] = useState([]);
@@ -14,12 +15,14 @@ const CakeCustomization = () => {
     const [selectedFilling, setSelectedFilling] = useState(fillingCode[0]);
     const [selectedExtras, setSelectedExtras] = useState(extraOptions[0]);
     const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
+    const [loading, setLoading] = useState(true);
 
     
     const [additionalNote, setAdditionalNote] = useState("");
     const [customInput, setCustomInput] = useState("");
     const [motifChoice, setMotifChoice] = useState(null);
     const [plexiColor, setPlexiColor] = useState("gold");
+    const [topCreamColor, setTopCreamColor] = useState("");
 
     const [qty, setQty] = useState(1);
     
@@ -38,6 +41,7 @@ const CakeCustomization = () => {
       fetch_shop_product("build-your-cake").then((res) => {
           if (res.status === "ok") {
             setProduct(res.data);
+            setLoading(false)
           }
       });
     }, []);
@@ -105,6 +109,19 @@ const CakeCustomization = () => {
     //     },
     //   }).then((res) => res.json());
     // };
+
+  if (loading) {
+    return (
+      <div className="d-flex align-items-center justify-content-center" style={{height: "100vh"}}>
+        <DotLottieReact
+          src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
+          loop
+          autoplay
+          style={{height: "auto"}}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="row mt-3 bg-light-gray cake-customization">
@@ -246,6 +263,10 @@ const CakeCustomization = () => {
                   </label>
                 </div>
               ))}
+              {(selectedTopCream.code === "colored_vanilla" ||
+                selectedTopCream.label === "Colored Vanilla") && (
+                <ColorPicker value={topCreamColor} onChange={setTopCreamColor} />
+              )}
             </div>
           </div>
         </div>
