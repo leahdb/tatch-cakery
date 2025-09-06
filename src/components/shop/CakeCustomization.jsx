@@ -265,7 +265,10 @@ const CakeCustomization = () => {
               ))}
               {(selectedTopCream.code === "colored_vanilla" ||
                 selectedTopCream.label === "Colored Vanilla") && (
-                <ColorPicker value={topCreamColor} onChange={setTopCreamColor} />
+                <ColorPicker 
+                  value={{ id: selectedTopCream.code,  label: selectedTopCream.label }}
+                  onChange={setSelectedTopCream}
+                />
               )}
             </div>
           </div>

@@ -183,7 +183,6 @@ const TOP_CREAM_OVERRIDES = {
     cls30: "#e0e8c4", // cream green
   },
   colored_vanilla: {
-    // These will be dynamically replaced depending on user-selected color
     Blue: {
       cls5:  "#9ecafc",
       cls10: "#7db5f8",
