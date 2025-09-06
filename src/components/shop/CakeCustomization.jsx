@@ -21,7 +21,7 @@ const CakeCustomization = () => {
     const [additionalNote, setAdditionalNote] = useState("");
     const [customInput, setCustomInput] = useState("");
     const [motifChoice, setMotifChoice] = useState(null);
-    const [plexiColor, setPlexiColor] = useState("gold");
+    const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
     const [topCreamColor, setTopCreamColor] = useState("");
 
     const [qty, setQty] = useState(1);

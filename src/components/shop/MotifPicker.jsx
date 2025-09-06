@@ -20,7 +20,7 @@ export default function MotifPicker({ value, onChange }) {
                     })
                 }
                 className={`aspect-square rounded-xl border flex items-center justify-center overflow-hidden col-3${
-                    isSel ? "ring-2 ring-black" : ""
+                    isSel ? " ring-2 ring-black" : ""
                 }`}
                 title={m.label}
                 aria-pressed={isSel}
@@ -33,7 +33,7 @@ export default function MotifPicker({ value, onChange }) {
                     preserveAspectRatio="xMidYMid meet"
                     className="mx-auto my-auto"
                 >
-                    <g transform="translate(150,150)">
+                    <g transform="translate(150,200)">
                     <path d={m.pathD} fill="currentColor" transform="translate(-150,-150)" />
                     </g>
                 </svg>

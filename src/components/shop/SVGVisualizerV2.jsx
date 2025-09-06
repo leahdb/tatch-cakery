@@ -279,7 +279,7 @@ export default function SVGVisualizer({
   topCreamFlavor = "chocolate", 
   message = "", 
   motif="", 
-  plexiColor="gold",
+  plexiColor={ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" },
   letteringMode, }) {
   const colors = useMemo(() => getComputedColors(cakeFlavor, creamFlavor, topCreamFlavor), [cakeFlavor, creamFlavor, topCreamFlavor]);
   const topCreamRef = React.useRef(null);
