@@ -8,10 +8,23 @@ import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const CakeCustomization = () => {
+    const TOP_CREAM_COLORS = [
+      { id: "white",   label: "White",   hex: "#FFFFFF", border: true },
+      { id: "black",   label: "Black",   hex: "#111827" },
+      { id: "red",     label: "Red",     hex: "#EF4444" },
+      { id: "blue",    label: "Blue",    hex: "#3B82F6" },
+      { id: "green",   label: "Green",   hex: "#10B981" },
+      { id: "pink",    label: "Pink",    hex: "#EC4899" },
+      { id: "purple",  label: "Purple",  hex: "#8B5CF6" },
+      { id: "yellow",  label: "Yellow",  hex: "#FACC15" },
+      { id: "orange",  label: "Orange",  hex: "#FB923C" },
+      { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
+    ];
     const [product, setProduct] = useState([]);
     const [selectedCake, setSelectedCake] = useState(cakeCode[0]);
     const [selectedCream, setSelectedCream] = useState(middleCreamCode[0]);
     const [selectedTopCream, setSelectedTopCream] = useState(topCreamCode[0]);
+    const [topCreamColor, setTopCreamColor] = useState(TOP_CREAM_COLORS[0]); 
     const [selectedFilling, setSelectedFilling] = useState(fillingCode[0]);
     const [selectedExtras, setSelectedExtras] = useState(extraOptions[0]);
     const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
@@ -22,8 +35,6 @@ const CakeCustomization = () => {
     const [customInput, setCustomInput] = useState("");
     const [motifChoice, setMotifChoice] = useState(null);
     const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
-    const [topCreamColor, setTopCreamColor] = useState("");
-
     const [qty, setQty] = useState(1);
     
     const decrease = () => {
@@ -34,7 +45,7 @@ const CakeCustomization = () => {
       setQty(qty + 1);
     };
 
-    console.log("hello");
+    console.log(selectedTopCream);
 
     useEffect(() => {
       console.log("[CakeCustomization] mounted");
@@ -131,6 +142,7 @@ const CakeCustomization = () => {
           fillingFlavor={selectedFilling.code}           // "Nutella" | "Pistachio" | ...
           creamFlavor={selectedCream.code}               // "Vanilla" | "Chocolate" | ...
           topCreamFlavor={selectedTopCream.code}
+          vanillaColor={topCreamColor?.id || null}  
           message={customInput}
           motif={selectedCustomization.code === "plexi_motif" ? motifChoice : null}
           plexiColor={plexiColor}
@@ -250,10 +262,18 @@ const CakeCustomization = () => {
                   <input
                     className="form-check-input"
                     type="radio"
-                    name="creamFlavor"
+                    name="topCreamFlavor"
                     value={flavor.label}
                     checked={selectedTopCream.code === flavor.code}
-                    onChange={() => setSelectedTopCream(flavor)}
+                    onChange={() => {
+                      setSelectedTopCream(flavor);
+                      if (flavor.code === "colored_vanilla" && !topCreamColor) {
+                        setTopCreamColor(TOP_CREAM_COLORS[0]);
+                      }
+                      if (flavor.code !== "colored_vanilla") {
+                        setTopCreamColor(null);
+                      }
+                    }}
                   />
                   <label className="form-check-label">
                     {flavor.label}{" "}
@@ -266,8 +286,9 @@ const CakeCustomization = () => {
               {(selectedTopCream.code === "colored_vanilla" ||
                 selectedTopCream.label === "Colored Vanilla") && (
                 <ColorPicker 
-                  value={{ id: selectedTopCream.code,  label: selectedTopCream.label }}
-                  onChange={setSelectedTopCream}
+                  value={topCreamColor} 
+                  onChange={setTopCreamColor}
+                  cream={true}
                 />
               )}
             </div>

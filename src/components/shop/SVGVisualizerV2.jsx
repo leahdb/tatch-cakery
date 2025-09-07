@@ -183,7 +183,7 @@ const TOP_CREAM_OVERRIDES = {
     cls30: "#e0e8c4", // cream green
   },
   colored_vanilla: {
-    Blue: {
+    blue: {
       cls5:  "#9ecafc",
       cls10: "#7db5f8",
       cls17: "#c1dcfd",
@@ -192,7 +192,7 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#d6e7fd",
       cls30: "#e6f0fe",
     },
-    Yellow: {
+    yellow: {
       cls5:  "#fdf4a6",
       cls10: "#fce86a",
       cls17: "#fdf7c1",
@@ -201,7 +201,7 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#fff8c6",
       cls30: "#fefbd7",
     },
-    Pink: {
+    pink: {
       cls5:  "#f9c6e4",
       cls10: "#f6a6d3",
       cls17: "#facfe9",
@@ -210,7 +210,7 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#fbdff0",
       cls30: "#fdeaf5",
     },
-    Purple: {
+    purple: {
       cls5:  "#c9b3f7",
       cls10: "#b093f1",
       cls17: "#d8c7fa",
@@ -219,7 +219,7 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#e3d8fb",
       cls30: "#efe8fd",
     },
-    Green: {
+    green: {
       cls5:  "#b8e3b0",
       cls10: "#9cd991",
       cls17: "#d0efca",
@@ -228,7 +228,7 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#daf5d3",
       cls30: "#e8fae4",
     },
-    Orange: {
+    orange: {
       cls5:  "#fcd4a0",
       cls10: "#fbb36a",
       cls17: "#fddfba",
@@ -237,7 +237,7 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#fee4cd",
       cls30: "#fff0e2",
     },
-    Red: {
+    red: {
       cls5:  "#f59b9b",
       cls10: "#f56a6a",
       cls17: "#fbbaba",
@@ -246,29 +246,21 @@ const TOP_CREAM_OVERRIDES = {
       cls29: "#fdd0d0",
       cls30: "#ffe1e1",
     },
-    Teal: {
-      cls5:  "#9fe3df",
-      cls10: "#7fd8d3",
-      cls17: "#c0eeec",
-      cls23: "#52c2bb",
-      cls24: "#a6e7e4",
-      cls29: "#d3f5f3",
-      cls30: "#e4faf9",
-    },
   },
 };
 
-function getTopCreamColors(topCream, vanillaColor) {
+function getTopCreamColors(topCream, vanillaColorId) {
   if (topCream === "colored_vanilla") {
-    return TOP_CREAM_OVERRIDES.colored_vanilla[vanillaColor] || {};
+    const key = (vanillaColorId || "").toLowerCase();
+    return TOP_CREAM_OVERRIDES.colored_vanilla[key] || {};
   }
   return TOP_CREAM_OVERRIDES[topCream] || {};
 }
 
-function getComputedColors(cakeFlavor, middleCreamFlavor, topCreamFlavor, vanillaColor) {
+function getComputedColors(cakeFlavor, middleCreamFlavor, topCreamFlavor, vanillaColorId) {
   const cakeOverrides = CAKE_OVERRIDES[cakeFlavor] || {};
   const middleCreamOverrides = MIDDLE_CREAM_OVERRIDES[middleCreamFlavor] || {};
-  const topCreamOverrides = getTopCreamColors(topCreamFlavor, vanillaColor);
+  const topCreamOverrides = getTopCreamColors(topCreamFlavor, vanillaColorId);
   return { ...BASE_COLORS, ...cakeOverrides, ...middleCreamOverrides, ...topCreamOverrides };
 }
 
@@ -276,11 +268,12 @@ export default function SVGVisualizer({
   cakeFlavor = "red_velvet", 
   creamFlavor = "vanilla", 
   topCreamFlavor = "chocolate", 
+  vanillaColor = null, 
   message = "", 
   motif="", 
   plexiColor={ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" },
   letteringMode, }) {
-  const colors = useMemo(() => getComputedColors(cakeFlavor, creamFlavor, topCreamFlavor), [cakeFlavor, creamFlavor, topCreamFlavor]);
+  const colors = useMemo(() => getComputedColors(cakeFlavor, creamFlavor, topCreamFlavor, vanillaColor), [cakeFlavor, creamFlavor, topCreamFlavor, vanillaColor]);
   const topCreamRef = React.useRef(null);
   return (
     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 738.93 559.09">

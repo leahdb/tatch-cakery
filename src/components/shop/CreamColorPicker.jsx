@@ -11,9 +11,11 @@ const DEFAULT_COLORS = [
   { id: "green",  label: "Green",  hex: "#10B981" },
   { id: "pink",   label: "Pink",   hex: "#EC4899" },
   { id: "purple", label: "Purple", hex: "#8B5CF6" },
-  { id: "yellow",  label: "Yellow",  hex: "#FACC15" },
-  { id: "orange",  label: "Orange",  hex: "#FB923C" },
-  { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
+  { id: "yellow",    label: "Yellow",    hex: "#EF4444" },
+  { id: "orange",   label: "Orange",   hex: "#3B82F6" },
+  { id: "fuchsia",  label: "Fuchsia",  hex: "#10B981" },
+  { id: "pink",   label: "Pink",   hex: "#EC4899" },
+  { id: "purple", label: "Purple", hex: "#8B5CF6" },
 ];
 
 /**
@@ -28,7 +30,7 @@ export default function ColorPicker({
   onChange,
   options = DEFAULT_COLORS,
   title = "Pick a color",
-  cream = false,
+  grad = true,
 }) {
   // normalize for selection check
   const selectedId = typeof value === "string" ? value : value?.id;
@@ -39,7 +41,7 @@ export default function ColorPicker({
         {options.map((opt) => {
           const isSel = selectedId === opt.id;
           const style =
-            opt.type === "gradient" && !cream
+            opt.type === "gradient" && grad
               ? { backgroundImage: opt.gradient }
               : { backgroundColor: opt.hex };
 
@@ -58,7 +60,7 @@ export default function ColorPicker({
                 isSel ? "swatch-selected" : "",
               ].join(" ")}
               style={style}
-              onClick={() => onChange(!cream ? opt : { label: "Colored Vanilla", code: "colored_vanilla", price: 0.5 },)}
+              onClick={() => onChange(opt)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
