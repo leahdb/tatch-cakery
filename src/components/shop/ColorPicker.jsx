@@ -28,7 +28,6 @@ export default function ColorPicker({
   onChange,
   options = DEFAULT_COLORS,
   title = "Pick a color",
-  cream = false,
 }) {
   // normalize for selection check
   const selectedId = typeof value === "string" ? value : value?.id;
@@ -39,7 +38,7 @@ export default function ColorPicker({
         {options.map((opt) => {
           const isSel = selectedId === opt.id;
           const style =
-            opt.type === "gradient" && !cream
+            opt.type === "gradient"
               ? { backgroundImage: opt.gradient }
               : { backgroundColor: opt.hex };
 
@@ -58,7 +57,7 @@ export default function ColorPicker({
                 isSel ? "swatch-selected" : "",
               ].join(" ")}
               style={style}
-              onClick={() => onChange(!cream ? opt : { label: "Colored Vanilla", code: "colored_vanilla", price: 0.5 },)}
+              onClick={() => onChange(opt)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();

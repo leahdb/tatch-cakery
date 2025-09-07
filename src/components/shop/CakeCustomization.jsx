@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SVGVisualizer from "./SVGVisualizerV2";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
+import CreamColorPicker from "./CreamColorPicker";
 import { cakeCode, middleCreamCode, topCreamCode, fillingCode, extraOptions, customizationOptions } from "../../services/shop/customizationOptions";
 import { add_to_cart } from "../../services/shop/cart";
 import { fetch_shop_product } from "../../services/shop/products";
@@ -45,7 +46,7 @@ const CakeCustomization = () => {
       setQty(qty + 1);
     };
 
-    console.log(selectedTopCream);
+    console.log(topCreamColor);
 
     useEffect(() => {
       console.log("[CakeCustomization] mounted");
@@ -285,10 +286,10 @@ const CakeCustomization = () => {
               ))}
               {(selectedTopCream.code === "colored_vanilla" ||
                 selectedTopCream.label === "Colored Vanilla") && (
-                <ColorPicker 
+                <CreamColorPicker 
                   value={topCreamColor} 
                   onChange={setTopCreamColor}
-                  cream={true}
+                  options={TOP_CREAM_COLORS}
                 />
               )}
             </div>

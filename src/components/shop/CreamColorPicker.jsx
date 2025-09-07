@@ -25,7 +25,7 @@ const DEFAULT_COLORS = [
  *    If you pass a string as value, you'll get a string back.
  *    If you pass an object, you'll get the full object back.
  */
-export default function ColorPicker({
+export default function CreamColorPicker({
   value,
   onChange,
   options = DEFAULT_COLORS,
