@@ -39,7 +39,7 @@ const ProductsMain = ({ categories, products }) => {
                       <div>
                         <h5 className="card-title fs-6">{product.name}</h5>
                         <p className="card-text fs-6 text-primary">
-                          ${product.price}
+                          {product.slug === 'build-your-cake' && <small>starting </small>}${product.price}
                         </p>
                       </div>
                     </div>
