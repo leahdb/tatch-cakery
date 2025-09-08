@@ -119,6 +119,12 @@ const Cart = () => {
                           alt={item.name}
                           loading="lazy"
                         />
+                        <img
+                          src={item.preview}
+                          className="img-thumbnail-cart"
+                          alt={item.name}
+                          loading="lazy"
+                        />
                       </div>
 
                       <div className="">

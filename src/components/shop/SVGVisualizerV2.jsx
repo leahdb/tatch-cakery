@@ -276,7 +276,7 @@ export default function SVGVisualizer({
   const colors = useMemo(() => getComputedColors(cakeFlavor, creamFlavor, topCreamFlavor, vanillaColor), [cakeFlavor, creamFlavor, topCreamFlavor, vanillaColor]);
   const topCreamRef = React.useRef(null);
   return (
-    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 738.93 559.09">
+    <svg id="cake_builder_svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 738.93 559.09">
       <defs>
         <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#B28900" />

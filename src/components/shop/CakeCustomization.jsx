@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SVGVisualizer from "./SVGVisualizerV2";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
@@ -21,6 +21,7 @@ const CakeCustomization = () => {
       { id: "orange",  label: "Orange",  hex: "#FB923C" },
       { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
     ];
+    const svgRef = useRef(null);
     const [product, setProduct] = useState([]);
     const [selectedCake, setSelectedCake] = useState(cakeCode[0]);
     const [selectedCream, setSelectedCream] = useState(middleCreamCode[0]);
@@ -46,8 +47,6 @@ const CakeCustomization = () => {
       setQty(qty + 1);
     };
 
-    console.log(topCreamColor);
-
     useEffect(() => {
       console.log("[CakeCustomization] mounted");
       fetch_shop_product("build-your-cake").then((res) => {
@@ -58,34 +57,47 @@ const CakeCustomization = () => {
       });
     }, []);
 
-    const handleAddToCart = () => {
-        const payload = {
-          product_id: product.id,
-          quantity: qty,
-          custom: {
-            fillings: selectedFilling.code,// array
-            extras: selectedExtras.code, // array (use checkbox array if you want many)
-            designs: selectedCustomization.code, // array
-            // Optional extra metadata for your order item (not used for pricing):
-            note: additionalNote || null,
-            message: selectedCustomization.code === "choco_letters" || selectedCustomization.code === "plexi_writing"
+    const handleAddToCart = async () => {
+      // 1) Serialize SVG
+      const svgEl = svgRef.current || document.querySelector('#cake_builder_svg');
+      if (!svgEl) { alert("Preview not ready"); return; }
+
+      const serializer = new XMLSerializer();
+      let svgString = serializer.serializeToString(svgEl);
+      if (!svgString.includes('xmlns=')) {
+        svgString = svgString.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+      }
+
+      // 2) Build payload with your existing config + preview
+      const payload = {
+        product_id: product.id,
+        quantity: qty,
+        custom: {
+          fillings: selectedFilling.code,
+          extras: selectedExtras.code,
+          designs: selectedCustomization.code,
+          note: additionalNote || null,
+          message:
+            (selectedCustomization.code === "choco_letters" ||
+            selectedCustomization.code === "plexi_writing")
               ? (customInput || "")
               : null,
-            plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
-            motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
-            // You can also send the three “cream” layers if you price them:
-            mcreams: selectedCream.code,
-            tcreams: selectedTopCream.code,
-            cake_flavor: selectedCake.code, // if you want to store/display
-          },
-        };
-        add_to_cart(payload).then((res) => {
-          if (res.total_items != undefined) {
-            console.log("Cart:", res.cart.cart);
-            alert("Product added to cart successfully"); // "Product added to cart successfully"
-          }
-        });
+          plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
+          motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
+          mcreams: selectedCream.code,
+          tcreams: selectedTopCream.code,
+          cake_flavor: selectedCake.code,
+        },
+        // ONE-CALL PREVIEW
+        preview_svg: svgString,
+        // or: preview_png_data_url: await svgToPngDataUrl(svgString)
       };
+
+      const res = await add_to_cart(payload);
+      if (res?.total_items !== undefined) {
+        alert("Product added to cart successfully");
+      }
+    };
 
     const totalPrice =
       product.price +
@@ -96,18 +108,25 @@ const CakeCustomization = () => {
     
     
 
-    // const handleAddToCart = () => {
-    //   console.log(formData);
-    //   if (id !== undefined) {
-    //     edit_shop_products(id, formData).then((res) => {
-    //       setShouldRedirectToIndex(res.status === "ok");
-    //     });
-    //   } else {
-    //     add_shop_products(formData).then((res) => {
-    //       setShouldRedirectToIndex(res.status === "ok");
-    //     });
-    //   }
-    // };
+    async function svgToPngDataUrl(svgString, width = 1080) {
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+
+      await new Promise((res, rej) => {
+        img.onload = res; img.onerror = rej; img.src = url;
+      });
+
+      const aspect = img.height / img.width;
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = Math.round(width * aspect);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      return canvas.toDataURL('image/png');
+    }
 
 
     // export const edit_shop_orders = (id, data) => {
