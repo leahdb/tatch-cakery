@@ -81,7 +81,7 @@ const CakeCustomization = () => {
         };
         add_to_cart(payload).then((res) => {
           if (res.total_items != undefined) {
-            console.log("Cart:", res.cart);
+            console.log("Cart:", res.cart.cart);
             alert("Product added to cart successfully"); // "Product added to cart successfully"
           }
         });
