@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import {useOutletContext} from "react-router-dom";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useOutletContext, useNavigate, useSearchParams } from "react-router-dom";
 import SVGVisualizer from "./SVGVisualizerV2";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
 import CreamColorPicker from "./CreamColorPicker";
 import { cakeCode, middleCreamCode, topCreamCode, fillingCode, extraOptions, customizationOptions } from "../../services/shop/customizationOptions";
-import { add_to_cart } from "../../services/shop/cart";
+import { add_to_cart, get_cart_item } from "../../services/shop/cart";
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
@@ -22,6 +22,8 @@ const CakeCustomization = () => {
       { id: "orange",  label: "Orange",  hex: "#FB923C" },
       { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
     ];
+    const [params] = useSearchParams();
+    const itemId = params.get("item")
     const svgRef = useRef(null);
     const { setCartCount } = useOutletContext();
     const [product, setProduct] = useState([]);
@@ -35,6 +37,7 @@ const CakeCustomization = () => {
     const [buttonText, setButtonText] = useState("Add to cart")
     const [isAdding, setIsAdding] = React.useState(false);
     const [loading, setLoading] = useState(true);
+    const [previewUrl, setPreviewUrl] = useState(null);
 
     
     const [additionalNote, setAdditionalNote] = useState("");
@@ -50,6 +53,58 @@ const CakeCustomization = () => {
     const increase = () => {
       setQty(qty + 1);
     };
+
+    useEffect(() => {
+      if (!itemId) return;
+
+      (async () => {
+        try {
+          const res = await get_cart_item(itemId);
+          const cfg = res?.config || {};
+
+          // ---- apply to your existing state ----
+          // Adjust these to your exact state variable names/options lists
+
+          if (cfg.cakeFlavor)       setSelectedCake({ code: cfg.cakeFlavor, label: cfg.cakeFlavor });
+          if (cfg.fillingFlavor)    setSelectedFilling({ code: cfg.fillingFlavor, label: cfg.fillingFlavor });
+          if (cfg.creamFlavor)      setSelectedCream({ code: cfg.creamFlavor, label: cfg.creamFlavor });
+          if (cfg.topCreamFlavor)   setSelectedTopCream({ code: cfg.topCreamFlavor, label: cfg.topCreamFlavor });
+
+          // Only show color if colored vanilla
+          if (cfg.topCreamFlavor === "colored_vanilla" && cfg.topCreamColor) {
+            setTopCreamColor(cfg.topCreamColor);
+          }
+
+          if (typeof cfg.message === "string") setCustomInput(cfg.message || "");
+
+          // Motif / plexi / lettering mode
+          if (cfg.motif) setMotifChoice(cfg.motif);
+          if (cfg.plexiColor) setPlexiColor(cfg.plexiColor);
+
+          if (cfg.letteringMode === "chocolate") {
+            setSelectedCustomization({ code: "choco_letters" });
+          } else if (cfg.letteringMode === "plexi") {
+            setSelectedCustomization({ code: "plexi_writing" });
+          } else if (cfg.motif) {
+            setSelectedCustomization({ code: "plexi_motif" });
+          } else {
+            setSelectedCustomization({ code: "none" });
+          }
+
+          // (Optional) preload preview while SVG draws
+          if (res.preview_url) setPreviewUrl(res.preview_url);
+
+          // (Optional) quantity if you allow editing it in builder
+          if (res.quantity) setQty(res.quantity);
+
+          // (Optional) product info (base price / name) if you need it in the UI
+          // setProduct(res.product);
+
+        } catch (e) {
+          console.error("Failed to load item config", e);
+        }
+      })();
+    }, [itemId]);
 
     useEffect(() => {
       console.log("[CakeCustomization] mounted");

@@ -80,3 +80,20 @@ export const remove_coupon = async () => {
     },
   }).then((res) => res.json());
 };
+
+export const get_cart_item = (id) => {
+  return fetch(API_HOST + `items/${id}`, {
+    method: "GET",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => res.json());
+};
+
+export const update_cart_item = (id, payload) => {
+  return fetch(API_HOST + `items/${id}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  }).then((res) => res.json());
+};

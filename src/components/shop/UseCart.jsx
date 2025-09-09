@@ -12,6 +12,7 @@ export function useCart() {
     fetch_cart().then((res) => {
       const items = Object.entries(res.cart).map(([key, v]) => ({
         id: key,
+        item_id: v.item_id ?? v.id ?? null,
         product_id: v.product_id,
         name: v.name,
         quantity: v.quantity,

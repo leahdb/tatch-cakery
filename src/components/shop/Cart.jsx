@@ -2,9 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useCart } from "./UseCart";
 import { remove_from_cart, update_cart } from "../../services/shop/cart";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { useNavigate, Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
+
+  const navigate = useNavigate();
 
   const { subtotal, itemsCount } = useMemo(() => {
     const sub = cart.reduce((sum, it) => sum + Number(it.price) * Number(it.quantity), 0);
@@ -30,48 +33,50 @@ const Cart = () => {
     </div>
   );
 
-  const updateQty = (product_id, delta) => {
-    const current = cart.find(it => it.product_id === product_id);
+  const updateQty = (item_id, delta) => {
+    const current = cart.find((it) => it.item_id === item_id);
     if (!current) return;
     const nextQty = Math.max(1, current.quantity + delta);
 
     setCart(curr =>
-      curr.map(it =>
-        it.product_id === product_id
-          ? { ...it, quantity: nextQty }
-          : it
-      )
+      curr.map((it) => (
+        it.item_id === item_id 
+        ? { ...it, quantity: nextQty, subtotal: nextQty * it.price } 
+        : it
+      ))
     );
 
-    update_cart(product_id, nextQty)
-        .then(res => {
-          const items = Object.entries(res.cart || {}).map(([key, v]) => ({
-            id: key,
-            product_id: v.product_id,
-            name: v.name,
-            quantity: v.quantity,
-            price: v.price,
-            slug: v.slug,
-            image: v.image || "/placeholder.jpg",
-            subtotal: v.price * v.quantity,
-            preview: v.preview,
-          }));
-          setCart(items);
-          setTotalItems(res.total_items);
-          setTotalPrice(res.total_price);
-        })
-        .catch(err => {
-          console.error("Update failed", err);
-        });
+    update_cart(item_id, nextQty)
+      .then(res => {
+        const items = Object.entries(res.cart || {}).map(([key, v]) => ({
+          id: key,
+          item_id: v.item_id ?? v.id ?? null,
+          product_id: v.product_id,
+          name: v.name,
+          quantity: v.quantity,
+          price: v.price,
+          slug: v.slug,
+          image: v.image || "/placeholder.jpg",
+          subtotal: v.price * v.quantity,
+          preview: v.preview,
+        }));
+        setCart(items);
+        setTotalItems(res.total_items);
+        setTotalPrice(res.total_price);
+      })
+      .catch(err => {
+        console.error("Update failed", err);
+      });
   };
 
 
-  const handleRemove = (e, id) => {
+  const handleRemove = (e, item_id) => {
     e.preventDefault();
-    remove_from_cart(id).then((res) => {
+    remove_from_cart(item_id).then((res) => {
       console.log("Cart after removal:", res.cart);
       const items = Object.entries(res.cart).map(([key, v]) => ({
         id: key,
+        item_id: v.item_id ?? v.id ?? null,
         product_id: v.product_id,
         name: v.name,
         quantity: v.quantity,
@@ -171,6 +176,14 @@ const Cart = () => {
                 </div>
                 <div className="col-lg-3 col-6 d-flex justify-content-end mb-2">
                   <div className="float-md-end">
+                    {item.is_custom && (
+                        <Link
+                          className="remove-cart text-light-brown"
+                          to={`/build-your-cake?item=${item.item_id}`}
+                        >
+                          Edit
+                        </Link>
+                      )}
                     <a
                       href="#"
                       className="remove-cart text-light-brown"
