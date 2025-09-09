@@ -21,6 +21,7 @@ export function useCart() {
         image: v.image || "/placeholder.jpg",
         subtotal: v.price * v.quantity,
         preview: v.preview,
+        is_custom: v.is_custom,
       }));
       setCart(items);
       setTotalItems(res.total_items);

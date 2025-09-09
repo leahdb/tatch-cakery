@@ -59,6 +59,7 @@ const Cart = () => {
           image: v.image || "/placeholder.jpg",
           subtotal: v.price * v.quantity,
           preview: v.preview,
+          is_custom: v.is_custom,
         }));
         setCart(items);
         setTotalItems(res.total_items);
@@ -85,6 +86,7 @@ const Cart = () => {
         image: v.image || "/placeholder.jpg",
         subtotal: v.price * v.quantity,
         preview: v.preview,
+        is_custom: v.is_custom,
       }));
       setCart(items);
       setTotalItems(res.total_items);
@@ -138,9 +140,7 @@ const Cart = () => {
                       </div>
 
                       <div className="">
-                        <a href="#" className="nav-link">
-                          {item.name}
-                        </a>
+                        {item.name}
                         <p className="text-muted">${item.price}</p>
                       </div>
                     </div>
