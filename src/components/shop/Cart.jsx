@@ -113,18 +113,21 @@ const Cart = () => {
                   <div className="me-lg-5">
                     <div className="d-flex align-items-center">
                       <div className="me-3 d-flex justify-content-center align-items-center">
-                        <img
-                          src={item.image}
-                          className="img-thumbnail-cart"
-                          alt={item.name}
-                          loading="lazy"
-                        />
-                        <img
-                          src={item.preview}
-                          className="img-thumbnail-cart"
-                          alt={item.name}
-                          loading="lazy"
-                        />
+                        {item.preview ? 
+                          <img
+                            src={item.preview}
+                            className="img-thumbnail-cart"
+                            alt={item.name}
+                            loading="lazy"
+                          />
+                          :
+                          <img
+                            src={item.image}
+                            className="img-thumbnail-cart"
+                            alt={item.name}
+                            loading="lazy"
+                          />
+                        }
                       </div>
 
                       <div className="">
