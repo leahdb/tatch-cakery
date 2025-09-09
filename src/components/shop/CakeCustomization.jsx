@@ -73,7 +73,9 @@ const CakeCustomization = () => {
 
           // Only show color if colored vanilla
           if (cfg.tcreams === "colored_vanilla" && cfg.topCreamColor) {
-            setTopCreamColor(cfg.topCreamColor);
+            setTopCreamColor(
+              TOP_CREAM_COLORS.find(c => c.id === cfg.topCreamColor) || TOP_CREAM_COLORS[0]
+            );
           }
 
           if (typeof cfg.message === "string") setCustomInput(cfg.message || "");
@@ -116,6 +118,57 @@ const CakeCustomization = () => {
           }
       });
     }, []);
+
+    const onSaveEdit = async () => {
+      if (!editMode || !itemId) return;
+
+      // 1) Serialize current SVG preview (optional but recommended)
+      const svgEl = svgRef.current || document.querySelector('#cake_builder_svg');
+      let preview_svg = null;
+      if (svgEl) {
+        const serializer = new XMLSerializer();
+        preview_svg = serializer.serializeToString(svgEl);
+        if (!preview_svg.includes('xmlns=')) {
+          preview_svg = preview_svg.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+      }
+
+      // 2) Build the SAME custom shape you used for add_to_cart
+      const custom = {
+        fillings: selectedFilling.code,
+        extras: selectedExtras.code,
+        designs: selectedCustomization.code,
+        note: additionalNote || null,
+        message:
+          (selectedCustomization.code === "choco_letters" || selectedCustomization.code === "plexi_writing")
+            ? (customInput || "")
+            : null,
+        plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
+        motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
+        mcreams: selectedCream.code,
+        tcreams: selectedTopCream.code,
+        cake_flavor: selectedCake.code,
+        // include the color only when colored vanilla is chosen
+        topCreamColor:
+          (selectedTopCream.code === "colored_vanilla")
+            ? (topCreamColor?.id || null)  // send the color ID you store (e.g., 'pink')
+            : null,
+      };
+
+      try {
+        const res = await update_cart_item(itemId, {
+          custom,
+          quantity: qty,               // keep or remove if you don't edit qty here
+          ...(preview_svg ? { preview_svg } : {}),
+        });
+
+        // Whether merged or not, head back to cart (cart page will refetch)
+        window.location.href = "/cart";
+      } catch (e) {
+        console.error("Update failed", e);
+        alert("Could not save changes. Please try again.");
+      }
+    };
 
     const handleAddToCart = async () => {
       if (isAdding) return;
@@ -193,42 +246,6 @@ const CakeCustomization = () => {
       URL.revokeObjectURL(url);
       return canvas.toDataURL('image/png');
     }
-
-
-    const onSaveEdit = async () => {
-    const custom = buildConfigFromState({
-      selectedCake,
-      selectedFilling,
-      selectedCream,
-      selectedTopCream,
-      topCreamColor,
-      customInput,
-      motifChoice,
-      plexiColor,
-      selectedCustomization,
-    });
-
-    // Optional preview snapshot
-    const preview_svg = getPreviewSvg();
-
-    try {
-      const res = await update_cart_item(itemId, {
-        custom,
-        quantity, // optional; remove if you don't want to change qty here
-        ...(preview_svg ? { preview_svg } : {}),
-      });
-
-      if (res.merged) {
-        // Item merged into another line
-        navigate(`/cart`, { replace: true });
-      } else {
-        navigate(`/cart`, { replace: true });
-      }
-    } catch (e) {
-      console.error("Save failed", e);
-      // keep user on page; optionally show toast
-    }
-  };
 
   if (loading) {
     return (
