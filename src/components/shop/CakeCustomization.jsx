@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import {useOutletContext} from "react-router-dom";
 import SVGVisualizer from "./SVGVisualizerV2";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
@@ -22,6 +23,7 @@ const CakeCustomization = () => {
       { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
     ];
     const svgRef = useRef(null);
+    const { setCartCount } = useOutletContext();
     const [product, setProduct] = useState([]);
     const [selectedCake, setSelectedCake] = useState(cakeCode[0]);
     const [selectedCream, setSelectedCream] = useState(middleCreamCode[0]);
@@ -30,6 +32,8 @@ const CakeCustomization = () => {
     const [selectedFilling, setSelectedFilling] = useState(fillingCode[0]);
     const [selectedExtras, setSelectedExtras] = useState(extraOptions[0]);
     const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
+    const [buttonText, setButtonText] = useState("Add to cart")
+    const [isAdding, setIsAdding] = React.useState(false);
     const [loading, setLoading] = useState(true);
 
     
@@ -58,6 +62,9 @@ const CakeCustomization = () => {
     }, []);
 
     const handleAddToCart = async () => {
+      if (isAdding) return;
+      setIsAdding(true);
+      setButtonText("Adding...")
       // 1) Serialize SVG
       const svgEl = svgRef.current || document.querySelector('#cake_builder_svg');
       if (!svgEl) { alert("Preview not ready"); return; }
@@ -95,6 +102,9 @@ const CakeCustomization = () => {
 
       const res = await add_to_cart(payload);
       if (res?.total_items !== undefined) {
+        setCartCount(res.cart.total_items);
+        setIsAdding(false);
+        setButtonText("Add to cart");
         alert("Product added to cart successfully");
       }
     };
@@ -395,7 +405,7 @@ const CakeCustomization = () => {
                     </button>
                     <input
                       type="text"
-                      className="form-control text-center p-0 border-0 bg-light-beige color-primary fs-5 fw-bold"
+                      className="form-control text-center p-0 border-0 color-primary fs-5 fw-bold"
                       value={qty}
                       readOnly
                     />
@@ -409,7 +419,7 @@ const CakeCustomization = () => {
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
-                  <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>Add to cart</button>
+                  <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>{buttonText}</button>
                 </div>
               </div>
             </div>
