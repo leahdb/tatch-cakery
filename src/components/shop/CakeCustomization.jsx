@@ -5,7 +5,7 @@ import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
 import CreamColorPicker from "./CreamColorPicker";
 import { cakeCode, middleCreamCode, topCreamCode, fillingCode, extraOptions, customizationOptions } from "../../services/shop/customizationOptions";
-import { add_to_cart, get_cart_item } from "../../services/shop/cart";
+import { add_to_cart, get_cart_item, update_cart_item } from "../../services/shop/cart";
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
@@ -25,6 +25,7 @@ const CakeCustomization = () => {
     const [params] = useSearchParams();
     const itemId = params.get("item")
     const svgRef = useRef(null);
+    const editMode = !!itemId;
     const { setCartCount } = useOutletContext();
     const [product, setProduct] = useState([]);
     const [selectedCake, setSelectedCake] = useState(cakeCode[0]);
@@ -55,7 +56,7 @@ const CakeCustomization = () => {
     };
 
     useEffect(() => {
-      if (!itemId) return;
+      if (!editMode) return;
 
       (async () => {
         try {
@@ -65,13 +66,13 @@ const CakeCustomization = () => {
           // ---- apply to your existing state ----
           // Adjust these to your exact state variable names/options lists
 
-          if (cfg.cakeFlavor)       setSelectedCake({ code: cfg.cakeFlavor, label: cfg.cakeFlavor });
-          if (cfg.fillingFlavor)    setSelectedFilling({ code: cfg.fillingFlavor, label: cfg.fillingFlavor });
-          if (cfg.creamFlavor)      setSelectedCream({ code: cfg.creamFlavor, label: cfg.creamFlavor });
-          if (cfg.topCreamFlavor)   setSelectedTopCream({ code: cfg.topCreamFlavor, label: cfg.topCreamFlavor });
+          if (cfg.cake_flavor)       setSelectedCake({ code: cfg.cake_flavor, label: cfg.cake_flavor });
+          if (cfg.fillings)    setSelectedFilling({ code: cfg.fillings, label: cfg.fillings });
+          if (cfg.mcreams)      setSelectedCream({ code: cfg.mcreams, label: cfg.mcreams });
+          if (cfg.tcreams)   setSelectedTopCream({ code: cfg.tcreams, label: cfg.tcreams });
 
           // Only show color if colored vanilla
-          if (cfg.topCreamFlavor === "colored_vanilla" && cfg.topCreamColor) {
+          if (cfg.tcreams === "colored_vanilla" && cfg.topCreamColor) {
             setTopCreamColor(cfg.topCreamColor);
           }
 
@@ -79,11 +80,11 @@ const CakeCustomization = () => {
 
           // Motif / plexi / lettering mode
           if (cfg.motif) setMotifChoice(cfg.motif);
-          if (cfg.plexiColor) setPlexiColor(cfg.plexiColor);
+          if (cfg.plexi_color) setPlexiColor(cfg.plexi_color);
 
-          if (cfg.letteringMode === "chocolate") {
+          if (cfg.designs === "chocolate") {
             setSelectedCustomization({ label: "Chocolate Letters Writing", code: "choco_letters", price: 1 });
-          } else if (cfg.letteringMode === "plexi") {
+          } else if (cfg.designs === "plexi") {
             setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 0 });
           } else if (cfg.motif) {
             setSelectedCustomization({ label: "Plexi Motif", code: "plexi_motif", price: 0 });
@@ -104,7 +105,7 @@ const CakeCustomization = () => {
           console.error("Failed to load item config", e);
         }
       })();
-    }, [itemId]);
+    }, [editMode, itemId]);
 
     useEffect(() => {
       console.log("[CakeCustomization] mounted");
@@ -194,17 +195,40 @@ const CakeCustomization = () => {
     }
 
 
-    // export const edit_shop_orders = (id, data) => {
-    //   return fetch(`${API_HOST}edit/${id}`, {
-    //     method: "POST",
-    //     credentials: "include",
-    //     secure: true,
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }).then((res) => res.json());
-    // };
+    const onSaveEdit = async () => {
+    const custom = buildConfigFromState({
+      selectedCake,
+      selectedFilling,
+      selectedCream,
+      selectedTopCream,
+      topCreamColor,
+      customInput,
+      motifChoice,
+      plexiColor,
+      selectedCustomization,
+    });
+
+    // Optional preview snapshot
+    const preview_svg = getPreviewSvg();
+
+    try {
+      const res = await update_cart_item(itemId, {
+        custom,
+        quantity, // optional; remove if you don't want to change qty here
+        ...(preview_svg ? { preview_svg } : {}),
+      });
+
+      if (res.merged) {
+        // Item merged into another line
+        navigate(`/cart`, { replace: true });
+      } else {
+        navigate(`/cart`, { replace: true });
+      }
+    } catch (e) {
+      console.error("Save failed", e);
+      // keep user on page; optionally show toast
+    }
+  };
 
   if (loading) {
     return (
@@ -474,7 +498,13 @@ const CakeCustomization = () => {
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
-                  <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>{buttonText}</button>
+                  {editMode ? (
+                    <button className="btn btn-primary w-100 rounded-0 h-100" onClick={onSaveEdit}>
+                      Save Changes
+                    </button>
+                  ) : (
+                    <button className="btn btn-primary w-100 rounded-0 h-100" onClick={handleAddToCart}>{buttonText}</button>
+                  )}
                 </div>
               </div>
             </div>
