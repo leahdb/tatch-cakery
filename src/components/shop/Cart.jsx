@@ -174,11 +174,11 @@ const Cart = () => {
                     <text className="h6 color-primary">${item.price*item.quantity}</text>
                   </div>
                 </div>
-                <div className="col-lg-3 col-6 d-flex justify-content-end mb-2">
+                <div className="col-lg-3 col-6 d-flex justify-content-end mb-0">
                   <div className="float-md-end">
                     {item.is_custom && (
                         <Link
-                          className="remove-cart text-light-brown"
+                          className="remove-cart text-light-brown me-4"
                           to={`/build-your-cake?item=${item.item_id}`}
                         >
                           Edit

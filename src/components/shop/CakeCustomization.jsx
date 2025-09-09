@@ -82,13 +82,13 @@ const CakeCustomization = () => {
           if (cfg.plexiColor) setPlexiColor(cfg.plexiColor);
 
           if (cfg.letteringMode === "chocolate") {
-            setSelectedCustomization({ code: "choco_letters" });
+            setSelectedCustomization({ label: "Chocolate Letters Writing", code: "choco_letters", price: 1 });
           } else if (cfg.letteringMode === "plexi") {
-            setSelectedCustomization({ code: "plexi_writing" });
+            setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 0 });
           } else if (cfg.motif) {
-            setSelectedCustomization({ code: "plexi_motif" });
+            setSelectedCustomization({ label: "Plexi Motif", code: "plexi_motif", price: 0 });
           } else {
-            setSelectedCustomization({ code: "none" });
+            setSelectedCustomization({ label: "No Customization", code: "none", price: 0 });
           }
 
           // (Optional) preload preview while SVG draws
