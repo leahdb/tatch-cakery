@@ -24,25 +24,25 @@ export const fetch_cart = () => {
   }).then((res) => res.json());
 };
 
-export const update_cart = (product_id, quantity) => {
+export const update_cart = (cart_item_id, quantity) => {
   return fetch(API_HOST + "update", {
     method: "PUT",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ product_id, quantity }),
+    body: JSON.stringify({ cart_item_id, quantity }),
   }).then((res) => res.json());
 };
 
-export const remove_from_cart = (product_id) => {
+export const remove_from_cart = (cart_item_id) => {
   return fetch(API_HOST + "remove", {
     method: "DELETE",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ product_id }),
+    body: JSON.stringify({ cart_item_id }),
   }).then((res) => res.json());
 };
 
