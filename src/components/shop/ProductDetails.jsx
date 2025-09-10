@@ -48,23 +48,42 @@ export default function ProductDetails() {
 
   const handleAddToCart = () => {
     if (isAdding || !product.in_stock) return;
+
     setIsAdding(true);
     setButtonText("Adding...")
-    const promise = add_to_cart({
+
+    const payload = {
       product_id: product.id,
       quantity: qty,
-      custom: {
-          designs: selectedCustomization.code,
-          note: additionalNote || null,
-          message:
-            (selectedCustomization.code === "choco_letters" ||
-            selectedCustomization.code === "plexi_writing")
-              ? (customInput || "")
-              : null,
-          plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
-          motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
-        },
-    });
+    };
+
+    const custom = {
+      designs: selectedCustomization.code,
+      note: additionalNote || null,
+      message:
+        (selectedCustomization.code === "choco_letters" ||
+          selectedCustomization.code === "plexi_writing")
+          ? (customInput || "")
+          : null,
+      plexi_color: selectedCustomization.label.includes("plexi")
+        ? plexiColor
+        : null,
+      motif: selectedCustomization.code === "plexi_motif"
+        ? motifChoice
+        : null,
+    };
+
+    // Remove all null/empty values
+    const cleanCustom = Object.fromEntries(
+      Object.entries(custom).filter(([_, v]) => v !== null && v !== "")
+    );
+
+    // Only attach `custom` if something remains
+    if (Object.keys(cleanCustom).length > 0) {
+      payload.custom = cleanCustom;
+    }
+
+    const promise = add_to_cart(payload);
 
     notify_promise(promise, "Added to cart!", "🛒");
 
