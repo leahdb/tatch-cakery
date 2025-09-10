@@ -3649,7 +3649,12 @@ table.dashboard-table td {
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.2s;
-  font-size: 14px !important;
+  max-width: 320px;
+  min-width: 240px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+  font-size: 12px !important;
 }
 
 .tooltip-wrapper:hover .tooltip-text {
