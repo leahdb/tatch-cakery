@@ -1,4 +1,5 @@
 import LoginPage from "./components/auth/LoginPage";
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import DashHome from "./components/dashboard/DashHome";
