@@ -113,7 +113,9 @@ export default function ProductDetails() {
 
             {product.category.id == 2 && (
               <div className="mb-2 py-3 px-2 border-top">
-                <label className="form-label fs-6">Customization</label>
+                <label className="form-label fs-6">Customization <i className="bi bi-info-circle-fill text-primary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+                  Cakes with customization can't be delivered on same day.
+                </i></label>
                 {customizationOptions.map((custom, index) => (
                   <div className="form-check" key={index}>
                     <input
