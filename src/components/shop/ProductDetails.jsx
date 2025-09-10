@@ -50,13 +50,15 @@ export default function ProductDetails() {
     if (isAdding || !product.in_stock) return;
 
     setIsAdding(true);
-    setButtonText("Adding...")
+    setButtonText("Adding...");
 
+    // Base payload
     const payload = {
       product_id: product.id,
       quantity: qty,
     };
 
+    // Build custom object
     const custom = {
       designs: selectedCustomization.code,
       note: additionalNote || null,
@@ -73,12 +75,17 @@ export default function ProductDetails() {
         : null,
     };
 
-    // Remove all null/empty values
-    const cleanCustom = Object.fromEntries(
+    // Remove null/empty values
+    let cleanCustom = Object.fromEntries(
       Object.entries(custom).filter(([_, v]) => v !== null && v !== "")
     );
 
-    // Only attach `custom` if something remains
+    // If designs === "none", ignore it completely
+    if (cleanCustom.designs === "none") {
+      delete cleanCustom.designs;
+    }
+
+    // Only attach custom if something remains
     if (Object.keys(cleanCustom).length > 0) {
       payload.custom = cleanCustom;
     }
@@ -96,6 +103,7 @@ export default function ProductDetails() {
         setButtonText("Add to cart");
       });
   };
+
 
   if (loading) return (
     <div className="d-flex align-items-center" style={{height: "100vh"}}>
