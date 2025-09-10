@@ -25,6 +25,9 @@ export default function ProductDetails() {
   const [motifChoice, setMotifChoice] = useState(null);
   const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
 
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el)); 
+
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
   };
