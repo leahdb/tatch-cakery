@@ -180,7 +180,7 @@ export default function ProductDetails() {
             )}
           </div>
 
-          <div className="row pt-3 mt-4 mx-0 gy-md-0 gy-3">
+          <div className="row mt-4 mx-0 gy-md-0 gy-3">
             <div className="col-12 col-md-6">
               <div className="input-group border border-brown w-100 small-h">
                 <button
