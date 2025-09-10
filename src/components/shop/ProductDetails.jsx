@@ -9,7 +9,6 @@ import { add_to_cart } from "../../services/shop/cart";
 import { customizationOptions } from "../../services/shop/customizationOptions";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
-import { Tooltip } from "bootstrap";     
 
 
 export default function ProductDetails() {
@@ -37,12 +36,6 @@ export default function ProductDetails() {
       setQty((q) => q + 1);
     }
   };
-
-  useEffect(() => {
-    const els = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltips = Array.from(els).map(el => new Tooltip(el));
-    return () => tooltips.forEach(t => t.dispose()); // cleanup on unmount
-  }, []);
 
   useEffect(() => {
     fetch_shop_product(slug).then((res) => {
@@ -126,14 +119,12 @@ export default function ProductDetails() {
               <div className="mb-2 py-3 px-2 border-top">
                 <label className="form-label fs-6">
                   Customization{" "}
-                  <i
-                    className="bi bi-info-circle-fill text-primary"
-                    role="button"
-                    style={{ cursor: "pointer" }}
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="right"
-                    data-bs-title="Cakes with customization can't be delivered on same day."
-                  />
+                  <span className="tooltip-wrapper">
+                    <i className="bi bi-info-circle-fill text-primary" />
+                    <span className="tooltip-text">
+                      Cakes with customization can't be delivered on same day.
+                    </span>
+                  </span>
                 </label>
                 {customizationOptions.map((custom, index) => (
                   <div className="form-check" key={index}>
