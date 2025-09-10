@@ -9,8 +9,7 @@ export const middleCreamCode = [
   { label: "Vanilla", code: "vanilla", price: 0 },
   { label: "Strawberry", code: "strawberry", price: 0.5 },
   { label: "Cream Cheese", code: "cream_cheese", price: 0.5 },
-  { label: "Lotus", code: "lotus", price: 0.5 },
-  { label: "Pistachio", code: "pistachio", price: 0.5 },
+  { label: "Coffee", code: "coffee", price: 0.5 },
 ];
 
 export const topCreamCode = [
@@ -18,8 +17,7 @@ export const topCreamCode = [
   { label: "Vanilla", code: "vanilla", price: 0 },
   { label: "Strawberry", code: "strawberry", price: 0.5 },
   { label: "Cream Cheese", code: "cream_cheese", price: 0.5 },
-  { label: "Lotus", code: "lotus", price: 0.5 },
-  { label: "Pistachio", code: "pistachio", price: 0.5 },
+  { label: "Coffee", code: "coffee", price: 0.5 },
   { label: "Colored Vanilla", code: "colored_vanilla", price: 0.5 },
 ];
 

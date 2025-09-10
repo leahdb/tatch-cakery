@@ -32,8 +32,8 @@ const CakeCustomization = () => {
     const [selectedCream, setSelectedCream] = useState(middleCreamCode[0]);
     const [selectedTopCream, setSelectedTopCream] = useState(topCreamCode[0]);
     const [topCreamColor, setTopCreamColor] = useState(TOP_CREAM_COLORS[0]); 
-    const [selectedFilling, setSelectedFilling] = useState(fillingCode[0]);
-    const [selectedExtras, setSelectedExtras] = useState(extraOptions[0]);
+    const [selectedFilling, setSelectedFilling] = useState({});
+    const [selectedExtras, setSelectedExtras] = useState({});
     const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
     const [buttonText, setButtonText] = useState("Add to cart")
     const [isAdding, setIsAdding] = React.useState(false);
