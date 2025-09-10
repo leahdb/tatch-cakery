@@ -11,7 +11,7 @@ import { add_to_cart } from "../../services/shop/cart";
 export default function ProductDetails() {
   const { setCartCount } = useOutletContext();
   const { slug } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
   const [qty, setQty] = useState(1);
   const [buttonText, setButtonText] = useState("Add to cart")
   const [isAdding, setIsAdding] = React.useState(false);
@@ -22,7 +22,11 @@ export default function ProductDetails() {
   };
 
   const increase = () => {
-    setQty(qty + 1);
+    if (typeof product.stock_quantity === "number") {
+      setQty((q) => Math.min(q + 1, product.stock_quantity));
+    } else {
+      setQty((q) => q + 1);
+    }
   };
 
   useEffect(() => {
@@ -35,7 +39,7 @@ export default function ProductDetails() {
   }, []);
 
   const handleAddToCart = () => {
-    if (isAdding) return;
+    if (isAdding || !product.in_stock) return;
     setIsAdding(true);
     setButtonText("Adding...")
     const promise = add_to_cart({
@@ -66,30 +70,19 @@ export default function ProductDetails() {
     </div>
   );
 
+  const isOut = !product.in_stock;
+  const addDisabled = isOut || isAdding;
+
   return (
     <div className="container my-md-5 my-3">
       <div className="row g-md-5 d-flex justify-content-between">
         <div className="col-md-6 col-12 px-0 px-md-4">
-          <a href={product.image_path} data-fancybox="gallery">
-            <img
-              src={product.image_url}
-              className="d-block w-100 carousel-image"
-              alt="Product"
-              loading="lazy"
-            />
-          </a>
-          {/* <div className="thumbnail-container mt-5">
-            {product.images.map((image, index) => (
-              <a
-                key={index}
-                href={image}
-                data-fancybox="gallery"
-                className="thumbnail"
-              >
-                <img src={image.image} alt={`Thumbnail ${index + 1}`} />
-              </a>
-            ))}
-          </div> */}
+          <img
+            src={product.image_url}
+            className="d-block w-100 carousel-image"
+            alt="Product"
+            loading="lazy"
+          />
         </div>
         <div className="col-md-6 col-12">
           <div className="row px-2">
@@ -128,10 +121,10 @@ export default function ProductDetails() {
             <div className="col-12 col-md-6">
               <button 
                 type="button" 
-                disabled={isAdding} 
+                disabled={addDisabled}
                 className="btn btn-primary w-100 rounded-0 h-100 small-h" 
                 onClick={handleAddToCart} >
-                  {buttonText}
+                  {isOut ? "Out of stock" : buttonText}
               </button>
             </div>
           </div>
