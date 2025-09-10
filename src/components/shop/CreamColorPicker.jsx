@@ -37,7 +37,7 @@ export default function CreamColorPicker({
 
   return (
     <div role="radiogroup" aria-label={title}>
-      <div className="d-grid gap-2" style={{ gridTemplateColumns: "repeat(10, 1fr)" }}>
+      <div className="d-grid gap-2" style={{ gridTemplateColumns: "repeat(7, 1fr)" }}>
         {options.map((opt) => {
           const isSel = selectedId === opt.id;
           const style =

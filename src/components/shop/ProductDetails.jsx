@@ -163,7 +163,7 @@ export default function ProductDetails() {
                     <label className="form-label fs-6">Enter Your Message</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control size-14"
                       placeholder="Your custom message"
                       value={customInput}
                       onChange={(e) => setCustomInput(e.target.value)}
