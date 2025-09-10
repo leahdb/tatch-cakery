@@ -46,6 +46,7 @@ export default function ChocolateMoldMessageAuto({
     const el = targetRef?.current;
     if (!el) { setMeasured(null); return; }
 
+    let raf = 0;
     const measure = () => {
       try {
         const b = el.getBBox();
@@ -61,9 +62,19 @@ export default function ChocolateMoldMessageAuto({
         setMeasured(null);
       }
     };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    raf = requestAnimationFrame(measure);
+    
+    const ro = 'ResizeObserver' in window ? new ResizeObserver(() => measure()) : null;
+    ro?.observe(el);
+
+    const onResize = () => measure();
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ro?.disconnect();
+      window.removeEventListener('resize', onResize);
+    };
   }, [targetRef, padding]);
 
   // Resolve working bounds + center
@@ -203,7 +214,7 @@ export default function ChocolateMoldMessageAuto({
           <stop offset="55%" stopColor={palette.tileFillMid}/>
           <stop offset="100%" stopColor={palette.tileFillBot}/>
         </linearGradient>
-        <filter id="tileShadow" x="-50%" y="-50%" width="200%" height="200%">
+        <filter id="letterDrop" x="-50%" y="-50%" width="200%" height="200%">
           <feDropShadow dx="0" dy="1" stdDeviation="1.2" floodOpacity="0.35"/>
         </filter>
       </defs>
