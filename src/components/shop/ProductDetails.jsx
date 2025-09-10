@@ -53,6 +53,17 @@ export default function ProductDetails() {
     const promise = add_to_cart({
       product_id: product.id,
       quantity: qty,
+      custom: {
+          designs: selectedCustomization.code,
+          note: additionalNote || null,
+          message:
+            (selectedCustomization.code === "choco_letters" ||
+            selectedCustomization.code === "plexi_writing")
+              ? (customInput || "")
+              : null,
+          plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
+          motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
+        },
     });
 
     notify_promise(promise, "Added to cart!", "🛒");
@@ -101,8 +112,8 @@ export default function ProductDetails() {
             <p className="pt-3 mt-4 mx-0">{product.description}</p>
 
             {product.category.id == 2 && (
-              <div className="mb-2 py-3 px-2">
-                <label className="form-label fs-5">Customization</label>
+              <div className="mb-2 py-3 px-2 border-top">
+                <label className="form-label fs-6">Customization</label>
                 {customizationOptions.map((custom, index) => (
                   <div className="form-check" key={index}>
                     <input
@@ -118,7 +129,7 @@ export default function ProductDetails() {
                         }
                       }}
                     />
-                    <label className="form-check-label">
+                    <label className="form-check-label size-14">
                       {custom.label}
                       <small className="text-muted">
                         &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
@@ -128,7 +139,7 @@ export default function ProductDetails() {
                 ))}
                 {selectedCustomization.label.includes("Writing") && (
                   <div className="my-3">
-                    <label className="form-label fs-5">Enter Your Message</label>
+                    <label className="form-label fs-6">Enter Your Message</label>
                     <input
                       type="text"
                       className="form-control"
