@@ -17,17 +17,15 @@ export default function ProductDetails() {
   const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
 
-  var isOut = !product.in_stock;
-  const addDisabled = isOut || isAdding;
-
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
   };
 
   const increase = () => {
-    setQty((q) => q + 1);
-    if (product.stock_quantity < qty) {
-      isOut = true
+    if (typeof product.stock_quantity === "number") {
+      setQty((q) => Math.min(q + 1, product.stock_quantity));
+    } else {
+      setQty((q) => q + 1);
     }
   };
 
@@ -71,6 +69,9 @@ export default function ProductDetails() {
       />
     </div>
   );
+
+  const isOut = !product.in_stock;
+  const addDisabled = isOut || isAdding;
 
   return (
     <div className="container my-md-5 my-3">
@@ -126,7 +127,20 @@ export default function ProductDetails() {
                   {isOut ? "Out of stock" : buttonText}
               </button>
             </div>
+            <div className="col-12">
+              {product.low_stock && product.in_stock && (
+                <div className="mt-2">
+                  <span className="badge bg-warning text-dark">Low stock</span>
+                </div>
+              )}
+              {isOut && (
+                <div className="mt-2">
+                  <span className="badge bg-secondary">Out of stock</span>
+                </div>
+              )}
+            </div>
           </div>
+
 
           <div className="row border-top pt-3 mt-5 mx-0">
             <h5 className="fw-semibold text-dark mb-4">Description</h5>
