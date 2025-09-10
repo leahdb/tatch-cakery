@@ -9,6 +9,7 @@ import { add_to_cart } from "../../services/shop/cart";
 import { customizationOptions } from "../../services/shop/customizationOptions";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
+import { Tooltip } from "bootstrap";     
 
 
 export default function ProductDetails() {
@@ -25,9 +26,6 @@ export default function ProductDetails() {
   const [motifChoice, setMotifChoice] = useState(null);
   const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
 
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-  const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el)); 
-
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
   };
@@ -39,6 +37,12 @@ export default function ProductDetails() {
       setQty((q) => q + 1);
     }
   };
+
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltips = Array.from(els).map(el => new Tooltip(el));
+    return () => tooltips.forEach(t => t.dispose()); // cleanup on unmount
+  }, []);
 
   useEffect(() => {
     fetch_shop_product(slug).then((res) => {
@@ -120,9 +124,17 @@ export default function ProductDetails() {
 
             {product.category.id == 2 && (
               <div className="mb-2 py-3 px-2 border-top">
-                <label className="form-label fs-6">Customization <i className="bi bi-info-circle-fill text-primary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
-                  Cakes with customization can't be delivered on same day.
-                </i></label>
+                <label className="form-label fs-6">
+                  Customization{" "}
+                  <i
+                    className="bi bi-info-circle-fill text-primary"
+                    role="button"
+                    style={{ cursor: "pointer" }}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-title="Cakes with customization can't be delivered on same day."
+                  />
+                </label>
                 {customizationOptions.map((custom, index) => (
                   <div className="form-check" key={index}>
                     <input
