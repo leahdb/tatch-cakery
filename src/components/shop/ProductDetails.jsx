@@ -6,6 +6,9 @@ import { notify_promise } from "../../services/utils/toasts";
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { add_to_cart } from "../../services/shop/cart";
+import { customizationOptions } from "../../services/shop/customizationOptions";
+import MotifPicker from "./MotifPicker";
+import ColorPicker from "./ColorPicker";
 
 
 export default function ProductDetails() {
@@ -16,6 +19,11 @@ export default function ProductDetails() {
   const [buttonText, setButtonText] = useState("Add to cart")
   const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
+  const [additionalNote, setAdditionalNote] = useState("");
+  const [customInput, setCustomInput] = useState("");
+  const [motifChoice, setMotifChoice] = useState(null);
+  const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
 
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
@@ -91,6 +99,62 @@ export default function ProductDetails() {
             <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">${product.price}</span>
 
             <p className="pt-3 mt-4 mx-0">{product.description}</p>
+
+            {product.category.id == 2 && (
+              <div className="mb-2 py-3 px-2">
+                <label className="form-label fs-5">Customization</label>
+                {customizationOptions.map((custom, index) => (
+                  <div className="form-check" key={index}>
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="customization"
+                      value={custom.label}
+                      checked={selectedCustomization.code === custom.code}
+                      onChange={() => {
+                        setSelectedCustomization(custom);
+                        if (custom.label !== "Plexi Motif") {
+                          setMotifChoice(null); // clear motif when leaving motif mode
+                        }
+                      }}
+                    />
+                    <label className="form-check-label">
+                      {custom.label}
+                      <small className="text-muted">
+                        &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
+                      </small>
+                    </label>
+                  </div>
+                ))}
+                {selectedCustomization.label.includes("Writing") && (
+                  <div className="my-3">
+                    <label className="form-label fs-5">Enter Your Message</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Your custom message"
+                      value={customInput}
+                      onChange={(e) => setCustomInput(e.target.value)}
+                    />
+                  </div>
+                )}
+                {selectedCustomization.label.includes("Drawing") ||
+                selectedCustomization.label.includes("Motif") ? (
+                  <MotifPicker
+                    value={motifChoice}
+                    onChange={setMotifChoice}
+                  />
+                ) : null}
+                {selectedCustomization.label.includes("Plexi") && (
+                  <div className="my-3">
+                    <ColorPicker
+                      value={plexiColor}
+                      onChange={setPlexiColor}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="row pt-3 mt-4 mx-0 gy-md-0 gy-3">
