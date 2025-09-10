@@ -17,15 +17,17 @@ export default function ProductDetails() {
   const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
 
+  var isOut = !product.in_stock;
+  const addDisabled = isOut || isAdding;
+
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
   };
 
   const increase = () => {
-    if (typeof product.stock_quantity === "number") {
-      setQty((q) => Math.min(q + 1, product.stock_quantity));
-    } else {
-      setQty((q) => q + 1);
+    setQty((q) => q + 1);
+    if (product.stock_quantity < qty) {
+      isOut = true
     }
   };
 
@@ -69,9 +71,6 @@ export default function ProductDetails() {
       />
     </div>
   );
-
-  const isOut = !product.in_stock;
-  const addDisabled = isOut || isAdding;
 
   return (
     <div className="container my-md-5 my-3">
