@@ -385,7 +385,7 @@ const CakeCustomization = () => {
                     Filling is inside the cake.
                   </span>
                 </span></label>
-              {middleCreamCode.map((filling, index) => (
+              {fillingCode.map((filling, index) => (
                 <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
