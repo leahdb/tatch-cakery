@@ -130,12 +130,7 @@ export default function ProductDetails() {
             <div className="col-12">
               {product.low_stock && product.in_stock && (
                 <div className="mt-2">
-                  <span className="badge bg-warning text-dark">Low stock</span>
-                </div>
-              )}
-              {isOut && (
-                <div className="mt-2">
-                  <span className="badge bg-secondary">Out of stock</span>
+                  <span className="badge text-primary">Low stock</span>
                 </div>
               )}
             </div>
