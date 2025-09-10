@@ -92,6 +92,10 @@ export default function ProductDetails() {
   const isOut = !product.in_stock;
   const addDisabled = isOut || isAdding;
 
+  const totalPrice =
+      product.price +
+      (selectedCustomization?.price || 0);
+
   return (
     <div className="container my-md-5 my-3">
       <div className="row g-md-5 d-flex justify-content-between">
@@ -107,7 +111,7 @@ export default function ProductDetails() {
           <div className="row px-2">
             <h3 className="mb-1 text-light-brown fw-bold pt-md-3 pt-4">{product.name}</h3>
 
-            <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">${product.price}</span>
+            <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">${totalPrice}</span>
 
             <p className="pt-3 mt-4 mx-0">{product.description}</p>
 

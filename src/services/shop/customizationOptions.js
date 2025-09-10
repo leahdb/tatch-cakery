@@ -40,6 +40,6 @@ export const extraOptions = [
 export const customizationOptions = [
   { label: "No Customization", code: "none", price: 0 },
   { label: "Chocolate Letters Writing", code: "choco_letters", price: 1 },
-  { label: "Plexi Writing", code: "plexi_writing", price: 0 },
-  { label: "Plexi Motif", code: "plexi_motif", price: 0 },
+  { label: "Plexi Writing", code: "plexi_writing", price: 1 },
+  { label: "Plexi Motif", code: "plexi_motif", price: 1 },
 ];
