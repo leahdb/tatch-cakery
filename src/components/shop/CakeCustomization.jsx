@@ -337,51 +337,6 @@ const CakeCustomization = () => {
         <div className="bg-white">
           <div className="container">
             <div className="mb-2 py-3 px-2">
-              <label className="form-label fs-5">Filling Flavor</label>
-              {middleCreamCode.map((filling, index) => (
-                <div className="form-check" key={index}>
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="fillingFlavor"
-                    value={filling.label}
-                    checked={selectedFilling.code === filling.code}
-                    onChange={() => setSelectedFilling(filling)}
-                  />
-                  <label className="form-check-label">
-                    {filling.label}{" "}
-                    <small className="text-muted">&nbsp;+{filling.price}$</small>
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="bg-white">
-          <div className="container">
-            <div className="mb-2 py-3 px-2">
-              <label className="form-label fs-5">Add On</label>
-              {extraOptions.map((extra, index) => (
-                <div className="form-check" key={index}>
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    value={extra.label}
-                    checked={selectedExtras.code === extra.code}
-                    onChange={() => setSelectedExtras(extra)}
-                  />
-                  <label className="form-check-label">
-                    {extra.label}{" "}
-                    <small className="text-muted">&nbsp;+{extra.price}$</small>
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="bg-white">
-          <div className="container">
-            <div className="mb-2 py-3 px-2">
               <label className="form-label fs-5">Top Cream Flavor</label>
               {topCreamCode.map((flavor, index) => (
                 <div className="form-check" key={index}>
@@ -417,6 +372,63 @@ const CakeCustomization = () => {
                   options={TOP_CREAM_COLORS}
                 />
               )}
+            </div>
+          </div>
+        </div>
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Filling Flavor{" "}
+                <span className="tooltip-wrapper">
+                  <i className="bi bi-info-circle-fill text-primary" />
+                  <span className="tooltip-text">
+                    Filling is inside the cake.
+                  </span>
+                </span></label>
+              {middleCreamCode.map((filling, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="fillingFlavor"
+                    value={filling.label}
+                    checked={selectedFilling.code === filling.code}
+                    onChange={() => setSelectedFilling(filling)}
+                  />
+                  <label className="form-check-label">
+                    {filling.label}{" "}
+                    <small className="text-muted">&nbsp;+{filling.price}$</small>
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="bg-white">
+          <div className="container">
+            <div className="mb-2 py-3 px-2">
+              <label className="form-label fs-5">Add On{" "}
+                <span className="tooltip-wrapper">
+                  <i className="bi bi-info-circle-fill text-primary" />
+                  <span className="tooltip-text">
+                    Add on is inside the cake.
+                  </span>
+                </span></label>
+              {extraOptions.map((extra, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    value={extra.label}
+                    checked={selectedExtras.code === extra.code}
+                    onChange={() => setSelectedExtras(extra)}
+                  />
+                  <label className="form-check-label">
+                    {extra.label}{" "}
+                    <small className="text-muted">&nbsp;+{extra.price}$</small>
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
         </div>
