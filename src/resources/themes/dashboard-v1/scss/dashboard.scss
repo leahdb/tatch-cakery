@@ -3621,6 +3621,12 @@ table.dashboard-table td {
   font-size: 12px !important;
 }
 
+.btn-primary.disabled, .btn-primary:disabled, fieldset:disabled{
+  background: #978777 !important;
+  border-color: #978777 !important;
+  outline-color: #978777 !important;
+}
+
 //
 .cls-1 {
   fill: #713f12;
