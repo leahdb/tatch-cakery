@@ -96,7 +96,7 @@ export default function ProductDetails() {
 
     promise
       .then((res) => {
-        setCartCount(res.cart.total_items);
+        setCartCount(res.total_items);
       })
       .finally(() => {
         setIsAdding(false);

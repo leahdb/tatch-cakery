@@ -8,6 +8,7 @@ import { cakeCode, middleCreamCode, topCreamCode, fillingCode, extraOptions, cus
 import { add_to_cart, get_cart_item, update_cart_item } from "../../services/shop/cart";
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { notify_promise } from "../../services/utils/toasts";
 
 const CakeCustomization = () => {
     const TOP_CREAM_COLORS = [
@@ -217,13 +218,18 @@ const CakeCustomization = () => {
         // or: preview_png_data_url: await svgToPngDataUrl(svgString)
       };
 
-      const res = await add_to_cart(payload);
-      if (res?.total_items !== undefined) {
-        setCartCount(res.cart.total_items);
-        setIsAdding(false);
-        setButtonText("Add to cart");
-        alert("Product added to cart successfully");
-      }
+      const promise = add_to_cart(payload);
+      
+      notify_promise(promise, "Added to cart!", "🛒");
+  
+      promise
+        .then((res) => {
+          setCartCount(res.total_items);
+        })
+        .finally(() => {
+          setIsAdding(false);
+          setButtonText("Add to cart");
+        });
     };
 
     const totalPrice =
@@ -231,6 +237,7 @@ const CakeCustomization = () => {
       (selectedCream?.price || 0) +
       (selectedFilling?.price || 0) +
       (selectedExtras?.price || 0) +
+      (selectedTopCream?. price || 0) +
       (isChocoLetters ? chocoLettersPrice : (selectedCustomization?.price || 0));
     
     
