@@ -211,68 +211,68 @@ const TOP_CREAM_OVERRIDES = {
       cls30: "#8fcff5",
     },
     yellow: {
-      cls5:  "#fdf4a6",
-      cls10: "#fce86a",
-      cls17: "#fdf7c1",
+      cls5:  "#fff27e",
+      cls10: "#ffec73",
+      cls17: "#fef17e",
       cls23: "#f8db5f",
       cls24: "#fbe993",
-      cls29: "#fff8c6",
-      cls30: "#fefbd7",
+      cls29: "#fff083",
+      cls30: "#fff68e",
     },
     pink: {
-      cls5:  "#f9c6e4",
+      cls5:  "#ffb3e0",
       cls10: "#f6a6d3",
-      cls17: "#facfe9",
-      cls23: "#f083bc",
-      cls24: "#f8b9dd",
-      cls29: "#fbdff0",
-      cls30: "#fdeaf5",
+      cls17: "#f99bcc",
+      cls23: "#dc66a2",
+      cls24: "#f6b1d8",
+      cls29: "#fface3",
+      cls30: "#ffa2cb",
     },
     purple: {
-      cls5:  "#c9b3f7",
-      cls10: "#b093f1",
-      cls17: "#d8c7fa",
+      cls5:  "#c4a7ff",
+      cls10: "#b499f2",
+      cls17: "#b99df1",
       cls23: "#946de6",
-      cls24: "#c3a5f5",
-      cls29: "#e3d8fb",
-      cls30: "#efe8fd",
+      cls24: "#c3a0fe",
+      cls29: "#b89df2",
+      cls30: "#c2a4ff",
     },
     green: {
       cls5:  "#b8e3b0",
-      cls10: "#9cd991",
-      cls17: "#d0efca",
+      cls10: "#7dca6f",
+      cls17: "#7fce70",
       cls23: "#79c769",
-      cls24: "#b9e5ae",
+      cls24: "#91d680",
       cls29: "#daf5d3",
-      cls30: "#e8fae4",
+      cls30: "#7dd469",
     },
     orange: {
       cls5:  "#fcd4a0",
       cls10: "#fbb36a",
-      cls17: "#fddfba",
+      cls17: "#ffa22f",
       cls23: "#f88d33",
       cls24: "#fbc48e",
       cls29: "#fee4cd",
-      cls30: "#fff0e2",
+      cls30: "#ffa653",
     },
     red: {
       cls5:  "#ef5151",
       cls10: "#ef5353",
       cls17: "#ff5353",
       cls23: "#e63e3e",
-      cls24: "#db4848",
+      cls24: "#eb5656",
       cls29: "#ff8181",
       cls30: "#ff6262",
     },
     black: {
-    cls5:  "#1a1a1a", // deepest base
-    cls10: "#2b2b2b", // charcoal
-    cls17: "#3c3c3c", // dark gray
-    cls23: "#262626", // near black
-    cls24: "#444444", // mid gray for highlights
-    cls29: "#555555", // softer top highlight
-    cls30: "#666666", // lightest reflection
-  },
+      cls5:  "#1a1a1a", // deepest base
+      cls10: "#2b2b2b", // charcoal
+      cls17: "#3c3c3c", // dark gray
+      cls23: "#262626", // near black
+      cls24: "#444444", // mid gray for highlights
+      cls29: "#555555", // softer top highlight
+      cls30: "#4c4c4c", // lightest reflection
+    },
   },
 };
 
