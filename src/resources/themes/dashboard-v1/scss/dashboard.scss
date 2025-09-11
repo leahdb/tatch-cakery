@@ -3663,7 +3663,23 @@ table.dashboard-table td {
 }
 
 .tooltip-text-short {
+  visibility: hidden;
+  color: $primaryLightColor;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 999;
+  bottom: 1%; 
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+  max-width: 320px;
   min-width: 200px !important;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+  font-size: 12px !important;
 }
 
 
