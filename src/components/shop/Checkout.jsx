@@ -544,7 +544,7 @@ const Checkout = () => {
           {cart.map((item) => (
             <div className="d-flex align-items-center mt-5 mb-4">
               <div className="me-3 position-relative">
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary good-circle">
                   {item.quantity}
                 </span>
                 <img src={item.image} className="img-sm-checkout rounded border" loading="lazy" />
