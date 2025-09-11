@@ -82,7 +82,7 @@ const CAKE_OVERRIDES = {
     cls11:"#e7d0a8",
     cls13:"#efe0c3",
     cls14:"#e4cca9",
-    cls15:"#eee2c7",
+    cls15:"#eadbbb",
     cls16:"#e1d0ae",
     cls18:"#d5bc90",
     cls19:"#f1e1c0",
@@ -253,7 +253,7 @@ const TOP_CREAM_OVERRIDES = {
       cls23: "#f88d33",
       cls24: "#fbc48e",
       cls29: "#fab06f",
-      cls30: "#ffaa5b",
+      cls30: "#ffaf64",
     },
     red: {
       cls5:  "#ef5151",

@@ -12,8 +12,6 @@ const DEFAULT_COLORS = [
   { id: "pink",   label: "Pink",   hex: "#EC4899" },
   { id: "purple", label: "Purple", hex: "#8B5CF6" },
   { id: "yellow",  label: "Yellow",  hex: "#FACC15" },
-  { id: "orange",  label: "Orange",  hex: "#FB923C" },
-  { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
 ];
 
 /**
