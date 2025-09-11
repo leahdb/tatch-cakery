@@ -46,7 +46,15 @@ const CakeCustomization = () => {
     const [motifChoice, setMotifChoice] = useState(null);
     const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
     const [qty, setQty] = useState(1);
-    
+
+    const MAX_MSG_LEN = 24;
+    const isChocoLetters = selectedCustomization.code === "choco_letters";
+    const chocoMsgLen = customInput.length;
+
+    const chocoLettersPrice = isChocoLetters
+    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 1 : 2))
+    : 0;
+
     const decrease = () => {
       if (qty > 1) setQty(qty - 1);
     };
@@ -223,7 +231,7 @@ const CakeCustomization = () => {
       (selectedCream?.price || 0) +
       (selectedFilling?.price || 0) +
       (selectedExtras?.price || 0) +
-      (selectedCustomization?.price || 0);
+      (isChocoLetters ? chocoLettersPrice : (selectedCustomization?.price || 0));
     
     
 
@@ -454,7 +462,11 @@ const CakeCustomization = () => {
                   <label className="form-check-label">
                     {custom.label}
                     <small className="text-muted">
-                      &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
+                      &nbsp;{
+                        custom.code === "choco_letters"
+                          ? (chocoMsgLen === 0 ? "" : `+${chocoLettersPrice}$`)
+                          : (custom.price > 0 ? `+${custom.price}$` : "")
+                      }
                     </small>
                   </label>
                 </div>
@@ -467,8 +479,24 @@ const CakeCustomization = () => {
                     className="form-control"
                     placeholder="Your custom message"
                     value={customInput}
-                    onChange={(e) => setCustomInput(e.target.value)}
+                    onChange={(e) => {
+                      const v = e.target.value || "";
+                      // hard cap at 24 (including spaces)
+                      setCustomInput(v.slice(0, MAX_MSG_LEN));
+                    }}
                   />
+                  <div className="d-flex justify-content-between align-items-center mt-1">
+                    <small className="text-muted">{chocoMsgLen}/{MAX_MSG_LEN}</small>
+                    {isChocoLetters && (
+                      <small className="text-muted">
+                        {chocoMsgLen === 0
+                          ? "Enter a message"
+                          : chocoMsgLen <= 10
+                            ? "Extra: +$1"
+                            : "Extra: +$2"}
+                      </small>
+                    )}
+                  </div>
                 </div>
               )}
               {selectedCustomization.label.includes("Drawing") ||
