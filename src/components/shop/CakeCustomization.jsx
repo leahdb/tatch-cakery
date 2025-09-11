@@ -473,7 +473,7 @@ const CakeCustomization = () => {
               ))}
               {selectedCustomization.label.includes("Writing") && (
                 <div className="my-3">
-                  <label className="form-label fs-5">Enter Your Message <small className="text-muted float-end">{chocoMsgLen}/{MAX_MSG_LEN}</small></label>
+                  <label className="form-label fs-5 w-100 d-flex justify-content-between align-items-end">Enter Your Message <small className="text-muted size-14">{chocoMsgLen}/{MAX_MSG_LEN}</small></label>
                   <input
                     type="text"
                     className="form-control"
