@@ -473,7 +473,7 @@ const CakeCustomization = () => {
               ))}
               {selectedCustomization.label.includes("Writing") && (
                 <div className="my-3">
-                  <label className="form-label fs-5">Enter Your Message</label>
+                  <label className="form-label fs-5">Enter Your Message <small className="text-muted float-end">{chocoMsgLen}/{MAX_MSG_LEN}</small></label>
                   <input
                     type="text"
                     className="form-control"
@@ -485,18 +485,6 @@ const CakeCustomization = () => {
                       setCustomInput(v.slice(0, MAX_MSG_LEN));
                     }}
                   />
-                  <div className="d-flex justify-content-between align-items-center mt-1">
-                    <small className="text-muted">{chocoMsgLen}/{MAX_MSG_LEN}</small>
-                    {isChocoLetters && (
-                      <small className="text-muted">
-                        {chocoMsgLen === 0
-                          ? "Enter a message"
-                          : chocoMsgLen <= 10
-                            ? "Extra: +$1"
-                            : "Extra: +$2"}
-                      </small>
-                    )}
-                  </div>
                 </div>
               )}
               {selectedCustomization.label.includes("Drawing") ||
