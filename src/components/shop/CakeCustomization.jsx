@@ -389,7 +389,7 @@ const CakeCustomization = () => {
               <label className="form-label fs-5">Filling Flavor{" "}
                 <span className="tooltip-wrapper">
                   <i className="bi bi-info-circle-fill text-primary" />
-                  <span className="tooltip-text">
+                  <span className="tooltip-text-short">
                     Filling is inside the cake.
                   </span>
                 </span></label>
@@ -418,7 +418,7 @@ const CakeCustomization = () => {
               <label className="form-label fs-5">Add On{" "}
                 <span className="tooltip-wrapper">
                   <i className="bi bi-info-circle-fill text-primary" />
-                  <span className="tooltip-text">
+                  <span className="tooltip-text-short">
                     Add on is inside the cake.
                   </span>
                 </span></label>
