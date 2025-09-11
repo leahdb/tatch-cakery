@@ -3662,6 +3662,11 @@ table.dashboard-table td {
   opacity: 1;
 }
 
+.tooltip-wrapper:hover .tooltip-text-short {
+  visibility: visible;
+  opacity: 1;
+}
+
 .tooltip-text-short {
   visibility: hidden;
   color: $primaryLightColor;
