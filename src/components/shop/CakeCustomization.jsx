@@ -12,7 +12,6 @@ import { notify_promise } from "../../services/utils/toasts";
 
 const CakeCustomization = () => {
     const TOP_CREAM_COLORS = [
-      { id: "white",   label: "White",   hex: "#FFFFFF", border: true },
       { id: "black",   label: "Black",   hex: "#111827" },
       { id: "red",     label: "Red",     hex: "#EF4444" },
       { id: "blue",    label: "Blue",    hex: "#3B82F6" },
@@ -21,7 +20,6 @@ const CakeCustomization = () => {
       { id: "purple",  label: "Purple",  hex: "#8B5CF6" },
       { id: "yellow",  label: "Yellow",  hex: "#FACC15" },
       { id: "orange",  label: "Orange",  hex: "#FB923C" },
-      { id: "fuchsia", label: "Fuchsia", hex: "#D946EF" },
     ];
     const [params] = useSearchParams();
     const itemId = params.get("item")

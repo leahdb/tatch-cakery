@@ -208,7 +208,7 @@ const TOP_CREAM_OVERRIDES = {
       cls23: "#478ac1",
       cls24: "#94d0ff",
       cls29: "#a1d5fb",
-      cls30: "#8fcff5",
+      cls30: "#94d7ff",
     },
     yellow: {
       cls5:  "#fff27e",
@@ -217,7 +217,7 @@ const TOP_CREAM_OVERRIDES = {
       cls23: "#f8db5f",
       cls24: "#fbe993",
       cls29: "#fff083",
-      cls30: "#fff68e",
+      cls30: "#fff8a4",
     },
     pink: {
       cls5:  "#ffb3e0",
@@ -226,7 +226,7 @@ const TOP_CREAM_OVERRIDES = {
       cls23: "#dc66a2",
       cls24: "#f6b1d8",
       cls29: "#fface3",
-      cls30: "#ffa2cb",
+      cls30: "#ffb5d5",
     },
     purple: {
       cls5:  "#c4a7ff",
@@ -235,25 +235,25 @@ const TOP_CREAM_OVERRIDES = {
       cls23: "#946de6",
       cls24: "#c3a0fe",
       cls29: "#b89df2",
-      cls30: "#c2a4ff",
+      cls30: "#c7abff",
     },
     green: {
-      cls5:  "#b8e3b0",
+      cls5:  "#afe3a5",
       cls10: "#7dca6f",
       cls17: "#7fce70",
       cls23: "#79c769",
       cls24: "#91d680",
-      cls29: "#daf5d3",
-      cls30: "#7dd469",
+      cls29: "#c0f0b4",
+      cls30: "#95dc84",
     },
     orange: {
-      cls5:  "#fcd4a0",
+      cls5:  "#ffc06f",
       cls10: "#fbb36a",
       cls17: "#ffa22f",
       cls23: "#f88d33",
       cls24: "#fbc48e",
-      cls29: "#fee4cd",
-      cls30: "#ffa653",
+      cls29: "#fab06f",
+      cls30: "#ffaa5b",
     },
     red: {
       cls5:  "#ef5151",
@@ -262,7 +262,7 @@ const TOP_CREAM_OVERRIDES = {
       cls23: "#e63e3e",
       cls24: "#eb5656",
       cls29: "#ff8181",
-      cls30: "#ff6262",
+      cls30: "#ff6d6d",
     },
     black: {
       cls5:  "#1a1a1a", // deepest base
