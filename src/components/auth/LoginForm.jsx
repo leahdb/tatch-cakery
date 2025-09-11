@@ -4,9 +4,9 @@ import { Navigate } from "react-router-dom";
 import { notify_error } from "../../services/utils/toasts";
 
 function LoginForm(props) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [generalErrorMessage, setGeneralErrorMessage] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -14,12 +14,12 @@ function LoginForm(props) {
 
   let login = (e) => {
     e.preventDefault();
-    setUsernameErrorMessage("");
+    setEmailErrorMessage("");
     setPasswordErrorMessage("");
     setGeneralErrorMessage("");
     setIsLoggingIn(true);
 
-    authenticate(username, password).then((response) => {
+    authenticate(email, password).then((response) => {
       setIsLoggingIn(false);
 
       if (response) {
@@ -27,9 +27,9 @@ function LoginForm(props) {
           setloginSuccessful(true);
         } else if (response.status === "error") {
           if (response.type === "validation") {
-            setUsernameErrorMessage(
-              response.data.user.username !== undefined
-                ? response.data.user.username
+            setEmailErrorMessage(
+              response.data.user.email !== undefined
+                ? response.data.user.email
                 : ""
             );
             setPasswordErrorMessage(
@@ -64,21 +64,21 @@ function LoginForm(props) {
         <p className="form-help">Enter your account details to login</p>
         <div className="general_error error">{generalErrorMessage}</div>
         <div className="mb-3">
-          <label htmlFor="username" className="form-label ">
-            Username
+          <label htmlFor="email" className="form-label ">
+            Email
           </label>
           <input
             type="text"
             className="form-control"
-            name="username"
+            name="email"
             placeholder=""
-            value={username}
+            value={email}
             onChange={(e) => {
-              setUsername(e.target.value);
+              setEmail(e.target.value);
             }}
             required
           />
-          <div className="username_error error">{usernameErrorMessage}</div>
+          <div className="email_error error">{emailErrorMessage}</div>
         </div>
         <div className="mb-5">
           <label htmlFor="password" className="form-label ">

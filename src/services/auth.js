@@ -3,12 +3,8 @@ const API_HOST = "https://api.tatchcakery.com/api/auth/";
 export function authenticate(email, password) {
   return fetch(API_HOST + "login", {
     method: "POST",
-    mode: "no-cors",
     credentials: "include",
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
+    body: JSON.stringify({ email, password }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -18,7 +14,7 @@ export function authenticate(email, password) {
       if (response.status === "error") {
         return response;
       }
-      localStorage.setItem("user_logged_in", "true");
+      localStorage.setItem("user_logged_in", true);
       return response;
     })
     .catch((error) => {
