@@ -18,6 +18,7 @@ export const topCreamCode = [
   { label: "Strawberry", code: "strawberry", price: 0.5 },
   { label: "Cream Cheese", code: "cream_cheese", price: 0.5 },
   { label: "Coffee", code: "coffee", price: 0.5 },
+  { label: "Lotus", code: "lotus", price: 0.5 },
   { label: "Colored Vanilla", code: "colored_vanilla", price: 0.5 },
 ];
 

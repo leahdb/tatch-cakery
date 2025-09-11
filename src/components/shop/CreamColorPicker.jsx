@@ -2,10 +2,7 @@
 import React from "react";
 
 const DEFAULT_COLORS = [
-  { id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" },
-  { id: "silver", label: "Silver", type: "gradient", gradient: "linear-gradient(135deg,#9AA0A6,#ECEFF1 35%,#6B7280 65%,#F5F7FA)" },
   { id: "black",  label: "Black",  hex: "#111827" },
-  { id: "white",  label: "White",  hex: "#ffffff", border: true },
   { id: "red",    label: "Red",    hex: "#EF4444" },
   { id: "blue",   label: "Blue",   hex: "#3B82F6" },
   { id: "green",  label: "Green",  hex: "#10B981" },

@@ -55,9 +55,9 @@ const CAKE_OVERRIDES = {
     cls15:"#5d1212",
     cls16:"#7c4515",
     cls18:"#4a0606",
-    cls19:"#b42222",
-    cls20:"#b72525",
-    cls21:"#a92222",
+    cls19:"#991515",
+    cls20:"#ac1b1b",
+    cls21:"#a91717",
     cls25:"#a00b0b",
     cls27:"#600808",
   },
@@ -78,18 +78,18 @@ const CAKE_OVERRIDES = {
   },
   vanilla: {
     // TODO: put your art-directed vanilla tones here:
-    cls2:"#eadfca",
-    cls11:"#d9c8ac",
-    cls13:"#f5ead5",
-    cls14:"#cbbda2",
+    cls2:"#ebddc2",
+    cls11:"#e7d0a8",
+    cls13:"#efe0c3",
+    cls14:"#e4cca9",
     cls15:"#eee2c7",
     cls16:"#e1d0ae",
-    cls18:"#b9ab8e",
-    cls19:"#f3e6cc",
+    cls18:"#d5bc90",
+    cls19:"#f1e1c0",
     cls20:"#e8d8b5",
-    cls21:"#d7c6a5",
-    cls25:"#f4ebd3",
-    cls27:"#cabfa8",
+    cls21:"#e4cfaa",
+    cls25:"#f0e5c6",
+    cls27:"#e4cfaa",
   },
 };
 
@@ -138,22 +138,22 @@ const MIDDLE_CREAM_OVERRIDES = {
 
 const TOP_CREAM_OVERRIDES = {
   vanilla: {
-    cls5:  "#f8f1dd", // soft beige
-    cls10: "#f6e8c4", // pale vanilla
-    cls17: "#f3dfb2", // light golden cream
-    cls23: "#e6d1a4", // warm beige
+    cls5:  "#f3d9a3", // soft beige
+    cls10: "#efcd86", // pale vanilla
+    cls17: "#f2d392", // light golden cream
+    cls23: "#a66f39", // warm beige
     cls24: "#e8bd6f", // soft yellow-gold
     cls29: "#f7e4b8", // light cream
     cls30: "#f4d89a", // warm cream
   },
   chocolate: {
-    cls5:  "#6b4a2e", // milk chocolate
+    cls5:  "#7b5535", // milk chocolate
     cls10: "#8b5e3c", // lighter cocoa
-    cls17: "#a17451", // caramel brown
+    cls17: "#a2714b", // caramel brown
     cls23: "#7a4a2f", // rich brown
-    cls24: "#c38b5c", // light cocoa
+    cls24: "#ac7649", // light cocoa
     cls29: "#9a6b48", // warm brown
-    cls30: "#b7835c", // soft chocolate
+    cls30: "#a7744d", // soft chocolate
   },
   strawberry: {
     cls5:  "#f9c6c3", // pale pink
@@ -164,6 +164,15 @@ const TOP_CREAM_OVERRIDES = {
     cls29: "#f6bbb7", // warm pink
     cls30: "#fdd0cd", // very pale pink
   },
+  cream_cheese: {
+    cls5:  "#f3e0ba", // soft beige
+    cls10: "#f3dcab", // pale vanilla
+    cls17: "#f6e3bc", // light golden cream
+    cls23: "#aa8f75", // warm beige
+    cls24: "#ecd4a8", // soft yellow-gold
+    cls29: "#f7e4b8", // light cream
+    cls30: "#ffedc6", // warm cream
+  },
   lotus: {
     cls5:  "#d8a46f", // biscuit tan
     cls10: "#c79055", // lotus cookie
@@ -172,6 +181,15 @@ const TOP_CREAM_OVERRIDES = {
     cls24: "#e1b885", // biscuit beige
     cls29: "#d1a068", // caramel biscuit
     cls30: "#f2cf9e", // light caramel
+  },
+  coffee: {
+    cls5:  "#c7a77b", // latte beige
+    cls10: "#b8946d", // medium caramel
+    cls17: "#d2b892", // creamy mocha
+    cls23: "#a37c56", // coffee brown
+    cls24: "#c9a474", // caramelized cream
+    cls29: "#e0cfad", // light cappuccino foam
+    cls30: "#d7bb8f", // warm beige-brown
   },
   pistachio: {
     cls5:  "#b8c38a", // soft pistachio
@@ -184,13 +202,13 @@ const TOP_CREAM_OVERRIDES = {
   },
   colored_vanilla: {
     blue: {
-      cls5:  "#9ecafc",
-      cls10: "#7db5f8",
-      cls17: "#c1dcfd",
-      cls23: "#5f9eea",
-      cls24: "#b3d3fa",
-      cls29: "#d6e7fd",
-      cls30: "#e6f0fe",
+      cls5:  "#7bcaf9",
+      cls10: "#84c5f7",
+      cls17: "#84caff",
+      cls23: "#478ac1",
+      cls24: "#94d0ff",
+      cls29: "#a1d5fb",
+      cls30: "#8fcff5",
     },
     yellow: {
       cls5:  "#fdf4a6",
@@ -238,14 +256,23 @@ const TOP_CREAM_OVERRIDES = {
       cls30: "#fff0e2",
     },
     red: {
-      cls5:  "#f59b9b",
-      cls10: "#f56a6a",
-      cls17: "#fbbaba",
+      cls5:  "#ef5151",
+      cls10: "#ef5353",
+      cls17: "#ff5353",
       cls23: "#e63e3e",
-      cls24: "#f58888",
-      cls29: "#fdd0d0",
-      cls30: "#ffe1e1",
+      cls24: "#db4848",
+      cls29: "#ff8181",
+      cls30: "#ff6262",
     },
+    black: {
+    cls5:  "#1a1a1a", // deepest base
+    cls10: "#2b2b2b", // charcoal
+    cls17: "#3c3c3c", // dark gray
+    cls23: "#262626", // near black
+    cls24: "#444444", // mid gray for highlights
+    cls29: "#555555", // softer top highlight
+    cls30: "#666666", // lightest reflection
+  },
   },
 };
 
