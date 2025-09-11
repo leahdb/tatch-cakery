@@ -298,7 +298,7 @@ const Checkout = () => {
           <div className="card mb-4 border shadow-0">
             <div className="p-4">
               <h5 className="card-title mb-3">Contact</h5>
-              <input type="tel" id="typeText" name="contact_number" placeholder="mobile phone number" className="form-control" onChange={onChange} required/>
+              <input type="tel" id="typePhone" name="contact_number" placeholder="mobile phone number" className="form-control" onChange={onChange} required/>
             </div>
           </div>
           <div className="card mb-4 shadow-0 border">

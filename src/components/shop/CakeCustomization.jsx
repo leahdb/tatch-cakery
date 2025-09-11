@@ -471,7 +471,7 @@ const CakeCustomization = () => {
                     <small className="text-muted">
                       &nbsp;{
                         custom.code === "choco_letters"
-                          ? (chocoMsgLen === 0 ? "" : `+${chocoLettersPrice}$`)
+                          ? (chocoMsgLen === 0 ? "+$1-2" : `+${chocoLettersPrice}$`)
                           : (custom.price > 0 ? `+${custom.price}$` : "")
                       }
                     </small>
