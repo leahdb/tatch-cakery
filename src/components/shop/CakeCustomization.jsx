@@ -95,10 +95,10 @@ const CakeCustomization = () => {
 
           if (cfg.designs === "choco_letters") {
             setSelectedCustomization({ label: "Chocolate Letters Writing", code: "choco_letters", price: 1 });
-          } else if (cfg.designs === "plexi") {
-            setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 0 });
+          } else if (cfg.designs === "plexi_writing") {
+            setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 1 });
           } else if (cfg.motif) {
-            setSelectedCustomization({ label: "Plexi Motif", code: "plexi_motif", price: 0 });
+            setSelectedCustomization({ label: "Plexi Motif", code: "plexi_motif", price: 1 });
           } else {
             setSelectedCustomization({ label: "No Customization", code: "none", price: 0 });
           }
@@ -152,7 +152,7 @@ const CakeCustomization = () => {
           (selectedCustomization.code === "choco_letters" || selectedCustomization.code === "plexi_writing")
             ? (customInput || "")
             : null,
-        plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
+        plexi_color: selectedCustomization.label.includes("plexi_writing") ? plexiColor : null,
         motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
         mcreams: selectedCream.code,
         tcreams: selectedTopCream.code,
@@ -207,7 +207,7 @@ const CakeCustomization = () => {
             selectedCustomization.code === "plexi_writing")
               ? (customInput || "")
               : null,
-          plexi_color: selectedCustomization.label.includes("plexi") ? plexiColor : null,
+          plexi_color: selectedCustomization.label.includes("plexi_writing") ? plexiColor : null,
           motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
           mcreams: selectedCream.code,
           tcreams: selectedTopCream.code,
