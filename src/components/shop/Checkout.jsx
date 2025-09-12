@@ -162,33 +162,18 @@ const Checkout = () => {
   }, [nowDisabled]);
 
   useEffect(() => {
-    if (fulfillmentType !== "schedule") {
-      setTimeOptions([]);
-      setSelectedSlot("");
-      return;
+    if (fulfillmentType !== "schedule") { setTimeOptions([]); setSelectedSlot(""); return; }
+    let slots = buildTimeSlots(selectedDate);
+    if (slots.length === 0) {
+      // move to tomorrow first slot
+      const opts = buildDateOptions(30, 1);
+      setSelectedDate(opts[0]?.value);
+      slots = buildTimeSlots(opts[0]?.value);
     }
-
-    let newDate = selectedDate;
-    let newSlots = buildTimeSlots(newDate);
-
-    // If no slots for the selected date, move to tomorrow's first date option
-    if (newSlots.length === 0) {
-      const [first] = buildDateOptions(30, 1);
-      if (first?.value) {
-        newDate = first.value;
-        newSlots = buildTimeSlots(newDate);
-      }
-    }
-
-    // Apply state updates
-    if (newDate !== selectedDate) setSelectedDate(newDate);
-    setTimeOptions(newSlots);
-
-    // Select the first slot if none selected yet
-    if (!selectedSlot && newSlots.length) {
-      setSelectedSlot(newSlots[0].value);
-    }
-  }, [fulfillmentType, selectedDate, selectedSlot]);
+    setTimeOptions(slots);
+    setSelectedTimeLabel(slots?.[0]?.label)
+    if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
+  }, [fulfillmentType, selectedDate]);
 
   const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
 
