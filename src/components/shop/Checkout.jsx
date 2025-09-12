@@ -162,6 +162,7 @@ const Checkout = () => {
   }, [nowDisabled]);
 
   useEffect(() => {
+    console.log(fulfillmentType);
     if (fulfillmentType !== "schedule") { setTimeOptions([]); setSelectedSlot(""); return; }
     let slots = buildTimeSlots(selectedDate);
     if (slots.length === 0) {
