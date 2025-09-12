@@ -92,7 +92,8 @@ const CakeCustomization = () => {
           if (cfg.motif) setMotifChoice(cfg.motif);
           if (cfg.plexi_color) setPlexiColor(cfg.plexi_color);
 
-          if (cfg.designs === "chocolate") {
+
+          if (cfg.designs === "choco_letters") {
             setSelectedCustomization({ label: "Chocolate Letters Writing", code: "choco_letters", price: 1 });
           } else if (cfg.designs === "plexi") {
             setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 0 });
