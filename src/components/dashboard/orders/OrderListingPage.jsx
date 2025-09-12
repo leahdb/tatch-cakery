@@ -78,7 +78,7 @@ const OrderListingPage = ({ pageState, setPageState }) => {
 
   const apiCall = [
     fetch_shop_orders,
-    { page: 1, filter: 0, search: search ? search : "", perPage: perPage },
+    { page: 1, filter: 'pending', search: search ? search : "", perPage: perPage },
   ];
 
   const updateTableInfo = getTableUpdateCallback({
