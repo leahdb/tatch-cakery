@@ -171,6 +171,7 @@ const Checkout = () => {
       slots = buildTimeSlots(opts[0]?.value);
     }
     setTimeOptions(slots);
+    console.log(timeOptions);
     if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
   }, [fulfillmentType, selectedDate]);
 
