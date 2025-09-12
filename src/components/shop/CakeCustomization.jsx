@@ -80,9 +80,9 @@ const CakeCustomization = () => {
           if (cfg.top_cream_color)   setTopCreamColor({ code: cfg.top_cream_color, label: cfg.tcreams });
 
           // Only show color if colored vanilla
-          if (cfg.tcreams === "colored_vanilla" && cfg.topCreamColor) {
+          if (cfg.tcreams === "colored_vanilla" && cfg.top_cream_color) {
             setTopCreamColor(
-              TOP_CREAM_COLORS.find(c => c.id === cfg.topCreamColor) || TOP_CREAM_COLORS[0]
+              TOP_CREAM_COLORS.find(c => c.id === cfg.top_cream_color) || TOP_CREAM_COLORS[0]
             );
           }
 
