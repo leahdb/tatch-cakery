@@ -133,7 +133,7 @@ const Checkout = () => {
   const [timeOptions, setTimeOptions] = useState([]);
   const [selectedDate, setSelectedDate] = useState(toISODate(new Date()));
   const [selectedSlot, setSelectedSlot] = useState("");
-  const [selectedTimeLabel, setSelectedTimeLabel] = useState("now");
+  const [selectedTimeLabel, setSelectedTimeLabel] = useState( timeOptions?.[0]?.label ? timeOptions?.[0]?.label : "now");
 
   const onSlotChange = (e) => {
     setSelectedSlot(e.target.value);
@@ -370,14 +370,14 @@ const Checkout = () => {
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">Street</p>
                   <div className="form-outline">
-                    <input type="text" id="typeEmail" placeholder="" className="form-control" name="street" onChange={onChange} required />
+                    <input type="text" id="typeText" placeholder="" className="form-control" name="street" onChange={onChange} required />
                   </div>
                 </div>
 
                 <div className="col-12 mb-3">
                   <p className="mb-0">Building, apartment, floor, ect.</p>
                   <div className="form-outline">
-                    <input type="text" id="typeEmail" placeholder="" className="form-control" name="building" onChange={onChange} />
+                    <input type="text" id="typeText" placeholder="" className="form-control" name="building" onChange={onChange} />
                   </div>
                 </div>
               </div>
