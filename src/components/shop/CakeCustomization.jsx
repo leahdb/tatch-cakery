@@ -207,7 +207,7 @@ const CakeCustomization = () => {
             selectedCustomization.code === "plexi_writing")
               ? (customInput || "")
               : null,
-          plexi_color: selectedCustomization.label.includes("plexi_writing") ? plexiColor : null,
+          plexi_color: selectedCustomization.code === "plexi_writing" || selectedCustomization.code === "plexi_motif" ? plexiColor : null,
           motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
           mcreams: selectedCream.code,
           tcreams: selectedTopCream.code,
