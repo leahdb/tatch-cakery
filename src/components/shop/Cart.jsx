@@ -151,7 +151,7 @@ const Cart = () => {
                     <button
                       className="btn color-primary fs-6 border-0"
                       type="button"
-                      onClick={() => updateQty(item.product_id, -1)}
+                      onClick={() => updateQty(item.item_id, -1)}
                       disabled={item.quantity <= 1}
                     >
                       −
@@ -165,7 +165,7 @@ const Cart = () => {
                     <button
                       className="btn color-primary fs-6 border-0"
                       type="button"
-                      onClick={() => updateQty(item.product_id, +1)}
+                      onClick={() => updateQty(item.item_id, +1)}
                     >
                       +
                     </button>
@@ -187,7 +187,7 @@ const Cart = () => {
                     <a
                       href="#"
                       className="remove-cart text-light-brown"
-                      onClick={(e) => handleRemove(e, item.product_id)}
+                      onClick={(e) => handleRemove(e, item.item_id)}
                     >
                       Remove
                     </a>
