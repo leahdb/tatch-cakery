@@ -56,6 +56,7 @@ export default function ProductDetails() {
     const payload = {
       product_id: product.id,
       quantity: qty,
+      total_price: totalPrice,
     };
 
     // Build custom object
