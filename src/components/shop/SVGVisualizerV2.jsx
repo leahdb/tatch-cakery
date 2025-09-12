@@ -95,28 +95,44 @@ const CAKE_OVERRIDES = {
 
 const MIDDLE_CREAM_OVERRIDES = {
   vanilla: {
-    cls1:"#f8f1dd", // light vanilla beige
+    cls1:"#f4d89a", // light vanilla beige
     cls3:"#f6e8c4", // pale warm cream
     cls7:"#f3dfb2", // soft golden cream
     cls16:"#e9d4a6", // slightly deeper beige
     cls26:"#e0c997", // warm tan
-    cls28:"#f5e2b4", // light golden
+    cls28:"#97652f", // light golden
   },
   chocolate: {
-    cls1:"#5b3a1a", // milk chocolate
-    cls3:"#6e4b26", // cocoa brown
+    cls1:"#694521", // milk chocolate
+    cls3:"#82582c", // cocoa brown
     cls7:"#8b5e2e", // caramel chocolate
     cls16:"#7a4a20", // warm brown
     cls26:"#6a3c16", // dark milk chocolate
     cls28:"#9c6b36", // caramel
   },
   strawberry: {
-    cls1:"#f9c6c3", // soft strawberry pink
+    cls1:"#ff9e98", // soft strawberry pink
     cls3:"#f6b1ae", // pink cream
     cls7:"#f7d3d0", // pale strawberry
     cls16:"#f4a6a1", // medium pink
     cls26:"#ec8d87", // deeper strawberry
     cls28:"#f6bbb7", // blush
+  },
+  cream_cheese: {
+    cls1:"#f3e0ba", // biscuit tan
+    cls3:"#f3dcab", // lotus cookie brown
+    cls7:"#f6e3bc", // light lotus cream
+    cls16:"#aa8f75", // deeper lotus
+    cls26:"#ecd4a8", // caramelized lotus
+    cls28:"#f7e4b8", // biscuit beige
+  },
+  coffee: {
+    cls1:"#c7a77b", // biscuit tan
+    cls3:"#b8946d", // lotus cookie brown
+    cls7:"#d2b892", // light lotus cream
+    cls16:"#c9a474", // deeper lotus
+    cls26:"#e0cfad", // caramelized lotus
+    cls28:"#d7bb8f", // biscuit beige
   },
   lotus: {
     cls1:"#d8a46f", // biscuit tan
