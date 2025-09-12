@@ -100,7 +100,7 @@ const MIDDLE_CREAM_OVERRIDES = {
     cls7:"#f3dfb2", // soft golden cream
     cls16:"#e9d4a6", // slightly deeper beige
     cls26:"#e0c997", // warm tan
-    cls28:"#97652f", // light golden
+    cls28:"#f5e0b0", // light golden
   },
   chocolate: {
     cls1:"#694521", // milk chocolate
@@ -122,15 +122,15 @@ const MIDDLE_CREAM_OVERRIDES = {
     cls1:"#f3e0ba", // biscuit tan
     cls3:"#f3dcab", // lotus cookie brown
     cls7:"#f6e3bc", // light lotus cream
-    cls16:"#aa8f75", // deeper lotus
+    cls16:"#f5e0b0", // deeper lotus
     cls26:"#ecd4a8", // caramelized lotus
     cls28:"#f7e4b8", // biscuit beige
   },
   coffee: {
-    cls1:"#c7a77b", // biscuit tan
-    cls3:"#b8946d", // lotus cookie brown
+    cls1:"#c8ab83", // biscuit tan
+    cls3:"#d9bb9b", // lotus cookie brown
     cls7:"#d2b892", // light lotus cream
-    cls16:"#c9a474", // deeper lotus
+    cls16:"#cbac83", // deeper lotus
     cls26:"#e0cfad", // caramelized lotus
     cls28:"#d7bb8f", // biscuit beige
   },
