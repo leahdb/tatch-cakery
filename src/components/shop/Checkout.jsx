@@ -165,6 +165,7 @@ const Checkout = () => {
     console.log(fulfillmentType);
     if (fulfillmentType !== "schedule") { setTimeOptions([]); setSelectedSlot(""); return; }
     let slots = buildTimeSlots(selectedDate);
+    console.log(slots);
     if (slots.length === 0) {
       // move to tomorrow first slot
       const opts = buildDateOptions(30, 1);
@@ -173,6 +174,7 @@ const Checkout = () => {
     }
     setTimeOptions(slots);
     console.log(timeOptions);
+    console.log(slots);
     if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
   }, [fulfillmentType, selectedDate]);
 
