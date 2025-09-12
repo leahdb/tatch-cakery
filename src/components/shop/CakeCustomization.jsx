@@ -77,6 +77,7 @@ const CakeCustomization = () => {
           if (cfg.fillings)    setSelectedFilling({ code: cfg.fillings, label: cfg.fillings });
           if (cfg.mcreams)      setSelectedCream({ code: cfg.mcreams, label: cfg.mcreams });
           if (cfg.tcreams)   setSelectedTopCream({ code: cfg.tcreams, label: cfg.tcreams });
+          if (cfg.top_cream_color)   setTopCreamColor({ code: cfg.top_cream_color, label: cfg.tcreams });
 
           // Only show color if colored vanilla
           if (cfg.tcreams === "colored_vanilla" && cfg.topCreamColor) {
@@ -156,7 +157,7 @@ const CakeCustomization = () => {
         tcreams: selectedTopCream.code,
         cake_flavor: selectedCake.code,
         // include the color only when colored vanilla is chosen
-        topCreamColor:
+        top_cream_color:
           (selectedTopCream.code === "colored_vanilla")
             ? (topCreamColor?.id || null)  // send the color ID you store (e.g., 'pink')
             : null,
@@ -210,6 +211,10 @@ const CakeCustomization = () => {
           mcreams: selectedCream.code,
           tcreams: selectedTopCream.code,
           cake_flavor: selectedCake.code,
+          top_cream_color:
+          (selectedTopCream.code === "colored_vanilla")
+            ? (topCreamColor?.id || null)  // send the color ID you store (e.g., 'pink')
+            : null,
         },
         // ONE-CALL PREVIEW
         preview_svg: svgString,
