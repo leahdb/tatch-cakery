@@ -2,12 +2,13 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useCart } from "./UseCart";
 import { remove_from_cart, update_cart } from "../../services/shop/cart";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useOutletContext } from "react-router-dom";
 
 const Cart = () => {
   const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
 
   const navigate = useNavigate();
+  const { setCartCount } = useOutletContext();
 
   const { subtotal, itemsCount } = useMemo(() => {
     const sub = cart.reduce((sum, it) => sum + Number(it.price) * Number(it.quantity), 0);
@@ -91,6 +92,7 @@ const Cart = () => {
       setCart(items);
       setTotalItems(res.total_items);
       setTotalPrice(res.total_price);
+      setCartCount(res.total_items);
     });
   };
 

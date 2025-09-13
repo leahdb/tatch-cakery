@@ -102,11 +102,57 @@ const Checkout = () => {
     delivery_time: "",
     coupon_code: "",
     payment_method: "cod",
-    agree_to_terms: false,
   });
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  const mapLaravelErrors = (errs = {}) => {
+    const out = {};
+    Object.entries(errs).forEach(([k, arr]) => {
+      if (Array.isArray(arr) && arr.length) out[k] = arr[0];
+    });
+    return out;
+  };
+
+  const validateForm = () => {
+    const errs = {};
+
+    // contact
+    if (!form.contact_number?.trim()) errs.contact_number = "Required";
+
+    // name
+    if (!form.first_name?.trim()) errs.first_name = "Required";
+    if (!form.last_name?.trim())  errs.last_name  = "Required";
+
+    // phone
+    if (!form.phone_number?.trim()) errs.phone_number = "Required";
+
+    // address
+    if (!form.state) errs.state = "Please select a district";
+    if (!form.city)  errs.city  = "Please select a city";
+    if (!form.street?.trim()) errs.street = "Required";
+    if (!form.building?.trim()) errs.building = "Required";
+
+    // delivery selection
+    if (fulfillmentType === "schedule") {
+      if (!selectedDate) errs.delivery_date = "Pick a delivery date";
+      if (!selectedSlot) errs.delivery_time = "Pick a time slot";
+    }
+
+    return errs;
+  };
+
+  const scrollToFirstError = (errs) => {
+    const firstKey = Object.keys(errs)[0];
+    if (!firstKey) return;
+    const el = document.querySelector(`[data-field="${firstKey}"]`);
+    if (el && typeof el.scrollIntoView === "function") {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   const [buttonText, setButtonText] = useState("Place Order")
   
   const { cart, totalItems, totalPrice, loading } = useCart();
@@ -212,7 +258,17 @@ const Checkout = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     setError(null);
+    setSuccess(null);
+    setFieldErrors({});
     setButtonText("Placing...")
+
+    const clientErrs = validateForm();
+    if (Object.keys(clientErrs).length) {
+      setButtonText("Place Order");
+      setFieldErrors(clientErrs);
+      scrollToFirstError(clientErrs);
+      return;
+    }
 
     // If "Now" is disabled but somehow selected, force schedule for tomorrow
     let type = fulfillmentType;
@@ -258,11 +314,25 @@ const Checkout = () => {
             deliveryDate: payload.delivery_date,
             timeLabel: payload.delivery_type === "now" ? "ASAP" : selectedTimeLabel,
             name: form.first_name,
+            deliveryPrice: shipping,
           },
           replace: true,
         });
       })
-      .catch(() => setError("Something went wrong, please try again."));
+      .catch((err) => {
+        setButtonText("Place Order");
+
+        if (err.status === 422) {
+          // Laravel validation errors
+          const errs = mapLaravelErrors(err.data?.errors || {});
+          setFieldErrors(errs);
+          // Also show a compact summary at top:
+          setError(err.data?.message || "Please fix the highlighted fields.");
+          scrollToFirstError(errs);
+        } else {
+          setError(err.message || "Something went wrong, please try again.");
+        }
+      });
   };
 
   if (loading) return (
@@ -299,7 +369,18 @@ const Checkout = () => {
           <div className="card mb-4 border shadow-0">
             <div className="p-4">
               <h5 className="card-title mb-3">Contact</h5>
-              <input type="tel" id="typePhone" name="contact_number" placeholder="mobile phone number" className="form-control" onChange={onChange} required/>
+              <input
+                type="tel"
+                id="typePhone"
+                name="contact_number"
+                placeholder="mobile phone number"
+                className={`form-control ${fieldErrors.contact_number ? "is-invalid" : ""}`}
+                onChange={onChange}
+                data-field="contact_number"
+              />
+              {fieldErrors.contact_number && (
+                <div className="invalid-feedback">{fieldErrors.contact_number}</div>
+              )}
             </div>
           </div>
           <div className="card mb-4 shadow-0 border">
@@ -309,76 +390,115 @@ const Checkout = () => {
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">First name</p>
                   <div className="form-outline">
-                    <input type="text" id="typeText" name="first_name" placeholder="first name" className="form-control" onChange={onChange} required />
+                    <input
+                      type="text"
+                      name="first_name"
+                      placeholder="first name"
+                      className={`form-control ${fieldErrors.first_name ? "is-invalid" : ""}`}
+                      onChange={onChange}
+                      data-field="first_name"
+                    />
+                    {fieldErrors.first_name && (
+                      <div className="invalid-feedback">{fieldErrors.first_name}</div>
+                    )}
                   </div>
                 </div>
 
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">Last name</p>
                   <div className="form-outline">
-                    <input type="text" id="typeText" name="last_name" placeholder="last name" className="form-control" onChange={onChange} required />
+                    <input
+                      type="text"
+                      name="last_name"
+                      placeholder="last name"
+                      className={`form-control ${fieldErrors.last_name ? "is-invalid" : ""}`}
+                      onChange={onChange}
+                      data-field="last_name"
+                    />
+                    {fieldErrors.last_name && (
+                      <div className="invalid-feedback">{fieldErrors.last_name}</div>
+                    )}
                   </div>
                 </div>
 
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">Phone</p>
                   <div className="form-outline">
-                    <input type="tel" id="typePhone" name="phone_number" className="form-control" onChange={onChange} required />
+                    <input
+                      type="tel"
+                      name="phone_number"
+                      className={`form-control ${fieldErrors.phone_number ? "is-invalid" : ""}`}
+                      onChange={onChange}
+                      data-field="phone_number"
+                    />
+                    {fieldErrors.phone_number && (
+                      <div className="invalid-feedback">{fieldErrors.phone_number}</div>
+                    )}
                   </div>
                 </div>
 
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">District</p>
                   <select
-                    className="form-select"
+                    className={`form-select ${fieldErrors.state ? "is-invalid" : ""}`}
                     value={form.state}
-                    onChange={(e) => {
-                      setForm(prev => ({ ...prev, state: e.target.value, city: "" }));
-                    }}
-                    name="state" required
+                    onChange={(e) => setForm(prev => ({ ...prev, state: e.target.value, city: "" }))}
+                    name="state"
+                    data-field="state"
                   >
                     <option value="">Select District</option>
                     {Object.keys(deliveryAreas).sort().map((state) => (
-                      <option key={state} value={state}>
-                        {state}
-                      </option>
+                      <option key={state} value={state}>{state}</option>
                     ))}
                   </select>
+                  {fieldErrors.state && <div className="invalid-feedback d-block">{fieldErrors.state}</div>}
                 </div>
 
                 {/* ✅ City Dropdown */}
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">City</p>
                   <select
-                    className="form-select"
+                    className={`form-select ${fieldErrors.city ? "is-invalid" : ""}`}
                     value={form.city}
-                    onChange={(e) => {
-                      setForm(prev => ({ ...prev, city: e.target.value }));
-                    }}
-                    name="city" required
+                    onChange={(e) => setForm(prev => ({ ...prev, city: e.target.value }))}
+                    name="city"
                     disabled={!form.state}
+                    data-field="city"
                   >
                     <option value="">Select City</option>
-                    {form.state &&
-                      deliveryAreas[form.state].slice().sort().map((city) => (
-                        <option key={city} value={city}>
-                          {city}
-                        </option>
-                      ))}
+                    {form.state && deliveryAreas[form.state].slice().sort().map((city) => (
+                      <option key={city} value={city}>{city}</option>
+                    ))}
                   </select>
+                  {fieldErrors.city && <div className="invalid-feedback d-block">{fieldErrors.city}</div>}
                 </div>
 
                 <div className="col-12 col-md-6 mb-3">
                   <p className="mb-0">Street</p>
                   <div className="form-outline">
-                    <input type="text" id="typeText" placeholder="" className="form-control" name="street" onChange={onChange} required />
+                    <input
+                      type="text"
+                      className={`form-control ${fieldErrors.street ? "is-invalid" : ""}`}
+                      name="street"
+                      onChange={onChange}
+                      data-field="street"
+                    />
+                    {fieldErrors.street && <div className="invalid-feedback">{fieldErrors.street}</div>}
                   </div>
                 </div>
 
                 <div className="col-12 mb-3">
                   <p className="mb-0">Building, apartment, floor, ect.</p>
                   <div className="form-outline">
-                    <input type="text" id="typeText" placeholder="" className="form-control" name="building" onChange={onChange} />
+                    <input 
+                      type="text" 
+                      id="typeText" 
+                      placeholder="" 
+                      className={`form-control ${fieldErrors.building ? "is-invalid" : ""}`} 
+                      name="building" 
+                      onChange={onChange} 
+                    />
+                    {fieldErrors.building && <div className="invalid-feedback">{fieldErrors.building}</div>}
                   </div>
                 </div>
               </div>
@@ -424,27 +544,30 @@ const Checkout = () => {
                   <div className="col-12 col-md-6 mb-3">
                     <p className="mb-0">Delivery Date</p>
                     <select
-                      className="form-select"
+                      className={`form-select ${fieldErrors.delivery_date ? "is-invalid" : ""}`}
                       disabled={fulfillmentType !== "schedule"}
                       value={selectedDate}
                       onChange={(e) => setSelectedDate(e.target.value)}
-                      required={fulfillmentType === "schedule"}
+                      data-field="delivery_date"
                     >
                       {dateOptions.map((d) => (
                         <option key={d.value} value={d.value}>{d.label}</option>
                       ))}
                     </select>
+                    {fieldErrors.delivery_date && (
+                      <div className="invalid-feedback d-block">{fieldErrors.delivery_date}</div>
+                    )}
                   </div>
                 )}
                 {fulfillmentType === "schedule"  && (
                   <div className="col-12 col-md-6 mb-3">
                     <p className="mb-0">Delivery Time</p>
                     <select
-                      className="form-select"
+                      className={`form-select ${fieldErrors.delivery_time ? "is-invalid" : ""}`}
                       disabled={fulfillmentType !== "schedule"}
                       value={selectedSlot}
                       onChange={onSlotChange}
-                      required={fulfillmentType === "schedule"}
+                      data-field="delivery_time"
                     >
                       {timeOptions.length === 0 && (
                         <option value="">No slots left today — pick another date</option>
@@ -548,7 +671,7 @@ const Checkout = () => {
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary good-circle">
                   {item.quantity}
                 </span>
-                <img src={item.preview} className="img-sm-checkout rounded border" loading="lazy" />
+                <img src={ item.product_id == 6 ? item.preview : item.image} className="img-sm-checkout rounded border" loading="lazy" />
               </div>
               <div className="">
                 <a href="#" className="nav-link">

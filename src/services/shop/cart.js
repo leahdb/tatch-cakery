@@ -46,17 +46,28 @@ export const remove_from_cart = (cart_item_id) => {
   }).then((res) => res.json());
 };
 
-export const checkout = (payload) => {
-  return fetch(API_HOST + "checkout", {
+export const checkout = async (payload) => {
+  const res = await fetch(API_HOST + "checkout", {
     method: "POST",
     credentials: "include",
-    redirect: 'manual',
-    headers: { 
+    redirect: "manual",
+    headers: {
       "Content-Type": "application/json",
-      'Accept': 'application/json'
+      Accept: "application/json",
     },
     body: JSON.stringify(payload),
-  }).then((res) => res.json());
+  });
+
+  let data = null;
+  try { data = await res.json(); } catch (_) {}
+
+  if (!res.ok) {
+    const err = new Error(data?.message || "Request failed");
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
+  return data;
 };
 
 export const apply_coupon = ({ code, city }) => {

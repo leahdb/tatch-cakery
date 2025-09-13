@@ -11,6 +11,7 @@ const ThankYou = () => {
     deliveryDate,
     timeLabel,
     name,
+    deliveryPrice,
   } = state || {};
 
   return (
@@ -23,7 +24,20 @@ const ThankYou = () => {
         {orderId && !orderNumber && <p className="mb-2">Order ID: <b>{orderId}</b></p>}
 
         <p className="mb-2">
-          Delivery: <b>{deliveryType === "now" ? "Now" : `${deliveryDate} • ${timeLabel}`}</b>
+          Delivery:{" "}
+          <b>
+            {deliveryType === "now" ? (
+              deliveryPrice === 2
+                ? "in 30 - 40 minutes"
+                : deliveryPrice === 3
+                ? "in 40 - 50 minutes"
+                : deliveryPrice === 4
+                ? "in 40 - 60 minutes"
+                : "in 30 - 60 minutes"
+            ) : (
+              `${deliveryDate} • ${timeLabel}`
+            )}
+          </b>
         </p>
 
         <div className="mt-4 d-flex gap-3">

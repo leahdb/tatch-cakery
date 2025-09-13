@@ -13,7 +13,7 @@ const paintMap = {
   green:  "#10B981",
   pink:   "#EC4899",
   purple: "#8B5CF6",
-  teal:   "#14B8A6",
+  yellow: "#FACC15",
 };
 
 const DUMMY_MOTIF_PATH =
