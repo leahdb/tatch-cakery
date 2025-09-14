@@ -9,6 +9,7 @@ import { add_to_cart } from "../../services/shop/cart";
 import { customizationOptions } from "../../services/shop/customizationOptions";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
+import { sendEvent } from "../../analytics/ga";
 
 
 export default function ProductDetails() {
@@ -25,6 +26,14 @@ export default function ProductDetails() {
   const [motifChoice, setMotifChoice] = useState(null);
   const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
 
+  const MAX_MSG_LEN = 24;
+  const isChocoLetters = selectedCustomization.code === "choco_letters";
+  const chocoMsgLen = customInput.length;
+
+  const chocoLettersPrice = isChocoLetters
+    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 1 : 2))
+    : 0;
+
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
   };
@@ -36,6 +45,21 @@ export default function ProductDetails() {
       setQty((q) => q + 1);
     }
   };
+
+  useEffect(() => {
+    if (!product) return;
+    sendEvent("view_item", {
+      currency: "USD",
+      value: Number(product.price) || 0,
+      items: [{
+        item_id: String(product.id),
+        item_name: product.name,
+        item_category: product.category?.name || "Unknown",
+        price: Number(product.price) || 0,
+        quantity: 1,
+      }],
+    });
+  }, [product]);
 
   useEffect(() => {
     fetch_shop_product(slug).then((res) => {
@@ -169,23 +193,34 @@ export default function ProductDetails() {
                         }
                       }}
                     />
-                    <label className="form-check-label size-14">
+                    <label className="form-check-label">
                       {custom.label}
                       <small className="text-muted">
-                        &nbsp;{custom.price > 0 ? `+${custom.price}$` : ""}
+                        &nbsp;{
+                          custom.code === "choco_letters"
+                            ? (chocoMsgLen === 0 ? "+$1-2" : `+${chocoLettersPrice}$`)
+                            : (custom.price > 0 ? `+${custom.price}$` : "")
+                        }
                       </small>
                     </label>
                   </div>
                 ))}
                 {selectedCustomization.label.includes("Writing") && (
                   <div className="my-3">
-                    <label className="form-label fs-6">Enter Your Message</label>
+                    <label className="form-label fs-6 w-100 d-flex justify-content-between align-items-end">
+                      Enter Your Message 
+                      <small className="text-muted size-14">{chocoMsgLen}/{MAX_MSG_LEN}</small>
+                    </label>
                     <input
                       type="text"
                       className="form-control size-14"
                       placeholder="Your custom message"
                       value={customInput}
-                      onChange={(e) => setCustomInput(e.target.value)}
+                      onChange={(e) => {
+                      const v = e.target.value || "";
+                      // hard cap at 24 (including spaces)
+                      setCustomInput(v.slice(0, MAX_MSG_LEN));
+                    }}
                     />
                   </div>
                 )}

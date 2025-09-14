@@ -59,7 +59,7 @@ const CakeCustomization = () => {
     };
   
     const increase = () => {
-      setQty(qty + 1);
+      if (qty < 10) setQty(qty + 1);
     };
 
     useEffect(() => {
@@ -77,7 +77,8 @@ const CakeCustomization = () => {
           if (cfg.fillings)    setSelectedFilling({ code: cfg.fillings, label: cfg.fillings });
           if (cfg.mcreams)      setSelectedCream({ code: cfg.mcreams, label: cfg.mcreams });
           if (cfg.tcreams)   setSelectedTopCream({ code: cfg.tcreams, label: cfg.tcreams });
-          if (cfg.top_cream_color)   setTopCreamColor({ code: cfg.top_cream_color, label: cfg.tcreams });
+          if (cfg.note)   setAdditionalNote(cfg.note);
+          if (cfg.top_cream_color)   setTopCreamColor({ code: cfg.top_cream_color, label: cfg.top_cream_color });
 
           // Only show color if colored vanilla
           if (cfg.tcreams === "colored_vanilla" && cfg.top_cream_color) {
@@ -216,6 +217,7 @@ const CakeCustomization = () => {
           (selectedTopCream.code === "colored_vanilla")
             ? (topCreamColor?.id || null)  // send the color ID you store (e.g., 'pink')
             : null,
+          note: additionalNote,
         },
         // ONE-CALL PREVIEW
         preview_svg: svgString,
