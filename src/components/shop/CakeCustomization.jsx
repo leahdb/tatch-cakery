@@ -76,6 +76,7 @@ const CakeCustomization = () => {
           if (cfg.cake_flavor)       setSelectedCake({ code: cfg.cake_flavor, label: cfg.cake_flavor });
           if (cfg.fillings)    setSelectedFilling({ code: cfg.fillings, label: cfg.fillings });
           if (cfg.mcreams)      setSelectedCream({ code: cfg.mcreams, label: cfg.mcreams });
+          if (cfg.custom_price) totalPrice = cfg.custom_price
           if (cfg.tcreams)   setSelectedTopCream({ code: cfg.tcreams, label: cfg.tcreams });
           if (cfg.note)   setAdditionalNote(cfg.note);
           if (cfg.top_cream_color)   setTopCreamColor({ code: cfg.top_cream_color, label: cfg.top_cream_color });
@@ -156,6 +157,7 @@ const CakeCustomization = () => {
         plexi_color: selectedCustomization.label.includes("plexi_writing") ? plexiColor : null,
         motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
         mcreams: selectedCream.code,
+        custom_price: totalPrice.toFixed(2),
         tcreams: selectedTopCream.code,
         cake_flavor: selectedCake.code,
         // include the color only when colored vanilla is chosen
@@ -211,6 +213,7 @@ const CakeCustomization = () => {
           plexi_color: selectedCustomization.code === "plexi_writing" || selectedCustomization.code === "plexi_motif" ? plexiColor : null,
           motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
           mcreams: selectedCream.code,
+          custom_price: totalPrice.toFixed(2),
           tcreams: selectedTopCream.code,
           cake_flavor: selectedCake.code,
           top_cream_color:
@@ -238,7 +241,7 @@ const CakeCustomization = () => {
         });
     };
 
-    const totalPrice =
+    var totalPrice =
       product.price +
       (selectedCream?.price || 0) +
       (selectedFilling?.price || 0) +
