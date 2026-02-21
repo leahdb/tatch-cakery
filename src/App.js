@@ -14,6 +14,7 @@ import Checkout from "./components/shop/Checkout";
 import ThankYou from "./components/shop/ThankYou";
 import CakeCustomization from "./components/shop/CakeCustomization";
 import ErrorPage404 from "./components/errors/ErrorPage404";
+import MenuPage from "./components/shop/MenuPage";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
 
       <Routes>
         {/* SHOP LAYOUT */}
+        <Route path="menu" element={<MenuPage />} />
+
         <Route path="/" element={<ShopHome />}>
           <Route index element={<ShopMain />} />
           <Route path="main" element={<ShopMain />} />
