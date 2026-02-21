@@ -31,9 +31,9 @@ function App() {
       />
 
       <Routes>
-        {/* SHOP LAYOUT */}
         <Route path="menu" element={<MenuPage />} />
 
+        {/* SHOP LAYOUT */}
         <Route path="/" element={<ShopHome />}>
           <Route index element={<ShopMain />} />
           <Route path="main" element={<ShopMain />} />
