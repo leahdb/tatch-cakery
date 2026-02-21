@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import iconClose from '../../resources/themes/dashboard-v1/icons/close.svg'
 import UploadZone from "./UploadZone";
 

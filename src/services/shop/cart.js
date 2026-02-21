@@ -1,5 +1,4 @@
 const API_HOST = "https://api.tatchcakery.com/api/cart/";
-const API_PREVIEW = "https://api.tatchcakery.com/api/previews";
 
 export const add_to_cart = (data) => {
   return fetch(API_HOST + "add", {

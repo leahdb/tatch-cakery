@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import upload from "../../resources/themes/dashboard-v1/icons/upload.svg";
 import iconClose from "../../resources/themes/dashboard-v1/icons/image-close.svg";
 
@@ -39,7 +39,7 @@ const ImageUploader = ({
               <div
                 key={index}
                 className={`uploaded-image ${
-                  selectedProfileIndex == index ? "selected" : ""
+                  selectedProfileIndex === index ? "selected" : ""
                 }`}
               >
                 <div className="profile-indicator">
@@ -47,7 +47,7 @@ const ImageUploader = ({
                 </div>
                 <div className="image-wrapper">
                   <img
-                    className="img"
+                    className="img-up"
                     height={150}
                     src={
                       /^https?:\/\//i.test(image.image)

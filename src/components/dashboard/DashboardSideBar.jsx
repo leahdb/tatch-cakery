@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import iconLogout from "../../resources/themes/dashboard-v1/icons/logout.svg";
 import { Link } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";

@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
 import DashboardSideBar from "./DashboardSideBar";
 import DashboardMain from "./DashboardMain";
 import ProductFormPage from "./products/ProductFormPage";

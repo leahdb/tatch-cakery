@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import ChocolateMoldMessage from "./ChocolateLetters";
 import PlexiText from "./PlexiText";
-import { MOTIFS } from "./Motifs";
+// import { MOTIFS } from "./Motifs";
 
 const paintMap = {
   gold:   "url(#goldGradient)",
@@ -16,8 +16,8 @@ const paintMap = {
   yellow: "#FACC15",
 };
 
-const DUMMY_MOTIF_PATH =
-  "M150 700 L850 700 L800 400 L650 550 L550 350 L450 550 L300 400 Z";;
+// const DUMMY_MOTIF_PATH =
+//   "M150 700 L850 700 L800 400 L650 550 L550 350 L450 550 L300 400 Z";;
 
 const BASE_COLORS = {
   cls1:"#713f12", cls2:"#691212", cls3:"#c88329", cls4:"#675752", cls5:"#f3d9a3",

@@ -1,8 +1,7 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
 import printIcon from "../../resources/themes/dashboard-v1/icons/print.svg";
 import SearchBar from "./SearchBar";
-import { notify_promise } from "../../services/utils/toasts";
 import DataFilterButtons, { STYLE_LINKS } from "./DataFilterButtons";
 
 const ListingPageControls = ({

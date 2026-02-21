@@ -1,5 +1,4 @@
 import logoWhite from "../../resources/themes/dashboard-v1/img/logo-light.svg";
-import iconEnvelope from "../../resources/themes/dashboard-v1/icons/envelope.svg";
 import LoginForm from "./LoginForm";
 
 function LoginPage() {

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import useLocalState from "@phntms/use-local-state";
 
 const PrivateRoutes = () => {

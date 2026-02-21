@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import optionsIcon1 from "../../resources/themes/dashboard-v1/icons/3-dots-vertical.svg";
+import React from "react";
 
 
 const DashboardMain = () => {

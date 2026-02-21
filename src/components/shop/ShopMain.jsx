@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { fetch_shop_home } from "../../services/shop/home";
 import ShopIntro from "./ShopIntro";

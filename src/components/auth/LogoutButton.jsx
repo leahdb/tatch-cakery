@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { unauthenticate } from "../../services/auth";
 import iconLogout from "../../resources/themes/dashboard-v1/icons/logout.svg";
 
 const LogoutButton = ({ preset }) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import locationIcon from "../../resources/themes/dashboard-v1/icons/location-pin.svg";
 import personIcon from "../../resources/themes/dashboard-v1/icons/person.svg";
@@ -18,7 +18,6 @@ import LocationIcon from "../../resources/themes/dashboard-v1/icons/location-pin
 import { getNestedProperty } from "../../services/utils/objects";
 import { notify_promise } from "../../services/utils/toasts";
 import { isSet } from "immutable";
-import Select from "react-select";
 import ActionsDropdown from "./ActionsDropdown";
 
 const ItemListingTable = ({

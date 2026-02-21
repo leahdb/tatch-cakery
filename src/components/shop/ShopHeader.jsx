@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import onClickOutside from "react-onclickoutside";
-import iconSearch from "../../resources/themes/dashboard-v1/icons/search-white.svg";
 import logoBlack from "../../resources/themes/dashboard-v1/img/logo-dark.svg";
-import User from "../../resources/themes/dashboard-v1/icons/user.svg";
-import Cart from "../../resources/themes/dashboard-v1/icons/cart.svg";
 import Bag from "../../resources/themes/dashboard-v1/icons/bag.svg";
-import Heart from "../../resources/themes/dashboard-v1/icons/heart.svg";
 import { Navigate } from "react-router-dom";
 
 class ShopHeader extends React.Component {
