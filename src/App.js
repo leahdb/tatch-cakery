@@ -1,19 +1,19 @@
 import LoginPage from "./components/auth/LoginPage";
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import RouteTracker from "./RouteTracker";
 import PrivateRoutes from "./components/PrivateRoutes";
 import DashHome from "./components/dashboard/DashHome";
-import ShopHome from "./components/shop/ShopHome";
-import ShopMain from "./components/shop/ShopMain";
-import ComingSoon from "./components/shop/ComingSoon";
-import Cart from "./components/shop/Cart";
-import ProductListing from "./components/shop/ProductListing";
-import ProductDetails from "./components/shop/ProductDetails";
-import Checkout from "./components/shop/Checkout";
-import ThankYou from "./components/shop/ThankYou";
-import CakeCustomization from "./components/shop/CakeCustomization";
-import ErrorPage404 from "./components/errors/ErrorPage404";
+// import ShopHome from "./components/shop/ShopHome";
+// import ShopMain from "./components/shop/ShopMain";
+// import ComingSoon from "./components/shop/ComingSoon";
+// import Cart from "./components/shop/Cart";
+// import ProductListing from "./components/shop/ProductListing";
+// import ProductDetails from "./components/shop/ProductDetails";
+// import Checkout from "./components/shop/Checkout";
+// import ThankYou from "./components/shop/ThankYou";
+// import CakeCustomization from "./components/shop/CakeCustomization";
+// import ErrorPage404 from "./components/errors/ErrorPage404";
 import MenuPage from "./components/shop/MenuPage";
 import { ToastContainer } from "react-toastify";
 
@@ -32,9 +32,10 @@ function App() {
 
       <Routes>
         <Route path="menu" element={<MenuPage />} />
+        <Route path="*" element={<Navigate to="/menu" replace />} />
 
         {/* SHOP LAYOUT */}
-        <Route path="/" element={<ShopHome />}>
+        {/* <Route path="/" element={<ShopHome />}>
           <Route index element={<ShopMain />} />
           <Route path="main" element={<ShopMain />} />
           <Route path="coming-soon" element={<ComingSoon />} />
@@ -46,7 +47,7 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="thank-you" element={<ThankYou />} />
           <Route path="*" element={<ErrorPage404 />} />
-        </Route>
+        </Route> */}
 
         {/* ADMIN */}
         <Route element={<PrivateRoutes />}>
