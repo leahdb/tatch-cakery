@@ -2099,7 +2099,7 @@ input[type="checkbox"].checkbox-primary:checked {
 /* ===================== SignUp Data ===================== */
 .signup-data-section {
   .flex-container-center {
-    justify-content: start;
+    justify-content: flex-start;
   }
   .logo-container {
     width: 122px;
@@ -2472,7 +2472,7 @@ table.dashboard-table td {
 
   &__header {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     flex-wrap: wrap;
     overflow-y: auto;
   }

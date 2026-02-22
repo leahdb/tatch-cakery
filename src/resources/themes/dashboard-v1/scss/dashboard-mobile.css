@@ -103,12 +103,12 @@
     font-size: 35px;
   }
   .login-section .bg-doodles {
-    align-items: start;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: center;
   }
   .login-section .account-left-col {
-    align-items: start;
+    align-items: flex-start;
   }
   .login-section .bg-footer {
     display: flex;
@@ -186,7 +186,7 @@
   }
   /* ===================== Sign Up ===================== */
   .signup-section .bg-doodles {
-    justify-content: start;
+    justify-content: flex-start;
   }
   .signup-section .logo-container {
     position: relative;

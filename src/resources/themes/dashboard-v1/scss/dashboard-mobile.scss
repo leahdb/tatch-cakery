@@ -211,13 +211,13 @@ $primaryColor: #007132;
     }
 
     .bg-doodles {
-      align-items: start;
+      align-items: flex-start;
       flex-direction: column;
       justify-content: center;
     }
 
     .account-left-col {
-      align-items: start;
+      align-items: flex-start;
     }
 
     .bg-footer {
@@ -332,7 +332,7 @@ $primaryColor: #007132;
   /* ===================== Sign Up ===================== */
   .signup-section {
     .bg-doodles {
-      justify-content: start;
+      justify-content: flex-start;
     }
     .logo-container {
       position: relative;
