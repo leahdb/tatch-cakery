@@ -55,7 +55,7 @@ const buildTimeSlots = (isoDate) => {
   const end   = new Date(`${isoDate}T22:00:00`);
   const now   = new Date();
   const isToday = isoDate === toISODate(now);
-  const earliest = isToday ? ceilToNextHalfHour(now) : flex-start;
+  const earliest = isToday ? ceilToNextHalfHour(now) : start;
 
   const slots = [];
   for (let t = new Date(start); t < end; t = new Date(t.getTime() + 30 * 60000)) {
