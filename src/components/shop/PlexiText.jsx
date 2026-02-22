@@ -104,7 +104,7 @@ export default function PlexiText({
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(raf);
     };
-  }, [targetRef?.current, padding, fbX, fbY, fbW, fbH]);
+  }, [padding, fbX, fbY, fbW, fbH, targetRef]);
 
   const palette = React.useMemo(() => {
     return {

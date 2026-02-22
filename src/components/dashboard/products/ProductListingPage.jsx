@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   delete_shop_products,
   fetch_shop_products,
-  export_shop_products,
-  search_shop_products,
   IMPORT_API,
 } from "../../../services/dashboard/products";
 import ItemListingTable, {
@@ -28,6 +26,8 @@ const ProductListingPage = ({ pageState, setPageState }) => {
   const [latestSearchQuery, setLatestSearchQuery] = useState(
     searchParams.get("search")
   );
+
+  let searchSearchParam = searchParams.get("search")
 
   const apiCall = [
     fetch_shop_products,
@@ -81,11 +81,11 @@ const ProductListingPage = ({ pageState, setPageState }) => {
 
   useEffect(() => {
     updateTableInfo();
-  }, [latestSearchQuery]);
+  }, [latestSearchQuery, updateTableInfo]);
 
   useEffect(() => {
     setSearch(searchParams.get("search"));
-  }, [searchParams.get("search")]);
+  }, [searchSearchParam, searchParams]);
 
   useEffect(() => {
     setLatestSearchQuery(search);

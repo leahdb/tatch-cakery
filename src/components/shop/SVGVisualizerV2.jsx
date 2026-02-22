@@ -28,22 +28,22 @@ const BASE_COLORS = {
   cls26:"#9c632d", cls27:"#600808", cls28:"#cd892e", cls29:"#f7e4b8", cls30:"#f4d89a",
 };
 
-const CAKE_CLASS_KEYS = [ // 12
-  "cls2","cls11","cls13","cls14","cls15","cls16",
-  "cls18","cls19","cls20","cls21","cls25","cls27",
-];
+// const CAKE_CLASS_KEYS = [ // 12
+//   "cls2","cls11","cls13","cls14","cls15","cls16",
+//   "cls18","cls19","cls20","cls21","cls25","cls27",
+// ];
 
-const MIDDLE_CREAM_CLASS_KEYS = [ // 6
-  "cls1","cls3","cls7","cls16","cls26","cls28",
-];
+// const MIDDLE_CREAM_CLASS_KEYS = [ // 6
+//   "cls1","cls3","cls7","cls16","cls26","cls28",
+// ];
 
-const TOP_CREAM_CLASS_KEYS = [ // 7
-  "cls5","cls10","cls17","cls23","cls24","cls29","cls30",
-];
+// const TOP_CREAM_CLASS_KEYS = [ // 7
+//   "cls5","cls10","cls17","cls23","cls24","cls29","cls30",
+// ];
 
-const BOX_CLASS_KEYS = [ // 5
-  "cls4","cls6","cls8","cls9","cls12","cls22"
-];
+// const BOX_CLASS_KEYS = [ // 5
+//   "cls4","cls6","cls8","cls9","cls12","cls22"
+// ];
 
 const CAKE_OVERRIDES = {
   red_velvet: {

@@ -48,7 +48,7 @@ const DataFilterButtons = ({ filters, newShopsCount, style }) => {
               key={filter.value}
               className={`nav-item ${isActive ? "active" : ""}`}
             >
-              <a className="nav-link" onClick={() => handleClick(filter.value)}>
+              <button type="button" className="nav-link" onClick={() => handleClick(filter.value)}>
                 {filter.label === "New Joining Sellers" ? (
                   <span>
                     {filter.label} &nbsp;
@@ -59,7 +59,7 @@ const DataFilterButtons = ({ filters, newShopsCount, style }) => {
                 ) : (
                   filter.label
                 )}
-              </a>
+              </button>
             </li>
           );
         })}

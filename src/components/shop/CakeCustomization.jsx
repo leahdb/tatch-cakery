@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { useOutletContext, useNavigate, useSearchParams } from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import SVGVisualizer from "./SVGVisualizerV2";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
@@ -11,16 +11,18 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { notify_promise } from "../../services/utils/toasts";
 
 const CakeCustomization = () => {
-    const TOP_CREAM_COLORS = [
-      { id: "red",     label: "Red",     hex: "#EF4444" },
-      { id: "blue",    label: "Blue",    hex: "#3B82F6" },
-      { id: "green",   label: "Green",   hex: "#10B981" },
-      { id: "pink",    label: "Pink",    hex: "#EC4899" },
-      { id: "purple",  label: "Purple",  hex: "#8B5CF6" },
-      { id: "yellow",  label: "Yellow",  hex: "#FACC15" },
-      { id: "orange",  label: "Orange",  hex: "#FB923C" },
-      { id: "black",   label: "Black",   hex: "#111827" },
-    ];
+    const TOP_CREAM_COLORS = useMemo(() => {
+      return [
+        { id: "red",     label: "Red",     hex: "#EF4444" },
+        { id: "blue",    label: "Blue",    hex: "#3B82F6" },
+        { id: "green",   label: "Green",   hex: "#10B981" },
+        { id: "pink",    label: "Pink",    hex: "#EC4899" },
+        { id: "purple",  label: "Purple",  hex: "#8B5CF6" },
+        { id: "yellow",  label: "Yellow",  hex: "#FACC15" },
+        { id: "orange",  label: "Orange",  hex: "#FB923C" },
+        { id: "black",   label: "Black",   hex: "#111827" },
+      ];
+    }, []);
     const [params] = useSearchParams();
     const itemId = params.get("item")
     const svgRef = useRef(null);
@@ -37,7 +39,8 @@ const CakeCustomization = () => {
     const [buttonText, setButtonText] = useState("Add to cart")
     const [isAdding, setIsAdding] = React.useState(false);
     const [loading, setLoading] = useState(true);
-    const [previewUrl, setPreviewUrl] = useState(null);
+    const [, setTotalprice] = useState(0);
+    const [, setPreviewUrl] = useState(null);
 
     
     const [additionalNote, setAdditionalNote] = useState("");
@@ -76,7 +79,7 @@ const CakeCustomization = () => {
           if (cfg.cake_flavor)       setSelectedCake({ code: cfg.cake_flavor, label: cfg.cake_flavor });
           if (cfg.fillings)    setSelectedFilling({ code: cfg.fillings, label: cfg.fillings });
           if (cfg.mcreams)      setSelectedCream({ code: cfg.mcreams, label: cfg.mcreams });
-          if (cfg.custom_price) totalPrice = cfg.custom_price
+          if (cfg.custom_price) setTotalprice(cfg.custom_price) 
           if (cfg.tcreams)   setSelectedTopCream({ code: cfg.tcreams, label: cfg.tcreams });
           if (cfg.note)   setAdditionalNote(cfg.note);
           if (cfg.top_cream_color)   setTopCreamColor({ code: cfg.top_cream_color, label: cfg.top_cream_color });
@@ -118,7 +121,7 @@ const CakeCustomization = () => {
           console.error("Failed to load item config", e);
         }
       })();
-    }, [editMode, itemId]);
+    }, [editMode, itemId, TOP_CREAM_COLORS]);
 
     useEffect(() => {
       console.log("[CakeCustomization] mounted");
@@ -168,7 +171,7 @@ const CakeCustomization = () => {
       };
 
       try {
-        const res = await update_cart_item(itemId, {
+        await update_cart_item(itemId, {
           custom,
           quantity: qty,               // keep or remove if you don't edit qty here
           ...(preview_svg ? { preview_svg } : {}),
@@ -220,7 +223,6 @@ const CakeCustomization = () => {
           (selectedTopCream.code === "colored_vanilla")
             ? (topCreamColor?.id || null)  // send the color ID you store (e.g., 'pink')
             : null,
-          note: additionalNote,
         },
         // ONE-CALL PREVIEW
         preview_svg: svgString,
@@ -246,30 +248,9 @@ const CakeCustomization = () => {
       (selectedCream?.price || 0) +
       (selectedFilling?.price || 0) +
       (selectedExtras?.price || 0) +
-      (selectedTopCream?. price || 0) +
+      (selectedTopCream?.price || 0) +
       (isChocoLetters ? chocoLettersPrice : (selectedCustomization?.price || 0));
     
-    
-
-    async function svgToPngDataUrl(svgString, width = 1080) {
-      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-      const url = URL.createObjectURL(svgBlob);
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-
-      await new Promise((res, rej) => {
-        img.onload = res; img.onerror = rej; img.src = url;
-      });
-
-      const aspect = img.height / img.width;
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = Math.round(width * aspect);
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      URL.revokeObjectURL(url);
-      return canvas.toDataURL('image/png');
-    }
 
   if (loading) {
     return (

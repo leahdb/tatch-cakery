@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 const ProductsMain = ({ categories, products }) => {
   return (
     <div className="container">

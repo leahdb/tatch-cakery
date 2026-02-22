@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import Select from "react-select";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   add_shop_products,
@@ -17,12 +16,10 @@ const ProductFormPage = () => {
   const { id } = useParams();
 
   const [shouldRedirectToIndex, setShouldRedirectToIndex] = useState(false);
-  const [shouldRedirectToProductView, setShouldRedirectToProductView] =
+  const [shouldRedirectToProductView,] =
     useState(false);
   const [selectedProfileIndex, setSelectedProfileIndex] = useState(0);
-  const [categories, setCategories] = useState([]);
-
-  const editorRef = useRef(null);
+  const [, setCategories] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -52,7 +49,7 @@ const ProductFormPage = () => {
         }
       }
     });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (id !== undefined) {
@@ -63,7 +60,7 @@ const ProductFormPage = () => {
         }
       });
     }
-  }, []);
+  }, [id]);
 
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
@@ -118,15 +115,6 @@ const ProductFormPage = () => {
         index: newIndex,
         removedImages: removedImages,
       };
-    });
-  };
-
-  const handleSelectInputChange = (name, selected) => {    
-    handleTextInputChange({
-      target: {
-        name: name,
-        value: selected.value,
-      },
     });
   };
 

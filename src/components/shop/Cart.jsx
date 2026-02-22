@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useCart } from "./UseCart";
 import { remove_from_cart, update_cart } from "../../services/shop/cart";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { useNavigate, Link, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const Cart = () => {
-  const { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice } = useCart();
+  const { cart, totalItems, loading, setCart, setTotalItems, setTotalPrice } = useCart();
 
-  const navigate = useNavigate();
   const { setCartCount } = useOutletContext();
 
   const { subtotal, itemsCount } = useMemo(() => {
@@ -186,13 +185,13 @@ const Cart = () => {
                           Edit
                         </Link>
                       )}
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="remove-cart text-light-brown"
                       onClick={(e) => handleRemove(e, item.item_id)}
                     >
                       Remove
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

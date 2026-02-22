@@ -55,7 +55,7 @@ const ImageUploader = ({
                         : ''
                         // : URL.createObjectURL(image)
                     }
-                    alt={`Uploaded Image ${index + 1}`}
+                    alt={`Uploaded ${index + 1}`}
                   />
                   <img
                     onClick={() => onRemoveImage(index)}

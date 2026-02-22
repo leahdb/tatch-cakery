@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {useParams, useOutletContext} from "react-router-dom";
-import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { notify_promise } from "../../services/utils/toasts";
 import { fetch_shop_product } from "../../services/shop/products";
@@ -21,7 +20,7 @@ export default function ProductDetails() {
   const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
-  const [additionalNote, setAdditionalNote] = useState("");
+  const [additionalNote,] = useState("");
   const [customInput, setCustomInput] = useState("");
   const [motifChoice, setMotifChoice] = useState(null);
   const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
@@ -68,7 +67,7 @@ export default function ProductDetails() {
           setLoading(false);
         }
     });
-  }, []);
+  }, [slug]);
 
   const handleAddToCart = () => {
     if (isAdding || !product.in_stock) return;
@@ -167,7 +166,7 @@ export default function ProductDetails() {
 
             <p className="pt-3 mt-4 mx-0">{product.description}</p>
 
-            {product.category.id == 2 && (
+            {product.category.id === 2 && (
               <div className="mb-2 py-3 px-2 border-top">
                 <label className="form-label fs-6">
                   Customization{" "}

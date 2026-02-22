@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import iconClose from "../../../resources/themes/dashboard-v1/icons/close.svg";
 
-import starSVG from "../../../resources/themes/dashboard-v1/icons/star.svg";
 const ProductPopup = ({ product }) => {
-  let reviews = [
-    // {user_name: "My Floyd Miles", user_image: '', review_text: 'pretty colors too ! '},
-    // {user_name: "My Floyd Miles", user_image: '', review_text: 'pretty colors too ! '},
-  ];
 
   if (product === undefined) {
     return (
@@ -56,7 +51,7 @@ const ProductPopup = ({ product }) => {
                 <img
                   className={"img-thumbnail"}
                   src={product.image}
-                  alt="Product Image"
+                  alt="Product"
                   height={150}
                   width={100}
                 />

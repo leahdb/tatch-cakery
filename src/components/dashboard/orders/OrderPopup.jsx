@@ -139,7 +139,7 @@ const OrderPopup = ({ order, setOrders, setSelectedOrder }) => {
                           <img
                             className={"img-product rounded-3"}
                             src={product.img_picture}
-                            alt="product image"
+                            alt="product"
                           />
                         </div>
                         <div className="w-100">

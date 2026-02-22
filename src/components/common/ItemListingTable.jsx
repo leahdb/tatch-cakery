@@ -50,7 +50,7 @@ const ItemListingTable = ({
     setHasPagination(
       pagination !== undefined && Object.keys(pagination).length > 0
     );
-  }, [fields]);
+  }, [fields, pagination]);
 
   const columns = fieldKeys.map((fieldKey) => {
     const field = fieldMap[fieldKey];
@@ -553,7 +553,7 @@ const TableData = ({
           <img
             className="img-thumbnail rounded-4"
             src={item[field.key]}
-            alt="Product Image"
+            alt="Product"
           />
         </div>
       );

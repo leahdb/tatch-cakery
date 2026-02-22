@@ -36,8 +36,6 @@ export default function ChocolateMoldMessageAuto({
     letterStroke: "#e0cfb6",
   },
   font = { family: "sans-serif", weight: 800, size: 60 },
-
-  showOverflowHint = true,
 }) {
   const [measured, setMeasured] = React.useState(null);
 
@@ -203,8 +201,8 @@ export default function ChocolateMoldMessageAuto({
     return { lineLayouts, overflow };
   }, [cleanText, B.x, B.y, B.width, B.height, tile, spacing, rows, measureLineWidth, layoutLineTiles]);
 
-  const { lineLayouts, overflow } = layout;
-  const { w, h, rx } = tile;
+  const { lineLayouts,} = layout;
+  const { w, h, } = tile;
 
   return (
     <g transform={`translate(80, 30) rotate(${rotation}, ${B.cx}, ${B.cy}) skewX(-27.77)`}>

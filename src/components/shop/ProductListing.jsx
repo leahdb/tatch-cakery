@@ -38,6 +38,7 @@ const ProductListing = () => {
   }, [
     perPage,
     currentPage,
+    categorySlug
   ]);
 
   const handlePerPageChange = (e) => {

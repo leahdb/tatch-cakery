@@ -7,7 +7,7 @@ const SearchBar = ({ type, resultType, setSearch }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchResultsOpen, setSearchResultsOpen] = useState(false);
-  const [searchInputFocused, setSearchInputFocused] = useState(false);
+  const [, setSearchInputFocused] = useState(false);
 
   const types = ["pet", "shop", "user", "product", "service"];
 

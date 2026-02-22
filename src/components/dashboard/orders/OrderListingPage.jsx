@@ -29,8 +29,10 @@ const OrderListingPage = ({ pageState, setPageState }) => {
 
   const [filters, setFilters] = useState([]);
   const [deliveryOption, setDeliveryOption] = useState([]);
-  const [activeFilter, setActiveFilter] = useState(0);
+  const [, setActiveFilter] = useState(0);
   const [perPage, setPerPage] = useState(10);
+
+  let searchSearchParam = searchParams.get("search");
 
   const openModal = (index) => {
     setSelectedOrder(orders[index]);
@@ -98,7 +100,7 @@ const OrderListingPage = ({ pageState, setPageState }) => {
 
   useEffect(() => {
     setSearch(searchParams.get("search"));
-  }, [searchParams.get("search")]);
+  }, [searchSearchParam, searchParams]);
 
   useEffect(() => {
     setLatestSearchQuery(search);
@@ -106,7 +108,7 @@ const OrderListingPage = ({ pageState, setPageState }) => {
 
   useEffect(() => {
     updateTableInfo(1);
-  }, [latestSearchQuery, perPage]);
+  }, [latestSearchQuery, perPage, updateTableInfo]);
 
   return (
     <div className="page-content py-3 px-4 bg-lightgray">

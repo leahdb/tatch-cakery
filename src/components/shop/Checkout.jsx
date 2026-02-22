@@ -205,7 +205,7 @@ const Checkout = () => {
       const stillValid = opts.some(o => o.value === selectedDate);
       if (!stillValid) setSelectedDate(opts[0]?.value);
     }
-  }, [nowDisabled]);
+  }, [nowDisabled, selectedDate]);
 
   useEffect(() => {
     if (fulfillmentType !== "schedule") { setTimeOptions([]); setSelectedSlot(""); return; }
@@ -219,7 +219,7 @@ const Checkout = () => {
     setTimeOptions(slots);
     setSelectedTimeLabel(slots?.[0]?.label)
     if (!selectedSlot && slots.length) setSelectedSlot(slots[0].value);
-  }, [fulfillmentType, selectedDate]);
+  }, [fulfillmentType, selectedDate, selectedSlot]);
 
   const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
 
@@ -275,7 +275,7 @@ const Checkout = () => {
     let date = selectedDate;
     let slot = selectedSlot;
 
-    if (nowDisabled || type !== "schedule" && nowDisabled) {
+    if (nowDisabled || (type !== "schedule" && nowDisabled)) {
       type = "schedule";
       const opts = buildDateOptions(30, 1);
       date = opts[0]?.value;
@@ -671,12 +671,12 @@ const Checkout = () => {
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary good-circle">
                   {item.quantity}
                 </span>
-                <img src={ item.product_id == 6 ? item.preview : item.image} className="img-sm-checkout rounded border" loading="lazy" />
+                <img src={ item.product_id === 6 ? item.preview : item.image} className="img-sm-checkout rounded border" loading="lazy" alt="item"/>
               </div>
               <div className="">
-                <a href="#" className="nav-link">
+                <button type="button" className="nav-link">
                   {item.name}
-                </a>
+                </button>
                 <div className="price text-muted">${item.price}</div>
               </div>
             </div>
