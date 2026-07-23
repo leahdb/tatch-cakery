@@ -1,4 +1,4 @@
-const API_HOST = "https://api.tatchcakery.com/api/auth/";
+const API_HOST = "https://staging-api.tatchcakery.com/api/auth/";
 
 export function authenticate(email, password) {
   return fetch(API_HOST + "login", {

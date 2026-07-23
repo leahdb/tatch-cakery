@@ -1,4 +1,4 @@
-const API_HOST = "https://api.tatchcakery.com/api/shop-home/";
+const API_HOST = "https://staging-api.tatchcakery.com/api/shop-home/";
 
 export const fetch_shop_home = () => {
   return fetch(API_HOST, {
