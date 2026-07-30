@@ -12,9 +12,11 @@ const ProductsMain = ({ categories, products }) => {
         return (
           <div key={category.id} className="my-4">
             <div className="row g-3 my-md-5">
-              <div className="col-12 d-flex justify-content-start">
+              <div className="col-12 d-flex justify-content-between align-items-center">
                 <h3 className="fw-bold text-muted mb-0 mb-md-2">{category.name}</h3>
-                {/* <a href={`/category/${category.slug}`}>See All</a> */}
+                <a href={`/products/category/${category.slug}`} className="text-decoration-none fw-semibold">
+                  See All
+                </a>
               </div>
               {filteredProducts.slice(0, 4).map((product) => (
                 <div
