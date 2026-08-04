@@ -182,11 +182,11 @@ export default function ProductDetails() {
         </div>
         <div className="col-md-6 col-12">
           <div className="row px-2">
-            <h3 className="mb-1 text-light-brown fw-bold pt-md-3 pt-4">{product.name}</h3>
+            <h3 className="mb-1 color-primary fw-bold pt-md-3 pt-3">{product.name}</h3>
 
-            <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">{formatLBP(totalPrice)}</span>
+            <p className="my-2 mx-0 text-grey fs-125">{product.description}</p>
 
-            <p className="pt-3 mt-4 mx-0">{product.description}</p>
+            <span className="fs-6 mt-md-2 fw-bold text-light-brown pb-3">{formatLBP(totalPrice)}</span>
 
             {customizationGroups.length > 0 && (
               <div className="mb-2 py-3 px-2 border-top">
@@ -266,12 +266,6 @@ export default function ProductDetails() {
                 </div>
               )}
             </div>
-          </div>
-
-
-          <div className="row border-top pt-3 mt-5 mx-0">
-            <h5 className="fw-semibold text-dark mb-4">Description</h5>
-            <p>{product.description_long}</p>
           </div>
         </div>
       </div>
