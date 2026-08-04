@@ -210,10 +210,10 @@ export default function ProductDetails() {
                                 : setSingleOption(group.key, opt.code)
                             }
                           />
-                          <label className="form-check-label">
+                          <label className="form-check-label size-14">
                             {opt.label}
                             {opt.price > 0 && (
-                              <small className="text-muted">&nbsp;+{formatLBP(opt.price)}</small>
+                              <small className="text-grey fs-12">&nbsp; &nbsp;+{formatLBP(opt.price)}</small>
                             )}
                           </label>
                         </div>
