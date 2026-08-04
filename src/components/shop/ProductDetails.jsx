@@ -1,38 +1,28 @@
 import React, { useEffect, useState } from "react";
-import {useParams, useOutletContext} from "react-router-dom";
+import { useParams, useOutletContext, useSearchParams, useNavigate } from "react-router-dom";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { notify_promise } from "../../services/utils/toasts";
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { add_to_cart } from "../../services/shop/cart";
-import { customizationOptions } from "../../services/shop/customizationOptions";
-import { formatLBP, formatNumber } from "../../services/utils/currency";
-import MotifPicker from "./MotifPicker";
-import ColorPicker from "./ColorPicker";
+import { add_to_cart, get_cart_item, update_cart_item } from "../../services/shop/cart";
+import { formatLBP } from "../../services/utils/currency";
 import { sendEvent } from "../../analytics/ga";
 
 
 export default function ProductDetails() {
   const { setCartCount } = useOutletContext();
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const itemId = searchParams.get("item");
+  const editMode = !!itemId;
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState({});
   const [qty, setQty] = useState(1);
-  const [buttonText, setButtonText] = useState("Add to cart")
+  const [buttonText, setButtonText] = useState(editMode ? "Save Changes" : "Add to cart");
   const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
-  const [selectedCustomization, setSelectedCustomization] = useState(customizationOptions[0]);
-  const [additionalNote,] = useState("");
-  const [customInput, setCustomInput] = useState("");
-  const [motifChoice, setMotifChoice] = useState(null);
-  const [plexiColor, setPlexiColor] = useState({ id: "gold",   label: "Gold",   type: "gradient", gradient: "linear-gradient(135deg,#B28900,#F1CF63 35%,#7A5A00 65%,#F7E7A1)" });
-
-  const MAX_MSG_LEN = 24;
-  const isChocoLetters = selectedCustomization.code === "choco_letters";
-  const chocoMsgLen = customInput.length;
-
-  const chocoLettersPrice = isChocoLetters
-    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 100000 : 200000))
-    : 0;
+  const [selections, setSelections] = useState({});
 
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
@@ -70,49 +60,68 @@ export default function ProductDetails() {
     });
   }, [slug]);
 
+  // Seed default selections once the product's customization groups are known
+  useEffect(() => {
+    const groups = product.customization_groups || [];
+    if (groups.length === 0) return;
+
+    const defaults = {};
+    groups.forEach((g) => {
+      defaults[g.key] = g.multiple ? [] : (g.required && g.options[0] ? g.options[0].code : "");
+    });
+    setSelections(defaults);
+  }, [product.customization_groups]);
+
+  // Edit mode: pull the cart item's saved config over the defaults
+  useEffect(() => {
+    if (!editMode || !product.customization_groups) return;
+    get_cart_item(itemId).then((res) => {
+      if (res.config) {
+        setSelections((prev) => ({ ...prev, ...res.config }));
+      }
+      if (res.quantity) setQty(res.quantity);
+    });
+  }, [editMode, itemId, product.customization_groups]);
+
+  const setSingleOption = (groupKey, code) => {
+    setSelections((prev) => ({ ...prev, [groupKey]: code }));
+  };
+
+  const toggleMultiOption = (groupKey, code) => {
+    setSelections((prev) => {
+      const current = prev[groupKey] || [];
+      const next = current.includes(code)
+        ? current.filter((c) => c !== code)
+        : [...current, code];
+      return { ...prev, [groupKey]: next };
+    });
+  };
+
   const handleAddToCart = () => {
     if (isAdding || !product.in_stock) return;
 
     setIsAdding(true);
-    setButtonText("Adding...");
+    setButtonText(editMode ? "Saving..." : "Adding...");
 
-    // Base payload
+    if (editMode) {
+      update_cart_item(itemId, { custom: selections, quantity: qty })
+        .then(() => {
+          navigate("/cart");
+        })
+        .finally(() => {
+          setIsAdding(false);
+          setButtonText("Save Changes");
+        });
+      return;
+    }
+
     const payload = {
       product_id: product.id,
       quantity: qty,
-      total_price: totalPrice,
     };
 
-    // Build custom object
-    const custom = {
-      designs: selectedCustomization.code,
-      note: additionalNote || null,
-      message:
-        (selectedCustomization.code === "choco_letters" ||
-          selectedCustomization.code === "plexi_writing")
-          ? (customInput || "")
-          : null,
-      plexi_color: selectedCustomization.label.includes("plexi")
-        ? plexiColor
-        : null,
-      motif: selectedCustomization.code === "plexi_motif"
-        ? motifChoice
-        : null,
-    };
-
-    // Remove null/empty values
-    let cleanCustom = Object.fromEntries(
-      Object.entries(custom).filter(([_, v]) => v !== null && v !== "")
-    );
-
-    // If designs === "none", ignore it completely
-    if (cleanCustom.designs === "none") {
-      delete cleanCustom.designs;
-    }
-
-    // Only attach custom if something remains
-    if (Object.keys(cleanCustom).length > 0) {
-      payload.custom = cleanCustom;
+    if (product.customization_groups && product.customization_groups.length > 0) {
+      payload.custom = selections;
     }
 
     const promise = add_to_cart(payload);
@@ -144,9 +153,21 @@ export default function ProductDetails() {
   const isOut = !product.in_stock;
   const addDisabled = isOut || isAdding;
 
-  const totalPrice =
-      product.price +
-      (selectedCustomization?.price || 0);
+  const customizationGroups = product.customization_groups || [];
+
+  const addonTotal = customizationGroups.reduce((sum, group) => {
+    const sel = selections[group.key];
+    if (group.multiple) {
+      return sum + (sel || []).reduce((s, code) => {
+        const opt = group.options.find((o) => o.code === code);
+        return s + (opt ? opt.price : 0);
+      }, 0);
+    }
+    const opt = group.options.find((o) => o.code === sel);
+    return sum + (opt ? opt.price : 0);
+  }, 0);
+
+  const totalPrice = (product.price || 0) + addonTotal;
 
   return (
     <div className="container my-md-5 my-3">
@@ -167,78 +188,39 @@ export default function ProductDetails() {
 
             <p className="pt-3 mt-4 mx-0">{product.description}</p>
 
-            {product.category.id === 2 && (
+            {customizationGroups.length > 0 && (
               <div className="mb-2 py-3 px-2 border-top">
-                <label className="form-label fs-6">
-                  Customization{" "}
-                  <span className="tooltip-wrapper">
-                    <i className="bi bi-info-circle-fill text-primary" />
-                    <span className="tooltip-text">
-                      Cakes with customization can't be delivered on same day.
-                    </span>
-                  </span>
-                </label>
-                {customizationOptions.map((custom, index) => (
-                  <div className="form-check" key={index}>
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="customization"
-                      value={custom.label}
-                      checked={selectedCustomization.code === custom.code}
-                      onChange={() => {
-                        setSelectedCustomization(custom);
-                        if (custom.label !== "Plexi Motif") {
-                          setMotifChoice(null); // clear motif when leaving motif mode
-                        }
-                      }}
-                    />
-                    <label className="form-check-label">
-                      {custom.label}
-                      <small className="text-muted">
-                        &nbsp;{
-                          custom.code === "choco_letters"
-                            ? (chocoMsgLen === 0 ? `+LBP ${formatNumber(100000)}-${formatNumber(200000)}` : `+${formatLBP(chocoLettersPrice)}`)
-                            : (custom.price > 0 ? `+${formatLBP(custom.price)}` : "")
-                        }
-                      </small>
-                    </label>
+                {customizationGroups.map((group) => (
+                  <div className="mb-3" key={group.key}>
+                    <label className="form-label fs-6">{group.label}</label>
+                    {group.options.map((opt) => {
+                      const checked = group.multiple
+                        ? (selections[group.key] || []).includes(opt.code)
+                        : selections[group.key] === opt.code;
+                      return (
+                        <div className="form-check" key={opt.code}>
+                          <input
+                            className="form-check-input"
+                            type={group.multiple ? "checkbox" : "radio"}
+                            name={group.key}
+                            checked={checked}
+                            onChange={() =>
+                              group.multiple
+                                ? toggleMultiOption(group.key, opt.code)
+                                : setSingleOption(group.key, opt.code)
+                            }
+                          />
+                          <label className="form-check-label">
+                            {opt.label}
+                            {opt.price > 0 && (
+                              <small className="text-muted">&nbsp;+{formatLBP(opt.price)}</small>
+                            )}
+                          </label>
+                        </div>
+                      );
+                    })}
                   </div>
                 ))}
-                {selectedCustomization.label.includes("Writing") && (
-                  <div className="my-3">
-                    <label className="form-label fs-6 w-100 d-flex justify-content-between align-items-end">
-                      Enter Your Message 
-                      <small className="text-muted size-14">{chocoMsgLen}/{MAX_MSG_LEN}</small>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control size-14"
-                      placeholder="Your custom message"
-                      value={customInput}
-                      onChange={(e) => {
-                      const v = e.target.value || "";
-                      // hard cap at 24 (including spaces)
-                      setCustomInput(v.slice(0, MAX_MSG_LEN));
-                    }}
-                    />
-                  </div>
-                )}
-                {selectedCustomization.label.includes("Drawing") ||
-                selectedCustomization.label.includes("Motif") ? (
-                  <MotifPicker
-                    value={motifChoice}
-                    onChange={setMotifChoice}
-                  />
-                ) : null}
-                {selectedCustomization.label.includes("Plexi") && (
-                  <div className="my-3">
-                    <ColorPicker
-                      value={plexiColor}
-                      onChange={setPlexiColor}
-                    />
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -269,10 +251,10 @@ export default function ProductDetails() {
               </div>
             </div>
             <div className="col-12 col-md-6">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 disabled={addDisabled}
-                className="btn btn-primary w-100 rounded-0 h-100 small-h" 
+                className="btn btn-primary w-100 rounded-0 h-100 small-h"
                 onClick={handleAddToCart} >
                   {isOut ? "Out of stock" : buttonText}
               </button>

@@ -186,9 +186,8 @@ const Checkout = () => {
     setSelectedTimeLabel(label);
   };
 
-  const hasCustom = useMemo(() => cart?.some(it => Number(it.product_id) === 6), [cart]);
   const after9pm  = useMemo(isAfter9pmBeirut, []);
-  const nowDisabled = hasCustom || after9pm;
+  const nowDisabled = after9pm;
 
   // If "Now" is disabled: force Schedule and start dates from tomorrow
   useEffect(() => {
@@ -522,7 +521,7 @@ const Checkout = () => {
                     <label className="form-check-label" htmlFor="deliveryNow">Now (in 30 - 60 mins)</label>
                     {nowDisabled && (
                       <small className="text-muted ms-2 d-block">
-                        {hasCustom ? "Custom items require scheduling for tomorrow." : "Orders after 9:00 PM are for tomorrow."}
+                        Orders after 9:00 PM are for tomorrow.
                       </small>
                     )}
                   </div>
@@ -670,7 +669,7 @@ const Checkout = () => {
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary bg-primary good-circle">
                   {item.quantity}
                 </span>
-                <img src={ item.product_id === 6 ? item.preview : item.image} className="img-sm-checkout rounded border" loading="lazy" alt="item"/>
+                <img src={item.preview || item.image} className="img-sm-checkout rounded border" loading="lazy" alt="item"/>
               </div>
               <div className="">
                 <button type="button" className="nav-link">

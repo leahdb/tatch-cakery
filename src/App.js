@@ -12,7 +12,6 @@ import ProductListing from "./components/shop/ProductListing";
 import ProductDetails from "./components/shop/ProductDetails";
 import Checkout from "./components/shop/Checkout";
 import ThankYou from "./components/shop/ThankYou";
-import CakeCustomization from "./components/shop/CakeCustomization";
 import ErrorPage404 from "./components/errors/ErrorPage404";
 import MenuPage from "./components/shop/MenuPage";
 import { ToastContainer } from "react-toastify";
@@ -38,7 +37,6 @@ function App() {
           <Route index element={<ShopMain />} />
           <Route path="main" element={<ShopMain />} />
           <Route path="coming-soon" element={<ComingSoon />} />
-          <Route path="build-your-cake" element={<CakeCustomization />} />
           <Route path="products" element={<ProductListing />} />
           <Route path="products/category/:categorySlug" element={<ProductListing />} />
           <Route path="products/:slug" element={<ProductDetails />} />

@@ -179,7 +179,7 @@ const Cart = () => {
                     {item.is_custom && (
                         <Link
                           className="remove-cart text-light-brown me-4"
-                          to={`/build-your-cake?item=${item.item_id}`}
+                          to={`/products/${item.slug}?item=${item.item_id}`}
                         >
                           Edit
                         </Link>

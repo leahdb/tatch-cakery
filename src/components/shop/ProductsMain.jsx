@@ -25,9 +25,7 @@ const ProductsMain = ({ categories, products }) => {
                   className="col-lg-3 col-md-6 col-6 d-flex"
                 >
                   <a
-                    href={product.slug === 'build-your-cake' 
-                      ? `/${product.slug}` 
-                      : `/products/${product.slug}`}
+                    href={`/products/${product.slug}`}
                     className="card newest w-100 shadow my-2"
                   >
                     <div className="d-flex justify-content-center">
@@ -42,7 +40,7 @@ const ProductsMain = ({ categories, products }) => {
                       <div>
                         <h5 className="card-title fs-6">{product.name}</h5>
                         <p className="card-text fs-6 text-primary">
-                          {product.slug === 'build-your-cake' && <small className="size-12">from </small>}{formatLBP(product.price)}
+                          {formatLBP(product.price)}
                         </p>
                       </div>
                     </div>

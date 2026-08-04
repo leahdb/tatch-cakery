@@ -20,12 +20,14 @@ const ProductFormPage = () => {
     useState(false);
   const [selectedProfileIndex, setSelectedProfileIndex] = useState(0);
   const [, setCategories] = useState([]);
+  const [customizationTypes, setCustomizationTypes] = useState({});
 
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     cost: "",
+    customization_type: "none",
     image: "",
     images: [],
     index: 0,
@@ -43,8 +45,9 @@ const ProductFormPage = () => {
     formDepCallback().then((res) => {
       if (res.status === "ok") {
         setCategories(res.categories);
+        setCustomizationTypes(res.customization_types || {});
         if (res.data) {
-          setFormData(res.data);
+          setFormData({ ...res.data, customization_type: res.data.customization_type || "none" });
           setSelectedProfileIndex(res.data.index);
         }
       }
@@ -55,7 +58,7 @@ const ProductFormPage = () => {
     if (id !== undefined) {
       fetch_shop_product(id).then((res) => {
         if (res.status === "ok") {
-          setFormData({ ...res.data });
+          setFormData({ ...res.data, customization_type: res.data.customization_type || "none" });
           setSelectedProfileIndex(res.data.index);
         }
       });
@@ -206,6 +209,18 @@ const ProductFormPage = () => {
                 onChange={handleTextInputChange}
                 placeholder={"Product Cost"}
               />
+            </div>
+            <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
+              <label className="fw-semibold">Customization Type</label>
+              <select
+                name="customization_type"
+                value={formData.customization_type || "none"}
+                onChange={handleTextInputChange}
+              >
+                {Object.entries(customizationTypes).map(([value, label]) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
+              </select>
             </div>
           </div>
 
