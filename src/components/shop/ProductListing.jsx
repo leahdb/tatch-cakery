@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetch_shop_products } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { formatLBP } from "../../services/utils/currency";
 
 const ProductListing = () => {
   const { categorySlug } = useParams();
@@ -87,7 +88,7 @@ const ProductListing = () => {
                   <div>
                     <h5 className="card-title fs-6">{product.name}</h5>
                     <p className="card-text fs-6 text-primary">
-                      ${product.price}
+                      {formatLBP(product.price)}
                     </p>
                   </div>
                 </div>

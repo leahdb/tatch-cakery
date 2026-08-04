@@ -9,6 +9,7 @@ import { add_to_cart, get_cart_item, update_cart_item } from "../../services/sho
 import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { notify_promise } from "../../services/utils/toasts";
+import { formatLBP, formatNumber } from "../../services/utils/currency";
 
 const CakeCustomization = () => {
     const TOP_CREAM_COLORS = useMemo(() => {
@@ -54,7 +55,7 @@ const CakeCustomization = () => {
     const chocoMsgLen = customInput.length;
 
     const chocoLettersPrice = isChocoLetters
-    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 1 : 2))
+    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 100000 : 200000))
     : 0;
 
     const decrease = () => {
@@ -99,11 +100,11 @@ const CakeCustomization = () => {
 
 
           if (cfg.designs === "choco_letters") {
-            setSelectedCustomization({ label: "Chocolate Letters Writing", code: "choco_letters", price: 1 });
+            setSelectedCustomization({ label: "Chocolate Letters Writing", code: "choco_letters", price: 100000 });
           } else if (cfg.designs === "plexi_writing") {
-            setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 1 });
+            setSelectedCustomization({ label: "Plexi Writing", code: "plexi_writing", price: 100000 });
           } else if (cfg.motif) {
-            setSelectedCustomization({ label: "Plexi Motif", code: "plexi_motif", price: 1 });
+            setSelectedCustomization({ label: "Plexi Motif", code: "plexi_motif", price: 100000 });
           } else {
             setSelectedCustomization({ label: "No Customization", code: "none", price: 0 });
           }
@@ -160,7 +161,7 @@ const CakeCustomization = () => {
         plexi_color: selectedCustomization.label.includes("plexi_writing") ? plexiColor : null,
         motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
         mcreams: selectedCream.code,
-        custom_price: totalPrice.toFixed(2),
+        custom_price: String(Math.round(totalPrice)),
         tcreams: selectedTopCream.code,
         cake_flavor: selectedCake.code,
         // include the color only when colored vanilla is chosen
@@ -216,7 +217,7 @@ const CakeCustomization = () => {
           plexi_color: selectedCustomization.code === "plexi_writing" || selectedCustomization.code === "plexi_motif" ? plexiColor : null,
           motif: selectedCustomization.code === "plexi_motif" ? motifChoice : null,
           mcreams: selectedCream.code,
-          custom_price: totalPrice.toFixed(2),
+          custom_price: String(Math.round(totalPrice)),
           tcreams: selectedTopCream.code,
           cake_flavor: selectedCake.code,
           top_cream_color:
@@ -291,7 +292,7 @@ const CakeCustomization = () => {
           <div className="container pb-3 pt-1">
             <h2 className="pt-4">{product.name}</h2>
             <p className="text-muted">{product.description}</p>
-            <h4>{totalPrice.toFixed(2)}$</h4>
+            <h4>{formatLBP(totalPrice)}</h4>
           </div>
         </div>
         <div className="bg-white">
@@ -331,7 +332,7 @@ const CakeCustomization = () => {
                   <label className="form-check-label">
                     {flavor.label}{" "}
                     <small className="text-muted">
-                      &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
+                      &nbsp;{flavor.price > 0 ? `+${formatLBP(flavor.price)}` : ""}
                     </small>
                   </label>
                 </div>
@@ -364,7 +365,7 @@ const CakeCustomization = () => {
                   <label className="form-check-label">
                     {flavor.label}{" "}
                     <small className="text-muted">
-                      &nbsp;{flavor.price > 0 ? `+${flavor.price}$` : ""}
+                      &nbsp;{flavor.price > 0 ? `+${formatLBP(flavor.price)}` : ""}
                     </small>
                   </label>
                 </div>
@@ -402,7 +403,7 @@ const CakeCustomization = () => {
                   />
                   <label className="form-check-label">
                     {filling.label}{" "}
-                    <small className="text-muted">&nbsp;+{filling.price}$</small>
+                    <small className="text-muted">&nbsp;+{formatLBP(filling.price)}</small>
                   </label>
                 </div>
               ))}
@@ -430,7 +431,7 @@ const CakeCustomization = () => {
                   />
                   <label className="form-check-label">
                     {extra.label}{" "}
-                    <small className="text-muted">&nbsp;+{extra.price}$</small>
+                    <small className="text-muted">&nbsp;+{formatLBP(extra.price)}</small>
                   </label>
                 </div>
               ))}
@@ -461,8 +462,8 @@ const CakeCustomization = () => {
                     <small className="text-muted">
                       &nbsp;{
                         custom.code === "choco_letters"
-                          ? (chocoMsgLen === 0 ? "+$1-2" : `+${chocoLettersPrice}$`)
-                          : (custom.price > 0 ? `+${custom.price}$` : "")
+                          ? (chocoMsgLen === 0 ? `+LBP ${formatNumber(100000)}-${formatNumber(200000)}` : `+${formatLBP(chocoLettersPrice)}`)
+                          : (custom.price > 0 ? `+${formatLBP(custom.price)}` : "")
                       }
                     </small>
                   </label>

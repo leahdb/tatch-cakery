@@ -16,6 +16,7 @@ import ShelterIcon from "../../resources/themes/dashboard-v1/icons/shelter.svg";
 import PhoneIconBlack from "../../resources/themes/dashboard-v1/icons/phoneblack.svg";
 import LocationIcon from "../../resources/themes/dashboard-v1/icons/location-pin-black.svg";
 import { getNestedProperty } from "../../services/utils/objects";
+import { formatNumber } from "../../services/utils/currency";
 import { notify_promise } from "../../services/utils/toasts";
 import { isSet } from "immutable";
 import ActionsDropdown from "./ActionsDropdown";
@@ -595,9 +596,10 @@ const TableData = ({
         </div>
       );
     default:
+      const isMoneyField = ["price", "cost", "total", "subtotal", "amount"].includes(field.key);
       return (
         <div className="fw-bold py-4" key={field.key}>
-          {item[field.key]}
+          {isMoneyField ? formatNumber(item[field.key]) : item[field.key]}
         </div>
       );
   }

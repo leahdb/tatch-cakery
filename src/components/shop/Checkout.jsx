@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useCart } from "./UseCart";
 import { checkout, apply_coupon, remove_coupon } from "../../services/shop/cart";
+import { formatLBP } from "../../services/utils/currency";
 
 const TZ = "Asia/Beirut";
 
@@ -157,15 +158,13 @@ const Checkout = () => {
   
   const { cart, totalItems, totalPrice, loading } = useCart();
 
-  const fmt = (n) => `$${Number(n || 0).toFixed(2)}`;
-
   const computeDeliveryFee = (city) => {
     if (!city) return 0;
     const group1 = ["Aramoun","Bchamoun","Choueifat","Khalde","Naameh","Damour","Haret El Naameh","Mechref","Antelias","Bouchrieh","Bourj Hammoud","Dbayeh","Dekwaneh","Mansourieh","Jal el Dib","Jdeideh","Zalka"];
     const group2 = ["Sin el Fil","Ain el Remmaneh","Bourj el-Barajneh","Chiyah","Furn el Chebbak","Ghbeireh","Hadath","Haret Hreik","Hazmieh","Laylakeh"];
-    if (group1.includes(city)) return 4;
-    if (group2.includes(city)) return 3;
-    return 2; 
+    if (group1.includes(city)) return 80000;
+    if (group2.includes(city)) return 60000;
+    return 40000;
   };
 
   const [promoInput, setPromoInput] = useState("");
@@ -648,20 +647,20 @@ const Checkout = () => {
             <div className="card-body">
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Subtotal</p>
-                <p className="mb-2">{fmt(totalPrice)}</p>
+                <p className="mb-2">{formatLBP(totalPrice)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Discount</p>
-                <p className="mb-2 text-primary">{fmt(promo ? discount : 0)}</p>
+                <p className="mb-2 text-primary">{formatLBP(promo ? discount : 0)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Shipping</p>
-                <p className="mb-2 text-primary">{form.city ? fmt(shipping) : <span className="small">Calculated after address</span>}</p>
+                <p className="mb-2 text-primary">{form.city ? formatLBP(shipping) : <span className="small">Calculated after address</span>}</p>
               </div>
               <hr />
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Total</p>
-                <p className="mb-2 fw-bold">{fmt(total)}</p>
+                <p className="mb-2 fw-bold">{formatLBP(total)}</p>
               </div>
             </div>
           </div>
@@ -677,7 +676,7 @@ const Checkout = () => {
                 <button type="button" className="nav-link">
                   {item.name}
                 </button>
-                <div className="price text-muted">${item.price}</div>
+                <div className="price text-muted">{formatLBP(item.price)}</div>
               </div>
             </div>
           ))}

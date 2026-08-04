@@ -9,6 +9,7 @@ import {
 } from "../../../services/dashboard/orders";
 
 import { notify_promise } from "../../../services/utils/toasts";
+import { formatLBP } from "../../../services/utils/currency";
 const OrderPopup = ({ order, setOrders, setSelectedOrder }) => {
   const [productQuantities, setProductQuantities] = useState({});
 
@@ -173,10 +174,7 @@ const OrderPopup = ({ order, setOrders, setSelectedOrder }) => {
                               <p className="text-muted fw-bold fs-6 mt-3 mb-0">
                                 Total:{" "}
                                 <span className="text-primary fs-5">
-                                  {(
-                                    product.pivot.quantity * product.price
-                                  ).toFixed(2)}{" "}
-                                  {order.currency}
+                                  {formatLBP(product.pivot.quantity * product.price)}
                                 </span>
                               </p>
                             </div>

@@ -3,6 +3,7 @@ import { useCart } from "./UseCart";
 import { remove_from_cart, update_cart } from "../../services/shop/cart";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Link, useOutletContext } from "react-router-dom";
+import { formatLBP } from "../../services/utils/currency";
 
 const Cart = () => {
   const { cart, totalItems, loading, setCart, setTotalItems, setTotalPrice } = useCart();
@@ -19,8 +20,6 @@ const Cart = () => {
     setTotalItems(itemsCount);
     setTotalPrice(subtotal);
   }, [itemsCount, subtotal, setTotalItems, setTotalPrice]);
-
-  const fmt = (n) => `$${n.toFixed(2)}`;
 
   if (loading) return (
     <div className="d-flex align-items-center" style={{height: "100vh"}}>
@@ -142,7 +141,7 @@ const Cart = () => {
 
                       <div className="">
                         {item.name}
-                        <p className="text-muted">${item.price}</p>
+                        <p className="text-muted">{formatLBP(item.price)}</p>
                       </div>
                     </div>
                   </div>
@@ -172,7 +171,7 @@ const Cart = () => {
                     </button>
                   </div>
                   <div className="">
-                    <text className="h6 color-primary">${item.price*item.quantity}</text>
+                    <text className="h6 color-primary">{formatLBP(item.price*item.quantity)}</text>
                   </div>
                 </div>
                 <div className="col-lg-3 col-6 d-flex justify-content-end mb-0">
@@ -204,11 +203,11 @@ const Cart = () => {
               <div className="card-body">
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Subtotal</p>
-                  <p className="mb-2">{fmt(subtotal)}</p>
+                  <p className="mb-2">{formatLBP(subtotal)}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Discount</p>
-                  <p className="mb-2 text-primary">{fmt(0)}</p>
+                  <p className="mb-2 text-primary">{formatLBP(0)}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Shipping</p>
@@ -217,7 +216,7 @@ const Cart = () => {
                 <hr />
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Total</p>
-                  <p className="mb-2 fw-bold">{fmt(subtotal)}</p>
+                  <p className="mb-2 fw-bold">{formatLBP(subtotal)}</p>
                 </div>
 
                 <div className="mt-3">

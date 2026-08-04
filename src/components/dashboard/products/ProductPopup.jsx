@@ -1,5 +1,6 @@
 import React from "react";
 import iconClose from "../../../resources/themes/dashboard-v1/icons/close.svg";
+import { formatLBP } from "../../../services/utils/currency";
 
 const ProductPopup = ({ product }) => {
 
@@ -68,7 +69,7 @@ const ProductPopup = ({ product }) => {
 
                 <div className={"text-left mt-4"}>
                   <span className={"fw-bold color-primary fs-5"}>
-                    $ {product.price}
+                    {formatLBP(product.price)}
                   </span>
                 </div>
               </div>

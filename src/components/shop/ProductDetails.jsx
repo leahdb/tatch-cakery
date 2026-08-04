@@ -6,6 +6,7 @@ import { fetch_shop_product } from "../../services/shop/products";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { add_to_cart } from "../../services/shop/cart";
 import { customizationOptions } from "../../services/shop/customizationOptions";
+import { formatLBP, formatNumber } from "../../services/utils/currency";
 import MotifPicker from "./MotifPicker";
 import ColorPicker from "./ColorPicker";
 import { sendEvent } from "../../analytics/ga";
@@ -30,7 +31,7 @@ export default function ProductDetails() {
   const chocoMsgLen = customInput.length;
 
   const chocoLettersPrice = isChocoLetters
-    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 1 : 2))
+    ? (chocoMsgLen === 0 ? 0 : (chocoMsgLen <= 10 ? 100000 : 200000))
     : 0;
 
   const decrease = () => {
@@ -48,7 +49,7 @@ export default function ProductDetails() {
   useEffect(() => {
     if (!product) return;
     sendEvent("view_item", {
-      currency: "USD",
+      currency: "LBP",
       value: Number(product.price) || 0,
       items: [{
         item_id: String(product.id),
@@ -162,7 +163,7 @@ export default function ProductDetails() {
           <div className="row px-2">
             <h3 className="mb-1 text-light-brown fw-bold pt-md-3 pt-4">{product.name}</h3>
 
-            <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">${totalPrice}</span>
+            <span className="fs-5 mt-1 mt-md-2 fw-bold color-primary">{formatLBP(totalPrice)}</span>
 
             <p className="pt-3 mt-4 mx-0">{product.description}</p>
 
@@ -197,8 +198,8 @@ export default function ProductDetails() {
                       <small className="text-muted">
                         &nbsp;{
                           custom.code === "choco_letters"
-                            ? (chocoMsgLen === 0 ? "+$1-2" : `+${chocoLettersPrice}$`)
-                            : (custom.price > 0 ? `+${custom.price}$` : "")
+                            ? (chocoMsgLen === 0 ? `+LBP ${formatNumber(100000)}-${formatNumber(200000)}` : `+${formatLBP(chocoLettersPrice)}`)
+                            : (custom.price > 0 ? `+${formatLBP(custom.price)}` : "")
                         }
                       </small>
                     </label>
