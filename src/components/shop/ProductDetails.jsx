@@ -23,6 +23,7 @@ export default function ProductDetails() {
   const [isAdding, setIsAdding] = React.useState(false);
   const [loading, setLoading] = useState(true);
   const [selections, setSelections] = useState({});
+  const [note, setNote] = useState("");
 
   const decrease = () => {
     if (qty > 1) setQty(qty - 1);
@@ -80,6 +81,7 @@ export default function ProductDetails() {
         setSelections((prev) => ({ ...prev, ...res.config }));
       }
       if (res.quantity) setQty(res.quantity);
+      if (res.note) setNote(res.note);
     });
   }, [editMode, itemId, product.customization_groups]);
 
@@ -104,7 +106,7 @@ export default function ProductDetails() {
     setButtonText(editMode ? "Saving..." : "Adding...");
 
     if (editMode) {
-      update_cart_item(itemId, { custom: selections, quantity: qty })
+      update_cart_item(itemId, { custom: selections, quantity: qty, note })
         .then(() => {
           navigate("/cart");
         })
@@ -118,6 +120,7 @@ export default function ProductDetails() {
     const payload = {
       product_id: product.id,
       quantity: qty,
+      note,
     };
 
     if (product.customization_groups && product.customization_groups.length > 0) {
@@ -223,6 +226,21 @@ export default function ProductDetails() {
                 ))}
               </div>
             )}
+
+            <div className="mb-2 py-3 px-2 border-top">
+              <label htmlFor="product-note" className="form-label fs-6">
+                Note for your order (optional)
+              </label>
+              <textarea
+                id="product-note"
+                className="form-control"
+                rows={2}
+                placeholder="e.g. low ice, extra hot..."
+                value={note}
+                maxLength={500}
+                onChange={(e) => setNote(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className="row mt-4 mx-0 gy-md-0 gy-3 product-actions-bar bg-light-beige">

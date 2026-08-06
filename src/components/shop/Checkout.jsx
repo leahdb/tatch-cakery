@@ -86,7 +86,6 @@ const Checkout = () => {
     "Aley": ["Aramoun", "Bchamoun", "Choueifat", "Khalde",],
     "Baabda": ["Ain el Remmaneh", "Bourj el-Barajneh", "Chiyah", "Furn el Chebbak", "Ghbeireh", "Hadath", "Haret Hreik", "Hazmieh", "Laylakeh"],
     "Matn": ["Antelias", "Bouchrieh", "Bourj Hammoud", "Dbayeh", "Dekwaneh", "Jal el Dib", "Jdeideh", "Sin el Fil", "Zalka"],
-    "Chouf": ["Naameh", "Damour", "Haret El Naameh", "Mechref"],
   };
 
   const [form, setForm] = useState({
@@ -160,11 +159,11 @@ const Checkout = () => {
 
   const computeDeliveryFee = (city) => {
     if (!city) return 0;
-    const group1 = ["Aramoun","Bchamoun","Choueifat","Khalde","Naameh","Damour","Haret El Naameh","Mechref","Antelias","Bouchrieh","Bourj Hammoud","Dbayeh","Dekwaneh","Mansourieh","Jal el Dib","Jdeideh","Zalka"];
-    const group2 = ["Sin el Fil","Ain el Remmaneh","Bourj el-Barajneh","Chiyah","Furn el Chebbak","Ghbeireh","Hadath","Haret Hreik","Hazmieh","Laylakeh"];
-    if (group1.includes(city)) return 80000;
-    if (group2.includes(city)) return 60000;
-    return 40000;
+    const group1 = ["Aramoun","Bchamoun","Choueifat","Khalde","Antelias","Dbayeh","Mansourieh","Jal el Dib","Jdeideh","Zalka"];
+    const group2 = ["Sin el Fil","Ain el Remmaneh","Bourj el-Barajneh","Chiyah","Furn el Chebbak","Ghbeireh","Hadath","Haret Hreik","Hazmieh","Laylakeh","Ras el-Nabaa","Mazraa","Sioufi", "Sodeco", "Badaro"];
+    if (group1.includes(city)) return 400000;
+    if (group2.includes(city)) return 200000;
+    return 300000;
   };
 
   const [promoInput, setPromoInput] = useState("");

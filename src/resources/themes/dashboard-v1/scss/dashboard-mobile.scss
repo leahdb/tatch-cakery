@@ -200,7 +200,8 @@ $primaryColor: #007132;
   }
 
   .quantity-button {
-    justify-self: center !important;
+    display: flex !important;
+    justify-content: center !important;
     margin: 0 !important;
   }
 
