@@ -36,7 +36,7 @@ class ShopHeader extends React.Component {
             <div className="row gy-3 d-flex justify-content-between align-items-center">
               <div className="mt-0 col-lg-2 col-sm-4 col-5">
                 <a href="/">
-                  <img src={logoBlack} alt="logoBlack" height={50} className="my-4" />
+                  <img src={logoBlack} alt="logoBlack" height={40} className="my-4" />
                 </a>
               </div>
 

@@ -198,7 +198,7 @@ export default function ProductDetails() {
                         ? (selections[group.key] || []).includes(opt.code)
                         : selections[group.key] === opt.code;
                       return (
-                        <div className="form-check" key={opt.code}>
+                        <div className="form-check mb-2" key={opt.code}>
                           <input
                             className="form-check-input"
                             type={group.multiple ? "checkbox" : "radio"}
@@ -225,9 +225,9 @@ export default function ProductDetails() {
             )}
           </div>
 
-          <div className="row mt-4 mx-0 gy-md-0 gy-3 product-actions-bar">
-            <div className="col-12 col-md-6">
-              <div className="input-group border border-brown w-100 small-h">
+          <div className="row mt-4 mx-0 gy-md-0 gy-3 product-actions-bar bg-light-beige">
+            <div className="col-12 col-md-6 quantity-button">
+              <div className="input-group border border-brown w-100 small-h quantity-button-input">
                 <button
                   className="btn color-primary fs-5"
                   type="button"
@@ -250,7 +250,7 @@ export default function ProductDetails() {
                 </button>
               </div>
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 add-to-card-button-div">
               <button
                 type="button"
                 disabled={addDisabled}
@@ -258,7 +258,7 @@ export default function ProductDetails() {
                 onClick={handleAddToCart} >
                   {isOut ? "Out of stock" : buttonText}
                   {!isOut && (
-                    <span className="position-absolute end-0 top-50 translate-middle-y pe-3">
+                    <span className="position-absolute end-0 top-50 translate-middle-y pe-2 fs-12">
                       {formatLBP(totalPrice * qty)}
                     </span>
                   )}

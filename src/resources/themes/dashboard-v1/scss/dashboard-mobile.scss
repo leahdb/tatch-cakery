@@ -196,7 +196,20 @@ $primaryColor: #007132;
     margin: 0;
     background: #fff;
     padding: 12px 16px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .quantity-button {
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+
+  .quantity-button-input {
+    width: 50% !important;
+  }
+
+  .add-to-card-button-div {
+    margin: 0 !important;
   }
 
   .dashboard-sidebar {
