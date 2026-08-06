@@ -170,7 +170,7 @@ export default function ProductDetails() {
   const totalPrice = (product.price || 0) + addonTotal;
 
   return (
-    <div className="container my-md-5 my-3">
+    <div className="container my-md-5 my-3 product-details-page">
       <div className="row g-md-5 d-flex justify-content-between">
         <div className="col-md-6 col-12 px-0 px-md-4">
           <img
@@ -213,7 +213,7 @@ export default function ProductDetails() {
                           <label className="form-check-label size-14">
                             {opt.label}
                             {opt.price > 0 && (
-                              <small className="text-grey fs-12">&nbsp; &nbsp;+{formatLBP(opt.price)}</small>
+                              <small className="text-grey fs-12">&nbsp; +{formatLBP(opt.price)}</small>
                             )}
                           </label>
                         </div>
@@ -225,7 +225,7 @@ export default function ProductDetails() {
             )}
           </div>
 
-          <div className="row mt-4 mx-0 gy-md-0 gy-3">
+          <div className="row mt-4 mx-0 gy-md-0 gy-3 product-actions-bar">
             <div className="col-12 col-md-6">
               <div className="input-group border border-brown w-100 small-h">
                 <button
@@ -254,9 +254,14 @@ export default function ProductDetails() {
               <button
                 type="button"
                 disabled={addDisabled}
-                className="btn btn-primary w-100 rounded-0 h-100 small-h"
+                className="btn btn-primary w-100 rounded-0 h-100 small-h position-relative"
                 onClick={handleAddToCart} >
                   {isOut ? "Out of stock" : buttonText}
+                  {!isOut && (
+                    <span className="position-absolute end-0 top-50 translate-middle-y pe-3">
+                      {formatLBP(totalPrice * qty)}
+                    </span>
+                  )}
               </button>
             </div>
             <div className="col-12">

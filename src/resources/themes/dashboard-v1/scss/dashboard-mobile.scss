@@ -181,6 +181,24 @@ $primaryColor: #007132;
     height: fit-content !important;
   }
 
+  .product-details-page {
+    padding-bottom: 110px;
+  }
+
+  .product-actions-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // Stay below .whatsapp-button (z-index: 1000) so its floating bubble
+    // remains visible/clickable above this bar instead of being covered by it.
+    z-index: 990;
+    margin: 0;
+    background: #fff;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  }
+
   .dashboard-sidebar {
     position: fixed !important;
     padding-top: 50px;
