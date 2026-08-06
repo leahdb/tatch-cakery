@@ -3,7 +3,7 @@ import { useParams, useOutletContext, useSearchParams, useNavigate } from "react
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { notify_promise } from "../../services/utils/toasts";
 import { fetch_shop_product } from "../../services/shop/products";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import LoadingScreen from "../common/LoadingScreen";
 import { add_to_cart, get_cart_item, update_cart_item } from "../../services/shop/cart";
 import { formatLBP } from "../../services/utils/currency";
 import { sendEvent } from "../../analytics/ga";
@@ -142,16 +142,7 @@ export default function ProductDetails() {
   };
 
 
-  if (loading) return (
-    <div className="d-flex align-items-center" style={{height: "100vh"}}>
-      <DotLottieReact
-        src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
-        loop
-        autoplay
-        style={{height: "auto"}}
-      />
-    </div>
-  );
+  if (loading) return <LoadingScreen />;
 
   const isOut = !product.in_stock;
   const addDisabled = isOut || isAdding;

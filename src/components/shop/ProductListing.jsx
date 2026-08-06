@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetch_shop_products } from "../../services/shop/products";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import LoadingScreen from "../common/LoadingScreen";
 import { formatLBP } from "../../services/utils/currency";
 
 const ProductListing = () => {
@@ -53,16 +53,7 @@ const ProductListing = () => {
   };
 
   if (loading) {
-    return (
-      <div className="d-flex align-items-center justify-content-center" style={{height: "100vh"}}>
-        <DotLottieReact
-          src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
-          loop
-          autoplay
-          style={{height: "auto"}}
-        />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

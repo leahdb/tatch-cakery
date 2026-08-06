@@ -69,15 +69,15 @@ export const checkout = async (payload) => {
   return data;
 };
 
-export const apply_coupon = ({ code, city }) => {
+export const apply_coupon = ({ code, city, phone_number }) => {
   return fetch(API_HOST + "apply-coupon", {
     method: "POST",
     credentials: "include",
     redirect: 'manual',
-    headers: { 
+    headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ code, city }),
+    body: JSON.stringify({ code, city, phone_number }),
   }).then((res) => res.json());
 };
 

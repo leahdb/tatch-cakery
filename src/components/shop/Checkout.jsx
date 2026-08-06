@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import LoadingScreen from "../common/LoadingScreen";
 import { useCart } from "./UseCart";
 import { checkout, apply_coupon, remove_coupon } from "../../services/shop/cart";
 import { formatLBP } from "../../services/utils/currency";
@@ -229,7 +229,12 @@ const Checkout = () => {
     if (!promoInput) return;
     setApplying(true); setPromoError(null);
     try {
-      const data = await apply_coupon({ code: promoInput });
+      const data = await apply_coupon({ code: promoInput, phone_number: form.phone_number });
+      if (data.status === "error") {
+        setPromo(null); setDiscount(0);
+        setPromoError(data.message || "Invalid or inactive code");
+        return;
+      }
       setPromo(data.coupon);
       setDiscount(Number(data.pricing.discount || 0));
     } catch (err) {
@@ -332,16 +337,7 @@ const Checkout = () => {
       });
   };
 
-  if (loading) return (
-    <div className="d-flex align-items-center" style={{height: "100vh"}}>
-      <DotLottieReact
-        src="https://lottie.host/610317e0-ecdf-497f-9224-6fed273a4574/UVCpOZhutB.lottie"
-        loop
-        autoplay
-        style={{height: "auto"}}
-      />
-    </div>
-  );
+  if (loading) return <LoadingScreen />;
 
   if (totalItems === 0) {
     return (
@@ -636,7 +632,7 @@ const Checkout = () => {
                     </button>
                   )}
                 </div>
-                {promoError && <small className="text-danger">Invalid or inactive code</small>}
+                {promoError && <small className="text-danger">{promoError}</small>}
                 {promo && <small className="text-success">Applied: {promo.label || promo.code}</small>}
               </div>
             </div>
