@@ -192,9 +192,9 @@ export default function ProductDetails() {
             <span className="fs-6 mt-md-2 fw-bold text-light-brown pb-3">{formatLBP(totalPrice)}</span>
 
             {customizationGroups.length > 0 && (
-              <div className="mb-2 py-3 px-2 border-top">
+              <div className="mb-2 pb-3 px-2">
                 {customizationGroups.map((group) => (
-                  <div className="mb-3" key={group.key}>
+                  <div className="mb-3 border-top pt-3" key={group.key}>
                     <label className="form-label fs-6">{group.label}</label>
                     {group.options.map((opt) => {
                       const checked = group.multiple
