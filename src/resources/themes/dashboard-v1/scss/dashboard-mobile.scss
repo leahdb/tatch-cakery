@@ -200,12 +200,13 @@ $primaryColor: #007132;
   }
 
   .quantity-button {
-    justify-content: center !important;
+    justify-self: center !important;
     margin: 0 !important;
   }
 
   .quantity-button-input {
     width: 50% !important;
+    border: 0px !important;
   }
 
   .add-to-card-button-div {
