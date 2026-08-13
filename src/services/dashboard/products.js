@@ -2,7 +2,7 @@ const API_HOST = "https://staging-api.tatchcakery.com/api/dash/dash-products";
 const EXPORT_API = "https://staging-api.tatchcakery.com/api/dash/export/products";
 const SEARCH_API = "https://staging-api.tatchcakery.com/api/dash/search/top";
 
-export const IMPORT_API = API_HOST + "import";
+export const IMPORT_API = API_HOST + "/import";
 
 export const fetch_shop_products = (options) => {
   const encodedQueryParams = new URLSearchParams(options);
@@ -18,7 +18,7 @@ export const fetch_shop_products = (options) => {
 };
 
 export const fetch_shop_product = (id) => {
-  return fetch(API_HOST + id, {
+  return fetch(API_HOST + "/" + id, {
     method: "GET",
     credentials: "include",
     secure: true,
@@ -65,7 +65,7 @@ export const edit_shop_products = (id, data) => {
   if (data.image instanceof File) {
     formData.append("image", data.image);
   }
-  return fetch(`${API_HOST}${id}?_method=PUT`, {
+  return fetch(`${API_HOST}/${id}?_method=PUT`, {
     method: "POST",
     credentials: "include",
     secure: true,
@@ -76,7 +76,7 @@ export const edit_shop_products = (id, data) => {
 
 export const delete_shop_products = (ids) => {
   let idCsv = ids.join(",");
-  return fetch(`${API_HOST}${idCsv}`, {
+  return fetch(`${API_HOST}/${idCsv}`, {
     method: "DELETE",
     credentials: "include",
     secure: true,
@@ -98,7 +98,7 @@ export const search_shop_products = (searchQuery) => {
 };
 
 export const fetch_product_create_form = () => {
-  return fetch(API_HOST + "create", {
+  return fetch(API_HOST + "/create", {
     method: "GET",
     credentials: "include",
     secure: true,
@@ -109,7 +109,7 @@ export const fetch_product_create_form = () => {
 };
 
 export const fetch_product_edit_form = (id) => {
-  return fetch(API_HOST + id + "/edit", {
+  return fetch(API_HOST + "/" + id + "/edit", {
     method: "GET",
     credentials: "include",
     secure: true,
