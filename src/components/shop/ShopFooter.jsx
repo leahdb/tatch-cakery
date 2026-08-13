@@ -5,7 +5,7 @@ const ShopFooter = () => {
   return (
     <footer id="footer" className="footer-science bg-beige">
       <div className="container text-center">
-        <img src={logoBlack} alt="logoBlack" className="footer-logo" loading="lazy"/>
+        <img src={logoBlack} alt="logoBlack" className="footer-logo mb-3 mt-4" loading="lazy" height={40}/>
         <p className="text-muted">
           Delicious cakes made with love, bringing sweetness to every moment.
         </p>
@@ -22,12 +22,12 @@ const ShopFooter = () => {
                 </a>
               </li>
               <li>
-                <a href="https://www.tiktok.com/@tatch.cakery">
+                <a href="https://www.tiktok.com/@tatchcafe">
                   <i className="bi bi-tiktok text-primary"></i>
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/tatchcakery">
+                <a href="https://www.instagram.com/tatchcafe">
                   <i className="bi bi-instagram text-primary"></i>
                 </a>
               </li>
