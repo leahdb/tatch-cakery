@@ -449,10 +449,10 @@ const TDBadge = ({ item, field }) => {
 
   if (textClasses[badgeText] !== undefined) {
     badgeClass = textClasses[badgeText];
-  } else if (badgeText === 1) {
+  } else if (badgeText === 1 || badgeText === true || badgeText === "1") {
     badgeText = "Active";
     badgeClass = "bg-success";
-  } else if (badgeText === 0) {
+  } else if (badgeText === 0 || badgeText === false || badgeText === "0") {
     badgeText = "Inactive";
     badgeClass = "bg-danger";
   }

@@ -28,6 +28,7 @@ const ProductFormPage = () => {
     price: "",
     cost: "",
     customization_type: "none",
+    is_active: true,
     image: "",
     images: [],
     index: 0,
@@ -47,7 +48,11 @@ const ProductFormPage = () => {
         setCategories(res.categories);
         setCustomizationTypes(res.customization_types || {});
         if (res.data) {
-          setFormData({ ...res.data, customization_type: res.data.customization_type || "none" });
+          setFormData({
+            ...res.data,
+            customization_type: res.data.customization_type || "none",
+            is_active: res.data.is_active === undefined ? true : Boolean(Number(res.data.is_active)),
+          });
           setSelectedProfileIndex(res.data.index);
         }
       }
@@ -58,7 +63,11 @@ const ProductFormPage = () => {
     if (id !== undefined) {
       fetch_shop_product(id).then((res) => {
         if (res.status === "ok") {
-          setFormData({ ...res.data, customization_type: res.data.customization_type || "none" });
+          setFormData({
+            ...res.data,
+            customization_type: res.data.customization_type || "none",
+            is_active: res.data.is_active === undefined ? true : Boolean(Number(res.data.is_active)),
+          });
           setSelectedProfileIndex(res.data.index);
         }
       });
@@ -68,6 +77,11 @@ const ProductFormPage = () => {
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: checked }));
   };
 
   const handleSelectProfile = (index) => {
@@ -221,6 +235,22 @@ const ProductFormPage = () => {
                   <option key={value} value={value}>{label}</option>
                 ))}
               </select>
+            </div>
+            <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
+              <label className="fw-semibold">Product Status</label>
+              <div className="form-check form-switch">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="is_active"
+                  name="is_active"
+                  checked={!!formData.is_active}
+                  onChange={handleCheckboxChange}
+                />
+                <label className="form-check-label" htmlFor="is_active">
+                  {formData.is_active ? "Active (visible on storefront)" : "Disabled (hidden from storefront)"}
+                </label>
+              </div>
             </div>
           </div>
 

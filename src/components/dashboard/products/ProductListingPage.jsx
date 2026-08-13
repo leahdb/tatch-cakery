@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   delete_shop_products,
   fetch_shop_products,
@@ -29,11 +29,6 @@ const ProductListingPage = ({ pageState, setPageState }) => {
 
   let searchSearchParam = searchParams.get("search")
 
-  const apiCall = [
-    fetch_shop_products,
-    { page: 0, search: search ? search : "" },
-  ];
-
   const deleteItem = (id) => {
     notify_promise(
       new Promise((resolve, reject) => {
@@ -57,8 +52,8 @@ const ProductListingPage = ({ pageState, setPageState }) => {
     popup.style.display = "flex";
   };
 
-  const updateTableInfo = getTableUpdateCallback({
-    apiCall: apiCall,
+  const updateTableInfoImpl = getTableUpdateCallback({
+    apiCall: [fetch_shop_products, { page: 1, search: search ? search : "" }],
     dataSetter: setProducts,
     paginationSetter: setPagination,
     fieldSetter: setFields,
@@ -78,9 +73,12 @@ const ProductListingPage = ({ pageState, setPageState }) => {
       },
     ],
   });
+  const updateTableInfoRef = useRef(updateTableInfoImpl);
+  updateTableInfoRef.current = updateTableInfoImpl;
+  const updateTableInfo = useCallback((page) => updateTableInfoRef.current(page), []);
 
   useEffect(() => {
-    updateTableInfo();
+    updateTableInfo(1);
   }, [latestSearchQuery, updateTableInfo]);
 
   useEffect(() => {
