@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import LoadingScreen from "../common/LoadingScreen";
 import { fetch_shop_home } from "../../services/shop/home";
 import ShopIntro from "./ShopIntro";
+import CategoryNav from "./CategoryNav";
 import ProductsMain from "./ProductsMain";
 import ShopFooter from "./ShopFooter";
 
@@ -28,6 +29,7 @@ export default function ShopMain() {
   return (
     <section>
       <ShopIntro banners={ banners } />
+      <CategoryNav categories={ categories } products={ products } />
       <ProductsMain categories={ categories } products={ products } />
       <ShopFooter />
     </section>

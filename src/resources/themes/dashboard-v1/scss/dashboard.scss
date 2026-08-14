@@ -1044,6 +1044,53 @@ form .error,
   max-width: 250px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.category-nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: $lightBeigeBg;
+  border-bottom: 1px solid $lightBeigeBorder;
+}
+
+.category-nav-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+  }
+}
+
+.category-nav-pill {
+  flex: 0 0 auto;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: $lightBeige;
+  color: $primaryColor;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover, &:active {
+    background: $primaryLightColor;
+    color: #fff;
+  }
+}
+
+[id^="category-"] {
+  scroll-margin-top: 60px; // keep the section heading clear of the sticky nav after an anchor jump
+}
+
 .category-card {
   background-size: cover;
   background-position: center center;

@@ -22,7 +22,7 @@ class ShopHeader extends React.Component {
   };
 
   render() {
-    const { cartCount } = this.props;
+    const { cartCount, sticky = true } = this.props;
     const { isLoggedOut } = this.state;
 
     if (isLoggedOut) {
@@ -30,7 +30,7 @@ class ShopHeader extends React.Component {
     }
 
     return (
-      <header className="sticky-top">
+      <header className={sticky ? "sticky-top" : ""}>
         <div className="text-center bg-beige">
           <div className="container">
             <div className="row gy-3 d-flex justify-content-between align-items-center">

@@ -11,7 +11,7 @@ const ProductsMain = ({ categories, products }) => {
         if (filteredProducts.length === 0) return null;
 
         return (
-          <div key={category.id} className="my-4">
+          <div key={category.id} id={`category-${category.slug}`} className="my-4">
             <div className="row g-3 my-md-5">
               <div className="col-12 d-flex justify-content-between align-items-center">
                 <h3 className="fw-bold text-muted mb-0 mb-md-2">{category.name}</h3>
