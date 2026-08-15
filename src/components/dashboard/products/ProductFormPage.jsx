@@ -29,6 +29,7 @@ const ProductFormPage = () => {
     cost: "",
     customization_type: "none",
     is_active: true,
+    best_seller_position: "",
     image: "",
     images: [],
     index: 0,
@@ -52,6 +53,7 @@ const ProductFormPage = () => {
             ...res.data,
             customization_type: res.data.customization_type || "none",
             is_active: res.data.is_active === undefined ? true : Boolean(Number(res.data.is_active)),
+            best_seller_position: res.data.best_seller_position ? String(res.data.best_seller_position) : "",
           });
           setSelectedProfileIndex(res.data.index);
         }
@@ -67,6 +69,7 @@ const ProductFormPage = () => {
             ...res.data,
             customization_type: res.data.customization_type || "none",
             is_active: res.data.is_active === undefined ? true : Boolean(Number(res.data.is_active)),
+            best_seller_position: res.data.best_seller_position ? String(res.data.best_seller_position) : "",
           });
           setSelectedProfileIndex(res.data.index);
         }
@@ -251,6 +254,20 @@ const ProductFormPage = () => {
                   {formData.is_active ? "Active (visible on storefront)" : "Disabled (hidden from storefront)"}
                 </label>
               </div>
+            </div>
+            <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
+              <label className="fw-semibold">Best Seller Slot</label>
+              <select
+                name="best_seller_position"
+                value={formData.best_seller_position || ""}
+                onChange={handleTextInputChange}
+              >
+                <option value="">Not a best seller</option>
+                <option value="1">Slot 1</option>
+                <option value="2">Slot 2</option>
+                <option value="3">Slot 3</option>
+                <option value="4">Slot 4</option>
+              </select>
             </div>
           </div>
 

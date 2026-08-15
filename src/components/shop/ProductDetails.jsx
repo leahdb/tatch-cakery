@@ -220,7 +220,7 @@ export default function ProductDetails() {
 
             <div className="mb-2 py-3 px-2 border-top">
               <label htmlFor="product-note" className="form-label fs-6">
-                Note for your order (optional)
+                Note for your order
               </label>
               <textarea
                 id="product-note"

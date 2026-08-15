@@ -7,6 +7,7 @@ import ProductFormPage from "./products/ProductFormPage";
 import ProductListingPage from "./products/ProductListingPage";
 //import OrderFormPage from "./orders/OrderFormPage";
 import OrderListingPage from "./orders/OrderListingPage";
+import CategoryOrderPage from "./categories/CategoryOrderPage";
 // import OrderListingPage from "./shop/orders/OrderListingPage";
 // import AdminSupportPage from "./admin/AdminSupportPage";
 // import AdminSettingsPage from "./admin/AdminSettingsPage";
@@ -52,6 +53,7 @@ const PageRoutes = ({ userRole }) => {
           ></Route> */}
 
         <Route path={"/orders/list"} element={<OrderListingPage />}></Route>
+        <Route path={"/categories"} element={<CategoryOrderPage />}></Route>
         {/* <Route path={"/orders/add"} element={<OrderFormPage />}></Route>
         <Route path={"/orders/edit/:id"} element={<OrderFormPage />}></Route> */}
 

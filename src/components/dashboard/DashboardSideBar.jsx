@@ -180,6 +180,7 @@ const DashboardSideBar = () => {
     let menusItems = [
       { title: "Dashboard", link: "/admin" },
       { title: "Products", link: "/admin/products/list" },
+      { title: "Categories", link: "/admin/categories" },
       { title: "Orders", link: "/admin/orders/list" },
     ];
     const currentPath = window.location.pathname;
