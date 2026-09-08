@@ -79,14 +79,55 @@ const isAfter9pmBeirut = () => {
   return h > 21 || (h === 21 && m >= 0);
 };
 
+// District -> city -> delivery fee (LBP) from the courier's price list.
+// Keep in sync with computeDeliveryFee() in CartController.php (backend is
+// authoritative — it recomputes the fee at checkout).
+const deliveryAreas = {
+  "Beirut": {
+    "Manara": 400000, "Raouché": 400000,
+    "Hamra": 350000, "Qoreitem": 350000, "Ain el-Tineh": 350000, "Clemenceau": 350000,
+    "Sanyeh": 350000, "Mina el-Hosn": 350000, "Down Town": 350000, "Mar Mikhaël": 350000,
+    "Achrafieh": 300000, "Verdun": 300000, "Tallet el-Khayat": 300000, "Mar Elias": 300000,
+    "Zuqaq al-Blat": 300000, "Batrakieh": 300000, "Qantari": 300000, "Basta el-Tahta": 300000,
+    "Basta el-Faouqa": 300000, "Bachoura": 300000, "Burj Abi Haidar": 300000, "Ras el-Nabaa": 300000,
+    "Tariq el-Jdideh": 300000, "Mazraa": 300000, "Saifi": 300000, "Gemmayzeh": 300000,
+    "Sodeco": 250000, "Badaro": 250000, "Sioufi": 250000,
+  },
+
+  "Aley": {
+    "Aramoun": 650000, "Bchamoun": 550000, "Choueifat": 350000, "Khalde": 700000,
+  },
+
+  "Baabda": {
+    "Ain el Remmaneh": 200000, "Furn el Chebbak": 200000,
+    "Bourj el-Barajneh": 300000,
+    "Chiyah": 250000, "Ghbeireh": 250000, "Hadath": 250000, "Haret Hreik": 250000,
+    "Laylakeh": 250000, "Hazmieh": 250000, "Baabda": 250000,
+  },
+
+  "Matn": {
+    "Antelias": 450000, "Jal el Dib": 450000, "Dbayeh": 450000, "Zalka": 450000,
+    "Bouchrieh": 300000, "Bourj Hammoud": 300000, "Jdeideh": 300000, "Mansourieh": 300000,
+    "Dekwaneh": 300000,
+    "Sin el Fil": 250000,
+  },
+
+  "Keserwan": {
+    "Adonis": 800000, "Ghadir": 800000, "Jounieh": 800000, "Kaslik": 800000,
+    "Sarba": 800000, "Zouk Mosbeh": 800000,
+  },
+};
+
+const computeDeliveryFee = (city) => {
+  if (!city) return 0;
+  for (const zone of Object.values(deliveryAreas)) {
+    if (zone[city] != null) return zone[city];
+  }
+  return 300000; // fallback for a city not in the courier list
+};
+
 const Checkout = () => {
   const { setCartCount } = useOutletContext();
-  const deliveryAreas = {
-    "Beirut": ["Manara", "Hamra", "Achrafieh", "Verdun", "Raouché", "Qoreitem", "Ain el-Tineh", "Clemenceau", "Sanyeh", "Tallet el-Khayat", "Mar Elias", "Zuqaq al-Blat", "Batrakieh", "Mina el-Hosn", "Qantari", "Down Town", "Basta el-Tahta", "Bachoura", "Burj Abi Haidar", "Basta el-Faouqa", "Ras el-Nabaa", "Mazraa", "Tariq el-Jdideh", "Sioufi", "Sodeco", "Saifi", "Gemmayzeh", "Badaro", "Mar Mikhaël"],
-    "Aley": ["Aramoun", "Bchamoun", "Choueifat", "Khalde",],
-    "Baabda": ["Ain el Remmaneh", "Bourj el-Barajneh", "Chiyah", "Furn el Chebbak", "Ghbeireh", "Hadath", "Haret Hreik", "Hazmieh", "Laylakeh"],
-    "Matn": ["Antelias", "Bouchrieh", "Bourj Hammoud", "Dbayeh", "Dekwaneh", "Jal el Dib", "Jdeideh", "Sin el Fil", "Zalka"],
-  };
 
   const [form, setForm] = useState({
     contact_number: "",
@@ -156,15 +197,6 @@ const Checkout = () => {
   const [buttonText, setButtonText] = useState("Place Order")
   
   const { cart, totalItems, totalPrice, discountPercent, loading } = useCart();
-
-  const computeDeliveryFee = (city) => {
-    if (!city) return 0;
-    const group1 = ["Aramoun","Bchamoun","Choueifat","Khalde","Antelias","Dbayeh","Mansourieh","Jal el Dib","Jdeideh","Zalka"];
-    const group2 = ["Sin el Fil","Ain el Remmaneh","Bourj el-Barajneh","Chiyah","Furn el Chebbak","Ghbeireh","Hadath","Haret Hreik","Hazmieh","Laylakeh","Ras el-Nabaa","Mazraa","Sioufi", "Sodeco", "Badaro"];
-    if (group1.includes(city)) return 400000;
-    if (group2.includes(city)) return 200000;
-    return 300000;
-  };
 
   const [promoInput, setPromoInput] = useState("");
   const [promo, setPromo] = useState(null);
@@ -467,7 +499,7 @@ const Checkout = () => {
                     data-field="city"
                   >
                     <option value="">Select City</option>
-                    {form.state && deliveryAreas[form.state].slice().sort().map((city) => (
+                    {form.state && Object.keys(deliveryAreas[form.state]).sort().map((city) => (
                       <option key={city} value={city}>{city}</option>
                     ))}
                   </select>
