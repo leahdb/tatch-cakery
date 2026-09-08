@@ -30,11 +30,10 @@ function App() {
       />
 
       <Routes>
-        <Route path="menu" element={<MenuPage />} />
-
         {/* SHOP LAYOUT */}
         <Route path="/" element={<ShopHome />}>
           <Route index element={<ShopMain />} />
+          <Route path="menu" element={<ShopMain />} />
           <Route path="main" element={<ShopMain />} />
           <Route path="coming-soon" element={<ComingSoon />} />
           <Route path="products" element={<ProductListing />} />
