@@ -196,7 +196,7 @@ export default function ProductDetails() {
                         ? (selections[group.key] || []).includes(opt.code)
                         : selections[group.key] === opt.code;
                       return (
-                        <div className="form-check mb-2" key={opt.code}>
+                        <label className="form-check mb-2 py-1" key={opt.code} style={{ cursor: "pointer" }}>
                           <input
                             className="form-check-input"
                             type={group.multiple ? "checkbox" : "radio"}
@@ -208,13 +208,13 @@ export default function ProductDetails() {
                                 : setSingleOption(group.key, opt.code)
                             }
                           />
-                          <label className="form-check-label size-14">
+                          <span className="form-check-label size-14">
                             {opt.label}
                             {opt.price > 0 && (
                               <small className="text-grey fs-12">&nbsp; +{formatLBP(opt.price)}</small>
                             )}
-                          </label>
-                        </div>
+                          </span>
+                        </label>
                       );
                     })}
                   </div>
