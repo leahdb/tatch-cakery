@@ -267,20 +267,22 @@ export default function ProductDetails() {
               <button
                 type="button"
                 disabled={addDisabled}
-                className="btn btn-primary w-100 rounded-0 h-100 small-h position-relative"
+                className="btn btn-primary w-100 rounded-0 h-100 small-h d-flex align-items-center justify-content-between px-3"
                 onClick={handleAddToCart} >
-                  {isOut ? "Out of stock" : buttonText}
-                  {!isOut && (
-                    <span className="position-absolute end-0 top-50 translate-middle-y pe-2 fs-12">
+                  {isOut ? (
+                    <span>Out of stock</span>
+                  ) : (
+                    <>
+                      <span>{buttonText}</span>
                       {showDiscount ? (
-                        <>
-                          <s className="text-white-50 me-1">{formatLBP(totalPrice * qty)}</s>
-                          {formatLBP(discountedUnit * qty)}
-                        </>
+                        <span className="d-flex flex-column align-items-end lh-1">
+                          <s className="text-white-50 fs-12">{formatLBP(totalPrice * qty)}</s>
+                          <span className="mt-1">{formatLBP(discountedUnit * qty)}</span>
+                        </span>
                       ) : (
-                        formatLBP(totalPrice * qty)
+                        <span className="fs-12">{formatLBP(totalPrice * qty)}</span>
                       )}
-                    </span>
+                    </>
                   )}
               </button>
             </div>
