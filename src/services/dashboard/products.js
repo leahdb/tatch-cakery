@@ -1,6 +1,8 @@
-const API_HOST = "https://staging-api.tatchcakery.com/api/dash/dash-products";
-const EXPORT_API = "https://staging-api.tatchcakery.com/api/dash/export/products";
-const SEARCH_API = "https://staging-api.tatchcakery.com/api/dash/search/top";
+import API_BASE from "../apiBase";
+
+const API_HOST = `${API_BASE}/dash/dash-products`;
+const EXPORT_API = `${API_BASE}/dash/export/products`;
+const SEARCH_API = `${API_BASE}/dash/search/top`;
 
 export const IMPORT_API = API_HOST + "/import";
 

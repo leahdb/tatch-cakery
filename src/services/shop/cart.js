@@ -1,4 +1,6 @@
-const API_HOST = "https://staging-api.tatchcakery.com/api/cart/";
+import API_BASE from "../apiBase";
+
+const API_HOST = `${API_BASE}/cart/`;
 
 export const add_to_cart = (data) => {
   return fetch(API_HOST + "add", {

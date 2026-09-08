@@ -1,4 +1,6 @@
-const API_HOST = "https://staging-api.tatchcakery.com/api/dash/dash-categories";
+import API_BASE from "../apiBase";
+
+const API_HOST = `${API_BASE}/dash/dash-categories`;
 
 export const fetch_categories = () => {
   return fetch(API_HOST, {
