@@ -273,11 +273,11 @@ export default function ProductDetails() {
                     <span>Out of stock</span>
                   ) : (
                     <>
-                      <span>{buttonText}</span>
+                      <span className="ps-5">{buttonText}</span>
                       {showDiscount ? (
                         <span className="d-flex flex-column align-items-end lh-1">
                           <s className="text-white-50 fs-12">{formatLBP(totalPrice * qty)}</s>
-                          <span className="mt-1">{formatLBP(discountedUnit * qty)}</span>
+                          <span className="mt-1 size-14">{formatLBP(discountedUnit * qty)}</span>
                         </span>
                       ) : (
                         <span className="fs-12">{formatLBP(totalPrice * qty)}</span>
