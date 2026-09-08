@@ -3660,8 +3660,20 @@ table.dashboard-table td {
   padding: 2px 5px 1px 6.9px
 }
 
+.remove-cart {
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .remove-cart:hover {
   color: $primaryColor !important;
+  text-decoration: underline;
 }
 
 .img-sm-checkout {

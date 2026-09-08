@@ -139,10 +139,10 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-4 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
-                  <div className="input-group border border-brown w-100 w-md-50 small-h-cart me-md-5 me-4">
+                <div className="col-lg-4 col-6 d-flex flex-column flex-xl-row text-nowrap align-items-start align-items-xl-center gap-2">
+                  <div className="input-group flex-nowrap border border-brown w-100 w-md-50 small-h-cart me-xl-4">
                     <button
-                      className="btn color-primary fs-6 border-0"
+                      className="btn color-primary fs-6 border-0 px-2"
                       type="button"
                       onClick={() => updateQty(item.item_id, -1)}
                       disabled={item.quantity <= 1}
@@ -156,7 +156,7 @@ const Cart = () => {
                       readOnly
                     />
                     <button
-                      className="btn color-primary fs-6 border-0"
+                      className="btn color-primary fs-6 border-0 px-2"
                       type="button"
                       onClick={() => updateQty(item.item_id, +1)}
                     >
