@@ -6,7 +6,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import { formatLBP } from "../../services/utils/currency";
 
 const Cart = () => {
-  const { cart, totalItems, loading, setCart, setTotalItems, setTotalPrice } = useCart();
+  const { cart, totalItems, discountPercent, loading, setCart, setTotalItems, setTotalPrice } = useCart();
 
   const { setCartCount } = useOutletContext();
 
@@ -15,6 +15,8 @@ const Cart = () => {
     const count = cart.reduce((sum, it) => sum + Number(it.quantity), 0);
     return { subtotal: sub, itemsCount: count };
   }, [cart]);
+
+  const autoDiscount = Math.round((subtotal * (Number(discountPercent) || 0)) / 100);
 
   useEffect(() => {
     setTotalItems(itemsCount);
@@ -197,8 +199,8 @@ const Cart = () => {
                   <p className="mb-2">{formatLBP(subtotal)}</p>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <p className="mb-2">Discount</p>
-                  <p className="mb-2 text-primary">{formatLBP(0)}</p>
+                  <p className="mb-2">Discount{discountPercent ? ` (${discountPercent}%)` : ""}</p>
+                  <p className="mb-2 text-primary">{autoDiscount ? `- ${formatLBP(autoDiscount)}` : formatLBP(0)}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Shipping</p>
@@ -207,7 +209,7 @@ const Cart = () => {
                 <hr />
                 <div className="d-flex justify-content-between">
                   <p className="mb-2">Total</p>
-                  <p className="mb-2 fw-bold">{formatLBP(subtotal)}</p>
+                  <p className="mb-2 fw-bold">{formatLBP(subtotal - autoDiscount)}</p>
                 </div>
 
                 <div className="mt-3">

@@ -163,6 +163,10 @@ export default function ProductDetails() {
 
   const totalPrice = (product.price || 0) + addonTotal;
 
+  const discountPercent = Number(product.discount_percent) || 0;
+  const discountedUnit = Math.round(totalPrice * (1 - discountPercent / 100));
+  const showDiscount = discountPercent > 0 && !isOut;
+
   return (
     <div className="container my-md-5 my-3 product-details-page">
       <div className="row g-md-5 d-flex justify-content-between">
@@ -268,7 +272,14 @@ export default function ProductDetails() {
                   {isOut ? "Out of stock" : buttonText}
                   {!isOut && (
                     <span className="position-absolute end-0 top-50 translate-middle-y pe-2 fs-12">
-                      {formatLBP(totalPrice * qty)}
+                      {showDiscount ? (
+                        <>
+                          <s className="text-white-50 me-1">{formatLBP(totalPrice * qty)}</s>
+                          {formatLBP(discountedUnit * qty)}
+                        </>
+                      ) : (
+                        formatLBP(totalPrice * qty)
+                      )}
                     </span>
                   )}
               </button>

@@ -155,7 +155,7 @@ const Checkout = () => {
 
   const [buttonText, setButtonText] = useState("Place Order")
   
-  const { cart, totalItems, totalPrice, loading } = useCart();
+  const { cart, totalItems, totalPrice, discountPercent, loading } = useCart();
 
   const computeDeliveryFee = (city) => {
     if (!city) return 0;
@@ -220,9 +220,17 @@ const Checkout = () => {
 
   const shipping = useMemo(() => computeDeliveryFee(form.city), [form.city]);
 
+  // Sitewide auto-discount (no code); `discount` state below holds the extra promo-code amount.
+  const autoDiscount = useMemo(
+    () => Math.round((Number(totalPrice) * (Number(discountPercent) || 0)) / 100),
+    [totalPrice, discountPercent]
+  );
+
+  const totalDiscount = autoDiscount + (promo ? Number(discount) : 0);
+
   const total = useMemo(() => {
-    return Number(totalPrice) - Number(discount) + Number(shipping || 0);
-  }, [totalPrice, discount, shipping]);
+    return Number(totalPrice) - totalDiscount + Number(shipping || 0);
+  }, [totalPrice, totalDiscount, shipping]);
 
   const handleApply = async (e) => {
     e?.preventDefault();
@@ -236,7 +244,7 @@ const Checkout = () => {
         return;
       }
       setPromo(data.coupon);
-      setDiscount(Number(data.pricing.discount || 0));
+      setDiscount(Number(data.pricing.coupon_discount ?? data.pricing.discount ?? 0));
     } catch (err) {
       setPromo(null); setDiscount(0);
       setPromoError(err.message);
@@ -644,8 +652,8 @@ const Checkout = () => {
                 <p className="mb-2">{formatLBP(totalPrice)}</p>
               </div>
               <div className="d-flex justify-content-between">
-                <p className="mb-2">Discount</p>
-                <p className="mb-2 text-primary">{formatLBP(promo ? discount : 0)}</p>
+                <p className="mb-2">Discount{discountPercent && !promo ? ` (${discountPercent}%)` : ""}</p>
+                <p className="mb-2 text-primary">{totalDiscount ? `- ${formatLBP(totalDiscount)}` : formatLBP(0)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p className="mb-2">Shipping</p>

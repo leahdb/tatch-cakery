@@ -6,6 +6,7 @@ export function useCart() {
   const [cart, setCart] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [discountPercent, setDiscountPercent] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,9 +27,10 @@ export function useCart() {
       setCart(items);
       setTotalItems(res.total_items);
       setTotalPrice(res.total_price);
+      setDiscountPercent(Number(res.discount_percent) || 0);
       setLoading(false);
     });
   }, []);
 
-  return { cart, totalItems, totalPrice, loading, setCart, setTotalItems, setTotalPrice };
+  return { cart, totalItems, totalPrice, discountPercent, loading, setCart, setTotalItems, setTotalPrice };
 }
