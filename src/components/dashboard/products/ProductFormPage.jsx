@@ -12,6 +12,9 @@ import ImageUploader from "../../common/ImageUploader";
 
 let removedImages = [];
 
+// Status isn't editable from this form; don't send it back so the stored value is kept.
+const withoutIsActive = ({ is_active, ...rest }) => rest;
+
 const ProductFormPage = () => {
   const { id } = useParams();
 
@@ -28,7 +31,6 @@ const ProductFormPage = () => {
     price: "",
     cost: "",
     customization_type: "none",
-    is_active: true,
     best_seller_position: "",
     image: "",
     images: [],
@@ -50,9 +52,8 @@ const ProductFormPage = () => {
         setCustomizationTypes(res.customization_types || {});
         if (res.data) {
           setFormData({
-            ...res.data,
+            ...withoutIsActive(res.data),
             customization_type: res.data.customization_type || "none",
-            is_active: res.data.is_active === undefined ? true : Boolean(Number(res.data.is_active)),
             best_seller_position: res.data.best_seller_position ? String(res.data.best_seller_position) : "",
           });
           setSelectedProfileIndex(res.data.index);
@@ -66,9 +67,8 @@ const ProductFormPage = () => {
       fetch_shop_product(id).then((res) => {
         if (res.status === "ok") {
           setFormData({
-            ...res.data,
+            ...withoutIsActive(res.data),
             customization_type: res.data.customization_type || "none",
-            is_active: res.data.is_active === undefined ? true : Boolean(Number(res.data.is_active)),
             best_seller_position: res.data.best_seller_position ? String(res.data.best_seller_position) : "",
           });
           setSelectedProfileIndex(res.data.index);
@@ -80,11 +80,6 @@ const ProductFormPage = () => {
   const handleTextInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: checked }));
   };
 
   const handleSelectProfile = (index) => {
@@ -238,22 +233,6 @@ const ProductFormPage = () => {
                   <option key={value} value={value}>{label}</option>
                 ))}
               </select>
-            </div>
-            <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
-              <label className="fw-semibold">Product Status</label>
-              <div className="form-check form-switch">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="is_active"
-                  name="is_active"
-                  checked={!!formData.is_active}
-                  onChange={handleCheckboxChange}
-                />
-                <label className="form-check-label" htmlFor="is_active">
-                  {formData.is_active ? "Active (visible on storefront)" : "Disabled (hidden from storefront)"}
-                </label>
-              </div>
             </div>
             <div className="d-flex flex-column gap-1 input-container mb-md-0 mb-3">
               <label className="fw-semibold">Best Seller Slot</label>
